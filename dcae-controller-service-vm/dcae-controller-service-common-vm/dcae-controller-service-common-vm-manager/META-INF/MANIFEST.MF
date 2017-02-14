@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: dcae-controller-service-common-vm-manager
+Bundle-SymbolicName: dcae-controller-service-common-vm-manager
+Bundle-Version: 0.1.0.qualifier
+Export-Package: org.openecomp.dcae.controller.service.common.vm.manager.tools,
+  org.openecomp.dcae.controller.service.common.vm.servers.manager
+Require-Bundle: ncomp-core-types,
+ ncomp-sirius-manager-model,
+ ncomp-sirius-manager-server,
+ ncomp-sirius-manager-console,
+ ncomp-sirius-manager-generator,
+ dcae-controller-service-common-vm-model;bundle-version="0.1.0",
+ ncomp-utils-java;bundle-version="0.1.0"

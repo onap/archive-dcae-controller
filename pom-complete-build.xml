@@ -1,0 +1,142 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.openecomp.dcae.controller</groupId>
+	<artifactId>dcae-controller-complete</artifactId>
+	<version>0.1.0-SNAPSHOT</version><!--VERSION-->
+	<packaging>pom</packaging>
+	<modules>
+		<module>dcae-org.openecomp.dcae.controller</module>
+		<module>dcae-org.openecomp.operation.utils/operation-utils</module>
+		<module>dcae-org.openecomp.dcae.demo/dcae-demo-controller</module>
+		<module>dcae-org.openecomp.ncomp.utils</module>
+		<module>dcae-org.openecomp.ncomp.maven</module>
+		<module>dcae-org.openecomp.ncomp.core</module>
+		<module>dcae-org.openecomp.ncomp.sirius.manager</module>
+		<module>dcae-org.openecomp.ncomp.openstack</module>
+		<module>dcae-org.openecomp.ncomp.cdap</module>
+		<module>dcae-org.openecomp.ncomp.docker</module>
+		<module>dcae-org.openecomp.dcae.analytics/dcae-analytics-cdap-common-model</module>
+	</modules>
+
+	
+	<pluginRepositories>
+		<!-- Black Duck plugin dependencies -->
+		<pluginRepository>
+			<id>JCenter</id>
+			<name>JCenter Repository</name>
+			<url>http://jcenter.bintray.com</url>
+		</pluginRepository>
+
+		<pluginRepository>
+			<id>Restlet</id>
+			<name>Restlet Repository</name>
+			<url>http://maven.restlet.com</url>
+		</pluginRepository>
+	</pluginRepositories>
+<build>
+		<plugins>
+		<!-- blackduck maven plugin -->
+			<plugin>
+				<groupId>com.blackducksoftware.integration</groupId>
+				<artifactId>hub-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<inherited>false</inherited>
+				<configuration>
+					<hubProjectName>${project.name}</hubProjectName>
+					<outputDirectory>${project.basedir}</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>create-bdio-file</id>
+						<phase>package</phase>
+						<goals>
+							<goal>createHubOutput</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+       <!-- site maven plugin -->
+       <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-site-plugin</artifactId>
+           <version>3.6</version>
+           <dependencies>
+             <dependency>
+               <groupId>org.apache.maven.wagon</groupId>
+               <artifactId>wagon-webdav-jackrabbit</artifactId>
+               <version>2.10</version>
+             </dependency>
+           </dependencies>
+       </plugin>
+    
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.2</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.8.1</version>
+				<configuration>
+					<tag>${project.artifactId}-${project.version}</tag>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+			</plugin>
+
+		</plugins>
+	</build>
+
+
+	
+		<distributionManagement>
+			<repository>
+				<id>osecomp-nexus-releases</id>
+				<name>OSECOMP Release Repository</name>
+				<url>${openecomp.nexus.releases}</url>
+			</repository>
+			<snapshotRepository>
+				<id>osecomp-nexus-snapshots</id>
+				<name>OSECOMP Snapshot Repository</name>
+				<url>${openecomp.nexus.snapshots}</url>
+			</snapshotRepository>
+			<site>
+				<id>dcae-javadoc</id>
+				<url>${site.urlroot}/${project.artifactId}/${project.version}/</url>
+			</site>
+		</distributionManagement>
+	
+   <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <failOnError>false</failOnError>
+                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                    <docletArtifact>
+                        <groupId>org.umlgraph</groupId>
+                        <artifactId>umlgraph</artifactId>
+                        <version>5.6</version>
+                    </docletArtifact>
+                    <additionalparam>-views</additionalparam>
+                    <useStandardDocletOptions>true</useStandardDocletOptions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+
+	<name>DCAE Controller main project</name>
+	<description>This Maven project is responsible to build and package all child projects - contributions in the DCAE Controller project.</description>
+	<organization>
+		<name>OPENECOMP - DCAE Controller </name>
+		<url>http://www.openecomp.org/</url>
+	</organization>
+</project>

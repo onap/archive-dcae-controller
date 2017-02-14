@@ -1,0 +1,29 @@
+
+if [ ! -e /home/%{applicationId} ]; then useradd -m -s /bin/bash %{applicationId}; fi
+
+case %{assemblyId} in
+  %*)
+    A1=%{groupId}:%{artifactId}:%{version}:%{type}
+    ;;
+  *)
+    A1=%{groupId}:%{artifactId}:%{version}:%{type}:%{assemblyId}
+    ;;
+esac
+
+mvn -s /tmp/settings.xml org.apache.maven.plugins:maven-dependency-plugin:2.10:copy \
+  -Dartifact=\$A1 \
+  -Dmaven.wagon.http.ssl.insecure=true \
+  -Dmaven.wagon.http.ssl.allowall=true \
+  -DoutputDirectory=/opt/app/%{artifactId}
+  
+case %{type} in
+  jar) 
+    mkdir /opt/app/%{artifactId}/lib
+    mv /opt/app/%{artifactId}/*.jar /opt/app/%{artifactId}/lib
+    ;;
+  zip) 
+    ( cd /opt/app/%{artifactId} ; unzip -o %{artifactId}*.zip )
+    ;;  
+esac   
+
+chown -R %{applicationId}:%{applicationId} /opt/app/%{artifactId}

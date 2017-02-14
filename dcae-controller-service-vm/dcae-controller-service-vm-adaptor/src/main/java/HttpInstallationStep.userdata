@@ -1,0 +1,23 @@
+
+if [ ! -e /home/%{applicationId} ]; then useradd -m -s /bin/bash %{applicationId}; fi
+
+OUT=/tmp/`basename %{url}`
+
+curl -k -f --user '%{userName}:%{password}' -o \$OUT %{url}
+
+case %{type} in
+  deb) 
+    dpkg --install \$OUT
+    ;;
+  jar) 
+    mkdir -p /opt/app/%{artifactId}/lib
+    mv \$OUT /opt/app/%{artifactId}/lib
+    chown -R %{applicationId}:%{applicationId} /opt/app/%{artifactId}
+    ;;
+  zip) 
+    mkdir -p /opt/app/%{artifactId}/lib
+    ( cd /opt/app/%{artifactId} ; cp -p \$OUT . ; unzip -o \$OUT )
+    chown -R %{applicationId}:%{applicationId} /opt/app/%{artifactId}
+    ;;  
+esac   
+

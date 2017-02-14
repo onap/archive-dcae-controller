@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated adaptor -->
+      <package
+            uri="org.openecomp.dcae.controller.service.cdap"
+            class="org.openecomp.dcae.controller.service.cdap.CdapPackage"
+            genModel="src/main/xcore/service.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated manager -->
+      <package
+            uri="org.openecomp.dcae.controller.service.cdapmanager"
+            class="org.openecomp.dcae.controller.service.cdapmanager.CdapmanagerPackage"
+            genModel="src/main/xcore/manager.xcore"/>
+   </extension>
+
+</plugin>

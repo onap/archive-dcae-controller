@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: dcae-controller-core-utils
+Bundle-SymbolicName: dcae-controller-core-utils
+Bundle-Version: 0.1.0.qualifier
+Export-Package: org.openecomp.dcae.controller.core.utils
+Require-Bundle: ncomp-utils-java

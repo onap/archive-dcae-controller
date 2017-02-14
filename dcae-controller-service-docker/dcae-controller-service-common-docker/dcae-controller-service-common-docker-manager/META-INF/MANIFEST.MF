@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: dcae-controller-service-common-docker-manager
+Bundle-SymbolicName: dcae-controller-service-common-docker-manager
+Bundle-Version: 0.1.0.qualifier
+Export-Package: org.openecomp.dcae.controller.service.common.docker.manager.tools,
+  org.openecomp.dcae.controller.service.common.docker.servers.manager
+Require-Bundle: ncomp-core-types,
+ ncomp-sirius-manager-model,
+ ncomp-sirius-manager-server,
+ ncomp-sirius-manager-console,
+ ncomp-sirius-manager-generator,
+ dcae-controller-service-common-docker-model;bundle-version="0.1.0",
+ ncomp-utils-java;bundle-version="0.1.0"

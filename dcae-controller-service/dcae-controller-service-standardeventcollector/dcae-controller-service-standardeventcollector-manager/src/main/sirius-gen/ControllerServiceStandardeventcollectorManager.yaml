@@ -1,0 +1,69 @@
+operations:
+  test: {}
+  suspend: {}
+  resume: {}
+  publicKey: {}
+  configurationChanged: {}
+  updateStreams: {}
+  REMOTE_test:
+    decription: Remote call test
+  REMOTE_suspend:
+    decription: Remote call suspend
+  REMOTE_resume:
+    decription: Remote call resume
+  REMOTE_publicKey:
+    decription: Remote call publicKey
+  REMOTE_configurationChanged:
+    decription: Remote call configurationChanged
+  REMOTE_updateStreams:
+    decription: Remote call updateStreams
+messages:
+  dummy: {}
+  test:
+    errorCode: test-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  suspend:
+    errorCode: suspend-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  resume:
+    errorCode: resume-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  publicKey:
+    errorCode: publicKey-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  configurationChanged:
+    errorCode: configurationChanged-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  updateStreams:
+    errorCode: updateStreams-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REMOTE_test:
+    errorCode: REMOTE-test-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_suspend:
+    errorCode: REMOTE-suspend-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_resume:
+    errorCode: REMOTE-resume-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_publicKey:
+    errorCode: REMOTE-publicKey-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_configurationChanged:
+    errorCode: REMOTE-configurationChanged-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_updateStreams:
+    errorCode: REMOTE-updateStreams-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception

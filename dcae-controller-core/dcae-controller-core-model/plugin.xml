@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated server -->
+      <package
+            uri="org.openecomp.dcae.controller.core.server"
+            class="org.openecomp.dcae.controller.core.server.ServerPackage"
+            genModel="src/main/xcore/server.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated hypervisor -->
+      <package
+            uri="org.openecomp.dcae.controller.core.hypervisor"
+            class="org.openecomp.dcae.controller.core.hypervisor.HypervisorPackage"
+            genModel="src/main/xcore/hypervisor.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated service -->
+      <package
+            uri="org.openecomp.dcae.controller.core.service"
+            class="org.openecomp.dcae.controller.core.service.ServicePackage"
+            genModel="src/main/xcore/service.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated stream -->
+      <package
+            uri="org.openecomp.dcae.controller.core.stream"
+            class="org.openecomp.dcae.controller.core.stream.StreamPackage"
+            genModel="src/main/xcore/stream.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated manager -->
+      <package
+            uri="org.openecomp.dcae.controller.core.manager"
+            class="org.openecomp.dcae.controller.core.manager.ManagerPackage"
+            genModel="src/main/xcore/manager.xcore"/>
+   </extension>
+
+</plugin>

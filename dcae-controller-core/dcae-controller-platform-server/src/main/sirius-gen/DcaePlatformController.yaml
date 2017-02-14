@@ -1,0 +1,135 @@
+operations:
+  logs: {}
+  metrics: {}
+  properties: {}
+  uploadInfo: {}
+  getValues: {}
+  getValuesAll: {}
+  getMessages: {}
+  getRequestLogger: {}
+  evaluate: {}
+  update: {}
+  deployDescriptor: {}
+  refreshDataBus: {}
+  REMOTE_logs:
+    decription: Remote call logs
+  REMOTE_metrics:
+    decription: Remote call metrics
+  REMOTE_properties:
+    decription: Remote call properties
+  REMOTE_uploadInfo:
+    decription: Remote call uploadInfo
+  REMOTE_getValues:
+    decription: Remote call getValues
+  REMOTE_getValuesAll:
+    decription: Remote call getValuesAll
+  REMOTE_getMessages:
+    decription: Remote call getMessages
+  REMOTE_getRequestLogger:
+    decription: Remote call getRequestLogger
+  REMOTE_evaluate:
+    decription: Remote call evaluate
+  REMOTE_update:
+    decription: Remote call update
+  REMOTE_deployDescriptor:
+    decription: Remote call deployDescriptor
+  REMOTE_refreshDataBus:
+    decription: Remote call refreshDataBus
+messages:
+  dummy: {}
+  logs:
+    errorCode: logs-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  metrics:
+    errorCode: metrics-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  properties:
+    errorCode: properties-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  uploadInfo:
+    errorCode: uploadInfo-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  getValues:
+    errorCode: getValues-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  getValuesAll:
+    errorCode: getValuesAll-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  getMessages:
+    errorCode: getMessages-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  getRequestLogger:
+    errorCode: getRequestLogger-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  evaluate:
+    errorCode: evaluate-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  update:
+    errorCode: update-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  deployDescriptor:
+    errorCode: deployDescriptor-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  refreshDataBus:
+    errorCode: refreshDataBus-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REMOTE_logs:
+    errorCode: REMOTE-logs-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_metrics:
+    errorCode: REMOTE-metrics-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_properties:
+    errorCode: REMOTE-properties-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_uploadInfo:
+    errorCode: REMOTE-uploadInfo-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_getValues:
+    errorCode: REMOTE-getValues-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_getValuesAll:
+    errorCode: REMOTE-getValuesAll-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_getMessages:
+    errorCode: REMOTE-getMessages-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_getRequestLogger:
+    errorCode: REMOTE-getRequestLogger-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_evaluate:
+    errorCode: REMOTE-evaluate-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_update:
+    errorCode: REMOTE-update-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_deployDescriptor:
+    errorCode: REMOTE-deployDescriptor-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_refreshDataBus:
+    errorCode: REMOTE-refreshDataBus-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception

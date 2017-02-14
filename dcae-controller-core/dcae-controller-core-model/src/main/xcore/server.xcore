@@ -1,0 +1,54 @@
+
+/*-
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0 
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ */
+	
+@GenModel(modelDirectory="/dcae-controller-core-model/src/main/xcore-gen")
+
+package org.openecomp.dcae.controller.core.server
+
+import org.openecomp.ncomp.core.HasOperationalState
+import org.openecomp.ncomp.core.logs.LogMessageContainer
+import org.openecomp.ncomp.sirius.manager.agent.collectd.CollectdServer
+import org.openecomp.ncomp.sirius.manager.properties.Module
+import org.openecomp.ncomp.core.DateMetricAttribute
+import org.openecomp.ncomp.core.NamedEntity
+import org.openecomp.ncomp.openstack.core.VirtualMachineType
+import org.openecomp.ncomp.openstack.compute.Server
+import org.openecomp.ncomp.openstack.location.Hypervisor
+
+class DcaeBasicServer extends NamedEntity, HasOperationalState, LogMessageContainer {
+	String privateIp
+	String publicIp
+	contains CollectdServer collectd
+	contains unordered Module[] modules
+	contains unordered DcaeBasicServerNetwork[] networks
+	transient DateMetricAttribute lastUpdate
+	boolean usingMonitoringAgent = "true"
+	refers Server server
+	refers Hypervisor hypervisor 
+	refers VirtualMachineType vmType
+	String certificatePassword
+}
+
+class DcaeBasicServerNetwork extends NamedEntity {
+	String ip
+	String dnsName
+}
+

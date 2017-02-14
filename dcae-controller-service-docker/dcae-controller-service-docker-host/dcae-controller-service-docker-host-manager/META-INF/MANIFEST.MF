@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: dcae-controller-service-docker-host-manager
+Bundle-SymbolicName: dcae-controller-service-docker-host-manager
+Bundle-Version: 0.1.0.qualifier
+Export-Package: org.openecomp.dcae.controller.service.docker.host.manager.tools,
+ org.openecomp.dcae.controller.service.docker.host.servers.manager,
+ org.openecomp.dcae.controller.service.docker.host.servers.service
+Require-Bundle: ncomp-core-types,
+ ncomp-sirius-manager-model,
+ ncomp-sirius-manager-server,
+ ncomp-sirius-manager-console,
+ ncomp-sirius-manager-generator,
+ dcae-controller-service-docker-host-model;bundle-version="0.1.0",
+ ncomp-utils-java;bundle-version="0.1.0",
+ ncomp-docker-adaptor;bundle-version="0.1.0"

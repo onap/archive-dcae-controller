@@ -1,0 +1,177 @@
+
+/*-
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0 
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ */
+	
+@GenModel(modelDirectory="/dcae-controller-core-model/src/main/xcore-gen")
+package org.openecomp.dcae.controller.core.stream
+
+import org.openecomp.ncomp.core.NamedEntity
+
+class DcaeStream extends NamedEntity {
+}
+
+class DmaapStream extends DcaeStream {
+	String dmaapDataType
+	String dmaapAction
+	String dmaapUrl
+	String dmaapUserName
+	String dmaapPassword
+	String dmaapAuthMethod
+}
+
+class DcaeStreamDefinition extends NamedEntity {
+	String streamType
+	String  databusType
+	contains DcaeStreamPublisher[] publishers
+	contains DcaeStreamSubscriber[] subscribers
+}
+
+abstract class DcaeStreamPublisher extends NamedEntity {
+}
+
+abstract class DcaeStreamSubscriber extends NamedEntity {
+}
+
+class DcaeStreamPublisherExternal extends DcaeStreamPublisher, DcaeStreamExternalEndPoint {
+}
+
+class DcaeStreamPublisherInternal extends DcaeStreamPublisher, DcaeStreamInternalEndPoint {
+}
+
+class DcaeStreamSubscriberExternal extends DcaeStreamSubscriber, DcaeStreamExternalEndPoint {
+}
+
+class DcaeStreamSubscriberInternal extends DcaeStreamSubscriber, DcaeStreamInternalEndPoint {
+}
+
+class DcaeStreamInternalEndPoint {
+	String localName
+	String serviceName
+}
+
+class DcaeStreamExternalEndPoint {
+	String user
+	String password
+	String url
+}
+
+abstract class DatabusStream extends NamedEntity {
+}
+
+class DatabusStreamTopic extends DatabusStream {
+	String topicName
+	String topicDescription
+	String dcaeLocationName
+	String owner
+	boolean txenabled
+	String fqtn
+	Date lastMod
+	String status
+	contains DatabusStreamTopicClient[] clients
+	String publishURL
+	String subscribeURL
+	StreamAuthentication authenticationMethod
+}
+
+class DatabusStreamTopicClient extends DatabusStream {
+	String localStreamId
+	String dcaeLocationName
+	String clientRole
+	DatabusStreamTopicAction[] action
+	String username
+	String userpwd
+	String fqtn
+	String mrClientId
+	String topicURL
+}
+
+enum DatabusStreamTopicAction {
+	PUB as "pub", SUB as "sub", VIEW as "view"
+}
+
+enum StreamAuthentication {
+	AAF as "aaf", NONE as "none", PASSWORD as "password"
+}
+
+
+class DatabusStreamFeed extends DatabusStream {
+	String feedName
+	String feedVersion
+	String feedDescription
+	String asprClassification
+	String owner 
+	String feedId
+	String logURL
+	String publishURL
+	String subscribeURL
+	String status
+	String suspended 
+	contains DatabusStreamFeedPublisher[] publishers
+	contains DatabusStreamFeedSubscriber[] subscribers
+}
+
+class DatabusStreamFeedPublisher extends NamedEntity {
+	String localStreamId
+	String dcaeLocationName
+	String feedId
+	String pubId
+	String status
+	String username
+	String userpwd
+}
+
+class DatabusStreamFeedSubscriber extends NamedEntity {
+	String localStreamId
+	String dcaeLocationName
+	String otherFeedName
+	String feedId
+	String logURL
+	String owner
+	String subId
+	boolean suspended
+	boolean use100
+	String username
+	String userpwd
+	String deliveryURL
+}
+
+class DatabusEntity extends NamedEntity {
+	String status
+	Date lastModified
+	String ^type
+}
+
+class DatabusLocation extends DatabusEntity {
+	String dcaeLayer
+}
+
+class DatabusMessageRouterCluster extends DatabusEntity {
+	String dcaeLocationName
+	String serviceFqdn
+	String[] hostFqdn
+	String topicPort
+	String topicProtocol
+}
+
+class DatabusDataRouterNode extends DatabusEntity {
+	String dcaeLocationName
+	String hostFqdn
+	String version
+}

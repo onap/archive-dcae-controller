@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: dcae-controller-service-standardeventcollector-manager
+Bundle-SymbolicName: dcae-controller-service-standardeventcollector-manager
+Bundle-Version: 0.1.0.qualifier
+Export-Package: org.openecomp.dcae.controller.service.standardeventcollector.manager.tools,
+  org.openecomp.dcae.controller.service.standardeventcollector.servers.manager
+Require-Bundle: ncomp-core-types,
+ ncomp-sirius-manager-model,
+ ncomp-sirius-manager-server,
+ ncomp-sirius-manager-console,
+ ncomp-sirius-manager-generator,
+ dcae-controller-service-standardeventcollector-model;bundle-version="0.1.0",
+ ncomp-utils-java;bundle-version="0.1.0",
+ dcae-controller-core-model

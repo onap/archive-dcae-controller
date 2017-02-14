@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: dcae-controller-service-dmaap-drsub-manager
+Bundle-SymbolicName: dcae-controller-service-dmaap-drsub-manager
+Bundle-Version: 0.1.0.qualifier
+Export-Package: org.openecomp.dcae.controller.service.dmaap.drsub.manager.tools,
+  org.openecomp.dcae.controller.service.dmaap.drsub.servers.manager
+Require-Bundle: ncomp-core-types,
+ ncomp-sirius-manager-model,
+ ncomp-sirius-manager-server,
+ ncomp-sirius-manager-console,
+ ncomp-sirius-manager-generator,
+ dcae-controller-service-dmaap-drsub-model;bundle-version="0.1.0",
+ ncomp-utils-java;bundle-version="0.1.0",
+ operation-utils;bundle-version="0.1.0"

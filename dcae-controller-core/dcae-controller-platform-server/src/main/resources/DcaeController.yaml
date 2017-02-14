@@ -1,0 +1,45 @@
+operations:
+  HEALTHCHECK:
+    description: Heath Check for all DCAE service instances.
+  POLICY_POLLING:
+    description: Polling of new configuration from ECOMP Policy for all DCAE service instances.
+  DATABUS_POLLING:
+    description: Polling of new configuration from DCAE Data Bus Controller.
+  CLUSTER_DATA_REPLICATION:
+    description: Data replication from master to slave controllers.
+messages:
+  HEALTHCHECK_SERVICE_FAILED:
+    errorCode: DCAE-CONTROLLER-HEALTHCHECK-SERVICE-FAILED-5001W
+    messageFormat: '{0}'
+    parameters:
+      service-name: 
+        description: Name of Service for which the health check fails.
+    resolution: Contact Tier 4. This is a software bug.
+    description: Heath Check on the service level fails.
+  POLICY_POLLING_FAILED:
+    errorCode: DCAE-CONTROLLER-POLICY-POLLING-FAILED-5001W
+    messageFormat: '{0} {1}'
+    parameters:
+      object-path: 
+        description: Object resource path for which the policy polling fails.
+      exception: 
+        description: Exception that happened.
+    resolution: Contact Tier 4. This is a software bug.
+    description: Police Polling on the service level fails.
+  DATABUS_POLLING_FAILED:
+    errorCode: DCAE-CONTROLLER-DATABUS-POLLING-FAILED-5001W
+    messageFormat: '{0}'
+    parameters:
+      exception: 
+        description: Exception that happened.
+    resolution: Contact Tier 4. This is a software bug.
+    description: Databus Polling on the service level fails.   
+    
+  CLUSTER_DATA_REPLICATION_FAILED:
+    errorCode: DCAE-CONTROLLER-CLUSTER_DATA_REPLICATION-FAILED-5001W
+    messageFormat: '{0}'
+    parameters:
+      exception: 
+        description: Exception that happened.
+    resolution: Contact Tier 4. This is a software bug.
+    description: Data Replication fails. 

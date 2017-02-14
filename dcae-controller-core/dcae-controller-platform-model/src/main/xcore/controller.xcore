@@ -1,0 +1,95 @@
+
+/*-
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0 
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ */
+	
+@GenModel(modelDirectory="/dcae-controller-platform-model/src/main/xcore-gen")
+
+package org.openecomp.dcae.controller.platform.controller
+
+import org.openecomp.dcae.controller.core.service.DcaeLocation
+import org.openecomp.dcae.controller.core.service.DcaeService
+import org.openecomp.dcae.controller.core.service.DcaeServiceDescriptor
+import org.openecomp.dcae.controller.core.stream.DatabusStream
+import org.openecomp.ncomp.core.DateMetricAttribute
+import org.openecomp.ncomp.core.IncreasingULongMetricAttribute
+import org.openecomp.ncomp.core.NamedEntity
+import org.openecomp.ncomp.core.User
+import org.openecomp.ncomp.openstack.OpenStackController
+import org.openecomp.ncomp.sirius.manager.server.AbstractManagementServer
+import org.openecomp.ncomp.sirius.manager.server.SouthBoundApiWithProxy
+import org.openecomp.dcae.controller.core.server.DcaeBasicServer
+import org.openecomp.dcae.controller.core.stream.DatabusLocation
+import org.openecomp.dcae.controller.core.stream.DatabusMessageRouterCluster
+import org.openecomp.dcae.controller.core.stream.DatabusDataRouterNode
+import org.openecomp.dcae.controller.service.vm.VirtualMachineService   
+
+class DcaePlatformController extends SouthBoundApiWithProxy, AbstractManagementServer {   
+	contains ControllerCluster cluster
+	contains OpenStackController openstack
+	contains unordered DcaeLocation[] locations
+	contains DcaeDataBus databus
+	contains unordered DcaeServiceDescriptor[] descriptors
+	contains unordered DcaeService[] services
+	contains unordered User[] users
+	refers User[] adminUsers  
+	op void deployDescriptor(String name)
+	op void refreshDataBus(String nameMatch)
+}
+
+class DcaeDataBus {
+	contains unordered DatabusStream[] streams
+	contains unordered DatabusLocation[] locations
+	contains unordered DatabusMessageRouterCluster[] mrClusters
+	contains unordered DatabusDataRouterNode[] drNodes
+}
+
+enum ServerRole {
+	UNKNOWN, STANDALONE, MASTER, SLAVE
+}
+
+class ControllerCluster {
+	String myServerName
+	ServerRole role
+	DateMetricAttribute stateTime
+	contains ControllerClusterServer[] servers
+	contains ControllerClusterServer[] remoteServers
+	op void pushData(String serverName, String dataName)
+	op void receiveData(String serverName, String dataName, Date time, String content)
+}
+
+class ControllerClusterServer extends NamedEntity {
+	ServerRole role
+	contains ControllerClusterServerData[] data
+	refers DcaeBasicServer server
+}
+
+class ControllerClusterServerData extends NamedEntity {
+	String pushInterval = "5min"
+	DateMetricAttribute lastPush
+	IncreasingULongMetricAttribute numberDataPushes
+	IncreasingULongMetricAttribute numberDataPushErrors
+	DateMetricAttribute lastDataReceived
+	IncreasingULongMetricAttribute numberDataReceived
+	IncreasingULongMetricAttribute numberDataReceivedErrors
+}
+
+class ControllerVirtualMachineService extends VirtualMachineService {
+	
+}

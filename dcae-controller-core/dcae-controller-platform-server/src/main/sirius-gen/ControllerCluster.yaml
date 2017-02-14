@@ -1,0 +1,25 @@
+operations:
+  pushData: {}
+  receiveData: {}
+  REMOTE_pushData:
+    decription: Remote call pushData
+  REMOTE_receiveData:
+    decription: Remote call receiveData
+messages:
+  dummy: {}
+  pushData:
+    errorCode: pushData-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  receiveData:
+    errorCode: receiveData-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REMOTE_pushData:
+    errorCode: REMOTE-pushData-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_receiveData:
+    errorCode: REMOTE-receiveData-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception

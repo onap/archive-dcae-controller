@@ -1,0 +1,132 @@
+
+/*-
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0 
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ */
+	
+
+@GenModel(modelDirectory="/dcae-controller-service-vm-model/src/main/xcore-gen")
+package org.openecomp.dcae.controller.service.vm
+
+import org.openecomp.dcae.controller.core.server.DcaeBasicServer
+import org.openecomp.dcae.controller.core.service.DcaeLocation
+import org.openecomp.dcae.controller.core.service.DcaeService
+import org.openecomp.dcae.controller.core.service.DcaeServiceDescriptor
+import org.openecomp.dcae.controller.core.service.DcaeServiceInstance
+import org.openecomp.ncomp.core.User
+import org.openecomp.ncomp.openstack.core.VirtualMachineType
+import org.openecomp.ncomp.core.NamedEntity
+
+annotation "http://openecomp.org" as ecomp
+
+// correspond to a BsaApplication 
+class VirtualMachineService extends DcaeService { 
+	contains VirtualMachineServiceInstance[] instances opposite service
+	@ecomp(^type = "configuration")
+	int managerPortNumber = "9999"
+	op void updateDeploymentStatus()
+}
+
+class VirtualMachineServiceInstance extends DcaeServiceInstance, VirtualMachineServiceConfiguration {
+	refers DcaeLocation location
+	@ecomp(^type = "service")
+	refers VirtualMachineType vmType
+	@ecomp(^type = "service")
+	refers User[] users
+	@ecomp(^type = "service")
+	refers User[] adminUsers
+	String[] applicationIds
+	String adminId
+	@ecomp(^type = "service")
+	int numberOfServers = "1"
+	@ecomp(^type = "service")
+	String availabilityZone
+	@ecomp(^type = "configuration")
+	Integer managerPortNumber
+	//	@ecomp(^type = "operational")
+	//	contains SecurityRule[] incomingSecurityRules
+	//	@ecomp(^type = "operational")
+	//	contains SecurityRule[] outboundSecurityRules
+	@ecomp(^type = "operational")
+	contains DcaeBasicServer[] servers
+	refers DcaeBasicServer leaderServer 
+	@ecomp(^type = "operational")
+	refers VirtualMachineService service opposite instances
+	String iedsAdmin
+	String chefUser
+	String chefOrg
+	String chefTopology
+	String openstackFlavor
+	String serviceFqdn
+	int deploymentTimeoutMinutes = "90"
+	contains InstallationStep[] steps
+}
+
+class VirtualMachineServiceConfiguration {
+	@ecomp(^type = "configuration")
+	String configuration
+}
+
+class VirtualMachineServiceDescriptor extends DcaeServiceDescriptor {
+	String servicePackage 			// "org.openecomp.dcae.controller.service.sample.sdnl.service",
+	String serviceClass 			// "ControllerServiceSampleSdnlService",
+	String serviceInstanceClass 	// "ControllerServiceSampleSdnlServiceInstance",
+	String vmType 					// "sample-sdnl",
+	String managerPortNumber 		// "9996",
+	String managerUser 				// "console",
+	String encryptedPassword        // "rsa:asfdsf"
+	String[] users
+	String[] adminUsers
+}
+
+class PhysicalMachine extends DcaeBasicServer {
+	@ecomp(^type = "configuration")
+	Integer managerPortNumber
+}
+
+class VirtualMachine extends DcaeBasicServer {
+	int functionIndex
+	String kvmName
+	String vnc // 1.2.3.4:4005 IP:PORT
+	String gateway
+}
+
+abstract class InstallationStep extends NamedEntity {
+	String applicationId = "dcae"
+}
+
+class ShellInstallationStep extends InstallationStep {
+	String command
+}
+
+class MavenArtifactInstallationStep extends InstallationStep { 
+	String groupId
+	String artifactId
+	String version
+	String ^type
+	String assemblyId
+}
+
+class HttpInstallationStep extends InstallationStep { 
+	String url
+	String userName
+	String password
+	String ^type
+	String artifactId
+}
+

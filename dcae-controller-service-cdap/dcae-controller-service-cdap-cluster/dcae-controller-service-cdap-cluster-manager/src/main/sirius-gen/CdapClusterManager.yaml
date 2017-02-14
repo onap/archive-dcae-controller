@@ -1,0 +1,597 @@
+operations:
+  test: {}
+  suspend: {}
+  resume: {}
+  publicKey: {}
+  configurationChanged: {}
+  updateStreams: {}
+  logs: {}
+  metrics: {}
+  properties: {}
+  uploadInfo: {}
+  getValues: {}
+  getValuesAll: {}
+  getMessages: {}
+  getRequestLogger: {}
+  evaluate: {}
+  update: {}
+  createNamespace: {}
+  deleteNamespace: {}
+  deployApp: {}
+  loadArtifact: {}
+  deleteArtifact: {}
+  startFlow: {}
+  startWorker: {}
+  startService: {}
+  startApp: {}
+  stopApp: {}
+  deleteApp: {}
+  loadPreferencesApp: {}
+  loadPreferencesFlow: {}
+  loadPreferencesNameSpace: {}
+  setPreferencesApp: {}
+  setPreferencesFlow: {}
+  setPreferencesWorker: {}
+  setPreferencesService: {}
+  setPreferencesNameSpace: {}
+  setFlowRunTimeArgs: {}
+  setFlowletInstances: {}
+  stopFlow: {}
+  stopWorker: {}
+  stopService: {}
+  truncateDataSet: {}
+  deleteDataset: {}
+  createStream: {}
+  deleteStream: {}
+  getStreamEvents: {}
+  getStreamStats: {}
+  sendEventToStream: {}
+  trucateStream: {}
+  setStreamProperties: {}
+  restartApp: {}
+  createApp: {}
+  createAppWithConfig: {}
+  setDatasetProperties: {}
+  setStreamTTL: {}
+  REMOTE_test:
+    decription: Remote call test
+  REMOTE_suspend:
+    decription: Remote call suspend
+  REMOTE_resume:
+    decription: Remote call resume
+  REMOTE_publicKey:
+    decription: Remote call publicKey
+  REMOTE_configurationChanged:
+    decription: Remote call configurationChanged
+  REMOTE_updateStreams:
+    decription: Remote call updateStreams
+  REMOTE_logs:
+    decription: Remote call logs
+  REMOTE_metrics:
+    decription: Remote call metrics
+  REMOTE_properties:
+    decription: Remote call properties
+  REMOTE_uploadInfo:
+    decription: Remote call uploadInfo
+  REMOTE_getValues:
+    decription: Remote call getValues
+  REMOTE_getValuesAll:
+    decription: Remote call getValuesAll
+  REMOTE_getMessages:
+    decription: Remote call getMessages
+  REMOTE_getRequestLogger:
+    decription: Remote call getRequestLogger
+  REMOTE_evaluate:
+    decription: Remote call evaluate
+  REMOTE_update:
+    decription: Remote call update
+  REMOTE_createNamespace:
+    decription: Remote call createNamespace
+  REMOTE_deleteNamespace:
+    decription: Remote call deleteNamespace
+  REMOTE_deployApp:
+    decription: Remote call deployApp
+  REMOTE_loadArtifact:
+    decription: Remote call loadArtifact
+  REMOTE_deleteArtifact:
+    decription: Remote call deleteArtifact
+  REMOTE_startFlow:
+    decription: Remote call startFlow
+  REMOTE_startWorker:
+    decription: Remote call startWorker
+  REMOTE_startService:
+    decription: Remote call startService
+  REMOTE_startApp:
+    decription: Remote call startApp
+  REMOTE_stopApp:
+    decription: Remote call stopApp
+  REMOTE_deleteApp:
+    decription: Remote call deleteApp
+  REMOTE_loadPreferencesApp:
+    decription: Remote call loadPreferencesApp
+  REMOTE_loadPreferencesFlow:
+    decription: Remote call loadPreferencesFlow
+  REMOTE_loadPreferencesNameSpace:
+    decription: Remote call loadPreferencesNameSpace
+  REMOTE_setPreferencesApp:
+    decription: Remote call setPreferencesApp
+  REMOTE_setPreferencesFlow:
+    decription: Remote call setPreferencesFlow
+  REMOTE_setPreferencesWorker:
+    decription: Remote call setPreferencesWorker
+  REMOTE_setPreferencesService:
+    decription: Remote call setPreferencesService
+  REMOTE_setPreferencesNameSpace:
+    decription: Remote call setPreferencesNameSpace
+  REMOTE_setFlowRunTimeArgs:
+    decription: Remote call setFlowRunTimeArgs
+  REMOTE_setFlowletInstances:
+    decription: Remote call setFlowletInstances
+  REMOTE_stopFlow:
+    decription: Remote call stopFlow
+  REMOTE_stopWorker:
+    decription: Remote call stopWorker
+  REMOTE_stopService:
+    decription: Remote call stopService
+  REMOTE_truncateDataSet:
+    decription: Remote call truncateDataSet
+  REMOTE_deleteDataset:
+    decription: Remote call deleteDataset
+  REMOTE_createStream:
+    decription: Remote call createStream
+  REMOTE_deleteStream:
+    decription: Remote call deleteStream
+  REMOTE_getStreamEvents:
+    decription: Remote call getStreamEvents
+  REMOTE_getStreamStats:
+    decription: Remote call getStreamStats
+  REMOTE_sendEventToStream:
+    decription: Remote call sendEventToStream
+  REMOTE_trucateStream:
+    decription: Remote call trucateStream
+  REMOTE_setStreamProperties:
+    decription: Remote call setStreamProperties
+  REMOTE_restartApp:
+    decription: Remote call restartApp
+  REMOTE_createApp:
+    decription: Remote call createApp
+  REMOTE_createAppWithConfig:
+    decription: Remote call createAppWithConfig
+  REMOTE_setDatasetProperties:
+    decription: Remote call setDatasetProperties
+  REMOTE_setStreamTTL:
+    decription: Remote call setStreamTTL
+messages:
+  dummy: {}
+  test:
+    errorCode: test-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  suspend:
+    errorCode: suspend-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  resume:
+    errorCode: resume-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  publicKey:
+    errorCode: publicKey-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  configurationChanged:
+    errorCode: configurationChanged-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  updateStreams:
+    errorCode: updateStreams-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  logs:
+    errorCode: logs-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  metrics:
+    errorCode: metrics-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  properties:
+    errorCode: properties-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  uploadInfo:
+    errorCode: uploadInfo-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  getValues:
+    errorCode: getValues-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  getValuesAll:
+    errorCode: getValuesAll-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  getMessages:
+    errorCode: getMessages-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  getRequestLogger:
+    errorCode: getRequestLogger-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  evaluate:
+    errorCode: evaluate-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  update:
+    errorCode: update-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  createNamespace:
+    errorCode: createNamespace-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  deleteNamespace:
+    errorCode: deleteNamespace-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  deployApp:
+    errorCode: deployApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  loadArtifact:
+    errorCode: loadArtifact-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  deleteArtifact:
+    errorCode: deleteArtifact-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  startFlow:
+    errorCode: startFlow-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  startWorker:
+    errorCode: startWorker-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  startService:
+    errorCode: startService-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  startApp:
+    errorCode: startApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  stopApp:
+    errorCode: stopApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  deleteApp:
+    errorCode: deleteApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  loadPreferencesApp:
+    errorCode: loadPreferencesApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  loadPreferencesFlow:
+    errorCode: loadPreferencesFlow-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  loadPreferencesNameSpace:
+    errorCode: loadPreferencesNameSpace-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  setPreferencesApp:
+    errorCode: setPreferencesApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  setPreferencesFlow:
+    errorCode: setPreferencesFlow-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  setPreferencesWorker:
+    errorCode: setPreferencesWorker-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  setPreferencesService:
+    errorCode: setPreferencesService-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  setPreferencesNameSpace:
+    errorCode: setPreferencesNameSpace-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  setFlowRunTimeArgs:
+    errorCode: setFlowRunTimeArgs-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  setFlowletInstances:
+    errorCode: setFlowletInstances-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  stopFlow:
+    errorCode: stopFlow-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  stopWorker:
+    errorCode: stopWorker-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  stopService:
+    errorCode: stopService-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  truncateDataSet:
+    errorCode: truncateDataSet-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  deleteDataset:
+    errorCode: deleteDataset-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  createStream:
+    errorCode: createStream-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  deleteStream:
+    errorCode: deleteStream-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  getStreamEvents:
+    errorCode: getStreamEvents-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  getStreamStats:
+    errorCode: getStreamStats-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  sendEventToStream:
+    errorCode: sendEventToStream-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  trucateStream:
+    errorCode: trucateStream-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  setStreamProperties:
+    errorCode: setStreamProperties-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  restartApp:
+    errorCode: restartApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  createApp:
+    errorCode: createApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  createAppWithConfig:
+    errorCode: createAppWithConfig-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  setDatasetProperties:
+    errorCode: setDatasetProperties-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  setStreamTTL:
+    errorCode: setStreamTTL-FAILED-5001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REMOTE_test:
+    errorCode: REMOTE-test-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_suspend:
+    errorCode: REMOTE-suspend-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_resume:
+    errorCode: REMOTE-resume-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_publicKey:
+    errorCode: REMOTE-publicKey-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_configurationChanged:
+    errorCode: REMOTE-configurationChanged-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_updateStreams:
+    errorCode: REMOTE-updateStreams-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_logs:
+    errorCode: REMOTE-logs-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_metrics:
+    errorCode: REMOTE-metrics-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_properties:
+    errorCode: REMOTE-properties-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_uploadInfo:
+    errorCode: REMOTE-uploadInfo-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_getValues:
+    errorCode: REMOTE-getValues-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_getValuesAll:
+    errorCode: REMOTE-getValuesAll-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_getMessages:
+    errorCode: REMOTE-getMessages-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_getRequestLogger:
+    errorCode: REMOTE-getRequestLogger-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_evaluate:
+    errorCode: REMOTE-evaluate-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_update:
+    errorCode: REMOTE-update-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_createNamespace:
+    errorCode: REMOTE-createNamespace-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_deleteNamespace:
+    errorCode: REMOTE-deleteNamespace-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_deployApp:
+    errorCode: REMOTE-deployApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_loadArtifact:
+    errorCode: REMOTE-loadArtifact-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_deleteArtifact:
+    errorCode: REMOTE-deleteArtifact-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_startFlow:
+    errorCode: REMOTE-startFlow-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_startWorker:
+    errorCode: REMOTE-startWorker-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_startService:
+    errorCode: REMOTE-startService-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_startApp:
+    errorCode: REMOTE-startApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_stopApp:
+    errorCode: REMOTE-stopApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_deleteApp:
+    errorCode: REMOTE-deleteApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_loadPreferencesApp:
+    errorCode: REMOTE-loadPreferencesApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_loadPreferencesFlow:
+    errorCode: REMOTE-loadPreferencesFlow-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_loadPreferencesNameSpace:
+    errorCode: REMOTE-loadPreferencesNameSpace-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_setPreferencesApp:
+    errorCode: REMOTE-setPreferencesApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_setPreferencesFlow:
+    errorCode: REMOTE-setPreferencesFlow-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_setPreferencesWorker:
+    errorCode: REMOTE-setPreferencesWorker-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_setPreferencesService:
+    errorCode: REMOTE-setPreferencesService-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_setPreferencesNameSpace:
+    errorCode: REMOTE-setPreferencesNameSpace-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_setFlowRunTimeArgs:
+    errorCode: REMOTE-setFlowRunTimeArgs-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_setFlowletInstances:
+    errorCode: REMOTE-setFlowletInstances-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_stopFlow:
+    errorCode: REMOTE-stopFlow-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_stopWorker:
+    errorCode: REMOTE-stopWorker-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_stopService:
+    errorCode: REMOTE-stopService-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_truncateDataSet:
+    errorCode: REMOTE-truncateDataSet-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_deleteDataset:
+    errorCode: REMOTE-deleteDataset-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_createStream:
+    errorCode: REMOTE-createStream-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_deleteStream:
+    errorCode: REMOTE-deleteStream-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_getStreamEvents:
+    errorCode: REMOTE-getStreamEvents-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_getStreamStats:
+    errorCode: REMOTE-getStreamStats-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_sendEventToStream:
+    errorCode: REMOTE-sendEventToStream-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_trucateStream:
+    errorCode: REMOTE-trucateStream-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_setStreamProperties:
+    errorCode: REMOTE-setStreamProperties-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_restartApp:
+    errorCode: REMOTE-restartApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_createApp:
+    errorCode: REMOTE-createApp-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_createAppWithConfig:
+    errorCode: REMOTE-createAppWithConfig-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_setDatasetProperties:
+    errorCode: REMOTE-setDatasetProperties-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE_setStreamTTL:
+    errorCode: REMOTE-setStreamTTL-FAILED-5001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception

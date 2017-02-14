@@ -1,0 +1,13 @@
+
+##############################################################
+##################### CLOUDINIT ##############################
+##############################################################
+
+## need to fix cloudinit in Centos.
+
+CLOUDHOSTCFG=/etc/cloud/cloud.cfg.d/99_hostname.cfg
+if [ -f /etc/redhat-release ]; then
+   # CentOS/RHEL
+   ( echo "hostname: \$(hostname)"; echo "fqdn: \$(hostname -f)" ) > \$CLOUDHOSTCFG
+fi
+

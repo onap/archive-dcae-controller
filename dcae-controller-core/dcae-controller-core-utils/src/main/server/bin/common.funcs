@@ -1,0 +1,35 @@
+#
+# common shell functions
+#
+
+_die() {
+        printf "$(date):FATAL:$1\n"
+        exit 2;
+}
+
+_fail() {
+        _die "$1";
+}
+
+_warn() {
+        printf "$(date):WARN:$1\n";
+}
+
+_print() {
+        printf "$(date):INFO:$1\n";
+}
+
+_info() {
+        _print "$1";
+}
+
+_isRoot() {
+        [ $(whoami) != "root" ] && _fail "This script needs to be run by root";
+}
+
+fail() {
+    rc=$1
+    shift;
+    echo "ERROR: $@"
+    exit $rc
+}

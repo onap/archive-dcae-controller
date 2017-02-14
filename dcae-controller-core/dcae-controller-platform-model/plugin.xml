@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated controller -->
+      <package
+            uri="org.openecomp.dcae.controller.platform.controller"
+            class="org.openecomp.dcae.controller.platform.controller.ControllerPackage"
+            genModel="src/main/xcore/controller.xcore"/>
+   </extension>
+
+</plugin>

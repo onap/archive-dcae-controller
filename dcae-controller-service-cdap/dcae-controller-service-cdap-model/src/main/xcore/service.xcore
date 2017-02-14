@@ -1,0 +1,101 @@
+
+/*-
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0 
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ */
+	
+@GenModel(modelDirectory="/dcae-controller-service-cdap-model/src/main/xcore-gen")
+
+
+package org.openecomp.dcae.controller.service.cdap
+
+
+import org.openecomp.dcae.controller.core.service.DcaeService
+import org.openecomp.dcae.controller.core.service.DcaeServiceInstance
+import org.openecomp.ncomp.cdap.CdapNamespace
+import org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterServiceInstance
+import org.openecomp.dcae.controller.core.service.DcaeServiceDescriptor
+import org.openecomp.ncomp.cdap.CdapKeyPair
+import org.openecomp.ncomp.cdap.CdapEntityWithPreferences
+import org.openecomp.ncomp.core.NamedEntity
+
+annotation "http://openecomp.org" as ecomp
+annotation "http://openecomp.org/cdap" as cdap
+
+class CdapService extends DcaeService {   
+	contains CdapServiceInstance[] instances  opposite service
+	op void updateInstanceConfiguration(String instanceName)
+}
+
+class CdapServiceInstance extends DcaeServiceInstance {
+	String cdapName
+	String namespace
+	String appJar //
+	String appConfigFile
+	contains CdapArtifact[] artifacts
+	contains CdapApplication[] apps
+	String[] appNames
+	String[] workerNames 
+	String[] flowNames 
+	String[] serviceNames 
+	@ecomp(^type="configuration")
+	contains CdapServiceInstanceConfiguration configuration
+	@ecomp(^type="operational")
+	contains CdapInternalApplicationConfiguration cdapConfiguration
+	@ecomp(^type="operational")
+	refers CdapClusterServiceInstance clusterService
+	@ecomp(^type="operational")
+	refers CdapNamespace cdapNamespace
+	@ecomp(^type="operational")
+	refers CdapService service opposite instances
+}
+
+class CdapApplication extends NamedEntity {
+  String jarFile
+  String artifactName
+  String version 
+  String appConfigFileContent
+	
+}
+
+class CdapArtifact extends NamedEntity {
+  String jarFile
+  String version
+	
+}
+
+class CdapServiceInstanceConfiguration {
+	
+}
+
+class CdapInternalApplicationConfiguration {
+	contains unordered CdapKeyPair[] config
+	contains unordered CdapKeyPair[] preferences
+	contains unordered CdapEntityWithPreferences[] apps
+	contains unordered CdapEntityWithPreferences[] workers
+	contains unordered CdapEntityWithPreferences[] flows
+	contains unordered CdapEntityWithPreferences[] services
+}
+
+class CdapServiceDescriptor extends DcaeServiceDescriptor {
+	String servicePackage 			
+	String serviceClass 			
+	String serviceInstanceClass 	
+	String jarFile
+}
+

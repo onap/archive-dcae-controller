@@ -1,0 +1,12 @@
+operations:
+  HEALTHCHECK:
+    description: Heath Check for all DCAE service instances.
+messages:
+  HEALTHCHECK_SERVICE_FAILED:
+    errorCode: DCAE-CONTROLLER-HEALTHCHECK-SERVICE-FAILED-5001W
+    messageFormat: '{0}'
+    parameters:
+      service-name: 
+        description: Name of Service for which the health check fails.
+    resolution: Contact Tier 4. This is a software bug.
+    description: Heath Check on the service level fails.
