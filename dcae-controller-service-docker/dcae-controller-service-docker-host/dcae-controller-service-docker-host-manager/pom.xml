@@ -195,7 +195,7 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.openecomp.dcae.operation</groupId>
+			<groupId>org.openecomp.dcae.operation.utils</groupId>
 			<artifactId>operation-utils</artifactId>
 			<version>${project.version}</version>
 		</dependency>
