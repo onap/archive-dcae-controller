@@ -3,7 +3,15 @@ if [ ! -e /home/%{applicationId} ]; then useradd -m -s /bin/bash %{applicationId
 
 OUT=/tmp/`basename %{url}`
 
-curl -k -f --user '%{userName}:%{password}' -o \$OUT %{url}
+case '%{userName}:%{password}' in
+  null:null)
+    curl -k -f -o \$OUT %{url}
+    ;;
+  *)
+    curl -k -f --user '%{userName}:%{password}' -o \$OUT %{url}
+    ;;
+esac
+
 
 case %{type} in
   deb) 
