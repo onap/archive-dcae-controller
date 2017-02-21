@@ -5,10 +5,10 @@ OUT=/tmp/`basename %{url}`
 
 case '%{userName}:%{password}' in
   null:null)
-    curl -k -f -o \$OUT %{url}
+    curl -s -k -f -o \$OUT %{url}
     ;;
   *)
-    curl -k -f --user '%{userName}:%{password}' -o \$OUT %{url}
+    curl -s -k -f --user '%{userName}:%{password}' -o \$OUT %{url}
     ;;
 esac
 

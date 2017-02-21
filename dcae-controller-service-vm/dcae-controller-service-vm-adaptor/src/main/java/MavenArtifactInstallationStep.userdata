@@ -10,7 +10,7 @@ case %{assemblyId} in
     ;;
 esac
 
-mvn -s /tmp/settings.xml org.apache.maven.plugins:maven-dependency-plugin:2.10:copy \
+mvn -s /tmp/settings.xml -q org.apache.maven.plugins:maven-dependency-plugin:2.10:copy \
   -Dartifact=\$A1 \
   -Dmaven.wagon.http.ssl.insecure=true \
   -Dmaven.wagon.http.ssl.allowall=true \
