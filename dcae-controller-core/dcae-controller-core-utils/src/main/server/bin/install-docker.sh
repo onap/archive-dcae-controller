@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 cd $(dirname $(readlink -e $0))
 export PATH=$PATH:$(pwd)
@@ -21,16 +21,19 @@ apt-get update
 #
 # get certificates
 #
-apt-get install -q -y apt-transport-https ca-certificates ||
-        _fail "apt-transport-http ca-certificates installation failed"
-_print "apt-transport-htps ca-certificates installed ..."
-
+apt-get install -q -y apt-transport-https ca-certificates curl software-properties-common ||
+        _fail "apt-transport-http ca-certificates curl software-properties-common installation failed"
+_print "apt-transport-htps ca-certificates curl software-properties-common installed ..."
 
 # makes the aufs storage driver available
 #
-apt-get install -q -y linux-image-extra-${REL} linux-image-extra-virtual ||
-        _fail "linux-image-extra-${REL} or linux-image-extra-virtual installation failed"
-_print "linux-image-extra-virtual aufs storage driver installed ..."
+apt-get install -q -y linux-image-extra-${REL} ||
+        _fail "linux-image-extra-${REL} failed"
+_print "linux-image-extra-${REL} installed ..."
+
+aptitude install -q -y linux-image-extra-virtual ||
+        _fail "linux-image-extra-virtual installation failed"
+_print "linux-image-extra-virtual installed ..."
 
 #
 # Add GPG key
@@ -61,6 +64,8 @@ apt-get install -q -y apparmor ||
         _fail "apparmor installation failed"
 _print "apparmor installed ..."
 
+apt-get update 
+
 apt-get install -q -y docker-engine ||
         _fail "docker-engine installation failed"
 _print "docker-engine installed ..."
@@ -86,7 +91,6 @@ fi
 #
 _print "Starting docker ..."
 service docker restart
-
 
 #
 # END
