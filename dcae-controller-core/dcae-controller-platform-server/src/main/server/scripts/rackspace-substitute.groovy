@@ -50,6 +50,17 @@ def m = yaml.load(f.text)
 
 if (m['POLICY-IP'] == null) m['POLICY-IP'] = "10.0.6.1"
 
+def i = m["DCAE-VERSION"].lastIndexOf(".")
+
+if (m['DCAE-VERSION'].contains("SNAPSHOT")) {
+	m['DOCKER-VERSION'] = "${m["DCAE-VERSION"].substring(0,i)}-SNAPSHOT-latest"
+}
+else {
+	m['DOCKER-VERSION'] = "${m["DCAE-VERSION"].substring(0,i)}-STAGING-latest"
+}
+
+println "m['DOCKER-VERSION'] = ${m['DOCKER-VERSION']}"
+
 fromDir.eachFileRecurse (FileType.FILES) { file ->
 	def ofile = new File(file.toString().replace(options.from, options.to))
 	switch (file.name) {
