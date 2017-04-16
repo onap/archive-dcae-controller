@@ -39,10 +39,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.docker.impl.DockerConfigurationImpl#getConfiguration <em>Configuration</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

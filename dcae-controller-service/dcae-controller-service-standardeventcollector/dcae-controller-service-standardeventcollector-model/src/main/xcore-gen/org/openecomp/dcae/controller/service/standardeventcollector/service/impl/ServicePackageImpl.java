@@ -189,7 +189,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwd() {
+	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Keystorealias() {
 		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -198,7 +198,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Maxinputqueue() {
+	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwdloc() {
 		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -207,7 +207,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authid() {
+	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Maxinputqueue() {
 		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -225,16 +225,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authpwd() {
-		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authfile() {
+	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Checkschemaflag() {
 		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -243,7 +234,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Checkschemaflag() {
+	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Schemafile() {
 		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -252,7 +243,16 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Schemafile() {
+	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authlist() {
+		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Streamid() {
 		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -292,14 +292,14 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CPORT);
 		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CSECPORT);
 		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTORELOC);
-		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWD);
+		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREALIAS);
+		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWDLOC);
 		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__MAXINPUTQUEUE);
-		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHID);
 		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFLAG);
-		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHPWD);
-		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFILE);
+		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST);
 		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CHECKSCHEMAFLAG);
 		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE);
+		createEAttribute(controllerServiceStandardeventcollectorServiceConfigurationEClass, CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__STREAMID);
 	}
 
 	/**
@@ -347,14 +347,14 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Cport(), theEcorePackage.getEString(), "cport", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Csecport(), theEcorePackage.getEString(), "csecport", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Keystoreloc(), theEcorePackage.getEString(), "keystoreloc", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwd(), theEcorePackage.getEString(), "keystorepwd", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Keystorealias(), theEcorePackage.getEString(), "keystorealias", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwdloc(), theEcorePackage.getEString(), "keystorepwdloc", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Maxinputqueue(), theEcorePackage.getEString(), "maxinputqueue", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Authid(), theEcorePackage.getEString(), "authid", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Authflag(), theEcorePackage.getEString(), "authflag", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Authpwd(), theEcorePackage.getEString(), "authpwd", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Authfile(), theEcorePackage.getEString(), "authfile", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Authlist(), theEcorePackage.getEString(), "authlist", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Checkschemaflag(), theEcorePackage.getEString(), "checkschemaflag", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Schemafile(), theEcorePackage.getEString(), "schemafile", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getControllerServiceStandardeventcollectorServiceConfiguration_Streamid(), theEcorePackage.getEString(), "streamid", null, 0, 1, ControllerServiceStandardeventcollectorServiceConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -363,7 +363,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 		// http://www.eclipse.org/emf/2011/Xcore
 		createXcoreAnnotations();
 		// http://openecomp.org
-		createEcompAnnotations();
+		createOpenecompAnnotations();
 	}
 
 	/**
@@ -388,7 +388,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createEcompAnnotations() {
+	protected void createOpenecompAnnotations() {
 		String source = "http://openecomp.org";	
 		addAnnotation
 		  (getControllerServiceStandardeventcollectorServiceConfiguration_Cport(), 
@@ -409,7 +409,13 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 			 "type", "configuration"
 		   });	
 		addAnnotation
-		  (getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwd(), 
+		  (getControllerServiceStandardeventcollectorServiceConfiguration_Keystorealias(), 
+		   source, 
+		   new String[] {
+			 "type", "configuration"
+		   });	
+		addAnnotation
+		  (getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwdloc(), 
 		   source, 
 		   new String[] {
 			 "type", "configuration"
@@ -421,25 +427,13 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 			 "type", "configuration"
 		   });	
 		addAnnotation
-		  (getControllerServiceStandardeventcollectorServiceConfiguration_Authid(), 
-		   source, 
-		   new String[] {
-			 "type", "configuration"
-		   });	
-		addAnnotation
 		  (getControllerServiceStandardeventcollectorServiceConfiguration_Authflag(), 
 		   source, 
 		   new String[] {
 			 "type", "configuration"
 		   });	
 		addAnnotation
-		  (getControllerServiceStandardeventcollectorServiceConfiguration_Authpwd(), 
-		   source, 
-		   new String[] {
-			 "type", "configuration"
-		   });	
-		addAnnotation
-		  (getControllerServiceStandardeventcollectorServiceConfiguration_Authfile(), 
+		  (getControllerServiceStandardeventcollectorServiceConfiguration_Authlist(), 
 		   source, 
 		   new String[] {
 			 "type", "configuration"
@@ -452,6 +446,12 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 		   });	
 		addAnnotation
 		  (getControllerServiceStandardeventcollectorServiceConfiguration_Schemafile(), 
+		   source, 
+		   new String[] {
+			 "type", "configuration"
+		   });	
+		addAnnotation
+		  (getControllerServiceStandardeventcollectorServiceConfiguration_Streamid(), 
 		   source, 
 		   new String[] {
 			 "type", "configuration"

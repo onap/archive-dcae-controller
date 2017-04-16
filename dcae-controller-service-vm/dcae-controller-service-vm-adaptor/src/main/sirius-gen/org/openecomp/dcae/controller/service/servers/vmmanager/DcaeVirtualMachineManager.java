@@ -26,20 +26,27 @@ package org.openecomp.dcae.controller.service.servers.vmmanager;
 
 
 
+
 import java.io.InputStream;
 
 import org.openecomp.ncomp.sirius.manager.IRequestHandler;
+import org.openecomp.ncomp.sirius.manager.ISwaggerHandler;
 import org.openecomp.ncomp.sirius.manager.ISiriusPlugin;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
+import org.openecomp.ncomp.sirius.manager.ISiriusProvider;
 import org.openecomp.ncomp.sirius.manager.ManagementServer;
+import org.openecomp.ncomp.sirius.manager.SwaggerUtils;
 import org.openecomp.ncomp.sirius.function.FunctionUtils;
 import org.openecomp.ncomp.component.ApiRequestStatus;
 
 import org.apache.log4j.Logger;
 
-import org.openecomp.logger.EcompLogger;
+import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.json.JSONObject;
 
 import java.util.Date;
@@ -72,9 +79,9 @@ import org.openecomp.dcae.controller.service.vmmanager.impl.VirtualMachineManage
 
 
 
-public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
+public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl implements ISiriusProvider {
 	public static final Logger logger = Logger.getLogger(DcaeVirtualMachineManager.class);
-	static final EcompLogger ecomplogger = EcompLogger.getEcompLogger();
+	static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
 	public DcaeVirtualMachineManagerProvider controller;
 	ISiriusServer server;
 
@@ -89,9 +96,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "test", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.test);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_test,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_test,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.test();
 		}
@@ -100,8 +106,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "test", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.test, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_test, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_test, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -116,9 +124,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.suspend);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_suspend,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_suspend,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.suspend();
 		}
@@ -127,8 +134,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.suspend, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_suspend, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_suspend, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -143,9 +152,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "resume", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.resume);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_resume,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_resume,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.resume();
 		}
@@ -154,8 +162,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "resume", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.resume, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_resume, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_resume, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -170,9 +180,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "publicKey", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.publicKey);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_publicKey,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_publicKey,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.publicKey();
 		}
@@ -181,8 +190,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "publicKey", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.publicKey, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_publicKey, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_publicKey,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_publicKey, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -197,9 +208,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "configurationChanged", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.configurationChanged);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_configurationChanged,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_configurationChanged,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.configurationChanged();
 		}
@@ -208,8 +218,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "configurationChanged", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.configurationChanged, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_configurationChanged, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_configurationChanged,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_configurationChanged, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -224,9 +236,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "updateStreams", ApiRequestStatus.START, duration_,inputStreams,outputStreams);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.updateStreams);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_updateStreams,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_updateStreams,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.updateStreams(inputStreams,outputStreams);
 		}
@@ -235,8 +246,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "updateStreams", ApiRequestStatus.ERROR, duration_,inputStreams,outputStreams);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.updateStreams, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_updateStreams, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_updateStreams,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_updateStreams, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -251,9 +264,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "logs", ApiRequestStatus.START, duration_,cx,logs);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.logs);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_logs,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_logs,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.logs(cx,logs);
 		}
@@ -262,8 +274,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "logs", ApiRequestStatus.ERROR, duration_,cx,logs);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.logs, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_logs, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_logs,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_logs, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -278,9 +292,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "metrics", ApiRequestStatus.START, duration_,cx,metrics);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.metrics);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_metrics,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_metrics,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.metrics(cx,metrics);
 		}
@@ -289,8 +302,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "metrics", ApiRequestStatus.ERROR, duration_,cx,metrics);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.metrics, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_metrics, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_metrics,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_metrics, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -305,9 +320,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "properties", ApiRequestStatus.START, duration_,cx,l);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.properties);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_properties,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_properties,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.properties(cx,l);
 		}
@@ -316,8 +330,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "properties", ApiRequestStatus.ERROR, duration_,cx,l);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.properties, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_properties, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_properties,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_properties, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -332,9 +348,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "uploadInfo", ApiRequestStatus.START, duration_,cx,info);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.uploadInfo);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_uploadInfo,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_uploadInfo,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.uploadInfo(cx,info);
 		}
@@ -343,8 +358,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "uploadInfo", ApiRequestStatus.ERROR, duration_,cx,info);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.uploadInfo, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_uploadInfo, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_uploadInfo,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_uploadInfo, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -359,9 +376,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getValues", ApiRequestStatus.START, duration_,cx,path,start,end,option,relativeInterval);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.getValues);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_getValues,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_getValues,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getValues(cx,path,start,end,option,relativeInterval);
 		}
@@ -370,8 +386,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getValues", ApiRequestStatus.ERROR, duration_,cx,path,start,end,option,relativeInterval);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.getValues, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_getValues, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_getValues,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_getValues, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -386,9 +404,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getValuesAll", ApiRequestStatus.START, duration_,cx,path,metrics,start,end,option,relativeInterval);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.getValuesAll);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_getValuesAll,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_getValuesAll,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getValuesAll(cx,path,metrics,start,end,option,relativeInterval);
 		}
@@ -397,8 +414,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getValuesAll", ApiRequestStatus.ERROR, duration_,cx,path,metrics,start,end,option,relativeInterval);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.getValuesAll, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_getValuesAll, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_getValuesAll,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_getValuesAll, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -413,9 +432,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getMessages", ApiRequestStatus.START, duration_,cx,path,start,end);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.getMessages);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_getMessages,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_getMessages,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getMessages(cx,path,start,end);
 		}
@@ -424,8 +442,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getMessages", ApiRequestStatus.ERROR, duration_,cx,path,start,end);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.getMessages, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_getMessages, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_getMessages,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_getMessages, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -440,9 +460,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getRequestLogger", ApiRequestStatus.START, duration_,userName,action,resourcePath,context);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.getRequestLogger);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_getRequestLogger,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_getRequestLogger,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getRequestLogger(userName,action,resourcePath,context);
 		}
@@ -451,8 +470,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getRequestLogger", ApiRequestStatus.ERROR, duration_,userName,action,resourcePath,context);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.getRequestLogger, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_getRequestLogger, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_getRequestLogger,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_getRequestLogger, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -467,9 +488,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "evaluate", ApiRequestStatus.START, duration_,path,function);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.evaluate);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_evaluate,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_evaluate,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.evaluate(path,function);
 		}
@@ -478,8 +498,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "evaluate", ApiRequestStatus.ERROR, duration_,path,function);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.evaluate, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_evaluate, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_evaluate,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_evaluate, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -494,9 +516,8 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "update", ApiRequestStatus.START, duration_,path,function);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.update);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(VirtualMachineManagerOperationEnum.VirtualMachineManager_update,server,this);
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_update,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.update(path,function);
 		}
@@ -505,8 +526,10 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "update", ApiRequestStatus.ERROR, duration_,path,function);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.update, e.toString());
-			throw e;
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REQUEST_FAILED_update, e.toString());
+			EcompException e1 =  EcompException.create(VirtualMachineManagerMessageEnum.REQUEST_FAILED_update,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, VirtualMachineManagerMessageEnum.REQUEST_FAILED_update, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -520,10 +543,12 @@ public class DcaeVirtualMachineManager extends VirtualMachineManagerImpl {
 
 
 
+
+
 	public static void ecoreSetup() {
 		DcaeVirtualMachineManagerProvider.ecoreSetup();
 	}
-	public DcaeVirtualMachineManagerProvider getSomfProvider() {
+	public DcaeVirtualMachineManagerProvider getSiriusProvider() {
 		return controller;
 	}
 }

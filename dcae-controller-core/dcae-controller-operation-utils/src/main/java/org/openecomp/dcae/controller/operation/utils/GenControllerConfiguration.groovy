@@ -336,6 +336,12 @@ class GenControllerConfiguration extends DocUtils {
 		}
 		save("/databus",[streams : platformConfig.streams2bus()]) 
 		save("/cluster",platformConfig.controllerCluster())
+		// version
+		def version = file2object("$release/version.yaml", false)
+		System.err.println "version=$version"
+		if (version != null) {
+			save("/configuration/version",version)
+		}
 	}
 
 	void createLocations() {

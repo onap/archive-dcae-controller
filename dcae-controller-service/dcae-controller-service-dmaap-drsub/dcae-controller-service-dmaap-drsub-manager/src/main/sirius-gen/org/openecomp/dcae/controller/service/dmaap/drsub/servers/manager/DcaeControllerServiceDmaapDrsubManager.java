@@ -25,24 +25,34 @@ package org.openecomp.dcae.controller.service.dmaap.drsub.servers.manager;
 
 
 
+
+
 import java.io.InputStream;
 
 import org.openecomp.ncomp.sirius.manager.IRequestHandler;
+import org.openecomp.ncomp.sirius.manager.ISwaggerHandler;
 import org.openecomp.ncomp.sirius.manager.ISiriusPlugin;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
+import org.openecomp.ncomp.sirius.manager.ISiriusProvider;
+import org.openecomp.ncomp.sirius.manager.ManagementServer;
+import org.openecomp.ncomp.sirius.manager.SwaggerUtils;
 import org.openecomp.ncomp.sirius.function.FunctionUtils;
 import org.openecomp.ncomp.component.ApiRequestStatus;
 
 import org.apache.log4j.Logger;
 
-import org.openecomp.logger.EcompLogger;
+import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.json.JSONObject;
 
 import java.util.Date;
 
 import org.openecomp.dcae.controller.service.dmaap.drsub.servers.manager.logging.ControllerServiceDmaapDrsubManagerOperationEnum;
+import org.openecomp.dcae.controller.service.dmaap.drsub.servers.manager.logging.ControllerServiceDmaapDrsubManagerMessageEnum;
 
 
 
@@ -69,9 +79,9 @@ import org.openecomp.dcae.controller.service.dmaap.drsub.manager.impl.Controller
 
 
 
-public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDmaapDrsubManagerImpl {
+public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDmaapDrsubManagerImpl implements ISiriusProvider {
 	public static final Logger logger = Logger.getLogger(DcaeControllerServiceDmaapDrsubManager.class);
-	static final EcompLogger ecomplogger = EcompLogger.getEcompLogger();
+	static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
 	public DcaeControllerServiceDmaapDrsubManagerProvider controller;
 	ISiriusServer server;
 
@@ -86,8 +96,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "test", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.test);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_test,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_test,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.test();
 		}
@@ -96,7 +106,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "test", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_test, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_test, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -111,8 +124,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.suspend);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_suspend,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_suspend,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.suspend();
 		}
@@ -121,7 +134,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_suspend, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_suspend, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -136,8 +152,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "resume", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.resume);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_resume,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_resume,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.resume();
 		}
@@ -146,7 +162,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "resume", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_resume, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_resume, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -161,8 +180,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "publicKey", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.publicKey);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_publicKey,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_publicKey,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.publicKey();
 		}
@@ -171,7 +190,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "publicKey", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_publicKey, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_publicKey,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_publicKey, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -186,8 +208,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "configurationChanged", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.configurationChanged);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_configurationChanged,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_configurationChanged,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.configurationChanged();
 		}
@@ -196,7 +218,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "configurationChanged", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_configurationChanged, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_configurationChanged,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_configurationChanged, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -211,8 +236,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "updateStreams", ApiRequestStatus.START, duration_,inputStreams,outputStreams);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.updateStreams);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_updateStreams,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_updateStreams,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.updateStreams(inputStreams,outputStreams);
 		}
@@ -221,7 +246,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "updateStreams", ApiRequestStatus.ERROR, duration_,inputStreams,outputStreams);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_updateStreams, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_updateStreams,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_updateStreams, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -236,8 +264,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "logs", ApiRequestStatus.START, duration_,cx,logs);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.logs);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_logs,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_logs,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.logs(cx,logs);
 		}
@@ -246,7 +274,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "logs", ApiRequestStatus.ERROR, duration_,cx,logs);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_logs, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_logs,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_logs, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -261,8 +292,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "metrics", ApiRequestStatus.START, duration_,cx,metrics);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.metrics);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_metrics,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_metrics,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.metrics(cx,metrics);
 		}
@@ -271,7 +302,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "metrics", ApiRequestStatus.ERROR, duration_,cx,metrics);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_metrics, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_metrics,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_metrics, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -286,8 +320,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "properties", ApiRequestStatus.START, duration_,cx,l);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.properties);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_properties,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_properties,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.properties(cx,l);
 		}
@@ -296,7 +330,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "properties", ApiRequestStatus.ERROR, duration_,cx,l);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_properties, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_properties,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_properties, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -311,8 +348,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "uploadInfo", ApiRequestStatus.START, duration_,cx,info);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.uploadInfo);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_uploadInfo,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_uploadInfo,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.uploadInfo(cx,info);
 		}
@@ -321,7 +358,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "uploadInfo", ApiRequestStatus.ERROR, duration_,cx,info);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_uploadInfo, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_uploadInfo,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_uploadInfo, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -336,8 +376,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "getValues", ApiRequestStatus.START, duration_,cx,path,start,end,option,relativeInterval);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.getValues);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_getValues,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_getValues,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getValues(cx,path,start,end,option,relativeInterval);
 		}
@@ -346,7 +386,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "getValues", ApiRequestStatus.ERROR, duration_,cx,path,start,end,option,relativeInterval);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getValues, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getValues,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getValues, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -361,8 +404,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "getValuesAll", ApiRequestStatus.START, duration_,cx,path,metrics,start,end,option,relativeInterval);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.getValuesAll);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_getValuesAll,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_getValuesAll,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getValuesAll(cx,path,metrics,start,end,option,relativeInterval);
 		}
@@ -371,7 +414,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "getValuesAll", ApiRequestStatus.ERROR, duration_,cx,path,metrics,start,end,option,relativeInterval);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getValuesAll, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getValuesAll,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getValuesAll, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -386,8 +432,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "getMessages", ApiRequestStatus.START, duration_,cx,path,start,end);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.getMessages);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_getMessages,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_getMessages,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getMessages(cx,path,start,end);
 		}
@@ -396,7 +442,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "getMessages", ApiRequestStatus.ERROR, duration_,cx,path,start,end);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getMessages, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getMessages,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getMessages, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -411,8 +460,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "getRequestLogger", ApiRequestStatus.START, duration_,userName,action,resourcePath,context);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.getRequestLogger);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_getRequestLogger,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_getRequestLogger,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getRequestLogger(userName,action,resourcePath,context);
 		}
@@ -421,7 +470,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "getRequestLogger", ApiRequestStatus.ERROR, duration_,userName,action,resourcePath,context);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getRequestLogger, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getRequestLogger,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_getRequestLogger, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -436,8 +488,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "evaluate", ApiRequestStatus.START, duration_,path,function);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.evaluate);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_evaluate,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_evaluate,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.evaluate(path,function);
 		}
@@ -446,7 +498,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "evaluate", ApiRequestStatus.ERROR, duration_,path,function);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_evaluate, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_evaluate,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_evaluate, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -461,8 +516,8 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 		if (server != null)
 			server.getServer().recordApi(null, this, "update", ApiRequestStatus.START, duration_,path,function);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubManagerOperationEnum.update);
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_update,server,this);
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubManagerOperationEnum.ControllerServiceDmaapDrsubManager_update,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.update(path,function);
 		}
@@ -471,7 +526,10 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 			if (server != null)
 				server.getServer().recordApi(null, this, "update", ApiRequestStatus.ERROR, duration_,path,function);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_update, e.toString());
+			EcompException e1 =  EcompException.create(ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_update,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerServiceDmaapDrsubManagerMessageEnum.REQUEST_FAILED_update, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -485,10 +543,12 @@ public class DcaeControllerServiceDmaapDrsubManager extends ControllerServiceDma
 
 
 
+
+
 	public static void ecoreSetup() {
 		DcaeControllerServiceDmaapDrsubManagerProvider.ecoreSetup();
 	}
-	public DcaeControllerServiceDmaapDrsubManagerProvider getSomfProvider() {
+	public DcaeControllerServiceDmaapDrsubManagerProvider getSiriusProvider() {
 		return controller;
 	}
 }

@@ -1,0 +1,12 @@
+operations:
+  DOCKER-MANAGER-START-NEW-CRON: {}
+  DOCKER-MANAGER-START-CRON-RUN: {}
+messages:
+  DOCKER-MANAGER-START-NEW-CRON:
+    errorCode: 2001I
+    messageFormat: cmd={0} frequency={1}
+    description: Defining new cron job
+  DOCKER-MANAGER-CRON-FAILURE:
+    errorCode: 4001W
+    messageFormat: cmd={0} error={1}
+    description: Cron Operation Failed

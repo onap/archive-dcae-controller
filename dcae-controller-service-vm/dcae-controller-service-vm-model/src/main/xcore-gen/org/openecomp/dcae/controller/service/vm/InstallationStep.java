@@ -42,7 +42,6 @@ import org.openecomp.ncomp.core.NamedEntity;
  * @generated
  */
 public interface InstallationStep extends NamedEntity {
-
 	/**
 	 * Returns the value of the '<em><b>Application Id</b></em>' attribute.
 	 * The default value is <code>"dcae"</code>.
@@ -69,4 +68,5 @@ public interface InstallationStep extends NamedEntity {
 	 * @generated
 	 */
 	void setApplicationId(String value);
+
 } // InstallationStep

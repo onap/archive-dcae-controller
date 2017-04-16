@@ -31,12 +31,12 @@ package org.openecomp.dcae.controller.service.common.docker.service;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.service.TommyDockerServiceConfiguration#getPostgresUserName <em>Postgres User Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.service.TommyDockerServiceConfiguration#getPostgresPassword <em>Postgres Password</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.service.TommyDockerServiceConfiguration#getPortgresJdbc <em>Portgres Jdbc</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.common.docker.service.ServicePackage#getTommyDockerServiceConfiguration()
  * @model

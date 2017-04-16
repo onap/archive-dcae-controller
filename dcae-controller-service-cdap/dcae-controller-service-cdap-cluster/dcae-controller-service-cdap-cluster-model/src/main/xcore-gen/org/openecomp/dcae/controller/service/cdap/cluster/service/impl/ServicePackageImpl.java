@@ -28,11 +28,17 @@ import org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterSer
 import org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterServiceInstance;
 import org.openecomp.dcae.controller.service.cdap.cluster.service.ServiceFactory;
 import org.openecomp.dcae.controller.service.cdap.cluster.service.ServicePackage;
+
 import org.openecomp.dcae.controller.service.vm.VmPackage;
+
 import org.openecomp.ncomp.cdap.CdapPackage;
+
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -110,8 +116,8 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		CdapPackage.eINSTANCE.eClass();
 		VmPackage.eINSTANCE.eClass();
+		CdapPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theServicePackage.createPackageContents();
@@ -169,6 +175,33 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCdapClusterConfiguration_CdapServiceServers() {
+		return (EAttribute)cdapClusterConfigurationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapClusterConfiguration_HealthCheckScript() {
+		return (EAttribute)cdapClusterConfigurationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapClusterConfiguration_TestTimeout() {
+		return (EAttribute)cdapClusterConfigurationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ServiceFactory getServiceFactory() {
 		return (ServiceFactory)getEFactoryInstance();
 	}
@@ -198,6 +231,9 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 
 		cdapClusterConfigurationEClass = createEClass(CDAP_CLUSTER_CONFIGURATION);
 		createEReference(cdapClusterConfigurationEClass, CDAP_CLUSTER_CONFIGURATION__CLUSTER);
+		createEAttribute(cdapClusterConfigurationEClass, CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS);
+		createEAttribute(cdapClusterConfigurationEClass, CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT);
+		createEAttribute(cdapClusterConfigurationEClass, CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT);
 	}
 
 	/**
@@ -226,6 +262,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 		// Obtain other dependent packages
 		VmPackage theVmPackage = (VmPackage)EPackage.Registry.INSTANCE.getEPackage(VmPackage.eNS_URI);
 		CdapPackage theCdapPackage = (CdapPackage)EPackage.Registry.INSTANCE.getEPackage(CdapPackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -243,6 +280,9 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 
 		initEClass(cdapClusterConfigurationEClass, CdapClusterConfiguration.class, "CdapClusterConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCdapClusterConfiguration_Cluster(), theCdapPackage.getCdapCluster(), null, "cluster", null, 0, 1, CdapClusterConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapClusterConfiguration_CdapServiceServers(), theEcorePackage.getEString(), "cdapServiceServers", null, 0, -1, CdapClusterConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapClusterConfiguration_HealthCheckScript(), theEcorePackage.getEString(), "healthCheckScript", "bin/healthCheck.sh", 0, 1, CdapClusterConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapClusterConfiguration_TestTimeout(), theEcorePackage.getEInt(), "testTimeout", "60000", 0, 1, CdapClusterConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -251,7 +291,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 		// http://www.eclipse.org/emf/2011/Xcore
 		createXcoreAnnotations();
 		// http://openecomp.org
-		createEcompAnnotations();
+		createOpenecompAnnotations();
 	}
 
 	/**
@@ -276,7 +316,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createEcompAnnotations() {
+	protected void createOpenecompAnnotations() {
 		String source = "http://openecomp.org";	
 		addAnnotation
 		  (getCdapClusterConfiguration_Cluster(), 

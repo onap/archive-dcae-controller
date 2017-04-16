@@ -26,12 +26,16 @@ package org.openecomp.dcae.controller.service.common.vm.manager.impl;
 import org.openecomp.dcae.controller.service.common.vm.manager.CommonVmManager;
 import org.openecomp.dcae.controller.service.common.vm.manager.ManagerFactory;
 import org.openecomp.dcae.controller.service.common.vm.manager.ManagerPackage;
+
 import org.openecomp.dcae.controller.service.common.vm.service.ServicePackage;
+
 import org.openecomp.dcae.controller.service.vmmanager.VmmanagerPackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 

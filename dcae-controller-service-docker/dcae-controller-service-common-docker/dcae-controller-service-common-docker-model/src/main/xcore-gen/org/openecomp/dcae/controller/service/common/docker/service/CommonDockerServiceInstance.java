@@ -32,6 +32,7 @@ import org.openecomp.dcae.controller.service.docker.DockerServiceInstance;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.service.CommonDockerServiceInstance#getScript <em>Script</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.service.CommonDockerServiceInstance#getConfigureTimeout <em>Configure Timeout</em>}</li>
@@ -40,7 +41,6 @@ import org.openecomp.dcae.controller.service.docker.DockerServiceInstance;
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.service.CommonDockerServiceInstance#getResumeTimeout <em>Resume Timeout</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.service.CommonDockerServiceInstance#getDockerConfiguration <em>Docker Configuration</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.common.docker.service.ServicePackage#getCommonDockerServiceInstance()
  * @model

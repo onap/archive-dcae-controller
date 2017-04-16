@@ -30,6 +30,8 @@ import org.openecomp.ncomp.sirius.manager.GenericHttpClient;
 import org.apache.log4j.Logger;
 
 import org.openecomp.logger.EcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -55,33 +57,37 @@ public class DcaeControllerClusterClient extends ControllerClusterImpl {
 		DcaeDcaePlatformController.ecoreSetup(); 
 		client = new GenericHttpClient(file,name);
 		client.add("/cluster", this);
+		client.setVersion("ONAP-R2");
 	}
 
 	public DcaeControllerClusterClient(String file, String name1, String name2) {
 		HighAvailabilityClient client1 = new HighAvailabilityClient(file,name1,name2);
 		client = client1.all; // requests should be forwarded to all.
 		client.add("/cluster", this);
+		client.setVersion("ONAP-R2");
 	}
 	
 	public DcaeControllerClusterClient(AbstractClient c) {
 		client = c;
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 
 
 	
 	public void pushData(String path, java.lang.String serverName, java.lang.String dataName) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerCluster(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerClusterOperationEnum.REMOTE_pushData);
+		EClass c = ControllerPackage.eINSTANCE.getControllerCluster(); 
+		ecomplogger.recordMetricEventStart(ControllerClusterOperationEnum.ControllerCluster_pushData,client.getRemote());
 		
 		try {
 		  client.operationPath(path, c, "pushData", null, serverName,dataName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerClusterMessageEnum.REMOTE_pushData, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@pushData: " + e);
+			ecomplogger.warn(ControllerClusterMessageEnum.REMOTE_CALL_FAILED_pushData, e.toString());
+			EcompException e1 = EcompException.create(ControllerClusterMessageEnum.REMOTE_CALL_FAILED_pushData,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerClusterMessageEnum.REMOTE_CALL_FAILED_pushData,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -89,16 +95,17 @@ public class DcaeControllerClusterClient extends ControllerClusterImpl {
 
 	
 	public void receiveData(String path, java.lang.String serverName, java.lang.String dataName, java.util.Date time, java.lang.String content) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerCluster(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerClusterOperationEnum.REMOTE_receiveData);
+		EClass c = ControllerPackage.eINSTANCE.getControllerCluster(); 
+		ecomplogger.recordMetricEventStart(ControllerClusterOperationEnum.ControllerCluster_receiveData,client.getRemote());
 		
 		try {
 		  client.operationPath(path, c, "receiveData", null, serverName,dataName,time,content);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerClusterMessageEnum.REMOTE_receiveData, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@receiveData: " + e);
+			ecomplogger.warn(ControllerClusterMessageEnum.REMOTE_CALL_FAILED_receiveData, e.toString());
+			EcompException e1 = EcompException.create(ControllerClusterMessageEnum.REMOTE_CALL_FAILED_receiveData,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerClusterMessageEnum.REMOTE_CALL_FAILED_receiveData,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		

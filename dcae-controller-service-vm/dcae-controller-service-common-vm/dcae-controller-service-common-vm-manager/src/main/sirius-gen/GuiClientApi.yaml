@@ -1,69 +1,57 @@
 operations:
-  getTree: {}
-  getObject: {}
-  getTimeSerie: {}
-  getTable: {}
-  getHtml: {}
-  getGraph: {}
-  REMOTE_getTree:
-    decription: Remote call getTree
-  REMOTE_getObject:
-    decription: Remote call getObject
-  REMOTE_getTimeSerie:
-    decription: Remote call getTimeSerie
-  REMOTE_getTable:
-    decription: Remote call getTable
-  REMOTE_getHtml:
-    decription: Remote call getHtml
-  REMOTE_getGraph:
-    decription: Remote call getGraph
+  GuiClientApi@getTree: {}
+  GuiClientApi@getObject: {}
+  GuiClientApi@getTimeSerie: {}
+  GuiClientApi@getTable: {}
+  GuiClientApi@getHtml: {}
+  GuiClientApi@getGraph: {}
 messages:
   dummy: {}
-  getTree:
-    errorCode: getTree-FAILED-5001W
+  REQUEST-FAILED-getTree:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  getObject:
-    errorCode: getObject-FAILED-5001W
+  REQUEST-FAILED-getObject:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  getTimeSerie:
-    errorCode: getTimeSerie-FAILED-5001W
+  REQUEST-FAILED-getTimeSerie:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  getTable:
-    errorCode: getTable-FAILED-5001W
+  REQUEST-FAILED-getTable:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  getHtml:
-    errorCode: getHtml-FAILED-5001W
+  REQUEST-FAILED-getHtml:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  getGraph:
-    errorCode: getGraph-FAILED-5001W
+  REQUEST-FAILED-getGraph:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  REMOTE_getTree:
-    errorCode: REMOTE-getTree-FAILED-5001W
+  REMOTE-CALL-FAILED-getTree:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_getObject:
-    errorCode: REMOTE-getObject-FAILED-5001W
+  REMOTE-CALL-FAILED-getObject:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_getTimeSerie:
-    errorCode: REMOTE-getTimeSerie-FAILED-5001W
+  REMOTE-CALL-FAILED-getTimeSerie:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_getTable:
-    errorCode: REMOTE-getTable-FAILED-5001W
+  REMOTE-CALL-FAILED-getTable:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_getHtml:
-    errorCode: REMOTE-getHtml-FAILED-5001W
+  REMOTE-CALL-FAILED-getHtml:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_getGraph:
-    errorCode: REMOTE-getGraph-FAILED-5001W
+  REMOTE-CALL-FAILED-getGraph:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception

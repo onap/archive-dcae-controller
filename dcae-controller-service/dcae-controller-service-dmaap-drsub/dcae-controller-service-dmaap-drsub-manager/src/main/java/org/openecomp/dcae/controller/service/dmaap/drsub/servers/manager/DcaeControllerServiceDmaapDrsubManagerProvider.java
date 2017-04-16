@@ -65,6 +65,7 @@ public class DcaeControllerServiceDmaapDrsubManagerProvider extends DcaeVirtualM
 	private static final String APP_HOME_ENV = System.getenv("APP_DRSUB_HOME");
 	private static final String APP_HOME = "/opt/app/dcae-analytics-dmaap-drsub";
 	private static final String CTL_SCRIPT = "dmaapAfSub.sh";	// Subscriber control script 
+	private static final String HDFS_SCRIPT = "create_hdfs_dirs.sh";	// HDFS directories creation script
 	private static final int JSON_INDENT_FACTOR = 0;
 	
 	public DcaeControllerServiceDmaapDrsubManagerProvider(ISiriusServer controller, ControllerServiceDmaapDrsubManager o) {
@@ -127,6 +128,9 @@ public class DcaeControllerServiceDmaapDrsubManagerProvider extends DcaeVirtualM
     	   }
        }
 
+       // call script to create HDFS directories based on updated configuration
+       createHdfsDirs();
+       
        // restart controlled process for config changes to take effect
        resume();
     }
@@ -150,9 +154,17 @@ public class DcaeControllerServiceDmaapDrsubManagerProvider extends DcaeVirtualM
 		logger.info("(re)starting");
 		command.add(CTL_SCRIPT);
 		command.add("restart");
-		runScript(command);	}
+		runScript(command);	
+	}
 
-	private void runScript(List<String> command) {
+	private void createHdfsDirs() {
+    	List<String> command = new ArrayList<String>();
+		logger.info("creating HDFS directories");
+		command.add(HDFS_SCRIPT);
+		runScript(command);
+	}
+	
+    private void runScript(List<String> command) {
 		String appBin = APP_HOME_ENV;
 			    
 		if (appBin == null || appBin.equals("")) {

@@ -40,6 +40,9 @@ class CdapClusterServiceInstance extends VirtualMachineServiceInstance, CdapClus
 class CdapClusterConfiguration { 
 	@ecomp(^type = "configuration")
 	contains CdapCluster cluster
+	String[] cdapServiceServers
+	String healthCheckScript = "bin/healthCheck.sh"
+	int testTimeout = "60000"
 }
 
 

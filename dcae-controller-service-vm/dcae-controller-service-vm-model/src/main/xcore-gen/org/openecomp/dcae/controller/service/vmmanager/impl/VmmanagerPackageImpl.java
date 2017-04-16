@@ -96,8 +96,8 @@ public class VmmanagerPackageImpl extends EPackageImpl implements VmmanagerPacka
 		isInited = true;
 
 		// Initialize simple dependencies
-		ServerPackage.eINSTANCE.eClass();
 		ManagerPackage.eINSTANCE.eClass();
+		ServerPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theVmmanagerPackage.createPackageContents();

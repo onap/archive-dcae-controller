@@ -24,12 +24,11 @@
 package org.openecomp.dcae.controller.service.standardeventcollector.manager.impl;
 
 import org.openecomp.dcae.controller.service.dockermanager.impl.DockerManagerImpl;
-
 import org.openecomp.dcae.controller.service.standardeventcollector.manager.ControllerServiceStandardeventcollectorManager;
 import org.openecomp.dcae.controller.service.standardeventcollector.manager.ManagerPackage;
-
 import org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration;
 import org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -40,20 +39,20 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getCport <em>Cport</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getCsecport <em>Csecport</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getKeystoreloc <em>Keystoreloc</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getKeystorepwd <em>Keystorepwd</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getKeystorealias <em>Keystorealias</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getKeystorepwdloc <em>Keystorepwdloc</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getMaxinputqueue <em>Maxinputqueue</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getAuthid <em>Authid</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getAuthflag <em>Authflag</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getAuthpwd <em>Authpwd</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getAuthfile <em>Authfile</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getAuthlist <em>Authlist</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getCheckschemaflag <em>Checkschemaflag</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getSchemafile <em>Schemafile</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl#getStreamid <em>Streamid</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -113,23 +112,41 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 	 */
 	protected String keystoreloc = KEYSTORELOC_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getKeystorepwd() <em>Keystorepwd</em>}' attribute.
+	 * The default value of the '{@link #getKeystorealias() <em>Keystorealias</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKeystorepwd()
+	 * @see #getKeystorealias()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String KEYSTOREPWD_EDEFAULT = null;
+	protected static final String KEYSTOREALIAS_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getKeystorepwd() <em>Keystorepwd</em>}' attribute.
+	 * The cached value of the '{@link #getKeystorealias() <em>Keystorealias</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKeystorepwd()
+	 * @see #getKeystorealias()
 	 * @generated
 	 * @ordered
 	 */
-	protected String keystorepwd = KEYSTOREPWD_EDEFAULT;
+	protected String keystorealias = KEYSTOREALIAS_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getKeystorepwdloc() <em>Keystorepwdloc</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKeystorepwdloc()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String KEYSTOREPWDLOC_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getKeystorepwdloc() <em>Keystorepwdloc</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKeystorepwdloc()
+	 * @generated
+	 * @ordered
+	 */
+	protected String keystorepwdloc = KEYSTOREPWDLOC_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getMaxinputqueue() <em>Maxinputqueue</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -149,24 +166,6 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 	 */
 	protected String maxinputqueue = MAXINPUTQUEUE_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getAuthid() <em>Authid</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAuthid()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String AUTHID_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getAuthid() <em>Authid</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAuthid()
-	 * @generated
-	 * @ordered
-	 */
-	protected String authid = AUTHID_EDEFAULT;
-	/**
 	 * The default value of the '{@link #getAuthflag() <em>Authflag</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -185,41 +184,23 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 	 */
 	protected String authflag = AUTHFLAG_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getAuthpwd() <em>Authpwd</em>}' attribute.
+	 * The default value of the '{@link #getAuthlist() <em>Authlist</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAuthpwd()
+	 * @see #getAuthlist()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String AUTHPWD_EDEFAULT = null;
+	protected static final String AUTHLIST_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getAuthpwd() <em>Authpwd</em>}' attribute.
+	 * The cached value of the '{@link #getAuthlist() <em>Authlist</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAuthpwd()
+	 * @see #getAuthlist()
 	 * @generated
 	 * @ordered
 	 */
-	protected String authpwd = AUTHPWD_EDEFAULT;
-	/**
-	 * The default value of the '{@link #getAuthfile() <em>Authfile</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAuthfile()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String AUTHFILE_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getAuthfile() <em>Authfile</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAuthfile()
-	 * @generated
-	 * @ordered
-	 */
-	protected String authfile = AUTHFILE_EDEFAULT;
+	protected String authlist = AUTHLIST_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getCheckschemaflag() <em>Checkschemaflag</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -256,6 +237,24 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 	 * @ordered
 	 */
 	protected String schemafile = SCHEMAFILE_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getStreamid() <em>Streamid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStreamid()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STREAMID_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getStreamid() <em>Streamid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStreamid()
+	 * @generated
+	 * @ordered
+	 */
+	protected String streamid = STREAMID_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -343,8 +342,8 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getKeystorepwd() {
-		return keystorepwd;
+	public String getKeystorealias() {
+		return keystorealias;
 	}
 
 	/**
@@ -352,11 +351,32 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setKeystorepwd(String newKeystorepwd) {
-		String oldKeystorepwd = keystorepwd;
-		keystorepwd = newKeystorepwd;
+	public void setKeystorealias(String newKeystorealias) {
+		String oldKeystorealias = keystorealias;
+		keystorealias = newKeystorealias;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWD, oldKeystorepwd, keystorepwd));
+			eNotify(new ENotificationImpl(this, Notification.SET, ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREALIAS, oldKeystorealias, keystorealias));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getKeystorepwdloc() {
+		return keystorepwdloc;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKeystorepwdloc(String newKeystorepwdloc) {
+		String oldKeystorepwdloc = keystorepwdloc;
+		keystorepwdloc = newKeystorepwdloc;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWDLOC, oldKeystorepwdloc, keystorepwdloc));
 	}
 
 	/**
@@ -385,27 +405,6 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getAuthid() {
-		return authid;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAuthid(String newAuthid) {
-		String oldAuthid = authid;
-		authid = newAuthid;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHID, oldAuthid, authid));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getAuthflag() {
 		return authflag;
 	}
@@ -420,48 +419,6 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 		authflag = newAuthflag;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFLAG, oldAuthflag, authflag));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getAuthpwd() {
-		return authpwd;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAuthpwd(String newAuthpwd) {
-		String oldAuthpwd = authpwd;
-		authpwd = newAuthpwd;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHPWD, oldAuthpwd, authpwd));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getAuthfile() {
-		return authfile;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAuthfile(String newAuthfile) {
-		String oldAuthfile = authfile;
-		authfile = newAuthfile;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFILE, oldAuthfile, authfile));
 	}
 
 	/**
@@ -520,22 +477,22 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 				return getCsecport();
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTORELOC:
 				return getKeystoreloc();
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWD:
-				return getKeystorepwd();
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREALIAS:
+				return getKeystorealias();
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWDLOC:
+				return getKeystorepwdloc();
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__MAXINPUTQUEUE:
 				return getMaxinputqueue();
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHID:
-				return getAuthid();
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFLAG:
 				return getAuthflag();
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHPWD:
-				return getAuthpwd();
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFILE:
-				return getAuthfile();
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHLIST:
+				return getAuthlist();
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CHECKSCHEMAFLAG:
 				return getCheckschemaflag();
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__SCHEMAFILE:
 				return getSchemafile();
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__STREAMID:
+				return getStreamid();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -557,29 +514,29 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTORELOC:
 				setKeystoreloc((String)newValue);
 				return;
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWD:
-				setKeystorepwd((String)newValue);
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREALIAS:
+				setKeystorealias((String)newValue);
+				return;
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWDLOC:
+				setKeystorepwdloc((String)newValue);
 				return;
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__MAXINPUTQUEUE:
 				setMaxinputqueue((String)newValue);
 				return;
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHID:
-				setAuthid((String)newValue);
-				return;
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFLAG:
 				setAuthflag((String)newValue);
 				return;
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHPWD:
-				setAuthpwd((String)newValue);
-				return;
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFILE:
-				setAuthfile((String)newValue);
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHLIST:
+				setAuthlist((String)newValue);
 				return;
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CHECKSCHEMAFLAG:
 				setCheckschemaflag((String)newValue);
 				return;
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__SCHEMAFILE:
 				setSchemafile((String)newValue);
+				return;
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__STREAMID:
+				setStreamid((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -602,29 +559,29 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTORELOC:
 				setKeystoreloc(KEYSTORELOC_EDEFAULT);
 				return;
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWD:
-				setKeystorepwd(KEYSTOREPWD_EDEFAULT);
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREALIAS:
+				setKeystorealias(KEYSTOREALIAS_EDEFAULT);
+				return;
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWDLOC:
+				setKeystorepwdloc(KEYSTOREPWDLOC_EDEFAULT);
 				return;
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__MAXINPUTQUEUE:
 				setMaxinputqueue(MAXINPUTQUEUE_EDEFAULT);
 				return;
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHID:
-				setAuthid(AUTHID_EDEFAULT);
-				return;
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFLAG:
 				setAuthflag(AUTHFLAG_EDEFAULT);
 				return;
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHPWD:
-				setAuthpwd(AUTHPWD_EDEFAULT);
-				return;
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFILE:
-				setAuthfile(AUTHFILE_EDEFAULT);
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHLIST:
+				setAuthlist(AUTHLIST_EDEFAULT);
 				return;
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CHECKSCHEMAFLAG:
 				setCheckschemaflag(CHECKSCHEMAFLAG_EDEFAULT);
 				return;
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__SCHEMAFILE:
 				setSchemafile(SCHEMAFILE_EDEFAULT);
+				return;
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__STREAMID:
+				setStreamid(STREAMID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -644,22 +601,22 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 				return CSECPORT_EDEFAULT == null ? csecport != null : !CSECPORT_EDEFAULT.equals(csecport);
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTORELOC:
 				return KEYSTORELOC_EDEFAULT == null ? keystoreloc != null : !KEYSTORELOC_EDEFAULT.equals(keystoreloc);
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWD:
-				return KEYSTOREPWD_EDEFAULT == null ? keystorepwd != null : !KEYSTOREPWD_EDEFAULT.equals(keystorepwd);
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREALIAS:
+				return KEYSTOREALIAS_EDEFAULT == null ? keystorealias != null : !KEYSTOREALIAS_EDEFAULT.equals(keystorealias);
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWDLOC:
+				return KEYSTOREPWDLOC_EDEFAULT == null ? keystorepwdloc != null : !KEYSTOREPWDLOC_EDEFAULT.equals(keystorepwdloc);
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__MAXINPUTQUEUE:
 				return MAXINPUTQUEUE_EDEFAULT == null ? maxinputqueue != null : !MAXINPUTQUEUE_EDEFAULT.equals(maxinputqueue);
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHID:
-				return AUTHID_EDEFAULT == null ? authid != null : !AUTHID_EDEFAULT.equals(authid);
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFLAG:
 				return AUTHFLAG_EDEFAULT == null ? authflag != null : !AUTHFLAG_EDEFAULT.equals(authflag);
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHPWD:
-				return AUTHPWD_EDEFAULT == null ? authpwd != null : !AUTHPWD_EDEFAULT.equals(authpwd);
-			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFILE:
-				return AUTHFILE_EDEFAULT == null ? authfile != null : !AUTHFILE_EDEFAULT.equals(authfile);
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHLIST:
+				return AUTHLIST_EDEFAULT == null ? authlist != null : !AUTHLIST_EDEFAULT.equals(authlist);
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CHECKSCHEMAFLAG:
 				return CHECKSCHEMAFLAG_EDEFAULT == null ? checkschemaflag != null : !CHECKSCHEMAFLAG_EDEFAULT.equals(checkschemaflag);
 			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__SCHEMAFILE:
 				return SCHEMAFILE_EDEFAULT == null ? schemafile != null : !SCHEMAFILE_EDEFAULT.equals(schemafile);
+			case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__STREAMID:
+				return STREAMID_EDEFAULT == null ? streamid != null : !STREAMID_EDEFAULT.equals(streamid);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -676,14 +633,14 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CPORT: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CPORT;
 				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CSECPORT: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CSECPORT;
 				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTORELOC: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTORELOC;
-				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWD: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWD;
+				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREALIAS: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREALIAS;
+				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWDLOC: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWDLOC;
 				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__MAXINPUTQUEUE: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__MAXINPUTQUEUE;
-				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHID: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHID;
 				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFLAG: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFLAG;
-				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHPWD: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHPWD;
-				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFILE: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFILE;
+				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHLIST: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST;
 				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CHECKSCHEMAFLAG: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CHECKSCHEMAFLAG;
 				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__SCHEMAFILE: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE;
+				case ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__STREAMID: return ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__STREAMID;
 				default: return -1;
 			}
 		}
@@ -702,14 +659,14 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CPORT: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CPORT;
 				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CSECPORT: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CSECPORT;
 				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTORELOC: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTORELOC;
-				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWD: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWD;
+				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREALIAS: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREALIAS;
+				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWDLOC: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWDLOC;
 				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__MAXINPUTQUEUE: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__MAXINPUTQUEUE;
-				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHID: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHID;
 				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFLAG: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFLAG;
-				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHPWD: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHPWD;
-				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFILE: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFILE;
+				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHLIST;
 				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CHECKSCHEMAFLAG: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CHECKSCHEMAFLAG;
 				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__SCHEMAFILE;
+				case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__STREAMID: return ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__STREAMID;
 				default: return -1;
 			}
 		}
@@ -732,24 +689,57 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 		result.append(csecport);
 		result.append(", keystoreloc: ");
 		result.append(keystoreloc);
-		result.append(", keystorepwd: ");
-		result.append(keystorepwd);
+		result.append(", keystorealias: ");
+		result.append(keystorealias);
+		result.append(", keystorepwdloc: ");
+		result.append(keystorepwdloc);
 		result.append(", maxinputqueue: ");
 		result.append(maxinputqueue);
-		result.append(", authid: ");
-		result.append(authid);
 		result.append(", authflag: ");
 		result.append(authflag);
-		result.append(", authpwd: ");
-		result.append(authpwd);
-		result.append(", authfile: ");
-		result.append(authfile);
+		result.append(", authlist: ");
+		result.append(authlist);
 		result.append(", checkschemaflag: ");
 		result.append(checkschemaflag);
 		result.append(", schemafile: ");
 		result.append(schemafile);
+		result.append(", streamid: ");
+		result.append(streamid);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public String getAuthlist() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAuthlist(String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getStreamid() {
+		return streamid;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStreamid(String newStreamid) {
+		String oldStreamid = streamid;
+		streamid = newStreamid;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__STREAMID, oldStreamid, streamid));
 	}
 
 } //ControllerServiceStandardeventcollectorManagerImpl

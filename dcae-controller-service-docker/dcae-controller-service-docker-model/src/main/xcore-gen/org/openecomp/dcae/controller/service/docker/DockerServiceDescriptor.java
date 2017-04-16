@@ -32,6 +32,7 @@ import org.openecomp.dcae.controller.core.service.DcaeServiceDescriptor;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.docker.DockerServiceDescriptor#getServicePackage <em>Service Package</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.docker.DockerServiceDescriptor#getServiceClass <em>Service Class</em>}</li>
@@ -41,7 +42,6 @@ import org.openecomp.dcae.controller.core.service.DcaeServiceDescriptor;
  *   <li>{@link org.openecomp.dcae.controller.service.docker.DockerServiceDescriptor#getManagerUser <em>Manager User</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.docker.DockerServiceDescriptor#getEncryptedPassword <em>Encrypted Password</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.docker.DockerPackage#getDockerServiceDescriptor()
  * @model

@@ -28,14 +28,17 @@ import org.openecomp.dcae.controller.service.cdap.cluster.service.ServicePackage
 
 import org.openecomp.ncomp.cdap.CdapCluster;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,10 +46,13 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.impl.CdapClusterConfigurationImpl#getCluster <em>Cluster</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.impl.CdapClusterConfigurationImpl#getCdapServiceServers <em>Cdap Service Servers</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.impl.CdapClusterConfigurationImpl#getHealthCheckScript <em>Health Check Script</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.impl.CdapClusterConfigurationImpl#getTestTimeout <em>Test Timeout</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -60,6 +66,56 @@ public class CdapClusterConfigurationImpl extends MinimalEObjectImpl.Container i
 	 * @ordered
 	 */
 	protected CdapCluster cluster;
+
+	/**
+	 * The cached value of the '{@link #getCdapServiceServers() <em>Cdap Service Servers</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCdapServiceServers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> cdapServiceServers;
+
+	/**
+	 * The default value of the '{@link #getHealthCheckScript() <em>Health Check Script</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHealthCheckScript()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String HEALTH_CHECK_SCRIPT_EDEFAULT = "bin/healthCheck.sh";
+
+	/**
+	 * The cached value of the '{@link #getHealthCheckScript() <em>Health Check Script</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHealthCheckScript()
+	 * @generated
+	 * @ordered
+	 */
+	protected String healthCheckScript = HEALTH_CHECK_SCRIPT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTestTimeout() <em>Test Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTestTimeout()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int TEST_TIMEOUT_EDEFAULT = 60000;
+
+	/**
+	 * The cached value of the '{@link #getTestTimeout() <em>Test Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTestTimeout()
+	 * @generated
+	 * @ordered
+	 */
+	protected int testTimeout = TEST_TIMEOUT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -128,6 +184,60 @@ public class CdapClusterConfigurationImpl extends MinimalEObjectImpl.Container i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getCdapServiceServers() {
+		if (cdapServiceServers == null) {
+			cdapServiceServers = new EDataTypeEList<String>(String.class, this, ServicePackage.CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS);
+		}
+		return cdapServiceServers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getHealthCheckScript() {
+		return healthCheckScript;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHealthCheckScript(String newHealthCheckScript) {
+		String oldHealthCheckScript = healthCheckScript;
+		healthCheckScript = newHealthCheckScript;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT, oldHealthCheckScript, healthCheckScript));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getTestTimeout() {
+		return testTimeout;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTestTimeout(int newTestTimeout) {
+		int oldTestTimeout = testTimeout;
+		testTimeout = newTestTimeout;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT, oldTestTimeout, testTimeout));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -147,6 +257,12 @@ public class CdapClusterConfigurationImpl extends MinimalEObjectImpl.Container i
 		switch (featureID) {
 			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CLUSTER:
 				return getCluster();
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS:
+				return getCdapServiceServers();
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT:
+				return getHealthCheckScript();
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT:
+				return getTestTimeout();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,11 +272,22 @@ public class CdapClusterConfigurationImpl extends MinimalEObjectImpl.Container i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CLUSTER:
 				setCluster((CdapCluster)newValue);
+				return;
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS:
+				getCdapServiceServers().clear();
+				getCdapServiceServers().addAll((Collection<? extends String>)newValue);
+				return;
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT:
+				setHealthCheckScript((String)newValue);
+				return;
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT:
+				setTestTimeout((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -177,6 +304,15 @@ public class CdapClusterConfigurationImpl extends MinimalEObjectImpl.Container i
 			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CLUSTER:
 				setCluster((CdapCluster)null);
 				return;
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS:
+				getCdapServiceServers().clear();
+				return;
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT:
+				setHealthCheckScript(HEALTH_CHECK_SCRIPT_EDEFAULT);
+				return;
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT:
+				setTestTimeout(TEST_TIMEOUT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -191,8 +327,34 @@ public class CdapClusterConfigurationImpl extends MinimalEObjectImpl.Container i
 		switch (featureID) {
 			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CLUSTER:
 				return cluster != null;
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS:
+				return cdapServiceServers != null && !cdapServiceServers.isEmpty();
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT:
+				return HEALTH_CHECK_SCRIPT_EDEFAULT == null ? healthCheckScript != null : !HEALTH_CHECK_SCRIPT_EDEFAULT.equals(healthCheckScript);
+			case ServicePackage.CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT:
+				return testTimeout != TEST_TIMEOUT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (cdapServiceServers: ");
+		result.append(cdapServiceServers);
+		result.append(", healthCheckScript: ");
+		result.append(healthCheckScript);
+		result.append(", testTimeout: ");
+		result.append(testTimeout);
+		result.append(')');
+		return result.toString();
 	}
 
 } //CdapClusterConfigurationImpl

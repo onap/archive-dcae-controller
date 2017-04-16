@@ -75,6 +75,7 @@ public class DcaeCommonDockerServiceProvider extends DcaeDockerServiceProvider {
 		c.setSuspendTimeout(i1.getSuspendTimeout());
 		c.setResumeTimeout(i1.getResumeTimeout());
 		c.setDockerConfiguration(EcoreUtil.copy(i1.getDockerConfiguration()));
+		ManagementServer.decryptPasswords(c.getDockerConfiguration());
 		return c;
 	}
 

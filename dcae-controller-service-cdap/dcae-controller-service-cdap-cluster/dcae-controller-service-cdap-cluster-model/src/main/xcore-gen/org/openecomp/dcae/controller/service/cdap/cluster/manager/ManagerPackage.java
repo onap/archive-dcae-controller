@@ -39,6 +39,24 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * -
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *  *        http://www.apache.org/licenses/LICENSE-2.0
+ *  * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ * <!-- end-model-doc -->
  * @see org.openecomp.dcae.controller.service.cdap.cluster.manager.ManagerFactory
  * @model kind="package"
  *        annotation="http://www.eclipse.org/emf/2002/GenModel modelDirectory='/dcae-controller-service-cdap-cluster-model/src/main/xcore-gen' basePackage='org.openecomp.dcae.controller.service.cdap.cluster'"
@@ -133,13 +151,40 @@ public interface ManagerPackage extends EPackage {
 	int CDAP_CLUSTER_MANAGER__CLUSTER = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Cdap Service Servers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_MANAGER__CDAP_SERVICE_SERVERS = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Health Check Script</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_MANAGER__HEALTH_CHECK_SCRIPT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Test Timeout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_MANAGER__TEST_TIMEOUT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Cdap Cluster Manager</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER_FEATURE_COUNT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_FEATURE_COUNT + 1;
+	int CDAP_CLUSTER_MANAGER_FEATURE_COUNT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Test</em>' operation.
@@ -322,13 +367,22 @@ public interface ManagerPackage extends EPackage {
 	int CDAP_CLUSTER_MANAGER___LOAD_ARTIFACT__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 3;
 
 	/**
+	 * The operation id for the '<em>Load Artifact With Config</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_MANAGER___LOAD_ARTIFACT_WITH_CONFIG__STRING_STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 4;
+
+	/**
 	 * The operation id for the '<em>Delete Artifact</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___DELETE_ARTIFACT__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 4;
+	int CDAP_CLUSTER_MANAGER___DELETE_ARTIFACT__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>Start Flow</em>' operation.
@@ -337,7 +391,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___START_FLOW__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 5;
+	int CDAP_CLUSTER_MANAGER___START_FLOW__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>Start Worker</em>' operation.
@@ -346,7 +400,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___START_WORKER__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 6;
+	int CDAP_CLUSTER_MANAGER___START_WORKER__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Start Service</em>' operation.
@@ -355,7 +409,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___START_SERVICE__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 7;
+	int CDAP_CLUSTER_MANAGER___START_SERVICE__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>Start App</em>' operation.
@@ -364,7 +418,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___START_APP__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 8;
+	int CDAP_CLUSTER_MANAGER___START_APP__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 9;
 
 	/**
 	 * The operation id for the '<em>Stop App</em>' operation.
@@ -373,7 +427,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___STOP_APP__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 9;
+	int CDAP_CLUSTER_MANAGER___STOP_APP__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 10;
 
 	/**
 	 * The operation id for the '<em>Delete App</em>' operation.
@@ -382,7 +436,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___DELETE_APP__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 10;
+	int CDAP_CLUSTER_MANAGER___DELETE_APP__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 11;
 
 	/**
 	 * The operation id for the '<em>Load Preferences App</em>' operation.
@@ -391,7 +445,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___LOAD_PREFERENCES_APP__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 11;
+	int CDAP_CLUSTER_MANAGER___LOAD_PREFERENCES_APP__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 12;
 
 	/**
 	 * The operation id for the '<em>Load Preferences Flow</em>' operation.
@@ -400,7 +454,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___LOAD_PREFERENCES_FLOW__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 12;
+	int CDAP_CLUSTER_MANAGER___LOAD_PREFERENCES_FLOW__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 13;
 
 	/**
 	 * The operation id for the '<em>Load Preferences Name Space</em>' operation.
@@ -409,7 +463,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___LOAD_PREFERENCES_NAME_SPACE__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 13;
+	int CDAP_CLUSTER_MANAGER___LOAD_PREFERENCES_NAME_SPACE__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 14;
 
 	/**
 	 * The operation id for the '<em>Set Preferences App</em>' operation.
@@ -418,7 +472,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___SET_PREFERENCES_APP__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 14;
+	int CDAP_CLUSTER_MANAGER___SET_PREFERENCES_APP__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 15;
 
 	/**
 	 * The operation id for the '<em>Set Preferences Flow</em>' operation.
@@ -427,7 +481,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___SET_PREFERENCES_FLOW__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 15;
+	int CDAP_CLUSTER_MANAGER___SET_PREFERENCES_FLOW__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 16;
 
 	/**
 	 * The operation id for the '<em>Set Preferences Worker</em>' operation.
@@ -436,7 +490,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___SET_PREFERENCES_WORKER__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 16;
+	int CDAP_CLUSTER_MANAGER___SET_PREFERENCES_WORKER__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 17;
 
 	/**
 	 * The operation id for the '<em>Set Preferences Service</em>' operation.
@@ -445,7 +499,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___SET_PREFERENCES_SERVICE__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 17;
+	int CDAP_CLUSTER_MANAGER___SET_PREFERENCES_SERVICE__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 18;
 
 	/**
 	 * The operation id for the '<em>Set Preferences Name Space</em>' operation.
@@ -454,7 +508,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___SET_PREFERENCES_NAME_SPACE__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 18;
+	int CDAP_CLUSTER_MANAGER___SET_PREFERENCES_NAME_SPACE__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 19;
 
 	/**
 	 * The operation id for the '<em>Set Flow Run Time Args</em>' operation.
@@ -463,7 +517,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___SET_FLOW_RUN_TIME_ARGS__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 19;
+	int CDAP_CLUSTER_MANAGER___SET_FLOW_RUN_TIME_ARGS__STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 20;
 
 	/**
 	 * The operation id for the '<em>Set Flowlet Instances</em>' operation.
@@ -472,7 +526,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___SET_FLOWLET_INSTANCES__STRING_STRING_STRING_STRING_INT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 20;
+	int CDAP_CLUSTER_MANAGER___SET_FLOWLET_INSTANCES__STRING_STRING_STRING_STRING_INT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 21;
 
 	/**
 	 * The operation id for the '<em>Stop Flow</em>' operation.
@@ -481,7 +535,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___STOP_FLOW__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 21;
+	int CDAP_CLUSTER_MANAGER___STOP_FLOW__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 22;
 
 	/**
 	 * The operation id for the '<em>Stop Worker</em>' operation.
@@ -490,7 +544,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___STOP_WORKER__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 22;
+	int CDAP_CLUSTER_MANAGER___STOP_WORKER__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 23;
 
 	/**
 	 * The operation id for the '<em>Stop Service</em>' operation.
@@ -499,7 +553,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___STOP_SERVICE__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 23;
+	int CDAP_CLUSTER_MANAGER___STOP_SERVICE__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 24;
 
 	/**
 	 * The operation id for the '<em>Truncate Data Set</em>' operation.
@@ -508,7 +562,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___TRUNCATE_DATA_SET__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 24;
+	int CDAP_CLUSTER_MANAGER___TRUNCATE_DATA_SET__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 25;
 
 	/**
 	 * The operation id for the '<em>Delete Dataset</em>' operation.
@@ -517,7 +571,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___DELETE_DATASET__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 25;
+	int CDAP_CLUSTER_MANAGER___DELETE_DATASET__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 26;
 
 	/**
 	 * The operation id for the '<em>Create Stream</em>' operation.
@@ -526,7 +580,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___CREATE_STREAM__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 26;
+	int CDAP_CLUSTER_MANAGER___CREATE_STREAM__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 27;
 
 	/**
 	 * The operation id for the '<em>Delete Stream</em>' operation.
@@ -535,7 +589,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___DELETE_STREAM__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 27;
+	int CDAP_CLUSTER_MANAGER___DELETE_STREAM__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 28;
 
 	/**
 	 * The operation id for the '<em>Get Stream Events</em>' operation.
@@ -544,7 +598,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___GET_STREAM_EVENTS__STRING_STRING_STRING_STRING_INT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 28;
+	int CDAP_CLUSTER_MANAGER___GET_STREAM_EVENTS__STRING_STRING_STRING_STRING_INT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 29;
 
 	/**
 	 * The operation id for the '<em>Get Stream Stats</em>' operation.
@@ -553,7 +607,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___GET_STREAM_STATS__STRING_STRING_STRING_STRING_INT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 29;
+	int CDAP_CLUSTER_MANAGER___GET_STREAM_STATS__STRING_STRING_STRING_STRING_INT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 30;
 
 	/**
 	 * The operation id for the '<em>Send Event To Stream</em>' operation.
@@ -562,7 +616,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___SEND_EVENT_TO_STREAM__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 30;
+	int CDAP_CLUSTER_MANAGER___SEND_EVENT_TO_STREAM__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 31;
 
 	/**
 	 * The operation id for the '<em>Trucate Stream</em>' operation.
@@ -571,7 +625,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___TRUCATE_STREAM__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 31;
+	int CDAP_CLUSTER_MANAGER___TRUCATE_STREAM__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 32;
 
 	/**
 	 * The operation id for the '<em>Set Stream Properties</em>' operation.
@@ -580,7 +634,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___SET_STREAM_PROPERTIES__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 32;
+	int CDAP_CLUSTER_MANAGER___SET_STREAM_PROPERTIES__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 33;
 
 	/**
 	 * The operation id for the '<em>Restart App</em>' operation.
@@ -589,7 +643,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___RESTART_APP__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 33;
+	int CDAP_CLUSTER_MANAGER___RESTART_APP__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 34;
 
 	/**
 	 * The operation id for the '<em>Create App</em>' operation.
@@ -598,7 +652,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___CREATE_APP__STRING_STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 34;
+	int CDAP_CLUSTER_MANAGER___CREATE_APP__STRING_STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 35;
 
 	/**
 	 * The operation id for the '<em>Create App With Config</em>' operation.
@@ -607,7 +661,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___CREATE_APP_WITH_CONFIG__STRING_STRING_STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 35;
+	int CDAP_CLUSTER_MANAGER___CREATE_APP_WITH_CONFIG__STRING_STRING_STRING_STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 36;
 
 	/**
 	 * The operation id for the '<em>Set Dataset Properties</em>' operation.
@@ -616,7 +670,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___SET_DATASET_PROPERTIES__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 36;
+	int CDAP_CLUSTER_MANAGER___SET_DATASET_PROPERTIES__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 37;
 
 	/**
 	 * The operation id for the '<em>Set Stream TTL</em>' operation.
@@ -625,7 +679,25 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___SET_STREAM_TTL__STRING_STRING_INT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 37;
+	int CDAP_CLUSTER_MANAGER___SET_STREAM_TTL__STRING_STRING_INT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 38;
+
+	/**
+	 * The operation id for the '<em>Suspend Schedule</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_MANAGER___SUSPEND_SCHEDULE__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 39;
+
+	/**
+	 * The operation id for the '<em>Resume Schedule</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_MANAGER___RESUME_SCHEDULE__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 40;
 
 	/**
 	 * The number of operations of the '<em>Cdap Cluster Manager</em>' class.
@@ -634,7 +706,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER_OPERATION_COUNT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 38;
+	int CDAP_CLUSTER_MANAGER_OPERATION_COUNT = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 41;
 
 
 	/**

@@ -38,20 +38,20 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getCport <em>Cport</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getCsecport <em>Csecport</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getKeystoreloc <em>Keystoreloc</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getKeystorepwd <em>Keystorepwd</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getKeystorealias <em>Keystorealias</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getKeystorepwdloc <em>Keystorepwdloc</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getMaxinputqueue <em>Maxinputqueue</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getAuthid <em>Authid</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getAuthflag <em>Authflag</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getAuthpwd <em>Authpwd</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getAuthfile <em>Authfile</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getAuthlist <em>Authlist</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getCheckschemaflag <em>Checkschemaflag</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getSchemafile <em>Schemafile</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceConfigurationImpl#getStreamid <em>Streamid</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -111,23 +111,41 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 	 */
 	protected String keystoreloc = KEYSTORELOC_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getKeystorepwd() <em>Keystorepwd</em>}' attribute.
+	 * The default value of the '{@link #getKeystorealias() <em>Keystorealias</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKeystorepwd()
+	 * @see #getKeystorealias()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String KEYSTOREPWD_EDEFAULT = null;
+	protected static final String KEYSTOREALIAS_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getKeystorepwd() <em>Keystorepwd</em>}' attribute.
+	 * The cached value of the '{@link #getKeystorealias() <em>Keystorealias</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKeystorepwd()
+	 * @see #getKeystorealias()
 	 * @generated
 	 * @ordered
 	 */
-	protected String keystorepwd = KEYSTOREPWD_EDEFAULT;
+	protected String keystorealias = KEYSTOREALIAS_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getKeystorepwdloc() <em>Keystorepwdloc</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKeystorepwdloc()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String KEYSTOREPWDLOC_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getKeystorepwdloc() <em>Keystorepwdloc</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKeystorepwdloc()
+	 * @generated
+	 * @ordered
+	 */
+	protected String keystorepwdloc = KEYSTOREPWDLOC_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getMaxinputqueue() <em>Maxinputqueue</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -147,24 +165,6 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 	 */
 	protected String maxinputqueue = MAXINPUTQUEUE_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getAuthid() <em>Authid</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAuthid()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String AUTHID_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getAuthid() <em>Authid</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAuthid()
-	 * @generated
-	 * @ordered
-	 */
-	protected String authid = AUTHID_EDEFAULT;
-	/**
 	 * The default value of the '{@link #getAuthflag() <em>Authflag</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -183,41 +183,23 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 	 */
 	protected String authflag = AUTHFLAG_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getAuthpwd() <em>Authpwd</em>}' attribute.
+	 * The default value of the '{@link #getAuthlist() <em>Authlist</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAuthpwd()
+	 * @see #getAuthlist()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String AUTHPWD_EDEFAULT = null;
+	protected static final String AUTHLIST_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getAuthpwd() <em>Authpwd</em>}' attribute.
+	 * The cached value of the '{@link #getAuthlist() <em>Authlist</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAuthpwd()
+	 * @see #getAuthlist()
 	 * @generated
 	 * @ordered
 	 */
-	protected String authpwd = AUTHPWD_EDEFAULT;
-	/**
-	 * The default value of the '{@link #getAuthfile() <em>Authfile</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAuthfile()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String AUTHFILE_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getAuthfile() <em>Authfile</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAuthfile()
-	 * @generated
-	 * @ordered
-	 */
-	protected String authfile = AUTHFILE_EDEFAULT;
+	protected String authlist = AUTHLIST_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getCheckschemaflag() <em>Checkschemaflag</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -254,6 +236,24 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 	 * @ordered
 	 */
 	protected String schemafile = SCHEMAFILE_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getStreamid() <em>Streamid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStreamid()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String STREAMID_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getStreamid() <em>Streamid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStreamid()
+	 * @generated
+	 * @ordered
+	 */
+	protected String streamid = STREAMID_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -341,8 +341,8 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getKeystorepwd() {
-		return keystorepwd;
+	public String getKeystorealias() {
+		return keystorealias;
 	}
 
 	/**
@@ -350,11 +350,32 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setKeystorepwd(String newKeystorepwd) {
-		String oldKeystorepwd = keystorepwd;
-		keystorepwd = newKeystorepwd;
+	public void setKeystorealias(String newKeystorealias) {
+		String oldKeystorealias = keystorealias;
+		keystorealias = newKeystorealias;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWD, oldKeystorepwd, keystorepwd));
+			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREALIAS, oldKeystorealias, keystorealias));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getKeystorepwdloc() {
+		return keystorepwdloc;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKeystorepwdloc(String newKeystorepwdloc) {
+		String oldKeystorepwdloc = keystorepwdloc;
+		keystorepwdloc = newKeystorepwdloc;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWDLOC, oldKeystorepwdloc, keystorepwdloc));
 	}
 
 	/**
@@ -383,27 +404,6 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getAuthid() {
-		return authid;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAuthid(String newAuthid) {
-		String oldAuthid = authid;
-		authid = newAuthid;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHID, oldAuthid, authid));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getAuthflag() {
 		return authflag;
 	}
@@ -418,48 +418,6 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 		authflag = newAuthflag;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFLAG, oldAuthflag, authflag));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getAuthpwd() {
-		return authpwd;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAuthpwd(String newAuthpwd) {
-		String oldAuthpwd = authpwd;
-		authpwd = newAuthpwd;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHPWD, oldAuthpwd, authpwd));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getAuthfile() {
-		return authfile;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAuthfile(String newAuthfile) {
-		String oldAuthfile = authfile;
-		authfile = newAuthfile;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFILE, oldAuthfile, authfile));
 	}
 
 	/**
@@ -509,6 +467,48 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getAuthlist() {
+		return authlist;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAuthlist(String newAuthlist) {
+		String oldAuthlist = authlist;
+		authlist = newAuthlist;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST, oldAuthlist, authlist));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getStreamid() {
+		return streamid;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStreamid(String newStreamid) {
+		String oldStreamid = streamid;
+		streamid = newStreamid;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__STREAMID, oldStreamid, streamid));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -518,22 +518,22 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 				return getCsecport();
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTORELOC:
 				return getKeystoreloc();
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWD:
-				return getKeystorepwd();
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREALIAS:
+				return getKeystorealias();
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWDLOC:
+				return getKeystorepwdloc();
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__MAXINPUTQUEUE:
 				return getMaxinputqueue();
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHID:
-				return getAuthid();
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFLAG:
 				return getAuthflag();
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHPWD:
-				return getAuthpwd();
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFILE:
-				return getAuthfile();
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST:
+				return getAuthlist();
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CHECKSCHEMAFLAG:
 				return getCheckschemaflag();
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE:
 				return getSchemafile();
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__STREAMID:
+				return getStreamid();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -555,29 +555,29 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTORELOC:
 				setKeystoreloc((String)newValue);
 				return;
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWD:
-				setKeystorepwd((String)newValue);
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREALIAS:
+				setKeystorealias((String)newValue);
+				return;
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWDLOC:
+				setKeystorepwdloc((String)newValue);
 				return;
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__MAXINPUTQUEUE:
 				setMaxinputqueue((String)newValue);
 				return;
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHID:
-				setAuthid((String)newValue);
-				return;
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFLAG:
 				setAuthflag((String)newValue);
 				return;
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHPWD:
-				setAuthpwd((String)newValue);
-				return;
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFILE:
-				setAuthfile((String)newValue);
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST:
+				setAuthlist((String)newValue);
 				return;
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CHECKSCHEMAFLAG:
 				setCheckschemaflag((String)newValue);
 				return;
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE:
 				setSchemafile((String)newValue);
+				return;
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__STREAMID:
+				setStreamid((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -600,29 +600,29 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTORELOC:
 				setKeystoreloc(KEYSTORELOC_EDEFAULT);
 				return;
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWD:
-				setKeystorepwd(KEYSTOREPWD_EDEFAULT);
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREALIAS:
+				setKeystorealias(KEYSTOREALIAS_EDEFAULT);
+				return;
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWDLOC:
+				setKeystorepwdloc(KEYSTOREPWDLOC_EDEFAULT);
 				return;
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__MAXINPUTQUEUE:
 				setMaxinputqueue(MAXINPUTQUEUE_EDEFAULT);
 				return;
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHID:
-				setAuthid(AUTHID_EDEFAULT);
-				return;
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFLAG:
 				setAuthflag(AUTHFLAG_EDEFAULT);
 				return;
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHPWD:
-				setAuthpwd(AUTHPWD_EDEFAULT);
-				return;
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFILE:
-				setAuthfile(AUTHFILE_EDEFAULT);
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST:
+				setAuthlist(AUTHLIST_EDEFAULT);
 				return;
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CHECKSCHEMAFLAG:
 				setCheckschemaflag(CHECKSCHEMAFLAG_EDEFAULT);
 				return;
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE:
 				setSchemafile(SCHEMAFILE_EDEFAULT);
+				return;
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__STREAMID:
+				setStreamid(STREAMID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -642,22 +642,22 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 				return CSECPORT_EDEFAULT == null ? csecport != null : !CSECPORT_EDEFAULT.equals(csecport);
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTORELOC:
 				return KEYSTORELOC_EDEFAULT == null ? keystoreloc != null : !KEYSTORELOC_EDEFAULT.equals(keystoreloc);
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWD:
-				return KEYSTOREPWD_EDEFAULT == null ? keystorepwd != null : !KEYSTOREPWD_EDEFAULT.equals(keystorepwd);
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREALIAS:
+				return KEYSTOREALIAS_EDEFAULT == null ? keystorealias != null : !KEYSTOREALIAS_EDEFAULT.equals(keystorealias);
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWDLOC:
+				return KEYSTOREPWDLOC_EDEFAULT == null ? keystorepwdloc != null : !KEYSTOREPWDLOC_EDEFAULT.equals(keystorepwdloc);
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__MAXINPUTQUEUE:
 				return MAXINPUTQUEUE_EDEFAULT == null ? maxinputqueue != null : !MAXINPUTQUEUE_EDEFAULT.equals(maxinputqueue);
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHID:
-				return AUTHID_EDEFAULT == null ? authid != null : !AUTHID_EDEFAULT.equals(authid);
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFLAG:
 				return AUTHFLAG_EDEFAULT == null ? authflag != null : !AUTHFLAG_EDEFAULT.equals(authflag);
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHPWD:
-				return AUTHPWD_EDEFAULT == null ? authpwd != null : !AUTHPWD_EDEFAULT.equals(authpwd);
-			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFILE:
-				return AUTHFILE_EDEFAULT == null ? authfile != null : !AUTHFILE_EDEFAULT.equals(authfile);
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST:
+				return AUTHLIST_EDEFAULT == null ? authlist != null : !AUTHLIST_EDEFAULT.equals(authlist);
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CHECKSCHEMAFLAG:
 				return CHECKSCHEMAFLAG_EDEFAULT == null ? checkschemaflag != null : !CHECKSCHEMAFLAG_EDEFAULT.equals(checkschemaflag);
 			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE:
 				return SCHEMAFILE_EDEFAULT == null ? schemafile != null : !SCHEMAFILE_EDEFAULT.equals(schemafile);
+			case ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__STREAMID:
+				return STREAMID_EDEFAULT == null ? streamid != null : !STREAMID_EDEFAULT.equals(streamid);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -678,22 +678,22 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 		result.append(csecport);
 		result.append(", keystoreloc: ");
 		result.append(keystoreloc);
-		result.append(", keystorepwd: ");
-		result.append(keystorepwd);
+		result.append(", keystorealias: ");
+		result.append(keystorealias);
+		result.append(", keystorepwdloc: ");
+		result.append(keystorepwdloc);
 		result.append(", maxinputqueue: ");
 		result.append(maxinputqueue);
-		result.append(", authid: ");
-		result.append(authid);
 		result.append(", authflag: ");
 		result.append(authflag);
-		result.append(", authpwd: ");
-		result.append(authpwd);
-		result.append(", authfile: ");
-		result.append(authfile);
+		result.append(", authlist: ");
+		result.append(authlist);
 		result.append(", checkschemaflag: ");
 		result.append(checkschemaflag);
 		result.append(", schemafile: ");
 		result.append(schemafile);
+		result.append(", streamid: ");
+		result.append(streamid);
 		result.append(')');
 		return result.toString();
 	}

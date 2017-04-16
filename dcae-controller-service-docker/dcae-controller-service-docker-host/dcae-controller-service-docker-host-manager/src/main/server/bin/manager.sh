@@ -19,10 +19,14 @@ VMTYPE=vm-docker-host
 
 case $CMD1 in 
   start) 
-    mkdir -p data/resources
+	mkdir -p data/resources/configuration
     if [ ! -e data/resources/dockerHost.json ]; then
     	echo '{}' > data/resources/dockerHost.json
     fi
+	if [ -e config/version.json ]; then
+		rm -rf data/resources/configuration/version*
+		cp config/version.json data/resources/configuration/
+	fi
     sed -i s/FQDN/$(hostname -f)/ config/docker.properties
     find /opt/app/dcae-controller-service-*/lib -name \*.jar | grep -v docker-host-manager | xargs -I X cp X lib/
     JVMARGS=$(cat config/manager.properties | grep JVMARGS | sed 's/[^=]*=//')

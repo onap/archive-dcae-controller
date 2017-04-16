@@ -23,6 +23,7 @@
  */
 package org.openecomp.dcae.controller.core.server;
 
+import org.openecomp.dcae.controller.core.service.HealthTestStatus;
 import org.openecomp.ncomp.core.HasOperationalState;
 import org.openecomp.ncomp.core.NamedEntity;
 import org.openecomp.ncomp.core.logs.LogMessageContainer;
@@ -53,6 +54,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getHypervisor <em>Hypervisor</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getVmType <em>Vm Type</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getCertificatePassword <em>Certificate Password</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getLastHealthTest <em>Last Health Test</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getHealthTestStatus <em>Health Test Status</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getHealthTestMessageCode <em>Health Test Message Code</em>}</li>
  * </ul>
  * </p>
  *
@@ -327,5 +331,86 @@ public interface DcaeBasicServer extends NamedEntity, HasOperationalState, LogMe
 	 * @generated
 	 */
 	void setCertificatePassword(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Last Health Test</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Last Health Test</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Last Health Test</em>' attribute.
+	 * @see #setLastHealthTest(DateMetricAttribute)
+	 * @see org.openecomp.dcae.controller.core.server.ServerPackage#getDcaeBasicServer_LastHealthTest()
+	 * @model unique="false" dataType="org.openecomp.ncomp.core.DateMetricAttribute" transient="true"
+	 * @generated
+	 */
+	DateMetricAttribute getLastHealthTest();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getLastHealthTest <em>Last Health Test</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Last Health Test</em>' attribute.
+	 * @see #getLastHealthTest()
+	 * @generated
+	 */
+	void setLastHealthTest(DateMetricAttribute value);
+
+	/**
+	 * Returns the value of the '<em><b>Health Test Status</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.openecomp.dcae.controller.core.service.HealthTestStatus}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Health Test Status</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Health Test Status</em>' attribute.
+	 * @see org.openecomp.dcae.controller.core.service.HealthTestStatus
+	 * @see #setHealthTestStatus(HealthTestStatus)
+	 * @see org.openecomp.dcae.controller.core.server.ServerPackage#getDcaeBasicServer_HealthTestStatus()
+	 * @model unique="false"
+	 * @generated
+	 */
+	HealthTestStatus getHealthTestStatus();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getHealthTestStatus <em>Health Test Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Health Test Status</em>' attribute.
+	 * @see org.openecomp.dcae.controller.core.service.HealthTestStatus
+	 * @see #getHealthTestStatus()
+	 * @generated
+	 */
+	void setHealthTestStatus(HealthTestStatus value);
+
+	/**
+	 * Returns the value of the '<em><b>Health Test Message Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Health Test Message Code</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Health Test Message Code</em>' attribute.
+	 * @see #setHealthTestMessageCode(String)
+	 * @see org.openecomp.dcae.controller.core.server.ServerPackage#getDcaeBasicServer_HealthTestMessageCode()
+	 * @model unique="false"
+	 * @generated
+	 */
+	String getHealthTestMessageCode();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getHealthTestMessageCode <em>Health Test Message Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Health Test Message Code</em>' attribute.
+	 * @see #getHealthTestMessageCode()
+	 * @generated
+	 */
+	void setHealthTestMessageCode(String value);
 
 } // DcaeBasicServer

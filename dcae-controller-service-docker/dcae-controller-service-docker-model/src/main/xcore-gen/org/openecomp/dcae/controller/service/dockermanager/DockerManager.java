@@ -33,10 +33,10 @@ import org.openecomp.dcae.controller.service.docker.DockerConfiguration;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.dockermanager.DockerManager#getConfiguration <em>Configuration</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.dockermanager.DockermanagerPackage#getDockerManager()
  * @model

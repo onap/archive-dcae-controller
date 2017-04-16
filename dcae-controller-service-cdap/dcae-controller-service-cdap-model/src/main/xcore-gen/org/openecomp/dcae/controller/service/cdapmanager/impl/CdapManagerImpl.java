@@ -32,7 +32,6 @@ import org.openecomp.ncomp.cdap.CdapConfiguration;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -44,10 +43,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdapmanager.impl.CdapManagerImpl#getConfiguration <em>Configuration</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

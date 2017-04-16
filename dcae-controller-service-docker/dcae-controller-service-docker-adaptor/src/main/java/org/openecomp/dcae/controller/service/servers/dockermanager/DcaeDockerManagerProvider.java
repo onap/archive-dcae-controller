@@ -19,45 +19,36 @@
  * ============LICENSE_END============================================
  */
 	
-
 package org.openecomp.dcae.controller.service.servers.dockermanager;
 
-
-
-
-
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.util.Date;
-
-import org.openecomp.ncomp.sirius.manager.IRequestHandler;
-import org.openecomp.ncomp.sirius.manager.ISiriusPlugin;
-import org.openecomp.ncomp.sirius.manager.ISiriusServer;
-import org.openecomp.ncomp.sirius.manager.ManagementServer;
-import org.openecomp.ncomp.sirius.manager.ManagementServerUtils;
-import org.openecomp.ncomp.sirius.function.FunctionUtils;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
-
-
-import org.openecomp.ncomp.sirius.manager.BasicAdaptorProvider;
-import org.openecomp.ncomp.webservice.utils.FileUtils;
 import org.openecomp.dcae.controller.core.service.HealthTestResponse;
 import org.openecomp.dcae.controller.core.service.HealthTestStatus;
 import org.openecomp.dcae.controller.core.service.ServiceFactory;
 import org.openecomp.dcae.controller.core.stream.DcaeStream;
-import org.openecomp.dcae.controller.service.dockermanager.impl.DockerManagerImpl;
 import org.openecomp.dcae.controller.service.dockermanager.DockerManager;
-
+import org.openecomp.dcae.controller.service.servers.dockermanager.logging.DockerManager2MessageEnum;
+import org.openecomp.dcae.controller.service.servers.dockermanager.logging.DockerManager2OperationEnum;
+import org.openecomp.logger.EcompMessageEnum;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.ncomp.sirius.manager.BasicAdaptorProvider;
+import org.openecomp.ncomp.sirius.manager.ISiriusServer;
+import org.openecomp.ncomp.sirius.manager.ManagementServer;
+import org.openecomp.ncomp.sirius.manager.ManagementServerUtils;
+import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
+import org.openecomp.ncomp.utils.ShellCmd;
+import org.openecomp.ncomp.webservice.utils.FileUtils;
 
 public class DcaeDockerManagerProvider extends BasicAdaptorProvider {
 	private static final Logger logger = Logger.getLogger(DcaeDockerManagerProvider.class);
+	private static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
 	DockerManager o;
 	private boolean suspended;
 
@@ -102,9 +93,9 @@ public class DcaeDockerManagerProvider extends BasicAdaptorProvider {
 			json.put("dmaapStreamId", s.getName());
 			a.put(json);
 		}
-		write2file(a,"/tmp/dmaap.conf2");
-		write2file(a,"/etc/dcae/dmaap.conf");
-		
+		write2file(a, "/tmp/dmaap.conf2");
+		write2file(a, "/etc/dcae/dmaap.conf");
+
 	}
 
 	private void write2file(JSONArray a, String fileName) {
@@ -124,49 +115,51 @@ public class DcaeDockerManagerProvider extends BasicAdaptorProvider {
 		o.getOutputStreams().clear();
 		o.getOutputStreams().addAll(outputStreams);
 	}
-	
+
 	public void scheduleCronjob(final String cmd, final long frequency) {
-    	Thread t = new Thread("crontab: " + cmd) {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                    	Date now = new Date();
-                    	long wait = frequency - (now.getTime() % frequency);
-                    	Thread.sleep(wait);
-                    	if (suspended) continue;
-                		Runtime runtime = Runtime.getRuntime();
-                		Process proc;
-                		try {
-                			now = new Date();
-                			proc = runtime.exec(cmd);
-                			ByteArrayOutputStream o = new ByteArrayOutputStream();
-                			ByteArrayOutputStream e = new ByteArrayOutputStream();
-                			FileUtils.copyStream(proc.getInputStream(), o);
-                			FileUtils.copyStream(proc.getErrorStream(), e);
-                			int i = proc.waitFor();
-                			if (i != 0) 
-                				logger.warn("crontab return error: " + cmd + " " + i);
-                			long duration = new Date().getTime()-now.getTime();
-							if (duration  > frequency) 
-                				logger.warn("crontab took too long: " + cmd + " " + duration);
-                		} catch (Exception e) {
-                			e.printStackTrace();
-                			logger.warn("ERROR: " + e);
-                		}
-                    } catch (Exception e) {
-                        ManagementServerUtils.printStackTrace(e);
-                        logger.fatal("crontab: " + cmd + " " + e);
-                        try {
-                            Thread.sleep(30000);
-                        } catch (InterruptedException e1) {
-                        }
-                    }
-                }
-            };
-        };
-        t.start();
+		ecomplogger.setOperation(DockerManager2OperationEnum.DOCKER_MANAGER_START_NEW_CRON);
+		ecomplogger.newRequestId();
+		ecomplogger.setInstanceId(controller, o);
+		ecomplogger.recordAuditEventStart();
+		EcompMessageEnum msg1 = DockerManager2MessageEnum.DOCKER_MANAGER_START_NEW_CRON;
+		;
+		ecomplogger.recordAuditEventEnd(StatusCodeEnum.COMPLETE, msg1, cmd, Long.toString(frequency));
+
+		Thread t = new Thread("crontab: " + cmd) {
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						Date now = new Date();
+						long wait = frequency - (now.getTime() % frequency);
+						Thread.sleep(wait);
+						if (suspended)
+							continue;
+						try {
+							ecomplogger.setOperation(DockerManager2OperationEnum.DOCKER_MANAGER_START_CRON_RUN);
+							ecomplogger.newRequestId();
+							ecomplogger.setInstanceId(controller, o);
+							ecomplogger.recordAuditEventStart();
+							ShellCmd c = new ShellCmd(cmd);
+							c.result(frequency);
+							ecomplogger.recordAuditEventEnd();
+						} catch (Exception e) {
+							e.printStackTrace();
+							EcompMessageEnum msg = DockerManager2MessageEnum.DOCKER_MANAGER_CRON_FAILURE;
+							ecomplogger.recordAuditEventEnd(StatusCodeEnum.ERROR, msg, cmd, e.toString());
+						}
+					} catch (Exception e) {
+						ManagementServerUtils.printStackTrace(e);
+						logger.fatal("crontab: " + cmd + " " + e);
+						try {
+							Thread.sleep(30000);
+						} catch (InterruptedException e1) {
+						}
+					}
+				}
+			};
+		};
+		t.start();
 	}
 
-	
 }

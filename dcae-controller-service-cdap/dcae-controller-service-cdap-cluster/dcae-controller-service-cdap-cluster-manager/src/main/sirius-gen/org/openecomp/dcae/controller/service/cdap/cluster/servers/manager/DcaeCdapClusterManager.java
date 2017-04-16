@@ -25,24 +25,34 @@ package org.openecomp.dcae.controller.service.cdap.cluster.servers.manager;
 
 
 
+
+
 import java.io.InputStream;
 
 import org.openecomp.ncomp.sirius.manager.IRequestHandler;
+import org.openecomp.ncomp.sirius.manager.ISwaggerHandler;
 import org.openecomp.ncomp.sirius.manager.ISiriusPlugin;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
+import org.openecomp.ncomp.sirius.manager.ISiriusProvider;
+import org.openecomp.ncomp.sirius.manager.ManagementServer;
+import org.openecomp.ncomp.sirius.manager.SwaggerUtils;
 import org.openecomp.ncomp.sirius.function.FunctionUtils;
 import org.openecomp.ncomp.component.ApiRequestStatus;
 
 import org.apache.log4j.Logger;
 
-import org.openecomp.logger.EcompLogger;
+import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.json.JSONObject;
 
 import java.util.Date;
 
 import org.openecomp.dcae.controller.service.cdap.cluster.servers.manager.logging.CdapClusterManagerOperationEnum;
+import org.openecomp.dcae.controller.service.cdap.cluster.servers.manager.logging.CdapClusterManagerMessageEnum;
 
 
 
@@ -69,9 +79,9 @@ import org.openecomp.dcae.controller.service.cdap.cluster.manager.impl.CdapClust
 
 
 
-public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
+public class DcaeCdapClusterManager extends CdapClusterManagerImpl implements ISiriusProvider {
 	public static final Logger logger = Logger.getLogger(DcaeCdapClusterManager.class);
-	static final EcompLogger ecomplogger = EcompLogger.getEcompLogger();
+	static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
 	public DcaeCdapClusterManagerProvider controller;
 	ISiriusServer server;
 
@@ -86,8 +96,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "test", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.test);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_test,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_test,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.test();
 		}
@@ -96,7 +106,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "test", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_test, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_test, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -111,8 +124,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.suspend);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_suspend,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_suspend,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.suspend();
 		}
@@ -121,7 +134,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_suspend, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_suspend, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -136,8 +152,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "resume", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.resume);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_resume,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_resume,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.resume();
 		}
@@ -146,7 +162,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "resume", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_resume, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_resume, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -161,8 +180,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "publicKey", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.publicKey);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_publicKey,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_publicKey,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.publicKey();
 		}
@@ -171,7 +190,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "publicKey", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_publicKey, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_publicKey,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_publicKey, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -186,8 +208,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "configurationChanged", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.configurationChanged);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_configurationChanged,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_configurationChanged,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.configurationChanged();
 		}
@@ -196,7 +218,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "configurationChanged", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_configurationChanged, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_configurationChanged,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_configurationChanged, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -211,8 +236,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "updateStreams", ApiRequestStatus.START, duration_,inputStreams,outputStreams);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.updateStreams);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_updateStreams,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_updateStreams,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.updateStreams(inputStreams,outputStreams);
 		}
@@ -221,7 +246,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "updateStreams", ApiRequestStatus.ERROR, duration_,inputStreams,outputStreams);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_updateStreams, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_updateStreams,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_updateStreams, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -236,8 +264,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "logs", ApiRequestStatus.START, duration_,cx,logs);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.logs);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_logs,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_logs,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.logs(cx,logs);
 		}
@@ -246,7 +274,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "logs", ApiRequestStatus.ERROR, duration_,cx,logs);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_logs, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_logs,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_logs, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -261,8 +292,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "metrics", ApiRequestStatus.START, duration_,cx,metrics);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.metrics);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_metrics,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_metrics,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.metrics(cx,metrics);
 		}
@@ -271,7 +302,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "metrics", ApiRequestStatus.ERROR, duration_,cx,metrics);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_metrics, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_metrics,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_metrics, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -286,8 +320,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "properties", ApiRequestStatus.START, duration_,cx,l);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.properties);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_properties,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_properties,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.properties(cx,l);
 		}
@@ -296,7 +330,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "properties", ApiRequestStatus.ERROR, duration_,cx,l);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_properties, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_properties,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_properties, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -311,8 +348,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "uploadInfo", ApiRequestStatus.START, duration_,cx,info);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.uploadInfo);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_uploadInfo,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_uploadInfo,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.uploadInfo(cx,info);
 		}
@@ -321,7 +358,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "uploadInfo", ApiRequestStatus.ERROR, duration_,cx,info);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_uploadInfo, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_uploadInfo,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_uploadInfo, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -336,8 +376,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getValues", ApiRequestStatus.START, duration_,cx,path,start,end,option,relativeInterval);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.getValues);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_getValues,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getValues,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getValues(cx,path,start,end,option,relativeInterval);
 		}
@@ -346,7 +386,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getValues", ApiRequestStatus.ERROR, duration_,cx,path,start,end,option,relativeInterval);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_getValues, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_getValues,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_getValues, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -361,8 +404,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getValuesAll", ApiRequestStatus.START, duration_,cx,path,metrics,start,end,option,relativeInterval);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.getValuesAll);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_getValuesAll,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getValuesAll,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getValuesAll(cx,path,metrics,start,end,option,relativeInterval);
 		}
@@ -371,7 +414,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getValuesAll", ApiRequestStatus.ERROR, duration_,cx,path,metrics,start,end,option,relativeInterval);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_getValuesAll, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_getValuesAll,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_getValuesAll, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -386,8 +432,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getMessages", ApiRequestStatus.START, duration_,cx,path,start,end);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.getMessages);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_getMessages,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getMessages,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getMessages(cx,path,start,end);
 		}
@@ -396,7 +442,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getMessages", ApiRequestStatus.ERROR, duration_,cx,path,start,end);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_getMessages, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_getMessages,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_getMessages, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -411,8 +460,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getRequestLogger", ApiRequestStatus.START, duration_,userName,action,resourcePath,context);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.getRequestLogger);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_getRequestLogger,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getRequestLogger,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getRequestLogger(userName,action,resourcePath,context);
 		}
@@ -421,7 +470,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getRequestLogger", ApiRequestStatus.ERROR, duration_,userName,action,resourcePath,context);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_getRequestLogger, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_getRequestLogger,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_getRequestLogger, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -436,8 +488,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "evaluate", ApiRequestStatus.START, duration_,path,function);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.evaluate);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_evaluate,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_evaluate,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.evaluate(path,function);
 		}
@@ -446,7 +498,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "evaluate", ApiRequestStatus.ERROR, duration_,path,function);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_evaluate, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_evaluate,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_evaluate, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -461,8 +516,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "update", ApiRequestStatus.START, duration_,path,function);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.update);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_update,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_update,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.update(path,function);
 		}
@@ -471,7 +526,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "update", ApiRequestStatus.ERROR, duration_,path,function);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_update, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_update,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_update, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -486,8 +544,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "createNamespace", ApiRequestStatus.START, duration_,namespace);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.createNamespace);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_createNamespace,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_createNamespace,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.createNamespace(namespace);
 		}
@@ -496,7 +554,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "createNamespace", ApiRequestStatus.ERROR, duration_,namespace);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_createNamespace, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_createNamespace,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_createNamespace, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -511,8 +572,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "deleteNamespace", ApiRequestStatus.START, duration_,namespace);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.deleteNamespace);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_deleteNamespace,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deleteNamespace,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.deleteNamespace(namespace);
 		}
@@ -521,7 +582,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "deleteNamespace", ApiRequestStatus.ERROR, duration_,namespace);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteNamespace, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteNamespace,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteNamespace, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -536,8 +600,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "deployApp", ApiRequestStatus.START, duration_,namespace,jarfile);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.deployApp);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_deployApp,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deployApp,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.deployApp(namespace,jarfile);
 		}
@@ -546,7 +610,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "deployApp", ApiRequestStatus.ERROR, duration_,namespace,jarfile);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_deployApp, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_deployApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_deployApp, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -561,8 +628,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "loadArtifact", ApiRequestStatus.START, duration_,namespace,artifactName,jarfile,version);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.loadArtifact);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_loadArtifact,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_loadArtifact,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.loadArtifact(namespace,artifactName,jarfile,version);
 		}
@@ -571,12 +638,43 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "loadArtifact", ApiRequestStatus.ERROR, duration_,namespace,artifactName,jarfile,version);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_loadArtifact, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_loadArtifact,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_loadArtifact, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
 		if (server != null)
 			server.getServer().recordApi(null, this, "loadArtifact", ApiRequestStatus.OKAY, duration_,namespace,artifactName,jarfile,version);
+		return res;
+	}
+
+	public java.lang.String loadArtifactWithConfig(java.lang.String namespace, java.lang.String artifactName, java.lang.String jarfile, java.lang.String version, java.lang.String config) {
+		java.lang.String res = null;
+		long duration_ = 0;
+		if (server != null)
+			server.getServer().recordApi(null, this, "loadArtifactWithConfig", ApiRequestStatus.START, duration_,namespace,artifactName,jarfile,version,config);
+		Date now_ = new Date();
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_loadArtifactWithConfig,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_loadArtifactWithConfig,"self:" + ManagementServer.object2ref(this));
+		try {
+			res =  controller.loadArtifactWithConfig(namespace,artifactName,jarfile,version,config);
+		}
+		catch (Exception e) {
+			duration_ = new Date().getTime()-now_.getTime();
+			if (server != null)
+				server.getServer().recordApi(null, this, "loadArtifactWithConfig", ApiRequestStatus.ERROR, duration_,namespace,artifactName,jarfile,version,config);
+			System.err.println("ERROR: " + e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_loadArtifactWithConfig, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_loadArtifactWithConfig,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_loadArtifactWithConfig, e.getMessage());
+			throw e1;
+		}
+		ecomplogger.recordMetricEventEnd();
+		duration_ = new Date().getTime()-now_.getTime();
+		if (server != null)
+			server.getServer().recordApi(null, this, "loadArtifactWithConfig", ApiRequestStatus.OKAY, duration_,namespace,artifactName,jarfile,version,config);
 		return res;
 	}
 
@@ -586,8 +684,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "deleteArtifact", ApiRequestStatus.START, duration_,namespace,artifactName,artifactVersion);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.deleteArtifact);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_deleteArtifact,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deleteArtifact,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.deleteArtifact(namespace,artifactName,artifactVersion);
 		}
@@ -596,7 +694,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "deleteArtifact", ApiRequestStatus.ERROR, duration_,namespace,artifactName,artifactVersion);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteArtifact, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteArtifact,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteArtifact, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -611,8 +712,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "startFlow", ApiRequestStatus.START, duration_,namespace,appName,flowId,extraArgs);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.startFlow);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_startFlow,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_startFlow,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.startFlow(namespace,appName,flowId,extraArgs);
 		}
@@ -621,7 +722,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "startFlow", ApiRequestStatus.ERROR, duration_,namespace,appName,flowId,extraArgs);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_startFlow, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_startFlow,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_startFlow, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -636,8 +740,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "startWorker", ApiRequestStatus.START, duration_,namespace,appName,workerId,extraArgs);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.startWorker);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_startWorker,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_startWorker,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.startWorker(namespace,appName,workerId,extraArgs);
 		}
@@ -646,7 +750,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "startWorker", ApiRequestStatus.ERROR, duration_,namespace,appName,workerId,extraArgs);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_startWorker, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_startWorker,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_startWorker, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -661,8 +768,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "startService", ApiRequestStatus.START, duration_,namespace,appName,serviceId,extraArgs);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.startService);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_startService,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_startService,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.startService(namespace,appName,serviceId,extraArgs);
 		}
@@ -671,7 +778,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "startService", ApiRequestStatus.ERROR, duration_,namespace,appName,serviceId,extraArgs);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_startService, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_startService,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_startService, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -686,8 +796,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "startApp", ApiRequestStatus.START, duration_,namespace,appName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.startApp);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_startApp,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_startApp,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.startApp(namespace,appName);
 		}
@@ -696,7 +806,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "startApp", ApiRequestStatus.ERROR, duration_,namespace,appName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_startApp, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_startApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_startApp, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -711,8 +824,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "stopApp", ApiRequestStatus.START, duration_,namespace,appName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.stopApp);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_stopApp,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_stopApp,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.stopApp(namespace,appName);
 		}
@@ -721,7 +834,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "stopApp", ApiRequestStatus.ERROR, duration_,namespace,appName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_stopApp, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_stopApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_stopApp, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -736,8 +852,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "deleteApp", ApiRequestStatus.START, duration_,namespace,appName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.deleteApp);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_deleteApp,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deleteApp,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.deleteApp(namespace,appName);
 		}
@@ -746,7 +862,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "deleteApp", ApiRequestStatus.ERROR, duration_,namespace,appName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteApp, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteApp, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -761,8 +880,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "loadPreferencesApp", ApiRequestStatus.START, duration_,namespace,prefsFile,appId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.loadPreferencesApp);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_loadPreferencesApp,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_loadPreferencesApp,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.loadPreferencesApp(namespace,prefsFile,appId);
 		}
@@ -771,7 +890,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "loadPreferencesApp", ApiRequestStatus.ERROR, duration_,namespace,prefsFile,appId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_loadPreferencesApp, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_loadPreferencesApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_loadPreferencesApp, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -786,8 +908,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "loadPreferencesFlow", ApiRequestStatus.START, duration_,namespace,prefsFile,appId,flowId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.loadPreferencesFlow);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_loadPreferencesFlow,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_loadPreferencesFlow,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.loadPreferencesFlow(namespace,prefsFile,appId,flowId);
 		}
@@ -796,7 +918,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "loadPreferencesFlow", ApiRequestStatus.ERROR, duration_,namespace,prefsFile,appId,flowId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_loadPreferencesFlow, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_loadPreferencesFlow,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_loadPreferencesFlow, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -811,8 +936,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "loadPreferencesNameSpace", ApiRequestStatus.START, duration_,namespace,prefsFile);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.loadPreferencesNameSpace);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_loadPreferencesNameSpace,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_loadPreferencesNameSpace,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.loadPreferencesNameSpace(namespace,prefsFile);
 		}
@@ -821,7 +946,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "loadPreferencesNameSpace", ApiRequestStatus.ERROR, duration_,namespace,prefsFile);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_loadPreferencesNameSpace, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_loadPreferencesNameSpace,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_loadPreferencesNameSpace, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -836,8 +964,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "setPreferencesApp", ApiRequestStatus.START, duration_,namespace,prefsString,appId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.setPreferencesApp);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesApp,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesApp,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.setPreferencesApp(namespace,prefsString,appId);
 		}
@@ -846,7 +974,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "setPreferencesApp", ApiRequestStatus.ERROR, duration_,namespace,prefsString,appId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesApp, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesApp, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -861,8 +992,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "setPreferencesFlow", ApiRequestStatus.START, duration_,namespace,prefsString,appId,flowId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.setPreferencesFlow);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesFlow,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesFlow,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.setPreferencesFlow(namespace,prefsString,appId,flowId);
 		}
@@ -871,7 +1002,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "setPreferencesFlow", ApiRequestStatus.ERROR, duration_,namespace,prefsString,appId,flowId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesFlow, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesFlow,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesFlow, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -886,8 +1020,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "setPreferencesWorker", ApiRequestStatus.START, duration_,namespace,prefsString,appId,workerId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.setPreferencesWorker);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesWorker,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesWorker,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.setPreferencesWorker(namespace,prefsString,appId,workerId);
 		}
@@ -896,7 +1030,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "setPreferencesWorker", ApiRequestStatus.ERROR, duration_,namespace,prefsString,appId,workerId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesWorker, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesWorker,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesWorker, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -911,8 +1048,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "setPreferencesService", ApiRequestStatus.START, duration_,namespace,prefsString,appId,serviceId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.setPreferencesService);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesService,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesService,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.setPreferencesService(namespace,prefsString,appId,serviceId);
 		}
@@ -921,7 +1058,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "setPreferencesService", ApiRequestStatus.ERROR, duration_,namespace,prefsString,appId,serviceId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesService, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesService,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesService, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -936,8 +1076,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "setPreferencesNameSpace", ApiRequestStatus.START, duration_,namespace,prefsString);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.setPreferencesNameSpace);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesNameSpace,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesNameSpace,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.setPreferencesNameSpace(namespace,prefsString);
 		}
@@ -946,7 +1086,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "setPreferencesNameSpace", ApiRequestStatus.ERROR, duration_,namespace,prefsString);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesNameSpace, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesNameSpace,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_setPreferencesNameSpace, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -961,8 +1104,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "setFlowRunTimeArgs", ApiRequestStatus.START, duration_,namespace,appId,flowId,args);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.setFlowRunTimeArgs);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_setFlowRunTimeArgs,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setFlowRunTimeArgs,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.setFlowRunTimeArgs(namespace,appId,flowId,args);
 		}
@@ -971,7 +1114,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "setFlowRunTimeArgs", ApiRequestStatus.ERROR, duration_,namespace,appId,flowId,args);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_setFlowRunTimeArgs, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_setFlowRunTimeArgs,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_setFlowRunTimeArgs, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -986,8 +1132,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "setFlowletInstances", ApiRequestStatus.START, duration_,namespace,appId,flowId,flowletId,nInstances);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.setFlowletInstances);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_setFlowletInstances,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setFlowletInstances,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.setFlowletInstances(namespace,appId,flowId,flowletId,nInstances);
 		}
@@ -996,7 +1142,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "setFlowletInstances", ApiRequestStatus.ERROR, duration_,namespace,appId,flowId,flowletId,nInstances);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_setFlowletInstances, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_setFlowletInstances,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_setFlowletInstances, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1011,8 +1160,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "stopFlow", ApiRequestStatus.START, duration_,namespace,appId,flowId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.stopFlow);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_stopFlow,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_stopFlow,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.stopFlow(namespace,appId,flowId);
 		}
@@ -1021,7 +1170,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "stopFlow", ApiRequestStatus.ERROR, duration_,namespace,appId,flowId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_stopFlow, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_stopFlow,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_stopFlow, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1036,8 +1188,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "stopWorker", ApiRequestStatus.START, duration_,namespace,appId,workerId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.stopWorker);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_stopWorker,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_stopWorker,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.stopWorker(namespace,appId,workerId);
 		}
@@ -1046,7 +1198,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "stopWorker", ApiRequestStatus.ERROR, duration_,namespace,appId,workerId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_stopWorker, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_stopWorker,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_stopWorker, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1061,8 +1216,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "stopService", ApiRequestStatus.START, duration_,namespace,appId,serviceId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.stopService);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_stopService,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_stopService,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.stopService(namespace,appId,serviceId);
 		}
@@ -1071,7 +1226,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "stopService", ApiRequestStatus.ERROR, duration_,namespace,appId,serviceId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_stopService, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_stopService,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_stopService, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1086,8 +1244,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "truncateDataSet", ApiRequestStatus.START, duration_,namespace,datasetName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.truncateDataSet);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_truncateDataSet,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_truncateDataSet,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.truncateDataSet(namespace,datasetName);
 		}
@@ -1096,7 +1254,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "truncateDataSet", ApiRequestStatus.ERROR, duration_,namespace,datasetName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_truncateDataSet, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_truncateDataSet,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_truncateDataSet, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1111,8 +1272,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "deleteDataset", ApiRequestStatus.START, duration_,namespace,datasetName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.deleteDataset);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_deleteDataset,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deleteDataset,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.deleteDataset(namespace,datasetName);
 		}
@@ -1121,7 +1282,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "deleteDataset", ApiRequestStatus.ERROR, duration_,namespace,datasetName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteDataset, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteDataset,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteDataset, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1136,8 +1300,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "createStream", ApiRequestStatus.START, duration_,namespace,newStreamId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.createStream);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_createStream,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_createStream,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.createStream(namespace,newStreamId);
 		}
@@ -1146,7 +1310,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "createStream", ApiRequestStatus.ERROR, duration_,namespace,newStreamId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_createStream, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_createStream,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_createStream, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1161,8 +1328,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "deleteStream", ApiRequestStatus.START, duration_,namespace,streamId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.deleteStream);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_deleteStream,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deleteStream,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.deleteStream(namespace,streamId);
 		}
@@ -1171,7 +1338,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "deleteStream", ApiRequestStatus.ERROR, duration_,namespace,streamId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteStream, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteStream,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_deleteStream, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1186,8 +1356,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getStreamEvents", ApiRequestStatus.START, duration_,namespace,streamId,startTime,endTime,limit);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.getStreamEvents);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_getStreamEvents,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getStreamEvents,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getStreamEvents(namespace,streamId,startTime,endTime,limit);
 		}
@@ -1196,7 +1366,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getStreamEvents", ApiRequestStatus.ERROR, duration_,namespace,streamId,startTime,endTime,limit);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_getStreamEvents, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_getStreamEvents,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_getStreamEvents, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1211,8 +1384,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getStreamStats", ApiRequestStatus.START, duration_,namespace,streamId,startTime,endTime,limit);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.getStreamStats);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_getStreamStats,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getStreamStats,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getStreamStats(namespace,streamId,startTime,endTime,limit);
 		}
@@ -1221,7 +1394,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getStreamStats", ApiRequestStatus.ERROR, duration_,namespace,streamId,startTime,endTime,limit);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_getStreamStats, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_getStreamStats,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_getStreamStats, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1236,8 +1412,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "sendEventToStream", ApiRequestStatus.START, duration_,namespace,streamId,event);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.sendEventToStream);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_sendEventToStream,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_sendEventToStream,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.sendEventToStream(namespace,streamId,event);
 		}
@@ -1246,7 +1422,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "sendEventToStream", ApiRequestStatus.ERROR, duration_,namespace,streamId,event);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_sendEventToStream, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_sendEventToStream,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_sendEventToStream, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1261,8 +1440,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "trucateStream", ApiRequestStatus.START, duration_,namespace,streamId);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.trucateStream);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_trucateStream,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_trucateStream,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.trucateStream(namespace,streamId);
 		}
@@ -1271,7 +1450,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "trucateStream", ApiRequestStatus.ERROR, duration_,namespace,streamId);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_trucateStream, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_trucateStream,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_trucateStream, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1286,8 +1468,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "setStreamProperties", ApiRequestStatus.START, duration_,namespace,streamId,propsFile);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.setStreamProperties);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_setStreamProperties,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setStreamProperties,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.setStreamProperties(namespace,streamId,propsFile);
 		}
@@ -1296,7 +1478,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "setStreamProperties", ApiRequestStatus.ERROR, duration_,namespace,streamId,propsFile);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_setStreamProperties, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_setStreamProperties,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_setStreamProperties, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1311,8 +1496,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "restartApp", ApiRequestStatus.START, duration_,namespace,appId,progTypes);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.restartApp);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_restartApp,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_restartApp,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.restartApp(namespace,appId,progTypes);
 		}
@@ -1321,7 +1506,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "restartApp", ApiRequestStatus.ERROR, duration_,namespace,appId,progTypes);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_restartApp, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_restartApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_restartApp, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1336,8 +1524,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "createApp", ApiRequestStatus.START, duration_,namespace,appId,artifactName,artifactVersion,scope);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.createApp);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_createApp,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_createApp,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.createApp(namespace,appId,artifactName,artifactVersion,scope);
 		}
@@ -1346,7 +1534,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "createApp", ApiRequestStatus.ERROR, duration_,namespace,appId,artifactName,artifactVersion,scope);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_createApp, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_createApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_createApp, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1361,8 +1552,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "createAppWithConfig", ApiRequestStatus.START, duration_,namespace,appId,artifactName,artifactVersion,scope,appConfig);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.createAppWithConfig);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_createAppWithConfig,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_createAppWithConfig,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.createAppWithConfig(namespace,appId,artifactName,artifactVersion,scope,appConfig);
 		}
@@ -1371,7 +1562,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "createAppWithConfig", ApiRequestStatus.ERROR, duration_,namespace,appId,artifactName,artifactVersion,scope,appConfig);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_createAppWithConfig, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_createAppWithConfig,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_createAppWithConfig, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1386,8 +1580,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "setDatasetProperties", ApiRequestStatus.START, duration_,namespace,datasetName,datasetProperties);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.setDatasetProperties);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_setDatasetProperties,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setDatasetProperties,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.setDatasetProperties(namespace,datasetName,datasetProperties);
 		}
@@ -1396,7 +1590,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "setDatasetProperties", ApiRequestStatus.ERROR, duration_,namespace,datasetName,datasetProperties);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_setDatasetProperties, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_setDatasetProperties,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_setDatasetProperties, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1411,8 +1608,8 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "setStreamTTL", ApiRequestStatus.START, duration_,namespace,streamName,ttlSeconds);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.setStreamTTL);
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_setStreamTTL,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setStreamTTL,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.setStreamTTL(namespace,streamName,ttlSeconds);
 		}
@@ -1421,7 +1618,10 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "setStreamTTL", ApiRequestStatus.ERROR, duration_,namespace,streamName,ttlSeconds);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_setStreamTTL, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_setStreamTTL,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_setStreamTTL, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -1429,6 +1629,64 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 			server.getServer().recordApi(null, this, "setStreamTTL", ApiRequestStatus.OKAY, duration_,namespace,streamName,ttlSeconds);
 		return res;
 	}
+
+	public java.lang.String suspendSchedule(java.lang.String namespace, java.lang.String appId, java.lang.String scheduleId) {
+		java.lang.String res = null;
+		long duration_ = 0;
+		if (server != null)
+			server.getServer().recordApi(null, this, "suspendSchedule", ApiRequestStatus.START, duration_,namespace,appId,scheduleId);
+		Date now_ = new Date();
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_suspendSchedule,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_suspendSchedule,"self:" + ManagementServer.object2ref(this));
+		try {
+			res =  controller.suspendSchedule(namespace,appId,scheduleId);
+		}
+		catch (Exception e) {
+			duration_ = new Date().getTime()-now_.getTime();
+			if (server != null)
+				server.getServer().recordApi(null, this, "suspendSchedule", ApiRequestStatus.ERROR, duration_,namespace,appId,scheduleId);
+			System.err.println("ERROR: " + e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_suspendSchedule, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_suspendSchedule,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_suspendSchedule, e.getMessage());
+			throw e1;
+		}
+		ecomplogger.recordMetricEventEnd();
+		duration_ = new Date().getTime()-now_.getTime();
+		if (server != null)
+			server.getServer().recordApi(null, this, "suspendSchedule", ApiRequestStatus.OKAY, duration_,namespace,appId,scheduleId);
+		return res;
+	}
+
+	public java.lang.String resumeSchedule(java.lang.String namespace, java.lang.String appId, java.lang.String scheduleId) {
+		java.lang.String res = null;
+		long duration_ = 0;
+		if (server != null)
+			server.getServer().recordApi(null, this, "resumeSchedule", ApiRequestStatus.START, duration_,namespace,appId,scheduleId);
+		Date now_ = new Date();
+		ecomplogger.recordAuditEventStartIfNeeded(CdapClusterManagerOperationEnum.CdapClusterManager_resumeSchedule,server,this);
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_resumeSchedule,"self:" + ManagementServer.object2ref(this));
+		try {
+			res =  controller.resumeSchedule(namespace,appId,scheduleId);
+		}
+		catch (Exception e) {
+			duration_ = new Date().getTime()-now_.getTime();
+			if (server != null)
+				server.getServer().recordApi(null, this, "resumeSchedule", ApiRequestStatus.ERROR, duration_,namespace,appId,scheduleId);
+			System.err.println("ERROR: " + e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REQUEST_FAILED_resumeSchedule, e.toString());
+			EcompException e1 =  EcompException.create(CdapClusterManagerMessageEnum.REQUEST_FAILED_resumeSchedule,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapClusterManagerMessageEnum.REQUEST_FAILED_resumeSchedule, e.getMessage());
+			throw e1;
+		}
+		ecomplogger.recordMetricEventEnd();
+		duration_ = new Date().getTime()-now_.getTime();
+		if (server != null)
+			server.getServer().recordApi(null, this, "resumeSchedule", ApiRequestStatus.OKAY, duration_,namespace,appId,scheduleId);
+		return res;
+	}
+
+
 
 
 
@@ -1438,7 +1696,7 @@ public class DcaeCdapClusterManager extends CdapClusterManagerImpl {
 	public static void ecoreSetup() {
 		DcaeCdapClusterManagerProvider.ecoreSetup();
 	}
-	public DcaeCdapClusterManagerProvider getSomfProvider() {
+	public DcaeCdapClusterManagerProvider getSiriusProvider() {
 		return controller;
 	}
 }

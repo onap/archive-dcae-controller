@@ -8,16 +8,16 @@ operations:
   CLUSTER_DATA_REPLICATION:
     description: Data replication from master to slave controllers.
 messages:
-  HEALTHCHECK_SERVICE_FAILED:
-    errorCode: DCAE-CONTROLLER-HEALTHCHECK-SERVICE-FAILED-5001W
+  HEALTHCHECK-SERVICE-FAILED:
+    errorCode: 5001W
     messageFormat: '{0}'
     parameters:
       service-name: 
         description: Name of Service for which the health check fails.
     resolution: Contact Tier 4. This is a software bug.
     description: Heath Check on the service level fails.
-  POLICY_POLLING_FAILED:
-    errorCode: DCAE-CONTROLLER-POLICY-POLLING-FAILED-5001W
+  POLICY-POLLING-FAILED:
+    errorCode: 5001W
     messageFormat: '{0} {1}'
     parameters:
       object-path: 
@@ -26,17 +26,22 @@ messages:
         description: Exception that happened.
     resolution: Contact Tier 4. This is a software bug.
     description: Police Polling on the service level fails.
-  DATABUS_POLLING_FAILED:
-    errorCode: DCAE-CONTROLLER-DATABUS-POLLING-FAILED-5001W
+  DATABUS-POLLING-FAILED:
+    errorCode: 5001W
     messageFormat: '{0}'
     parameters:
       exception: 
         description: Exception that happened.
     resolution: Contact Tier 4. This is a software bug.
     description: Databus Polling on the service level fails.   
-    
-  CLUSTER_DATA_REPLICATION_FAILED:
-    errorCode: DCAE-CONTROLLER-CLUSTER_DATA_REPLICATION-FAILED-5001W
+  DATABUS-UNABLE-TO-ADD-STREAM:
+    errorCode: 5001W
+    messageFormat: stream={0} issue={1}
+    resolution: Verify configuration. 
+    description: Unable to find service instance for a stream pub/sub.   
+        
+  CLUSTER-DATA-REPLICATION-FAILED:
+    errorCode: 5001W
     messageFormat: '{0}'
     parameters:
       exception: 

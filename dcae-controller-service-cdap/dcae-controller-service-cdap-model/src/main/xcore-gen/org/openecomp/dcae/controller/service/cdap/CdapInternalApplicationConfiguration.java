@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapInternalApplicationConfiguration#getConfig <em>Config</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapInternalApplicationConfiguration#getPreferences <em>Preferences</em>}</li>
@@ -45,7 +46,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapInternalApplicationConfiguration#getFlows <em>Flows</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapInternalApplicationConfiguration#getServices <em>Services</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.cdap.CdapPackage#getCdapInternalApplicationConfiguration()
  * @model

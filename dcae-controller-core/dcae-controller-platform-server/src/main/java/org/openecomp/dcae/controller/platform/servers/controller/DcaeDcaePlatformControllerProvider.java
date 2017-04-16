@@ -74,7 +74,7 @@ import org.openecomp.dcae.controller.service.docker.DockerService;
 import org.openecomp.dcae.controller.service.docker.DockerServiceInstance;
 import org.openecomp.dcae.controller.service.vm.VirtualMachineService;
 import org.openecomp.dcae.controller.service.vm.VirtualMachineServiceInstance;
-import org.openecomp.logger.EcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
 import org.openecomp.ncomp.core.DeploymentStatus;
 import org.openecomp.ncomp.core.NamedEntity;
 import org.openecomp.ncomp.sirius.manager.BasicManagementServerProvider;
@@ -84,6 +84,7 @@ import org.openecomp.ncomp.sirius.manager.JavaHttpClient;
 import org.openecomp.ncomp.sirius.manager.ManagementServer;
 import org.openecomp.ncomp.sirius.manager.ManagementServerUtils;
 import org.openecomp.ncomp.sirius.manager.Subject;
+import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
 import org.openecomp.ncomp.sirius.manager.SwaggerUtils;
 import org.openecomp.ncomp.utils.CryptoUtils;
 import org.openecomp.ncomp.utils.PropertyUtil;
@@ -92,12 +93,17 @@ import org.openecomp.ncomp.webservice.utils.JsonUtils;
 
 public class DcaeDcaePlatformControllerProvider extends BasicManagementServerProvider {
 	private static final Logger logger = Logger.getLogger(DcaeDcaePlatformControllerProvider.class);
-	static final EcompLogger ecomplogger = EcompLogger.getEcompLogger();
+	static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
 	DcaePlatformController o;
 
 	public DcaeDcaePlatformControllerProvider(ISiriusServer controller, DcaePlatformController o) {
 		super(controller, o);
 		this.o = o;
+	}
+
+	public static void ecoreSetup() {
+		// TODO Auto-generated method stub
+
 	}
 
 	public void start() {
@@ -108,11 +114,12 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		Thread t = new Thread("health checks") {
 			@Override
 			public void run() {
-				ecomplogger.setOperation(DcaeControllerOperationEnum.HEALTHCHECK);
 				while (true) {
 					try {
 						if (!controller.getServer().isSlave) {
+							ecomplogger.setOperation(DcaeControllerOperationEnum.HEALTHCHECK);
 							ecomplogger.newRequestId();
+							ecomplogger.setInstanceId(controller, o);
 							ecomplogger.recordAuditEventStart();
 							for (DcaeService s : o.getServices()) {
 								try {
@@ -150,15 +157,15 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				ecomplogger.setOperation(DcaeControllerOperationEnum.POLICY_POLLING);
 				while (true) {
 					try {
-						System.out.println("PPPPPPPPPPP polling start");
 						switch (o.getCluster().getRole()) {
 						case MASTER:
 						case UNKNOWN:
 						case STANDALONE:
+							ecomplogger.setOperation(DcaeControllerOperationEnum.POLICY_POLLING);
 							ecomplogger.newRequestId();
+							ecomplogger.setInstanceId(controller, o);
 							ecomplogger.recordAuditEventStart();
 							System.out.println("PPPPPPPPPPP polling start");
 							for (DcaeService s : o.getServices()) {
@@ -205,22 +212,24 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		Thread t3 = new Thread("databus polling") {
 			@Override
 			public void run() {
-				ecomplogger.setOperation(DcaeControllerOperationEnum.DATABUS_POLLING);
 				while (true) {
 					try {
 						switch (o.getCluster().getRole()) {
 						case MASTER:
 						case UNKNOWN:
 						case STANDALONE:
+							ecomplogger.setOperation(DcaeControllerOperationEnum.DATABUS_POLLING);
 							ecomplogger.newRequestId();
+							ecomplogger.setInstanceId(controller, o);
 							ecomplogger.recordAuditEventStart();
 							try {
 								updateDatabusInformation();
+								ecomplogger.recordAuditEventEnd();
 							} catch (Exception e) {
 								ecomplogger.warn(DcaeControllerMessageEnum.DATABUS_POLLING_FAILED, e.toString());
 								ManagementServerUtils.printStackTrace(e);
+								ecomplogger.recordAuditEventEnd(StatusCodeEnum.ERROR);
 							}
-							ecomplogger.recordAuditEventEnd();
 							break;
 						case SLAVE:
 							break;
@@ -269,8 +278,6 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		HashMap<DcaeServiceInstance, List<DmaapStream>> inputs = new HashMap<DcaeServiceInstance, List<DmaapStream>>();
 		HashMap<DcaeServiceInstance, List<DmaapStream>> outputs = new HashMap<DcaeServiceInstance, List<DmaapStream>>();
 		for (DatabusStream stream : o.getDatabus().getStreams()) {
-			// if (!stream.getName().startsWith("local:"))
-			// continue;
 			if (stream instanceof DatabusStreamFeed) {
 				DatabusStreamFeed feed = (DatabusStreamFeed) stream;
 				for (DatabusStreamFeedPublisher p : feed.getPublishers()) {
@@ -285,8 +292,6 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			if (stream instanceof DatabusStreamTopic) {
 				DatabusStreamTopic topic = (DatabusStreamTopic) stream;
 				for (DatabusStreamTopicClient p : topic.getClients()) {
-					// System.err.println("UPDATE: " + p.getName() + " " +
-					// p.getTopicURL());
 					if (p.getAction().contains(DatabusStreamTopicAction.PUB))
 						addStream(outputs, "message", "publish", p.getName(), p.getLocalStreamId(), p.getUsername(),
 								p.getUserpwd(), p.getTopicURL(), topic.getAuthenticationMethod().toString());
@@ -301,6 +306,10 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				if (inputs.get(i) == null && outputs.get(i) == null)
 					continue;
 				String before = streamsHash(i);
+				List<DcaeStream> in = new ArrayList<DcaeStream>();
+				in.addAll(i.getInputStreams());
+				List<DcaeStream> out = new ArrayList<DcaeStream>();
+				out.addAll(i.getOutputStreams());
 				i.getInputStreams().clear();
 				if (inputs.get(i) != null)
 					i.getInputStreams().addAll(inputs.get(i));
@@ -308,8 +317,25 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				if (outputs.get(i) != null)
 					i.getOutputStreams().addAll(outputs.get(i));
 				String after = streamsHash(i);
+				boolean okay = false;
 				if (i.getStatus() == DeploymentStatus.DEPLOYED && !before.equals(after)) {
-					s.pushManagerConfiguration(i.getName());
+					try {
+						s.pushManagerConfiguration(i.getName());
+						okay = true; 
+					} catch (Exception e) {
+						logger.warn("Unable to push configuration: " + ManagementServer.object2ref(i));
+						e.printStackTrace();
+					}
+				} 
+				else {
+					okay = true;
+				}
+				if (! okay && !before.equals(after)) {
+					// need to restore previous state so next attempt will be made.
+					i.getInputStreams().clear();
+					i.getInputStreams().addAll(in);
+					i.getOutputStreams().clear();
+					i.getOutputStreams().addAll(out);
 				}
 			}
 		}
@@ -349,7 +375,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		json2.put("dmaapName", client.props.get("databus.dmaapName"));
 		json2.put("drProvUrl", client.props.get("databus.drProvUrl"));
 		json2.put("version", "1");
-		json2.put("topicNsRoot", "org.openecomp.dcae.dmaap");
+		json2.put("topicNsRoot", client.props.getProperty("databus.topicNsRoot","org.openecomp.dcae.dmaap"));
 		json2.put("bridgeAdminTopic", "DCAE_MM_AGENT");
 		try {
 			client.httpJsonTransaction("/webapi/dmaap", "PUT", headers, json2);
@@ -384,7 +410,8 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 						System.err.println("DATABUS: add dr node: " + server.getName() + " " + time);
 					}
 					if (found && i.getStatus() != DeploymentStatus.DEPLOYED) {
-						client.httpJsonTransaction("/webapi/dr_nodes/" + server.getName(), "DELETE", headers, null);
+						client.httpJsonTransaction("/webapi/dr_nodes/" + server.getNetworks().get(0).getDnsName(),
+								"DELETE", headers, null);
 						System.err.println("DATABUS: delete dr node: " + server.getName() + " " + time);
 					}
 				}
@@ -417,9 +444,33 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				}
 			}
 		}
+		databusCheckConsistency(databus);
 	}
 
-	private <T extends NamedEntity> T findNamed(EList<? extends T> l, String name) {
+	private void databusCheckConsistency(DcaeDataBus databus) {
+		for (DatabusStream s : databus.getStreams()) {
+			if (s instanceof DatabusStreamFeed) {
+				DatabusStreamFeed feed = (DatabusStreamFeed) s;
+				for (DatabusStreamFeedSubscriber sub : feed.getSubscribers()) {
+					if (!sub.getName().startsWith("forward:"))
+						continue;
+					String forwardStreamName = sub.getName().replace("forward:", "");
+					DatabusStream s2 = findNamed(databus.getStreams(), forwardStreamName);
+					if (!(s2 instanceof DatabusStreamFeed))
+						continue;
+					DatabusStreamFeed feed2 = (DatabusStreamFeed) s2;
+					if (feed2.getPublishURL() == null) continue;
+					if (! feed2.getPublishURL().equals(sub.getDeliveryURL())) {
+						System.err.println("FEED: forward URL wrong: " + feed.getName() + " " + sub.getDeliveryURL()
+								+ " != " + feed2.getPublishURL());
+						o.refreshDataBus(feed.getName());
+					}
+				}
+			}
+		}
+	}
+
+	protected <T extends NamedEntity> T findNamed(EList<? extends T> l, String name) {
 		for (T t : l) {
 			if (t.getName() != null && t.getName().equals(name))
 				return t;
@@ -435,8 +486,9 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			return;
 		String path = "/services/" + a[0];
 		Subject s = controller.getServer().find(path);
-		if (s == null || s.o == null)
+		if (s == null || s.o == null) {
 			return;
+		}
 		DcaeService s1 = (DcaeService) s.o;
 		for (DcaeServiceInstance i : instances(s1)) {
 			if (!a[1].equals(location(i)))
@@ -648,7 +700,6 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 	}
 
 	// XX remove static
-	@SuppressWarnings("unused")
 	private void databusAddTopic(DatabusStreamTopic topic) {
 		if (topic.getTopicName() != null)
 			return;
@@ -683,7 +734,12 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			headers.put("Content-Type", "application/json");
 			JSONObject json = ManagementServer.ecore2json(topic, 100, topic.eClass(), true);
 			if (topic.getFqtn() != null) {
-				client.httpJsonTransaction("/webapi/topics/" + topic.getFqtn(), "DELETE", headers, null);
+				try {
+					client.httpJsonTransaction("/webapi/topics/" + topic.getFqtn(), "DELETE", headers, null);
+				}
+				catch (Exception e) {
+					System.err.println("TOPIC0: delete existing topic: " + topicName + " " + e);
+				}
 				System.err.println("TOPIC0: delete existing topic: " + topicName);
 			} else
 				System.err.println("TOPIC0: new topic: " + topicName);
@@ -878,42 +934,41 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		}
 		HashMap<String, String> headers = new HashMap<String, String>();
 		JSONObject json = new JSONObject();
-		headers.put("ClientAuth", "cHl0aG9uOnRlc3Q=");
-		headers.put("Environment", "TEST");
+		headers.put("ClientAuth", client.props.getProperty("policy.clientAuth"));
+		headers.put("Environment", client.props.getProperty("policy.environment"));
 		JSONObject json2 = new JSONObject();
 		// json.put("configAttributes", json2);
 		String uuid = ManagementServer.object2ref(o2).toLowerCase();
-		for (Object k : client.props.keySet()) {
-			String key = (String) k;
-			if (key.startsWith("policy.substitution.")) {
-				uuid = uuid.replace(key.substring(20), client.props.getProperty(key));
-			}
-		}
+		String pName = o2.getPolicyName();
+		String matchPolicyName = pName;
 		json2.put("uuid", uuid);
-		json.put("policyName", ".*");
-		JSONObject res = client.httpJsonTransaction("/PyPDPServer/getConfig", "POST", headers, json);
+		json.put("policyName", matchPolicyName);
+		JSONObject res = client.httpJsonTransaction("/getConfig", "POST", headers, json);
 		System.out.println("PPPPPPPPPPP 0: " + uuid);
 		JSONArray a = res.getJSONArray("$list");
+		switch (a.length()) {
+		case 0: 
+			System.out.println("PPPPPPPPPPP 0 no policies: " + matchPolicyName + " " + uuid);
+			return;
+		case 1: break;
+		default:
+			System.out.println("PPPPPPPPPPP 0 too many policies: " + matchPolicyName + " " + uuid + " " + a.length());
+			return;
+		}
 		for (int j = 0; j < a.length(); j++) {
 			JSONObject c1 = a.getJSONObject(j);
-//			if (c1.has("matchingConditions") && c1.getJSONObject("matchingConditions").has("ECOMPName")) {
-//				if (c1.getJSONObject("matchingConditions").getString("ECOMPName").equals("DCAE"))
-//					continue;
-//			}
-			System.out.println("PPPPPPPPPPP 1: " + c1.toString(2));
 			JSONObject newConfig;
 			try {
 				newConfig = new JSONObject(c1.getString("config"));
 			} catch (Exception e) {
-				System.out.println("PPPPPPPPPPP 1.1: " + c1.toString(2));
+				System.out.println("PPPPPPPPPPP 1: " + c1.toString(2));
 				continue;
 			}
 			System.out.println("PPPPPPPPPPP 2: " + newConfig.toString(2) + " uuid:" + newConfig.get("uuid"));
-			if (!uuid.equals(newConfig.getString("uuid").toLowerCase()))
-				continue;
+//			if (!uuid.equals(newConfig.getString("uuid").toLowerCase()))
+//				continue;
 			JSONObject content = new JSONObject(newConfig.getString("content"));
 			System.out.println("PPPPPPPPPPP 3: " + content.toString(2));
-			content.put("policyName", newConfig.getString("policyName"));
 			content.put("policyDescription", newConfig.getString("description"));
 			content.put("policyConfigName", newConfig.getString("configName"));
 			content.put("policyTemplateVersion", newConfig.getString("templateVersion"));
@@ -926,11 +981,12 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			// System.out.println("PPPPPPPPPPP 4_1: " +
 			// ManagementServer.ecore2json(oo, 1000, null, true).toString(2));
 			JSONObject before = cleanJson(o2);
-			ManagementServer.merge(o2, oo, null, true, null);
+			ManagementServer.merge(o2, oo, content, true, null);
+			o2.setPolicyName(pName);
 			JSONObject after = cleanJson(o2);
 			ManagementServer.ecore2json(o2, 1000, null, true);
 			if (!before.toString(2).equals(after.toString(2))) {
-				System.out.println("PPPPPPPPPPP configuration change 5: " + ManagementServer.object2ref(i));
+				System.out.println("PPPPPPPPPPP configuration change 5: " + ManagementServer.object2ref(i) + " using: " +  c1.getString("policyName"));
 				System.out.println("PPPPPPPPPPP before: " + before.toString(2));
 				System.out.println("PPPPPPPPPPP after: " + after.toString(2));
 				s.pushManagerConfiguration(i.getName());
@@ -1059,9 +1115,11 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		}
 	}
 
-	public Object handleJson(String userName, String action, String resourcePath, JSONObject json, JSONObject context) {
-		System.err.println("XXXXXX handleJson: " + action + " " + resourcePath + " " + context);
+	public Object handleJson(String userName, String action, String resourcePath, JSONObject json, JSONObject context, String clientVersion) {
+		// System.err.println("XXXXXX handleJson: " + action + " " +
+		// resourcePath + " " + context);
 		switch ((String) context.get("path")) {
+		case "/test/":
 		case "/test":
 			if (o.getCluster().getRole() == ServerRole.MASTER) {
 				return new JSONObject("{ status: 'OKAY'}");

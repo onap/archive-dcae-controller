@@ -26,20 +26,27 @@ package org.openecomp.dcae.controller.service.servers.cdap;
 
 
 
+
 import java.io.InputStream;
 
 import org.openecomp.ncomp.sirius.manager.IRequestHandler;
+import org.openecomp.ncomp.sirius.manager.ISwaggerHandler;
 import org.openecomp.ncomp.sirius.manager.ISiriusPlugin;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
+import org.openecomp.ncomp.sirius.manager.ISiriusProvider;
 import org.openecomp.ncomp.sirius.manager.ManagementServer;
+import org.openecomp.ncomp.sirius.manager.SwaggerUtils;
 import org.openecomp.ncomp.sirius.function.FunctionUtils;
 import org.openecomp.ncomp.component.ApiRequestStatus;
 
 import org.apache.log4j.Logger;
 
-import org.openecomp.logger.EcompLogger;
+import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.json.JSONObject;
 
 import java.util.Date;
@@ -54,9 +61,9 @@ import org.openecomp.dcae.controller.service.cdap.impl.CdapServiceImpl;
 
 
 
-public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
+public class DcaeCdapService extends CdapServiceImpl implements ISiriusProvider, ISiriusPlugin {
 	public static final Logger logger = Logger.getLogger(DcaeCdapService.class);
-	static final EcompLogger ecomplogger = EcompLogger.getEcompLogger();
+	static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
 	public DcaeCdapServiceProvider controller;
 	ISiriusServer server;
 
@@ -71,9 +78,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "updateInstanceConfiguration", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.updateInstanceConfiguration);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_updateInstanceConfiguration,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_updateInstanceConfiguration,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.updateInstanceConfiguration(instanceName);
 		}
@@ -82,8 +88,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "updateInstanceConfiguration", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.updateInstanceConfiguration, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_updateInstanceConfiguration, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_updateInstanceConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_updateInstanceConfiguration, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -98,9 +106,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "deploy", ApiRequestStatus.START, duration_,instanceName,containerPath);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.deploy);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_deploy,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_deploy,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.deploy(instanceName,containerPath);
 		}
@@ -109,8 +116,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "deploy", ApiRequestStatus.ERROR, duration_,instanceName,containerPath);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.deploy, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_deploy, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_deploy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_deploy, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -125,9 +134,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "undeploy", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.undeploy);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_undeploy,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_undeploy,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.undeploy(instanceName);
 		}
@@ -136,8 +144,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "undeploy", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.undeploy, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_undeploy, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_undeploy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_undeploy, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -152,9 +162,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "test", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.test);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_test,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_test,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.test(instanceName);
 		}
@@ -163,8 +172,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "test", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.test, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_test, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_test, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -179,9 +190,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.suspend);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_suspend,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_suspend,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.suspend(instanceName);
 		}
@@ -190,8 +200,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.suspend, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_suspend, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_suspend, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -206,9 +218,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "resume", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.resume);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_resume,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_resume,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.resume(instanceName);
 		}
@@ -217,8 +228,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "resume", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.resume, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_resume, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_resume, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -233,9 +246,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "pushManagerConfiguration", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.pushManagerConfiguration);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_pushManagerConfiguration,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_pushManagerConfiguration,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.pushManagerConfiguration(instanceName);
 		}
@@ -244,8 +256,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "pushManagerConfiguration", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.pushManagerConfiguration, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_pushManagerConfiguration, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_pushManagerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_pushManagerConfiguration, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -260,9 +274,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "pollManagerConfiguration", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.pollManagerConfiguration);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_pollManagerConfiguration,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_pollManagerConfiguration,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.pollManagerConfiguration(instanceName);
 		}
@@ -271,8 +284,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "pollManagerConfiguration", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.pollManagerConfiguration, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_pollManagerConfiguration, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_pollManagerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_pollManagerConfiguration, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -287,9 +302,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "managerConfiguration", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.managerConfiguration);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_managerConfiguration,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_managerConfiguration,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.managerConfiguration(instanceName);
 		}
@@ -298,8 +312,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "managerConfiguration", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.managerConfiguration, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_managerConfiguration, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_managerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_managerConfiguration, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -314,9 +330,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "managerOperation", ApiRequestStatus.START, duration_,instanceName,operation,parameters);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.managerOperation);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_managerOperation,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_managerOperation,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.managerOperation(instanceName,operation,parameters);
 		}
@@ -325,8 +340,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "managerOperation", ApiRequestStatus.ERROR, duration_,instanceName,operation,parameters);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.managerOperation, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_managerOperation, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_managerOperation,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_managerOperation, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -341,9 +358,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "updateConfigurationFromPolicy", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.updateConfigurationFromPolicy);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_updateConfigurationFromPolicy,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_updateConfigurationFromPolicy,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.updateConfigurationFromPolicy(instanceName);
 		}
@@ -352,8 +368,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "updateConfigurationFromPolicy", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.updateConfigurationFromPolicy, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_updateConfigurationFromPolicy, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_updateConfigurationFromPolicy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_updateConfigurationFromPolicy, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -368,9 +386,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 		if (server != null)
 			server.getServer().recordApi(null, this, "runHealthTests", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.runHealthTests);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(CdapServiceOperationEnum.CdapService_runHealthTests,server,this);
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_runHealthTests,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.runHealthTests();
 		}
@@ -379,8 +396,10 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			if (server != null)
 				server.getServer().recordApi(null, this, "runHealthTests", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(CdapServiceMessageEnum.runHealthTests, e.toString());
-			throw e;
+			ecomplogger.warn(CdapServiceMessageEnum.REQUEST_FAILED_runHealthTests, e.toString());
+			EcompException e1 =  EcompException.create(CdapServiceMessageEnum.REQUEST_FAILED_runHealthTests,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, CdapServiceMessageEnum.REQUEST_FAILED_runHealthTests, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -388,6 +407,8 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 			server.getServer().recordApi(null, this, "runHealthTests", ApiRequestStatus.OKAY, duration_);
 		
 	}
+
+
 
 
 
@@ -402,7 +423,7 @@ public class DcaeCdapService extends CdapServiceImpl implements ISiriusPlugin {
 	public static void ecoreSetup() {
 		DcaeCdapServiceProvider.ecoreSetup();
 	}
-	public DcaeCdapServiceProvider getSomfProvider() {
+	public DcaeCdapServiceProvider getSiriusProvider() {
 		return controller;
 	}
 }

@@ -170,7 +170,6 @@ public class VmPackageImpl extends EPackageImpl implements VmPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		ServicePackage.eINSTANCE.eClass();
 		ServerPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects

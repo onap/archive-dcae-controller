@@ -29,7 +29,9 @@ import org.openecomp.dcae.controller.service.vm.VmPackage;
 import org.openecomp.ncomp.core.impl.NamedEntityImpl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -55,6 +57,7 @@ public abstract class InstallationStepImpl extends NamedEntityImpl implements In
 	 * @ordered
 	 */
 	protected static final String APPLICATION_ID_EDEFAULT = "dcae";
+
 	/**
 	 * The cached value of the '{@link #getApplicationId() <em>Application Id</em>}' attribute.
 	 * <!-- begin-user-doc -->

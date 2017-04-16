@@ -1,51 +1,32 @@
 
-/*-
- * ============LICENSE_START==========================================
- * OPENECOMP - DCAE
- * ===================================================================
- * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
- * ===================================================================
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0 
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ============LICENSE_END============================================
- */
-	
-
 package org.openecomp.dcae.controller.service.servers.docker.logging;
 
 import org.openecomp.entity.EcompOperationEnum;
 
 public enum DockerServiceOperationEnum implements EcompOperationEnum {
 
-  deploy,
-  undeploy,
-  test,
-  suspend,
-  resume,
-  pushManagerConfiguration,
-  pollManagerConfiguration,
-  managerConfiguration,
-  managerOperation,
-  updateConfigurationFromPolicy,
-  runHealthTests,
-  REMOTE_deploy,
-  REMOTE_undeploy,
-  REMOTE_test,
-  REMOTE_suspend,
-  REMOTE_resume,
-  REMOTE_pushManagerConfiguration,
-  REMOTE_pollManagerConfiguration,
-  REMOTE_managerConfiguration,
-  REMOTE_managerOperation,
-  REMOTE_updateConfigurationFromPolicy,
-  REMOTE_runHealthTests;
+  DockerService_deploy("DockerService@deploy"),
+  DockerService_undeploy("DockerService@undeploy"),
+  DockerService_test("DockerService@test"),
+  DockerService_suspend("DockerService@suspend"),
+  DockerService_resume("DockerService@resume"),
+  DockerService_pushManagerConfiguration("DockerService@pushManagerConfiguration"),
+  DockerService_pollManagerConfiguration("DockerService@pollManagerConfiguration"),
+  DockerService_managerConfiguration("DockerService@managerConfiguration"),
+  DockerService_managerOperation("DockerService@managerOperation"),
+  DockerService_updateConfigurationFromPolicy("DockerService@updateConfigurationFromPolicy"),
+  DockerService_runHealthTests("DockerService@runHealthTests") ; 
+
+
+	private String n;
+	
+	private DockerServiceOperationEnum(String n) {
+		this.n = n;
+	}
+
+	@Override
+	public String toString() {
+		return n;
+	}
+
 }

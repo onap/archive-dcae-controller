@@ -30,6 +30,8 @@ import org.openecomp.ncomp.sirius.manager.GenericHttpClient;
 import org.apache.log4j.Logger;
 
 import org.openecomp.logger.EcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -54,33 +56,37 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 		DcaeVirtualMachineManager.ecoreSetup(); 
 		client = new GenericHttpClient(file,name);
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 	public DcaeVirtualMachineManagerClient(String file, String name1, String name2) {
 		HighAvailabilityClient client1 = new HighAvailabilityClient(file,name1,name2);
 		client = client1.all; // requests should be forwarded to all.
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 	
 	public DcaeVirtualMachineManagerClient(AbstractClient c) {
 		client = c;
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 
 
 	@Override
 	public org.openecomp.dcae.controller.core.service.HealthTestResponse test() {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_test);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_test,client.getRemote());
 		org.openecomp.dcae.controller.core.service.HealthTestResponse res;
 		try {
 		  res = (org.openecomp.dcae.controller.core.service.HealthTestResponse) client.operationPath("/resources", c, "test", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_test, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@test: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_test, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_test,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -88,16 +94,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public void suspend() {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_suspend);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_suspend,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "suspend", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_suspend, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@suspend: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_suspend, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_suspend,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -105,16 +112,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public void resume() {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_resume);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_resume,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "resume", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_resume, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@resume: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_resume, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_resume,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -122,16 +130,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public java.lang.String publicKey() {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_publicKey);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_publicKey,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "publicKey", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_publicKey, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@publicKey: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_publicKey, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_publicKey,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_publicKey,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -139,16 +148,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public void configurationChanged() {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_configurationChanged);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_configurationChanged,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "configurationChanged", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_configurationChanged, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@configurationChanged: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_configurationChanged, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_configurationChanged,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_configurationChanged,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -156,16 +166,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public void updateStreams(EList<org.openecomp.dcae.controller.core.stream.DcaeStream> inputStreams, EList<org.openecomp.dcae.controller.core.stream.DcaeStream> outputStreams) {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_updateStreams);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_updateStreams,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "updateStreams", null, inputStreams,outputStreams);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_updateStreams, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@updateStreams: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_updateStreams, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_updateStreams,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_updateStreams,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -173,16 +184,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public void logs(org.json.JSONObject cx, EList<org.openecomp.ncomp.core.logs.LogMessage> logs) {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_logs);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_logs,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "logs", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,logs);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_logs, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@logs: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_logs, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_logs,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_logs,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -190,16 +202,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public void metrics(org.json.JSONObject cx, EList<org.openecomp.ncomp.core.metrics.Metric> metrics) {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_metrics);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_metrics,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "metrics", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,metrics);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_metrics, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@metrics: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_metrics, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_metrics,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_metrics,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -207,16 +220,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public void properties(org.json.JSONObject cx, EList<org.openecomp.ncomp.sirius.manager.properties.AbstractProperty> l) {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_properties);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_properties,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "properties", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,l);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_properties, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@properties: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_properties, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_properties,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_properties,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -224,16 +238,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public void uploadInfo(org.json.JSONObject cx, EList<org.openecomp.ncomp.sirius.manager.server.ManagementInfo> info) {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_uploadInfo);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_uploadInfo,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "uploadInfo", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,info);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_uploadInfo, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@uploadInfo: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_uploadInfo, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_uploadInfo,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_uploadInfo,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -241,16 +256,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.metrics.DoubleMetric> getValues(org.json.JSONObject cx, java.lang.String path, java.lang.Long start, java.lang.Long end, org.openecomp.ncomp.core.metrics.MetricValueOption option, boolean relativeInterval) {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_getValues);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_getValues,client.getRemote());
 		EList<org.openecomp.ncomp.core.metrics.DoubleMetric> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.metrics.DoubleMetric>) client.operationPath("/resources", c, "getValues", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,path,start,end,option,relativeInterval);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_getValues, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@getValues: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getValues, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getValues,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getValues,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -258,16 +274,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.metrics.DoubleMetric> getValuesAll(org.json.JSONObject cx, java.lang.String path, EList<java.lang.String> metrics, java.lang.Long start, java.lang.Long end, org.openecomp.ncomp.core.metrics.MetricValueOption option, boolean relativeInterval) {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_getValuesAll);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_getValuesAll,client.getRemote());
 		EList<org.openecomp.ncomp.core.metrics.DoubleMetric> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.metrics.DoubleMetric>) client.operationPath("/resources", c, "getValuesAll", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,path,metrics,start,end,option,relativeInterval);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_getValuesAll, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@getValuesAll: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getValuesAll, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getValuesAll,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getValuesAll,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -275,16 +292,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.logs.LogMessage> getMessages(org.json.JSONObject cx, java.lang.String path, java.lang.Long start, java.lang.Long end) {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_getMessages);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_getMessages,client.getRemote());
 		EList<org.openecomp.ncomp.core.logs.LogMessage> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.logs.LogMessage>) client.operationPath("/resources", c, "getMessages", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,path,start,end);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_getMessages, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@getMessages: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getMessages, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getMessages,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getMessages,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -292,16 +310,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public org.openecomp.ncomp.sirius.manager.server.LoggerInfo getRequestLogger(java.lang.String userName, java.lang.String action, java.lang.String resourcePath, org.json.JSONObject context) {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_getRequestLogger);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_getRequestLogger,client.getRemote());
 		org.openecomp.ncomp.sirius.manager.server.LoggerInfo res;
 		try {
 		  res = (org.openecomp.ncomp.sirius.manager.server.LoggerInfo) client.operationPath("/resources", c, "getRequestLogger", null, userName,action,resourcePath,context);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_getRequestLogger, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@getRequestLogger: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getRequestLogger, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getRequestLogger,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_getRequestLogger,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -309,16 +328,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.function.ValuePair> evaluate(java.lang.String path, org.openecomp.ncomp.core.function.Function function) {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_evaluate);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_evaluate,client.getRemote());
 		EList<org.openecomp.ncomp.core.function.ValuePair> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.function.ValuePair>) client.operationPath("/resources", c, "evaluate", null, path,function);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_evaluate, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@evaluate: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_evaluate, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_evaluate,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_evaluate,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -326,16 +346,17 @@ public class DcaeVirtualMachineManagerClient extends VirtualMachineManagerImpl {
 
 	@Override
 	public void update(java.lang.String path, org.openecomp.ncomp.core.function.Function function) {
-		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(VirtualMachineManagerOperationEnum.REMOTE_update);
+		EClass c = VmmanagerPackage.eINSTANCE.getVirtualMachineManager(); 
+		ecomplogger.recordMetricEventStart(VirtualMachineManagerOperationEnum.VirtualMachineManager_update,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "update", null, path,function);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_update, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@update: " + e);
+			ecomplogger.warn(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_update, e.toString());
+			EcompException e1 = EcompException.create(VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_update,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,VirtualMachineManagerMessageEnum.REMOTE_CALL_FAILED_update,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		

@@ -53,7 +53,7 @@ public class DcaeCommonVmServiceProvider extends DcaeVirtualMachineServiceProvid
 	}
 
 	@Override
-	protected EObject convertToManagerConfiguration(VirtualMachineServiceInstance i) {
+	public EObject convertToManagerConfiguration(VirtualMachineServiceInstance i) {
 		CommonVmServiceInstance i1 = (CommonVmServiceInstance) i;
 		CommonVmServiceInstance c = ServiceFactory.eINSTANCE.createCommonVmServiceInstance();
 		c.setScript(i1.getScript());

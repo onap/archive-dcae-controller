@@ -25,24 +25,34 @@ package org.openecomp.dcae.controller.service.servers.docker;
 
 
 
+
+
 import java.io.InputStream;
 
 import org.openecomp.ncomp.sirius.manager.IRequestHandler;
+import org.openecomp.ncomp.sirius.manager.ISwaggerHandler;
 import org.openecomp.ncomp.sirius.manager.ISiriusPlugin;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
+import org.openecomp.ncomp.sirius.manager.ISiriusProvider;
+import org.openecomp.ncomp.sirius.manager.ManagementServer;
+import org.openecomp.ncomp.sirius.manager.SwaggerUtils;
 import org.openecomp.ncomp.sirius.function.FunctionUtils;
 import org.openecomp.ncomp.component.ApiRequestStatus;
 
 import org.apache.log4j.Logger;
 
-import org.openecomp.logger.EcompLogger;
+import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.json.JSONObject;
 
 import java.util.Date;
 
 import org.openecomp.dcae.controller.service.servers.docker.logging.DockerServiceOperationEnum;
+import org.openecomp.dcae.controller.service.servers.docker.logging.DockerServiceMessageEnum;
 
 
 
@@ -51,9 +61,9 @@ import org.openecomp.dcae.controller.service.docker.impl.DockerServiceImpl;
 
 
 
-public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugin {
+public class DcaeDockerService extends DockerServiceImpl implements ISiriusProvider, ISiriusPlugin {
 	public static final Logger logger = Logger.getLogger(DcaeDockerService.class);
-	static final EcompLogger ecomplogger = EcompLogger.getEcompLogger();
+	static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
 	public DcaeDockerServiceProvider controller;
 	ISiriusServer server;
 
@@ -68,8 +78,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 		if (server != null)
 			server.getServer().recordApi(null, this, "deploy", ApiRequestStatus.START, duration_,instanceName,containerPath);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerServiceOperationEnum.deploy);
+		ecomplogger.recordAuditEventStartIfNeeded(DockerServiceOperationEnum.DockerService_deploy,server,this);
+		ecomplogger.recordMetricEventStart(DockerServiceOperationEnum.DockerService_deploy,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.deploy(instanceName,containerPath);
 		}
@@ -78,7 +88,10 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			if (server != null)
 				server.getServer().recordApi(null, this, "deploy", ApiRequestStatus.ERROR, duration_,instanceName,containerPath);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(DockerServiceMessageEnum.REQUEST_FAILED_deploy, e.toString());
+			EcompException e1 =  EcompException.create(DockerServiceMessageEnum.REQUEST_FAILED_deploy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerServiceMessageEnum.REQUEST_FAILED_deploy, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -93,8 +106,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 		if (server != null)
 			server.getServer().recordApi(null, this, "undeploy", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerServiceOperationEnum.undeploy);
+		ecomplogger.recordAuditEventStartIfNeeded(DockerServiceOperationEnum.DockerService_undeploy,server,this);
+		ecomplogger.recordMetricEventStart(DockerServiceOperationEnum.DockerService_undeploy,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.undeploy(instanceName);
 		}
@@ -103,7 +116,10 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			if (server != null)
 				server.getServer().recordApi(null, this, "undeploy", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(DockerServiceMessageEnum.REQUEST_FAILED_undeploy, e.toString());
+			EcompException e1 =  EcompException.create(DockerServiceMessageEnum.REQUEST_FAILED_undeploy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerServiceMessageEnum.REQUEST_FAILED_undeploy, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -118,8 +134,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 		if (server != null)
 			server.getServer().recordApi(null, this, "test", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerServiceOperationEnum.test);
+		ecomplogger.recordAuditEventStartIfNeeded(DockerServiceOperationEnum.DockerService_test,server,this);
+		ecomplogger.recordMetricEventStart(DockerServiceOperationEnum.DockerService_test,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.test(instanceName);
 		}
@@ -128,7 +144,10 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			if (server != null)
 				server.getServer().recordApi(null, this, "test", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(DockerServiceMessageEnum.REQUEST_FAILED_test, e.toString());
+			EcompException e1 =  EcompException.create(DockerServiceMessageEnum.REQUEST_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerServiceMessageEnum.REQUEST_FAILED_test, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -143,8 +162,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 		if (server != null)
 			server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerServiceOperationEnum.suspend);
+		ecomplogger.recordAuditEventStartIfNeeded(DockerServiceOperationEnum.DockerService_suspend,server,this);
+		ecomplogger.recordMetricEventStart(DockerServiceOperationEnum.DockerService_suspend,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.suspend(instanceName);
 		}
@@ -153,7 +172,10 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			if (server != null)
 				server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(DockerServiceMessageEnum.REQUEST_FAILED_suspend, e.toString());
+			EcompException e1 =  EcompException.create(DockerServiceMessageEnum.REQUEST_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerServiceMessageEnum.REQUEST_FAILED_suspend, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -168,8 +190,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 		if (server != null)
 			server.getServer().recordApi(null, this, "resume", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerServiceOperationEnum.resume);
+		ecomplogger.recordAuditEventStartIfNeeded(DockerServiceOperationEnum.DockerService_resume,server,this);
+		ecomplogger.recordMetricEventStart(DockerServiceOperationEnum.DockerService_resume,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.resume(instanceName);
 		}
@@ -178,7 +200,10 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			if (server != null)
 				server.getServer().recordApi(null, this, "resume", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(DockerServiceMessageEnum.REQUEST_FAILED_resume, e.toString());
+			EcompException e1 =  EcompException.create(DockerServiceMessageEnum.REQUEST_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerServiceMessageEnum.REQUEST_FAILED_resume, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -193,8 +218,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 		if (server != null)
 			server.getServer().recordApi(null, this, "pushManagerConfiguration", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerServiceOperationEnum.pushManagerConfiguration);
+		ecomplogger.recordAuditEventStartIfNeeded(DockerServiceOperationEnum.DockerService_pushManagerConfiguration,server,this);
+		ecomplogger.recordMetricEventStart(DockerServiceOperationEnum.DockerService_pushManagerConfiguration,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.pushManagerConfiguration(instanceName);
 		}
@@ -203,7 +228,10 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			if (server != null)
 				server.getServer().recordApi(null, this, "pushManagerConfiguration", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(DockerServiceMessageEnum.REQUEST_FAILED_pushManagerConfiguration, e.toString());
+			EcompException e1 =  EcompException.create(DockerServiceMessageEnum.REQUEST_FAILED_pushManagerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerServiceMessageEnum.REQUEST_FAILED_pushManagerConfiguration, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -218,8 +246,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 		if (server != null)
 			server.getServer().recordApi(null, this, "pollManagerConfiguration", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerServiceOperationEnum.pollManagerConfiguration);
+		ecomplogger.recordAuditEventStartIfNeeded(DockerServiceOperationEnum.DockerService_pollManagerConfiguration,server,this);
+		ecomplogger.recordMetricEventStart(DockerServiceOperationEnum.DockerService_pollManagerConfiguration,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.pollManagerConfiguration(instanceName);
 		}
@@ -228,7 +256,10 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			if (server != null)
 				server.getServer().recordApi(null, this, "pollManagerConfiguration", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(DockerServiceMessageEnum.REQUEST_FAILED_pollManagerConfiguration, e.toString());
+			EcompException e1 =  EcompException.create(DockerServiceMessageEnum.REQUEST_FAILED_pollManagerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerServiceMessageEnum.REQUEST_FAILED_pollManagerConfiguration, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -243,8 +274,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 		if (server != null)
 			server.getServer().recordApi(null, this, "managerConfiguration", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerServiceOperationEnum.managerConfiguration);
+		ecomplogger.recordAuditEventStartIfNeeded(DockerServiceOperationEnum.DockerService_managerConfiguration,server,this);
+		ecomplogger.recordMetricEventStart(DockerServiceOperationEnum.DockerService_managerConfiguration,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.managerConfiguration(instanceName);
 		}
@@ -253,7 +284,10 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			if (server != null)
 				server.getServer().recordApi(null, this, "managerConfiguration", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(DockerServiceMessageEnum.REQUEST_FAILED_managerConfiguration, e.toString());
+			EcompException e1 =  EcompException.create(DockerServiceMessageEnum.REQUEST_FAILED_managerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerServiceMessageEnum.REQUEST_FAILED_managerConfiguration, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -268,8 +302,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 		if (server != null)
 			server.getServer().recordApi(null, this, "managerOperation", ApiRequestStatus.START, duration_,instanceName,operation,parameters);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerServiceOperationEnum.managerOperation);
+		ecomplogger.recordAuditEventStartIfNeeded(DockerServiceOperationEnum.DockerService_managerOperation,server,this);
+		ecomplogger.recordMetricEventStart(DockerServiceOperationEnum.DockerService_managerOperation,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.managerOperation(instanceName,operation,parameters);
 		}
@@ -278,7 +312,10 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			if (server != null)
 				server.getServer().recordApi(null, this, "managerOperation", ApiRequestStatus.ERROR, duration_,instanceName,operation,parameters);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(DockerServiceMessageEnum.REQUEST_FAILED_managerOperation, e.toString());
+			EcompException e1 =  EcompException.create(DockerServiceMessageEnum.REQUEST_FAILED_managerOperation,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerServiceMessageEnum.REQUEST_FAILED_managerOperation, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -293,8 +330,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 		if (server != null)
 			server.getServer().recordApi(null, this, "updateConfigurationFromPolicy", ApiRequestStatus.START, duration_,instanceName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerServiceOperationEnum.updateConfigurationFromPolicy);
+		ecomplogger.recordAuditEventStartIfNeeded(DockerServiceOperationEnum.DockerService_updateConfigurationFromPolicy,server,this);
+		ecomplogger.recordMetricEventStart(DockerServiceOperationEnum.DockerService_updateConfigurationFromPolicy,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.updateConfigurationFromPolicy(instanceName);
 		}
@@ -303,7 +340,10 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			if (server != null)
 				server.getServer().recordApi(null, this, "updateConfigurationFromPolicy", ApiRequestStatus.ERROR, duration_,instanceName);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(DockerServiceMessageEnum.REQUEST_FAILED_updateConfigurationFromPolicy, e.toString());
+			EcompException e1 =  EcompException.create(DockerServiceMessageEnum.REQUEST_FAILED_updateConfigurationFromPolicy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerServiceMessageEnum.REQUEST_FAILED_updateConfigurationFromPolicy, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -318,8 +358,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 		if (server != null)
 			server.getServer().recordApi(null, this, "runHealthTests", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerServiceOperationEnum.runHealthTests);
+		ecomplogger.recordAuditEventStartIfNeeded(DockerServiceOperationEnum.DockerService_runHealthTests,server,this);
+		ecomplogger.recordMetricEventStart(DockerServiceOperationEnum.DockerService_runHealthTests,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.runHealthTests();
 		}
@@ -328,7 +368,10 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			if (server != null)
 				server.getServer().recordApi(null, this, "runHealthTests", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(DockerServiceMessageEnum.REQUEST_FAILED_runHealthTests, e.toString());
+			EcompException e1 =  EcompException.create(DockerServiceMessageEnum.REQUEST_FAILED_runHealthTests,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerServiceMessageEnum.REQUEST_FAILED_runHealthTests, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -336,6 +379,8 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 			server.getServer().recordApi(null, this, "runHealthTests", ApiRequestStatus.OKAY, duration_);
 		
 	}
+
+
 
 
 
@@ -350,7 +395,7 @@ public class DcaeDockerService extends DockerServiceImpl implements ISiriusPlugi
 	public static void ecoreSetup() {
 		DcaeDockerServiceProvider.ecoreSetup();
 	}
-	public DcaeDockerServiceProvider getSomfProvider() {
+	public DcaeDockerServiceProvider getSiriusProvider() {
 		return controller;
 	}
 }

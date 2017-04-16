@@ -47,6 +47,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.docker.impl.DockerServiceInstanceImpl#getDockerHost <em>Docker Host</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.docker.impl.DockerServiceInstanceImpl#getHostService <em>Host Service</em>}</li>
@@ -59,7 +60,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.openecomp.dcae.controller.service.docker.impl.DockerServiceInstanceImpl#getPortBindings <em>Port Bindings</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.docker.impl.DockerServiceInstanceImpl#getManagerPortNumber <em>Manager Port Number</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

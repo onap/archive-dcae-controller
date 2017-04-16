@@ -25,6 +25,7 @@ package org.openecomp.dcae.controller.service.cdap.cluster.service;
 
 import org.openecomp.ncomp.cdap.CdapCluster;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -34,10 +35,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getCluster <em>Cluster</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getCdapServiceServers <em>Cdap Service Servers</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getHealthCheckScript <em>Health Check Script</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getTestTimeout <em>Test Timeout</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.cdap.cluster.service.ServicePackage#getCdapClusterConfiguration()
  * @model
@@ -70,5 +74,75 @@ public interface CdapClusterConfiguration extends EObject {
 	 * @generated
 	 */
 	void setCluster(CdapCluster value);
+
+	/**
+	 * Returns the value of the '<em><b>Cdap Service Servers</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Cdap Service Servers</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Cdap Service Servers</em>' attribute list.
+	 * @see org.openecomp.dcae.controller.service.cdap.cluster.service.ServicePackage#getCdapClusterConfiguration_CdapServiceServers()
+	 * @model unique="false"
+	 * @generated
+	 */
+	EList<String> getCdapServiceServers();
+
+	/**
+	 * Returns the value of the '<em><b>Health Check Script</b></em>' attribute.
+	 * The default value is <code>"bin/healthCheck.sh"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Health Check Script</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Health Check Script</em>' attribute.
+	 * @see #setHealthCheckScript(String)
+	 * @see org.openecomp.dcae.controller.service.cdap.cluster.service.ServicePackage#getCdapClusterConfiguration_HealthCheckScript()
+	 * @model default="bin/healthCheck.sh" unique="false"
+	 * @generated
+	 */
+	String getHealthCheckScript();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getHealthCheckScript <em>Health Check Script</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Health Check Script</em>' attribute.
+	 * @see #getHealthCheckScript()
+	 * @generated
+	 */
+	void setHealthCheckScript(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Test Timeout</b></em>' attribute.
+	 * The default value is <code>"60000"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Test Timeout</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Test Timeout</em>' attribute.
+	 * @see #setTestTimeout(int)
+	 * @see org.openecomp.dcae.controller.service.cdap.cluster.service.ServicePackage#getCdapClusterConfiguration_TestTimeout()
+	 * @model default="60000" unique="false"
+	 * @generated
+	 */
+	int getTestTimeout();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getTestTimeout <em>Test Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Test Timeout</em>' attribute.
+	 * @see #getTestTimeout()
+	 * @generated
+	 */
+	void setTestTimeout(int value);
 
 } // CdapClusterConfiguration

@@ -38,12 +38,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.service.impl.TommyDockerServiceConfigurationImpl#getPostgresUserName <em>Postgres User Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.service.impl.TommyDockerServiceConfigurationImpl#getPostgresPassword <em>Postgres Password</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.service.impl.TommyDockerServiceConfigurationImpl#getPortgresJdbc <em>Portgres Jdbc</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

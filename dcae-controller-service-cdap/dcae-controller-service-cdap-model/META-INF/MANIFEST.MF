@@ -16,15 +16,5 @@ Export-Package: org.openecomp.dcae.controller.service.cdap,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.emf.ecore.xcore.lib,
- ncomp-openstack-model;visibility:=reexport,
- ncomp-sirius-manager-agent-model;visibility:=reexport,
- ncomp-core-model;bundle-version="0.1.0";visibility:=reexport,
- ncomp-sirius-manager-model;bundle-version="0.1.0";visibility:=reexport,
- ncomp-core-types;bundle-version="0.1.0",
- ncomp-utils-java;bundle-version="0.1.0",
- dcae-controller-core-model;bundle-version="0.1.0";visibility:=reexport,
- dcae-controller-service-vm-model;visibility:=reexport,
- ncomp-cdap-model;bundle-version="0.1.0";visibility:=reexport,
- dcae-controller-service-cdap-cluster-model;bundle-version="0.1.0";visibility:=reexport
+ org.eclipse.emf.ecore.xcore.lib
 Bundle-ActivationPolicy: lazy

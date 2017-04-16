@@ -1,53 +1,33 @@
 
-/*-
- * ============LICENSE_START==========================================
- * OPENECOMP - DCAE
- * ===================================================================
- * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
- * ===================================================================
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0 
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ============LICENSE_END============================================
- */
-	
-
 package org.openecomp.dcae.controller.service.docker.host.servers.service.logging;
 
 import org.openecomp.entity.EcompOperationEnum;
 
 public enum DockerHostServiceOperationEnum implements EcompOperationEnum {
 
-  deploy,
-  undeploy,
-  test,
-  suspend,
-  resume,
-  pushManagerConfiguration,
-  pollManagerConfiguration,
-  managerConfiguration,
-  managerOperation,
-  updateConfigurationFromPolicy,
-  runHealthTests,
-  updateDeploymentStatus,
-  REMOTE_deploy,
-  REMOTE_undeploy,
-  REMOTE_test,
-  REMOTE_suspend,
-  REMOTE_resume,
-  REMOTE_pushManagerConfiguration,
-  REMOTE_pollManagerConfiguration,
-  REMOTE_managerConfiguration,
-  REMOTE_managerOperation,
-  REMOTE_updateConfigurationFromPolicy,
-  REMOTE_runHealthTests,
-  REMOTE_updateDeploymentStatus;
+  DockerHostService_deploy("DockerHostService@deploy"),
+  DockerHostService_undeploy("DockerHostService@undeploy"),
+  DockerHostService_test("DockerHostService@test"),
+  DockerHostService_suspend("DockerHostService@suspend"),
+  DockerHostService_resume("DockerHostService@resume"),
+  DockerHostService_pushManagerConfiguration("DockerHostService@pushManagerConfiguration"),
+  DockerHostService_pollManagerConfiguration("DockerHostService@pollManagerConfiguration"),
+  DockerHostService_managerConfiguration("DockerHostService@managerConfiguration"),
+  DockerHostService_managerOperation("DockerHostService@managerOperation"),
+  DockerHostService_updateConfigurationFromPolicy("DockerHostService@updateConfigurationFromPolicy"),
+  DockerHostService_runHealthTests("DockerHostService@runHealthTests"),
+  DockerHostService_updateDeploymentStatus("DockerHostService@updateDeploymentStatus") ; 
+
+
+	private String n;
+	
+	private DockerHostServiceOperationEnum(String n) {
+		this.n = n;
+	}
+
+	@Override
+	public String toString() {
+		return n;
+	}
+
 }

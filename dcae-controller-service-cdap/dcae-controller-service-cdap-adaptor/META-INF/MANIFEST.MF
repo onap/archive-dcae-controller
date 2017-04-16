@@ -5,14 +5,4 @@ Bundle-SymbolicName: dcae-controller-service-cdap-adaptor
 Bundle-Version: 0.1.0.qualifier
 Export-Package: org.openecomp.dcae.controller.service.cdap.adaptor.tools,
   org.openecomp.dcae.controller.service.servers.cdap
-Require-Bundle: ncomp-core-types,
- ncomp-sirius-manager-model,
- ncomp-sirius-manager-server,
- ncomp-sirius-manager-console,
- ncomp-sirius-manager-generator,
- dcae-controller-service-cdap-model;bundle-version="0.1.0",
- ncomp-utils-java;bundle-version="0.1.0",
- dcae-controller-service-cdap-cluster-model,
- dcae-controller-service-vm-adaptor;bundle-version="0.1.0",
- dcae-controller-service-cdap-cluster-manager,
- dcae-controller-core-model
+

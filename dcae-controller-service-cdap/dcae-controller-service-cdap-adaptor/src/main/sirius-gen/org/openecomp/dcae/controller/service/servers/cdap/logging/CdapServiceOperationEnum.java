@@ -1,53 +1,33 @@
 
-/*-
- * ============LICENSE_START==========================================
- * OPENECOMP - DCAE
- * ===================================================================
- * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
- * ===================================================================
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0 
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ============LICENSE_END============================================
- */
-	
-
 package org.openecomp.dcae.controller.service.servers.cdap.logging;
 
 import org.openecomp.entity.EcompOperationEnum;
 
 public enum CdapServiceOperationEnum implements EcompOperationEnum {
 
-  deploy,
-  undeploy,
-  test,
-  suspend,
-  resume,
-  pushManagerConfiguration,
-  pollManagerConfiguration,
-  managerConfiguration,
-  managerOperation,
-  updateConfigurationFromPolicy,
-  runHealthTests,
-  updateInstanceConfiguration,
-  REMOTE_deploy,
-  REMOTE_undeploy,
-  REMOTE_test,
-  REMOTE_suspend,
-  REMOTE_resume,
-  REMOTE_pushManagerConfiguration,
-  REMOTE_pollManagerConfiguration,
-  REMOTE_managerConfiguration,
-  REMOTE_managerOperation,
-  REMOTE_updateConfigurationFromPolicy,
-  REMOTE_runHealthTests,
-  REMOTE_updateInstanceConfiguration;
+  CdapService_deploy("CdapService@deploy"),
+  CdapService_undeploy("CdapService@undeploy"),
+  CdapService_test("CdapService@test"),
+  CdapService_suspend("CdapService@suspend"),
+  CdapService_resume("CdapService@resume"),
+  CdapService_pushManagerConfiguration("CdapService@pushManagerConfiguration"),
+  CdapService_pollManagerConfiguration("CdapService@pollManagerConfiguration"),
+  CdapService_managerConfiguration("CdapService@managerConfiguration"),
+  CdapService_managerOperation("CdapService@managerOperation"),
+  CdapService_updateConfigurationFromPolicy("CdapService@updateConfigurationFromPolicy"),
+  CdapService_runHealthTests("CdapService@runHealthTests"),
+  CdapService_updateInstanceConfiguration("CdapService@updateInstanceConfiguration") ; 
+
+
+	private String n;
+	
+	private CdapServiceOperationEnum(String n) {
+		this.n = n;
+	}
+
+	@Override
+	public String toString() {
+		return n;
+	}
+
 }

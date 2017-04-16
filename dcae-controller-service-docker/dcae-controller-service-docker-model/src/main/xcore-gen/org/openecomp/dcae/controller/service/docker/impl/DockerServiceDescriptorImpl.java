@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.docker.impl.DockerServiceDescriptorImpl#getServicePackage <em>Service Package</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.docker.impl.DockerServiceDescriptorImpl#getServiceClass <em>Service Class</em>}</li>
@@ -49,7 +50,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.openecomp.dcae.controller.service.docker.impl.DockerServiceDescriptorImpl#getManagerUser <em>Manager User</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.docker.impl.DockerServiceDescriptorImpl#getEncryptedPassword <em>Encrypted Password</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

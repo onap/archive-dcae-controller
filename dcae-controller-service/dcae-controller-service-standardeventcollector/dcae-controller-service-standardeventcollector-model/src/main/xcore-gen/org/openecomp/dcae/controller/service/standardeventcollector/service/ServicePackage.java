@@ -41,6 +41,24 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * -
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *  *        http://www.apache.org/licenses/LICENSE-2.0
+ *  * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ * <!-- end-model-doc -->
  * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServiceFactory
  * @model kind="package"
  *        annotation="http://www.eclipse.org/emf/2002/GenModel modelDirectory='/dcae-controller-service-standardeventcollector-model/src/main/xcore-gen' basePackage='org.openecomp.dcae.controller.service.standardeventcollector'"
@@ -479,13 +497,22 @@ public interface ServicePackage extends EPackage {
 	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__KEYSTORELOC = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Keystorepwd</b></em>' attribute.
+	 * The feature id for the '<em><b>Keystorealias</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__KEYSTOREPWD = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 3;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__KEYSTOREALIAS = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Keystorepwdloc</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__KEYSTOREPWDLOC = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Maxinputqueue</b></em>' attribute.
@@ -494,16 +521,7 @@ public interface ServicePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__MAXINPUTQUEUE = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Authid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__AUTHID = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 5;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__MAXINPUTQUEUE = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Authflag</b></em>' attribute.
@@ -515,22 +533,13 @@ public interface ServicePackage extends EPackage {
 	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__AUTHFLAG = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Authpwd</b></em>' attribute.
+	 * The feature id for the '<em><b>Authlist</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__AUTHPWD = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Authfile</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__AUTHFILE = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 8;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__AUTHLIST = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Checkschemaflag</b></em>' attribute.
@@ -539,7 +548,7 @@ public interface ServicePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__CHECKSCHEMAFLAG = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 9;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__CHECKSCHEMAFLAG = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Schemafile</b></em>' attribute.
@@ -548,7 +557,16 @@ public interface ServicePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__SCHEMAFILE = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 10;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__SCHEMAFILE = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Streamid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_INSTANCE__STREAMID = DockerPackage.DOCKER_SERVICE_INSTANCE_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Controller Service Standardeventcollector Service Instance</em>' class.
@@ -606,13 +624,22 @@ public interface ServicePackage extends EPackage {
 	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTORELOC = 2;
 
 	/**
-	 * The feature id for the '<em><b>Keystorepwd</b></em>' attribute.
+	 * The feature id for the '<em><b>Keystorealias</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWD = 3;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREALIAS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Keystorepwdloc</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWDLOC = 4;
 
 	/**
 	 * The feature id for the '<em><b>Maxinputqueue</b></em>' attribute.
@@ -621,16 +648,7 @@ public interface ServicePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__MAXINPUTQUEUE = 4;
-
-	/**
-	 * The feature id for the '<em><b>Authid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHID = 5;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__MAXINPUTQUEUE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Authflag</b></em>' attribute.
@@ -642,22 +660,13 @@ public interface ServicePackage extends EPackage {
 	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFLAG = 6;
 
 	/**
-	 * The feature id for the '<em><b>Authpwd</b></em>' attribute.
+	 * The feature id for the '<em><b>Authlist</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHPWD = 7;
-
-	/**
-	 * The feature id for the '<em><b>Authfile</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFILE = 8;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST = 7;
 
 	/**
 	 * The feature id for the '<em><b>Checkschemaflag</b></em>' attribute.
@@ -666,7 +675,7 @@ public interface ServicePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CHECKSCHEMAFLAG = 9;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__CHECKSCHEMAFLAG = 8;
 
 	/**
 	 * The feature id for the '<em><b>Schemafile</b></em>' attribute.
@@ -675,7 +684,16 @@ public interface ServicePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE = 10;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE = 9;
+
+	/**
+	 * The feature id for the '<em><b>Streamid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__STREAMID = 10;
 
 	/**
 	 * The number of structural features of the '<em>Controller Service Standardeventcollector Service Configuration</em>' class.
@@ -760,15 +778,26 @@ public interface ServicePackage extends EPackage {
 	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Keystoreloc();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorepwd <em>Keystorepwd</em>}'.
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorealias <em>Keystorealias</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Keystorepwd</em>'.
-	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorepwd()
+	 * @return the meta object for the attribute '<em>Keystorealias</em>'.
+	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorealias()
 	 * @see #getControllerServiceStandardeventcollectorServiceConfiguration()
 	 * @generated
 	 */
-	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwd();
+	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Keystorealias();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorepwdloc <em>Keystorepwdloc</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Keystorepwdloc</em>'.
+	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorepwdloc()
+	 * @see #getControllerServiceStandardeventcollectorServiceConfiguration()
+	 * @generated
+	 */
+	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwdloc();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getMaxinputqueue <em>Maxinputqueue</em>}'.
@@ -782,17 +811,6 @@ public interface ServicePackage extends EPackage {
 	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Maxinputqueue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthid <em>Authid</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Authid</em>'.
-	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthid()
-	 * @see #getControllerServiceStandardeventcollectorServiceConfiguration()
-	 * @generated
-	 */
-	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authid();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthflag <em>Authflag</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -802,28 +820,6 @@ public interface ServicePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authflag();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthpwd <em>Authpwd</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Authpwd</em>'.
-	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthpwd()
-	 * @see #getControllerServiceStandardeventcollectorServiceConfiguration()
-	 * @generated
-	 */
-	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authpwd();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthfile <em>Authfile</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Authfile</em>'.
-	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthfile()
-	 * @see #getControllerServiceStandardeventcollectorServiceConfiguration()
-	 * @generated
-	 */
-	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authfile();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getCheckschemaflag <em>Checkschemaflag</em>}'.
@@ -846,6 +842,28 @@ public interface ServicePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Schemafile();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthlist <em>Authlist</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Authlist</em>'.
+	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthlist()
+	 * @see #getControllerServiceStandardeventcollectorServiceConfiguration()
+	 * @generated
+	 */
+	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authlist();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getStreamid <em>Streamid</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Streamid</em>'.
+	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getStreamid()
+	 * @see #getControllerServiceStandardeventcollectorServiceConfiguration()
+	 * @generated
+	 */
+	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Streamid();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -925,12 +943,20 @@ public interface ServicePackage extends EPackage {
 		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTORELOC = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Keystoreloc();
 
 		/**
-		 * The meta object literal for the '<em><b>Keystorepwd</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Keystorealias</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWD = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwd();
+		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREALIAS = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Keystorealias();
+
+		/**
+		 * The meta object literal for the '<em><b>Keystorepwdloc</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__KEYSTOREPWDLOC = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwdloc();
 
 		/**
 		 * The meta object literal for the '<em><b>Maxinputqueue</b></em>' attribute feature.
@@ -941,36 +967,12 @@ public interface ServicePackage extends EPackage {
 		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__MAXINPUTQUEUE = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Maxinputqueue();
 
 		/**
-		 * The meta object literal for the '<em><b>Authid</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHID = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Authid();
-
-		/**
 		 * The meta object literal for the '<em><b>Authflag</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFLAG = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Authflag();
-
-		/**
-		 * The meta object literal for the '<em><b>Authpwd</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHPWD = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Authpwd();
-
-		/**
-		 * The meta object literal for the '<em><b>Authfile</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFILE = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Authfile();
 
 		/**
 		 * The meta object literal for the '<em><b>Checkschemaflag</b></em>' attribute feature.
@@ -987,6 +989,22 @@ public interface ServicePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Schemafile();
+
+		/**
+		 * The meta object literal for the '<em><b>Authlist</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Authlist();
+
+		/**
+		 * The meta object literal for the '<em><b>Streamid</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__STREAMID = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Streamid();
 
 	}
 

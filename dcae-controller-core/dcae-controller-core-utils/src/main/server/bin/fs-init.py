@@ -70,11 +70,15 @@ with open(YamlFile, 'r') as stream:
         
     # Enumerate work
     vol = pinfo["volumes"]
+    do_cinder=do_ephem=False
     for name in vol.keys():
         eph = 'ephemeral' if vol[name]["uuid"] == "ephemeral" else 'cinder'
         print "\tVolume %s size %s type %s" % (name, vol[name]["size"], eph)
         if( eph == "ephemeral" ):
             ephvol = name
+            do_ephem=True
+        else:
+            do_cinder=True
 
     # Parse ephemeral from cloud-init log
     if( not os.access(CloudInitLog, os.R_OK) ):
@@ -88,8 +92,8 @@ with open(YamlFile, 'r') as stream:
                 ephem_found = True
     fh.close()
 
-    if( not ephem_found ):
-        sys.exit("Error: ephemeral device not found in cloud-init.log");
+    if( do_ephem and not ephem_found ):
+        sys.exit("Error: ephemeral required and device not found in cloud-init.log");
         
     # Read block device info
     dev_config=dev_root=cinder_dev=""
@@ -123,6 +127,7 @@ with open(YamlFile, 'r') as stream:
     print "\tConfig: %s" % ( dev_config )
     print "\tEphemeral: %s" % ( dev_ephem )
     print "\tCinder: %s" % ( cinder_dev )
+    print "\tDoEphem? %s DoCinder? %s" % ( do_ephem, do_cinder )
 
     # Handle ephemeral already mounted
     if( not os.access("/etc/fstab", os.R_OK) ):
@@ -141,7 +146,7 @@ with open(YamlFile, 'r') as stream:
     fh.close()
     
     # Handle ephemeral
-    if 'ephvol' in locals() and not DryRun:
+    if do_ephem and not DryRun:
         print "Processing ephemeral volume \"%s\"" % ephvol
         if( ephem_mounted == True ):
             if( os.path.ismount(mp_ephem) ):
@@ -172,10 +177,10 @@ with open(YamlFile, 'r') as stream:
             update_fstab(dev_ephem,k)
     else:
         if( not DryRun ):
-            print "No ephemeral disk defined."
+            print "No ephemeral volumes defined."
 
     # Handle cinder volume(s)
-    if( not 'cinder_dev' in locals() ):
+    if( do_cinder and not 'cinder_dev' in locals() ):
         sys.exit("Error: cinder volume not found")
 
     for name in vol.keys():

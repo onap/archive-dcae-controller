@@ -31,13 +31,16 @@ import org.openecomp.dcae.controller.service.vm.impl.VirtualMachineServiceInstan
 
 import org.openecomp.ncomp.cdap.CdapCluster;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,10 +48,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.impl.CdapClusterServiceInstanceImpl#getCluster <em>Cluster</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.impl.CdapClusterServiceInstanceImpl#getCdapServiceServers <em>Cdap Service Servers</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.impl.CdapClusterServiceInstanceImpl#getHealthCheckScript <em>Health Check Script</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.service.impl.CdapClusterServiceInstanceImpl#getTestTimeout <em>Test Timeout</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -62,6 +68,56 @@ public class CdapClusterServiceInstanceImpl extends VirtualMachineServiceInstanc
 	 * @ordered
 	 */
 	protected CdapCluster cluster;
+
+	/**
+	 * The cached value of the '{@link #getCdapServiceServers() <em>Cdap Service Servers</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCdapServiceServers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> cdapServiceServers;
+
+	/**
+	 * The default value of the '{@link #getHealthCheckScript() <em>Health Check Script</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHealthCheckScript()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String HEALTH_CHECK_SCRIPT_EDEFAULT = "bin/healthCheck.sh";
+
+	/**
+	 * The cached value of the '{@link #getHealthCheckScript() <em>Health Check Script</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHealthCheckScript()
+	 * @generated
+	 * @ordered
+	 */
+	protected String healthCheckScript = HEALTH_CHECK_SCRIPT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTestTimeout() <em>Test Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTestTimeout()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int TEST_TIMEOUT_EDEFAULT = 60000;
+
+	/**
+	 * The cached value of the '{@link #getTestTimeout() <em>Test Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTestTimeout()
+	 * @generated
+	 * @ordered
+	 */
+	protected int testTimeout = TEST_TIMEOUT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -130,6 +186,60 @@ public class CdapClusterServiceInstanceImpl extends VirtualMachineServiceInstanc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getCdapServiceServers() {
+		if (cdapServiceServers == null) {
+			cdapServiceServers = new EDataTypeEList<String>(String.class, this, ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CDAP_SERVICE_SERVERS);
+		}
+		return cdapServiceServers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getHealthCheckScript() {
+		return healthCheckScript;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHealthCheckScript(String newHealthCheckScript) {
+		String oldHealthCheckScript = healthCheckScript;
+		healthCheckScript = newHealthCheckScript;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__HEALTH_CHECK_SCRIPT, oldHealthCheckScript, healthCheckScript));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getTestTimeout() {
+		return testTimeout;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTestTimeout(int newTestTimeout) {
+		int oldTestTimeout = testTimeout;
+		testTimeout = newTestTimeout;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__TEST_TIMEOUT, oldTestTimeout, testTimeout));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -149,6 +259,12 @@ public class CdapClusterServiceInstanceImpl extends VirtualMachineServiceInstanc
 		switch (featureID) {
 			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CLUSTER:
 				return getCluster();
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CDAP_SERVICE_SERVERS:
+				return getCdapServiceServers();
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__HEALTH_CHECK_SCRIPT:
+				return getHealthCheckScript();
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__TEST_TIMEOUT:
+				return getTestTimeout();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,11 +274,22 @@ public class CdapClusterServiceInstanceImpl extends VirtualMachineServiceInstanc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CLUSTER:
 				setCluster((CdapCluster)newValue);
+				return;
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CDAP_SERVICE_SERVERS:
+				getCdapServiceServers().clear();
+				getCdapServiceServers().addAll((Collection<? extends String>)newValue);
+				return;
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__HEALTH_CHECK_SCRIPT:
+				setHealthCheckScript((String)newValue);
+				return;
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__TEST_TIMEOUT:
+				setTestTimeout((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -179,6 +306,15 @@ public class CdapClusterServiceInstanceImpl extends VirtualMachineServiceInstanc
 			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CLUSTER:
 				setCluster((CdapCluster)null);
 				return;
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CDAP_SERVICE_SERVERS:
+				getCdapServiceServers().clear();
+				return;
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__HEALTH_CHECK_SCRIPT:
+				setHealthCheckScript(HEALTH_CHECK_SCRIPT_EDEFAULT);
+				return;
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__TEST_TIMEOUT:
+				setTestTimeout(TEST_TIMEOUT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -193,6 +329,12 @@ public class CdapClusterServiceInstanceImpl extends VirtualMachineServiceInstanc
 		switch (featureID) {
 			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CLUSTER:
 				return cluster != null;
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CDAP_SERVICE_SERVERS:
+				return cdapServiceServers != null && !cdapServiceServers.isEmpty();
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__HEALTH_CHECK_SCRIPT:
+				return HEALTH_CHECK_SCRIPT_EDEFAULT == null ? healthCheckScript != null : !HEALTH_CHECK_SCRIPT_EDEFAULT.equals(healthCheckScript);
+			case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__TEST_TIMEOUT:
+				return testTimeout != TEST_TIMEOUT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -207,6 +349,9 @@ public class CdapClusterServiceInstanceImpl extends VirtualMachineServiceInstanc
 		if (baseClass == CdapClusterConfiguration.class) {
 			switch (derivedFeatureID) {
 				case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CLUSTER: return ServicePackage.CDAP_CLUSTER_CONFIGURATION__CLUSTER;
+				case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CDAP_SERVICE_SERVERS: return ServicePackage.CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS;
+				case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__HEALTH_CHECK_SCRIPT: return ServicePackage.CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT;
+				case ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__TEST_TIMEOUT: return ServicePackage.CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT;
 				default: return -1;
 			}
 		}
@@ -223,10 +368,33 @@ public class CdapClusterServiceInstanceImpl extends VirtualMachineServiceInstanc
 		if (baseClass == CdapClusterConfiguration.class) {
 			switch (baseFeatureID) {
 				case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CLUSTER: return ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CLUSTER;
+				case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS: return ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__CDAP_SERVICE_SERVERS;
+				case ServicePackage.CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT: return ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__HEALTH_CHECK_SCRIPT;
+				case ServicePackage.CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT: return ServicePackage.CDAP_CLUSTER_SERVICE_INSTANCE__TEST_TIMEOUT;
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (cdapServiceServers: ");
+		result.append(cdapServiceServers);
+		result.append(", healthCheckScript: ");
+		result.append(healthCheckScript);
+		result.append(", testTimeout: ");
+		result.append(testTimeout);
+		result.append(')');
+		return result.toString();
 	}
 
 } //CdapClusterServiceInstanceImpl

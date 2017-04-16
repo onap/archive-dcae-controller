@@ -25,6 +25,7 @@ import org.openecomp.ncomp.cdap.CdapCluster;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.openecomp.ncomp.utils.ShellCmd;
 import org.openecomp.dcae.controller.core.service.HealthTestResponse;
 import org.openecomp.dcae.controller.core.service.HealthTestStatus;
 import org.openecomp.dcae.controller.core.service.ServiceFactory;
@@ -39,16 +40,6 @@ public class DcaeCdapClusterManagerProvider extends DcaeVirtualMachineManagerPro
 		super(controller, o);
 		this.o = o;
 	}
-	@Override
-	public HealthTestResponse test() {
-		HealthTestResponse res = ServiceFactory.eINSTANCE.createHealthTestResponse();
-		res.setStatus(HealthTestStatus.GREEN);
-		if (o.getCluster() == null || o.getCluster().getConfigurations().size() == 0) {
-			res.setMessageCode("CDAP not working");
-			res.setStatus(HealthTestStatus.RED);
-		}
-		return res;
-	}
 
 	private CdapCluster getCluster() {
 		if (o.getCluster() == null) {
@@ -56,6 +47,39 @@ public class DcaeCdapClusterManagerProvider extends DcaeVirtualMachineManagerPro
 			throw new RuntimeException("Unable to find cluster");
 		}
 		return o.getCluster();
+	}
+	
+	@Override
+	public HealthTestResponse test() {
+		String s = run(o.getHealthCheckScript(), o.getTestTimeout());
+		String a[] = s.split(":");
+		int index = s.indexOf(":");
+		String msg = index < 0 ? null : s.substring(index);
+		HealthTestResponse res = ServiceFactory.eINSTANCE.createHealthTestResponse();
+		if ("GREEN".equalsIgnoreCase(a[0])) {
+			res.setStatus(HealthTestStatus.GREEN);
+			res.setMessageCode(msg);
+		} else if ("YELLOW".equalsIgnoreCase(a[0])) {
+			res.setStatus(HealthTestStatus.YELLOW);
+			res.setMessageCode(msg);
+		} else if ("RED".equalsIgnoreCase(a[0])) {
+			res.setStatus(HealthTestStatus.RED);
+			res.setMessageCode(msg);
+		} else {
+			res.setStatus(HealthTestStatus.RED);
+			res.setMessageCode("Bad return string: " + s);
+		}
+		return res;
+	}
+	
+	private String run(String cmd, long wait) {
+		try {
+			ShellCmd worker = new ShellCmd(cmd);
+			return worker.result(wait);
+		} catch (Exception e) {
+			logger.warn("Unable to run cmd: " + cmd + " " + e);
+			return "RED:Unable to run cmd: " + cmd + " " + e;
+		}
 	}
 
 	public String loadArtifact(String namespace, String artifactName, String jarfile, String version) {
@@ -214,6 +238,19 @@ public class DcaeCdapClusterManagerProvider extends DcaeVirtualMachineManagerPro
 
 	public String setPreferencesService(String namespace, String prefsString, String appId, String serviceId) {
 		return getCluster().setPreferencesService(namespace, prefsString, appId, serviceId);
+	}
+
+	public String resumeSchedule(String namespace, String appId, String scheduleId) {
+		return getCluster().resumeSchedule(namespace, appId, scheduleId);
+	}
+
+	public String suspendSchedule(String namespace, String appId, String scheduleId) {
+		return getCluster().suspendSchedule(namespace, appId, scheduleId);
+	}
+
+	public String loadArtifactWithConfig(String namespace, String artifactName, String jarfile, String version,
+			String config) {
+		return getCluster().loadArtifactWithConfig(namespace, artifactName, jarfile, version, config);
 	}
 
 }

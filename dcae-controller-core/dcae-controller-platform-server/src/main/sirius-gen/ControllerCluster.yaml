@@ -1,25 +1,21 @@
 operations:
-  pushData: {}
-  receiveData: {}
-  REMOTE_pushData:
-    decription: Remote call pushData
-  REMOTE_receiveData:
-    decription: Remote call receiveData
+  ControllerCluster@pushData: {}
+  ControllerCluster@receiveData: {}
 messages:
   dummy: {}
-  pushData:
-    errorCode: pushData-FAILED-5001W
+  REQUEST-FAILED-pushData:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  receiveData:
-    errorCode: receiveData-FAILED-5001W
+  REQUEST-FAILED-receiveData:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  REMOTE_pushData:
-    errorCode: REMOTE-pushData-FAILED-5001W
+  REMOTE-CALL-FAILED-pushData:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_receiveData:
-    errorCode: REMOTE-receiveData-FAILED-5001W
+  REMOTE-CALL-FAILED-receiveData:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception

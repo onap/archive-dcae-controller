@@ -472,7 +472,7 @@ public class DockerPackageImpl extends EPackageImpl implements DockerPackage {
 		// http://www.eclipse.org/emf/2011/Xcore
 		createXcoreAnnotations();
 		// http://openecomp.org
-		createEcompAnnotations();
+		createOpenecompAnnotations();
 	}
 
 	/**
@@ -497,7 +497,7 @@ public class DockerPackageImpl extends EPackageImpl implements DockerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createEcompAnnotations() {
+	protected void createOpenecompAnnotations() {
 		String source = "http://openecomp.org";	
 		addAnnotation
 		  (getDockerServiceInstance_DockerHost(), 

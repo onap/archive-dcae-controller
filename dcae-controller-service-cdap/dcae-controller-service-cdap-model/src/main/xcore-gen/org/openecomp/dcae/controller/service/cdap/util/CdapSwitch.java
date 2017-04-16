@@ -72,7 +72,7 @@ public class CdapSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -138,6 +138,151 @@ public class CdapSwitch<T> extends Switch<T> {
 				T result = caseCdapServiceDescriptor(cdapServiceDescriptor);
 				if (result == null) result = caseDcaeServiceDescriptor(cdapServiceDescriptor);
 				if (result == null) result = caseNamedEntity(cdapServiceDescriptor);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_STEP: {
+				CdapStep cdapStep = (CdapStep)theEObject;
+				T result = caseCdapStep(cdapStep);
+				if (result == null) result = caseNamedEntity(cdapStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP: {
+				CdapLoadArtifactStep cdapLoadArtifactStep = (CdapLoadArtifactStep)theEObject;
+				T result = caseCdapLoadArtifactStep(cdapLoadArtifactStep);
+				if (result == null) result = caseCdapStep(cdapLoadArtifactStep);
+				if (result == null) result = caseNamedEntity(cdapLoadArtifactStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_LOAD_ARTIFACT_WITH_CONFIG_STEP: {
+				CdapLoadArtifactWithConfigStep cdapLoadArtifactWithConfigStep = (CdapLoadArtifactWithConfigStep)theEObject;
+				T result = caseCdapLoadArtifactWithConfigStep(cdapLoadArtifactWithConfigStep);
+				if (result == null) result = caseCdapLoadArtifactStep(cdapLoadArtifactWithConfigStep);
+				if (result == null) result = caseCdapStep(cdapLoadArtifactWithConfigStep);
+				if (result == null) result = caseNamedEntity(cdapLoadArtifactWithConfigStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_CREATE_APP_STEP: {
+				CdapCreateAppStep cdapCreateAppStep = (CdapCreateAppStep)theEObject;
+				T result = caseCdapCreateAppStep(cdapCreateAppStep);
+				if (result == null) result = caseCdapStep(cdapCreateAppStep);
+				if (result == null) result = caseNamedEntity(cdapCreateAppStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_CREATE_APP_WITH_CONFIG_STEP: {
+				CdapCreateAppWithConfigStep cdapCreateAppWithConfigStep = (CdapCreateAppWithConfigStep)theEObject;
+				T result = caseCdapCreateAppWithConfigStep(cdapCreateAppWithConfigStep);
+				if (result == null) result = caseCdapCreateAppStep(cdapCreateAppWithConfigStep);
+				if (result == null) result = caseCdapStep(cdapCreateAppWithConfigStep);
+				if (result == null) result = caseNamedEntity(cdapCreateAppWithConfigStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_DEPLOY_APP_STEP: {
+				CdapDeployAppStep cdapDeployAppStep = (CdapDeployAppStep)theEObject;
+				T result = caseCdapDeployAppStep(cdapDeployAppStep);
+				if (result == null) result = caseCdapStep(cdapDeployAppStep);
+				if (result == null) result = caseNamedEntity(cdapDeployAppStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_STOP_FLOW_STEP: {
+				CdapStopFlowStep cdapStopFlowStep = (CdapStopFlowStep)theEObject;
+				T result = caseCdapStopFlowStep(cdapStopFlowStep);
+				if (result == null) result = caseCdapStep(cdapStopFlowStep);
+				if (result == null) result = caseNamedEntity(cdapStopFlowStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_STOP_WORKER_STEP: {
+				CdapStopWorkerStep cdapStopWorkerStep = (CdapStopWorkerStep)theEObject;
+				T result = caseCdapStopWorkerStep(cdapStopWorkerStep);
+				if (result == null) result = caseCdapStep(cdapStopWorkerStep);
+				if (result == null) result = caseNamedEntity(cdapStopWorkerStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_STOP_SERVICE_STEP: {
+				CdapStopServiceStep cdapStopServiceStep = (CdapStopServiceStep)theEObject;
+				T result = caseCdapStopServiceStep(cdapStopServiceStep);
+				if (result == null) result = caseCdapStep(cdapStopServiceStep);
+				if (result == null) result = caseNamedEntity(cdapStopServiceStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_STOP_APP_STEP: {
+				CdapStopAppStep cdapStopAppStep = (CdapStopAppStep)theEObject;
+				T result = caseCdapStopAppStep(cdapStopAppStep);
+				if (result == null) result = caseCdapStep(cdapStopAppStep);
+				if (result == null) result = caseNamedEntity(cdapStopAppStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_START_FLOW_STEP: {
+				CdapStartFlowStep cdapStartFlowStep = (CdapStartFlowStep)theEObject;
+				T result = caseCdapStartFlowStep(cdapStartFlowStep);
+				if (result == null) result = caseCdapStep(cdapStartFlowStep);
+				if (result == null) result = caseNamedEntity(cdapStartFlowStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_START_WORKER_STEP: {
+				CdapStartWorkerStep cdapStartWorkerStep = (CdapStartWorkerStep)theEObject;
+				T result = caseCdapStartWorkerStep(cdapStartWorkerStep);
+				if (result == null) result = caseCdapStep(cdapStartWorkerStep);
+				if (result == null) result = caseNamedEntity(cdapStartWorkerStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_START_SERVICE_STEP: {
+				CdapStartServiceStep cdapStartServiceStep = (CdapStartServiceStep)theEObject;
+				T result = caseCdapStartServiceStep(cdapStartServiceStep);
+				if (result == null) result = caseCdapStep(cdapStartServiceStep);
+				if (result == null) result = caseNamedEntity(cdapStartServiceStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_START_APP_STEP: {
+				CdapStartAppStep cdapStartAppStep = (CdapStartAppStep)theEObject;
+				T result = caseCdapStartAppStep(cdapStartAppStep);
+				if (result == null) result = caseCdapStep(cdapStartAppStep);
+				if (result == null) result = caseNamedEntity(cdapStartAppStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_DELETE_APP_STEP: {
+				CdapDeleteAppStep cdapDeleteAppStep = (CdapDeleteAppStep)theEObject;
+				T result = caseCdapDeleteAppStep(cdapDeleteAppStep);
+				if (result == null) result = caseCdapStep(cdapDeleteAppStep);
+				if (result == null) result = caseNamedEntity(cdapDeleteAppStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_DELETE_ARTIFACT: {
+				CdapDeleteArtifact cdapDeleteArtifact = (CdapDeleteArtifact)theEObject;
+				T result = caseCdapDeleteArtifact(cdapDeleteArtifact);
+				if (result == null) result = caseCdapStep(cdapDeleteArtifact);
+				if (result == null) result = caseNamedEntity(cdapDeleteArtifact);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_SUSPEND_SCHEDULE_STEP: {
+				CdapSuspendScheduleStep cdapSuspendScheduleStep = (CdapSuspendScheduleStep)theEObject;
+				T result = caseCdapSuspendScheduleStep(cdapSuspendScheduleStep);
+				if (result == null) result = caseCdapStep(cdapSuspendScheduleStep);
+				if (result == null) result = caseNamedEntity(cdapSuspendScheduleStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CdapPackage.CDAP_RESUME_SCHEDULE_STEP: {
+				CdapResumeScheduleStep cdapResumeScheduleStep = (CdapResumeScheduleStep)theEObject;
+				T result = caseCdapResumeScheduleStep(cdapResumeScheduleStep);
+				if (result == null) result = caseCdapStep(cdapResumeScheduleStep);
+				if (result == null) result = caseNamedEntity(cdapResumeScheduleStep);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -247,6 +392,276 @@ public class CdapSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCdapServiceDescriptor(CdapServiceDescriptor object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapStep(CdapStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Load Artifact Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Load Artifact Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapLoadArtifactStep(CdapLoadArtifactStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Load Artifact With Config Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Load Artifact With Config Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapLoadArtifactWithConfigStep(CdapLoadArtifactWithConfigStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Create App Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Create App Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapCreateAppStep(CdapCreateAppStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Create App With Config Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Create App With Config Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapCreateAppWithConfigStep(CdapCreateAppWithConfigStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Deploy App Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Deploy App Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapDeployAppStep(CdapDeployAppStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stop Flow Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stop Flow Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapStopFlowStep(CdapStopFlowStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stop Worker Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stop Worker Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapStopWorkerStep(CdapStopWorkerStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stop Service Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stop Service Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapStopServiceStep(CdapStopServiceStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stop App Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stop App Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapStopAppStep(CdapStopAppStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Start Flow Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Start Flow Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapStartFlowStep(CdapStartFlowStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Start Worker Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Start Worker Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapStartWorkerStep(CdapStartWorkerStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Start Service Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Start Service Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapStartServiceStep(CdapStartServiceStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Start App Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Start App Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapStartAppStep(CdapStartAppStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Delete App Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Delete App Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapDeleteAppStep(CdapDeleteAppStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Delete Artifact</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Delete Artifact</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapDeleteArtifact(CdapDeleteArtifact object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Suspend Schedule Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Suspend Schedule Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapSuspendScheduleStep(CdapSuspendScheduleStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Resume Schedule Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Resume Schedule Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCdapResumeScheduleStep(CdapResumeScheduleStep object) {
 		return null;
 	}
 

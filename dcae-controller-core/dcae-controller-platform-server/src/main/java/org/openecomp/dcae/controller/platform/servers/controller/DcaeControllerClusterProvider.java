@@ -28,36 +28,30 @@ import java.util.Date;
 import org.openecomp.ncomp.sirius.manager.GenericHttpClient;
 import org.openecomp.ncomp.sirius.manager.ISiriusPlugin;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
-import org.openecomp.ncomp.sirius.manager.Jetty8Client;
-import org.openecomp.ncomp.sirius.manager.Jetty8ClientOld;
 import org.openecomp.ncomp.sirius.manager.ManagementServer;
 import org.openecomp.ncomp.sirius.manager.ManagementServerUtils;
 import org.openecomp.ncomp.sirius.manager.Subject;
 
 import org.apache.log4j.Logger;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import org.openecomp.ncomp.sirius.manager.BasicAdaptorProvider;
+import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
 import org.openecomp.ncomp.sirius.manager.metrics.MetricManager;
 import org.openecomp.ncomp.webservice.utils.DateUtils;
 import org.openecomp.dcae.controller.core.server.DcaeBasicServer;
-import org.openecomp.dcae.controller.core.service.DcaeService;
 import org.openecomp.dcae.controller.platform.controller.ControllerCluster;
 import org.openecomp.dcae.controller.platform.controller.ControllerClusterServer;
 import org.openecomp.dcae.controller.platform.controller.ControllerClusterServerData;
-import org.openecomp.dcae.controller.platform.controller.DcaePlatformController;
 import org.openecomp.dcae.controller.platform.controller.ServerRole;
 import org.openecomp.dcae.controller.platform.servers.controller.logging.DcaeControllerMessageEnum;
 import org.openecomp.dcae.controller.platform.servers.controller.logging.DcaeControllerOperationEnum;
-import org.openecomp.dcae.controller.service.vm.PhysicalMachine;
 import org.openecomp.dcae.controller.service.vm.VirtualMachineService;
 import org.openecomp.dcae.controller.service.vm.VirtualMachineServiceInstance;
-import org.openecomp.logger.EcompLogger;
 
 public class DcaeControllerClusterProvider extends BasicAdaptorProvider implements ISiriusPlugin {
 	private static final Logger logger = Logger.getLogger(DcaeControllerClusterProvider.class);
-	static final EcompLogger ecomplogger = EcompLogger.getEcompLogger();
+	static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
 	ControllerCluster o;
 
 	public DcaeControllerClusterProvider(ISiriusServer controller, ControllerCluster o) {
@@ -122,7 +116,7 @@ public class DcaeControllerClusterProvider extends BasicAdaptorProvider implemen
 		b = b.replaceFirst("localhost", s.getServer().getNetworks().get(0).getDnsName());
 		client.setBaseAddress(b);
 		logger.info("using baseAdress: " + client.getBaseAddress());
-		System.out.println("CLUSTER: " + client.getBaseAddress());
+//		System.out.println("CLUSTER: " + client.getBaseAddress());
 		return new DcaeControllerClusterConsole(client);
 	}
 
@@ -153,7 +147,7 @@ public class DcaeControllerClusterProvider extends BasicAdaptorProvider implemen
 
 	@Override
 	public void start() {
-		System.out.println("CLUSTER: start");
+//		System.out.println("CLUSTER: start");
 		try {
 			String hostname = InetAddress.getLocalHost().getHostName();
 			if (hostname.indexOf(".") > 0)
@@ -177,43 +171,44 @@ public class DcaeControllerClusterProvider extends BasicAdaptorProvider implemen
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		System.out.println("CLUSTER: start");
+//		System.out.println("CLUSTER: start");
 		Thread t = new Thread("cluster replication") {
 			@Override
 			public void run() {
-				System.out.println("CLUSTER 2: run");
-				ecomplogger.setOperation(DcaeControllerOperationEnum.CLUSTER_DATA_REPLICATION);
+//				System.out.println("CLUSTER 2: run");
 				while (true) {
 					try {
-						System.out.println("CLUSTER 3: run");
+//						System.out.println("CLUSTER 3: run");
 						for (ControllerClusterServer s : o.getServers()) {
 							if (s.getName().equals(o.getMyServerName()))
 								o.setRole(s.getRole());
 						}
 						controller.getServer().isSlave = o.getRole() == ServerRole.SLAVE;
 						if (o.getRole() == ServerRole.MASTER) {
-							System.out.println("CLUSTER 3: run");
+//							System.out.println("CLUSTER 3: run");
+							ecomplogger.setOperation(DcaeControllerOperationEnum.CLUSTER_DATA_REPLICATION);
 							ecomplogger.newRequestId();
+							ecomplogger.setInstanceId(controller, o);
 							ecomplogger.recordAuditEventStart();
 							for (ControllerClusterServer s : o.getServers()) {
-								System.out.println("CLUSTER 4: run: " + s.getName() + " " + s.getRole());
+//								System.out.println("CLUSTER 4: run: " + s.getName() + " " + s.getRole());
 								if (s.getRole() != ServerRole.SLAVE)
 									continue;
 								if (s.getName().equals(o.getMyServerName()))
 									continue;
-								System.out.println("CLUSTER 5: run");
+//								System.out.println("CLUSTER 5: run");
 								for (ControllerClusterServerData d : s.getData()) {
 									try {
-										System.out.println("CLUSTER 6: run: " + d.getName());
+//										System.out.println("CLUSTER 6: run: " + d.getName());
 										Date last = d.getLastPush() == null ? null : d.getLastPush().last;
 										long i = DateUtils.stringToDuration(d.getPushInterval());
-										System.out.println("CLUSTER 7: run");
+//										System.out.println("CLUSTER 7: run");
 										long now = new Date().getTime();
 										if (last != null && last.getTime() + i > now)
 											continue;
-										System.out.println("CLUSTER 8: run");
+//										System.out.println("CLUSTER 8: run");
 										o.pushData(s.getName(), d.getName());
-										System.out.println("CLUSTER 9: run");
+//										System.out.println("CLUSTER 9: run");
 									} catch (Exception e) {
 										ecomplogger.warn(DcaeControllerMessageEnum.CLUSTER_DATA_REPLICATION_FAILED,
 												s.getName());

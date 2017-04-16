@@ -23,8 +23,6 @@
  */
 package org.openecomp.dcae.controller.service.standardeventcollector.manager.util;
 
-import org.openecomp.dcae.controller.core.manager.DcaeManager;
-
 import org.openecomp.dcae.controller.service.dockermanager.DockerManager;
 
 import org.openecomp.dcae.controller.service.standardeventcollector.manager.*;
@@ -37,6 +35,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.openecomp.dcae.controller.core.manager.DcaeManager;
 
 /**
  * <!-- begin-user-doc -->

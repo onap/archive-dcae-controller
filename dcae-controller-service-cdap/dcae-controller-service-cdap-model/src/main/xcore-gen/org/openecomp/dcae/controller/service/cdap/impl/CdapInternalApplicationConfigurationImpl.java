@@ -49,6 +49,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapInternalApplicationConfigurationImpl#getConfig <em>Config</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapInternalApplicationConfigurationImpl#getPreferences <em>Preferences</em>}</li>
@@ -57,7 +58,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapInternalApplicationConfigurationImpl#getFlows <em>Flows</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapInternalApplicationConfigurationImpl#getServices <em>Services</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -61,7 +61,7 @@ public class DcaeControllerServiceStandardeventcollectorServiceProvider extends 
             //EObject o1 =  ManagerFactory.eINSTANCE.createControllerServiceStandardeventcollectorManager();
 			ControllerServiceStandardeventcollectorManager o1 =  ManagerFactory.eINSTANCE.createControllerServiceStandardeventcollectorManager();
             ManagementServer.copy(findInstance(instanceName),o1);
-            o1.setKeystorepwd(JavaHttpClient.decryptPassword(o1.getKeystorepwd()));
+            //o1.setKeystorepwd(JavaHttpClient.decryptPassword(o1.getKeystorepwd()));
             
             return o1;
     }

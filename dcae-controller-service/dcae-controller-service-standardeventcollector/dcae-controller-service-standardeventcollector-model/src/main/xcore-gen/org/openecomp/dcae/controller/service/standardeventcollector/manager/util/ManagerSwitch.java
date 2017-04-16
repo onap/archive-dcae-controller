@@ -23,8 +23,6 @@
  */
 package org.openecomp.dcae.controller.service.standardeventcollector.manager.util;
 
-import org.openecomp.dcae.controller.core.manager.DcaeManager;
-
 import org.openecomp.dcae.controller.service.dockermanager.DockerManager;
 
 import org.openecomp.dcae.controller.service.standardeventcollector.manager.*;
@@ -35,6 +33,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
+import org.openecomp.dcae.controller.core.manager.DcaeManager;
 
 /**
  * <!-- begin-user-doc -->
@@ -74,7 +73,7 @@ public class ManagerSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */

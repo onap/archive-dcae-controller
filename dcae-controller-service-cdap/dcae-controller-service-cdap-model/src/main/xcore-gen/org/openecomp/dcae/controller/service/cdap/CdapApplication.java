@@ -32,13 +32,13 @@ import org.openecomp.ncomp.core.NamedEntity;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapApplication#getJarFile <em>Jar File</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapApplication#getArtifactName <em>Artifact Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapApplication#getVersion <em>Version</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapApplication#getAppConfigFileContent <em>App Config File Content</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.cdap.CdapPackage#getCdapApplication()
  * @model

@@ -94,8 +94,8 @@ public class DockermanagerPackageImpl extends EPackageImpl implements Dockermana
 		isInited = true;
 
 		// Initialize simple dependencies
-		DockerPackage.eINSTANCE.eClass();
 		ManagerPackage.eINSTANCE.eClass();
+		DockerPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theDockermanagerPackage.createPackageContents();

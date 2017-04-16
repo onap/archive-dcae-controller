@@ -30,6 +30,8 @@ import org.openecomp.ncomp.sirius.manager.GenericHttpClient;
 import org.apache.log4j.Logger;
 
 import org.openecomp.logger.EcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -54,33 +56,37 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 		DcaeDockerHostManager.ecoreSetup(); 
 		client = new GenericHttpClient(file,name);
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 	public DcaeDockerHostManagerClient(String file, String name1, String name2) {
 		HighAvailabilityClient client1 = new HighAvailabilityClient(file,name1,name2);
 		client = client1.all; // requests should be forwarded to all.
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 	
 	public DcaeDockerHostManagerClient(AbstractClient c) {
 		client = c;
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 
 
 	@Override
 	public void updateContainerConfiguration(java.lang.String name, org.eclipse.emf.ecore.EObject o, EList<org.openecomp.dcae.controller.core.stream.DcaeStream> inputStreams, EList<org.openecomp.dcae.controller.core.stream.DcaeStream> outputStreams) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_updateContainerConfiguration);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_updateContainerConfiguration,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "updateContainerConfiguration", null, name,o,inputStreams,outputStreams);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_updateContainerConfiguration, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@updateContainerConfiguration: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_updateContainerConfiguration, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_updateContainerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_updateContainerConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -88,16 +94,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void suspendContainer(java.lang.String name) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_suspendContainer);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_suspendContainer,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "suspendContainer", null, name);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_suspendContainer, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@suspendContainer: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_suspendContainer, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_suspendContainer,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_suspendContainer,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -105,16 +112,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void resumeContainer(java.lang.String name) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_resumeContainer);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_resumeContainer,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "resumeContainer", null, name);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_resumeContainer, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@resumeContainer: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_resumeContainer, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_resumeContainer,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_resumeContainer,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -122,16 +130,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public org.openecomp.dcae.controller.core.service.HealthTestResponse testContainer(java.lang.String name) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_testContainer);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_testContainer,client.getRemote());
 		org.openecomp.dcae.controller.core.service.HealthTestResponse res;
 		try {
 		  res = (org.openecomp.dcae.controller.core.service.HealthTestResponse) client.operationPath("/resources", c, "testContainer", null, name);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_testContainer, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@testContainer: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_testContainer, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_testContainer,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_testContainer,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -139,16 +148,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void setupConfiguration(java.lang.String service, java.lang.String instance) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_setupConfiguration);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_setupConfiguration,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "setupConfiguration", null, service,instance);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_setupConfiguration, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@setupConfiguration: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_setupConfiguration, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_setupConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_setupConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -156,16 +166,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public org.openecomp.dcae.controller.core.service.HealthTestResponse test() {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_test);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_test,client.getRemote());
 		org.openecomp.dcae.controller.core.service.HealthTestResponse res;
 		try {
 		  res = (org.openecomp.dcae.controller.core.service.HealthTestResponse) client.operationPath("/resources", c, "test", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_test, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@test: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_test, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_test,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -173,16 +184,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void suspend() {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_suspend);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_suspend,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "suspend", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_suspend, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@suspend: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_suspend, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_suspend,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -190,16 +202,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void resume() {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_resume);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_resume,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "resume", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_resume, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@resume: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_resume, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_resume,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -207,16 +220,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public java.lang.String publicKey() {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_publicKey);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_publicKey,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "publicKey", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_publicKey, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@publicKey: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_publicKey, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_publicKey,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_publicKey,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -224,16 +238,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void configurationChanged() {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_configurationChanged);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_configurationChanged,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "configurationChanged", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_configurationChanged, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@configurationChanged: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_configurationChanged, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_configurationChanged,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_configurationChanged,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -241,16 +256,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void updateStreams(EList<org.openecomp.dcae.controller.core.stream.DcaeStream> inputStreams, EList<org.openecomp.dcae.controller.core.stream.DcaeStream> outputStreams) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_updateStreams);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_updateStreams,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "updateStreams", null, inputStreams,outputStreams);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_updateStreams, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@updateStreams: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_updateStreams, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_updateStreams,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_updateStreams,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -258,16 +274,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void logs(org.json.JSONObject cx, EList<org.openecomp.ncomp.core.logs.LogMessage> logs) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_logs);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_logs,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "logs", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,logs);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_logs, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@logs: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_logs, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_logs,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_logs,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -275,16 +292,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void metrics(org.json.JSONObject cx, EList<org.openecomp.ncomp.core.metrics.Metric> metrics) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_metrics);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_metrics,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "metrics", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,metrics);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_metrics, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@metrics: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_metrics, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_metrics,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_metrics,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -292,16 +310,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void properties(org.json.JSONObject cx, EList<org.openecomp.ncomp.sirius.manager.properties.AbstractProperty> l) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_properties);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_properties,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "properties", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,l);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_properties, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@properties: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_properties, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_properties,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_properties,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -309,16 +328,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void uploadInfo(org.json.JSONObject cx, EList<org.openecomp.ncomp.sirius.manager.server.ManagementInfo> info) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_uploadInfo);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_uploadInfo,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "uploadInfo", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,info);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_uploadInfo, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@uploadInfo: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_uploadInfo, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_uploadInfo,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_uploadInfo,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -326,16 +346,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.metrics.DoubleMetric> getValues(org.json.JSONObject cx, java.lang.String path, java.lang.Long start, java.lang.Long end, org.openecomp.ncomp.core.metrics.MetricValueOption option, boolean relativeInterval) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_getValues);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_getValues,client.getRemote());
 		EList<org.openecomp.ncomp.core.metrics.DoubleMetric> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.metrics.DoubleMetric>) client.operationPath("/resources", c, "getValues", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,path,start,end,option,relativeInterval);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_getValues, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@getValues: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getValues, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getValues,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getValues,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -343,16 +364,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.metrics.DoubleMetric> getValuesAll(org.json.JSONObject cx, java.lang.String path, EList<java.lang.String> metrics, java.lang.Long start, java.lang.Long end, org.openecomp.ncomp.core.metrics.MetricValueOption option, boolean relativeInterval) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_getValuesAll);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_getValuesAll,client.getRemote());
 		EList<org.openecomp.ncomp.core.metrics.DoubleMetric> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.metrics.DoubleMetric>) client.operationPath("/resources", c, "getValuesAll", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,path,metrics,start,end,option,relativeInterval);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_getValuesAll, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@getValuesAll: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getValuesAll, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getValuesAll,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getValuesAll,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -360,16 +382,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.logs.LogMessage> getMessages(org.json.JSONObject cx, java.lang.String path, java.lang.Long start, java.lang.Long end) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_getMessages);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_getMessages,client.getRemote());
 		EList<org.openecomp.ncomp.core.logs.LogMessage> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.logs.LogMessage>) client.operationPath("/resources", c, "getMessages", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,path,start,end);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_getMessages, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@getMessages: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getMessages, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getMessages,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getMessages,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -377,16 +400,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public org.openecomp.ncomp.sirius.manager.server.LoggerInfo getRequestLogger(java.lang.String userName, java.lang.String action, java.lang.String resourcePath, org.json.JSONObject context) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_getRequestLogger);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_getRequestLogger,client.getRemote());
 		org.openecomp.ncomp.sirius.manager.server.LoggerInfo res;
 		try {
 		  res = (org.openecomp.ncomp.sirius.manager.server.LoggerInfo) client.operationPath("/resources", c, "getRequestLogger", null, userName,action,resourcePath,context);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_getRequestLogger, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@getRequestLogger: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getRequestLogger, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getRequestLogger,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_getRequestLogger,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -394,16 +418,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.function.ValuePair> evaluate(java.lang.String path, org.openecomp.ncomp.core.function.Function function) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_evaluate);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_evaluate,client.getRemote());
 		EList<org.openecomp.ncomp.core.function.ValuePair> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.function.ValuePair>) client.operationPath("/resources", c, "evaluate", null, path,function);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_evaluate, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@evaluate: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_evaluate, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_evaluate,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_evaluate,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -411,16 +436,17 @@ public class DcaeDockerHostManagerClient extends DockerHostManagerImpl {
 
 	@Override
 	public void update(java.lang.String path, org.openecomp.ncomp.core.function.Function function) {
-		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.REMOTE_update);
+		EClass c = ManagerPackage.eINSTANCE.getDockerHostManager(); 
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_update,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "update", null, path,function);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_update, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@update: " + e);
+			ecomplogger.warn(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_update, e.toString());
+			EcompException e1 = EcompException.create(DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_update,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DockerHostManagerMessageEnum.REMOTE_CALL_FAILED_update,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		

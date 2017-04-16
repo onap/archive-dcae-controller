@@ -32,20 +32,20 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getCport <em>Cport</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getCsecport <em>Csecport</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystoreloc <em>Keystoreloc</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorepwd <em>Keystorepwd</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorealias <em>Keystorealias</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorepwdloc <em>Keystorepwdloc</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getMaxinputqueue <em>Maxinputqueue</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthid <em>Authid</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthflag <em>Authflag</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthpwd <em>Authpwd</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthfile <em>Authfile</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthlist <em>Authlist</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getCheckschemaflag <em>Checkschemaflag</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getSchemafile <em>Schemafile</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getStreamid <em>Streamid</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage#getControllerServiceStandardeventcollectorServiceConfiguration()
  * @model
@@ -135,31 +135,58 @@ public interface ControllerServiceStandardeventcollectorServiceConfiguration ext
 	void setKeystoreloc(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Keystorepwd</b></em>' attribute.
+	 * Returns the value of the '<em><b>Keystorealias</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Keystorepwd</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Keystorealias</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Keystorepwd</em>' attribute.
-	 * @see #setKeystorepwd(String)
-	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage#getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwd()
+	 * @return the value of the '<em>Keystorealias</em>' attribute.
+	 * @see #setKeystorealias(String)
+	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage#getControllerServiceStandardeventcollectorServiceConfiguration_Keystorealias()
 	 * @model unique="false"
 	 *        annotation="http://openecomp.org type='configuration'"
 	 * @generated
 	 */
-	String getKeystorepwd();
+	String getKeystorealias();
 
 	/**
-	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorepwd <em>Keystorepwd</em>}' attribute.
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorealias <em>Keystorealias</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Keystorepwd</em>' attribute.
-	 * @see #getKeystorepwd()
+	 * @param value the new value of the '<em>Keystorealias</em>' attribute.
+	 * @see #getKeystorealias()
 	 * @generated
 	 */
-	void setKeystorepwd(String value);
+	void setKeystorealias(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Keystorepwdloc</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Keystorepwdloc</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Keystorepwdloc</em>' attribute.
+	 * @see #setKeystorepwdloc(String)
+	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage#getControllerServiceStandardeventcollectorServiceConfiguration_Keystorepwdloc()
+	 * @model unique="false"
+	 *        annotation="http://openecomp.org type='configuration'"
+	 * @generated
+	 */
+	String getKeystorepwdloc();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getKeystorepwdloc <em>Keystorepwdloc</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Keystorepwdloc</em>' attribute.
+	 * @see #getKeystorepwdloc()
+	 * @generated
+	 */
+	void setKeystorepwdloc(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Maxinputqueue</b></em>' attribute.
@@ -189,33 +216,6 @@ public interface ControllerServiceStandardeventcollectorServiceConfiguration ext
 	void setMaxinputqueue(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Authid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Authid</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Authid</em>' attribute.
-	 * @see #setAuthid(String)
-	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage#getControllerServiceStandardeventcollectorServiceConfiguration_Authid()
-	 * @model unique="false"
-	 *        annotation="http://openecomp.org type='configuration'"
-	 * @generated
-	 */
-	String getAuthid();
-
-	/**
-	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthid <em>Authid</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Authid</em>' attribute.
-	 * @see #getAuthid()
-	 * @generated
-	 */
-	void setAuthid(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Authflag</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -241,60 +241,6 @@ public interface ControllerServiceStandardeventcollectorServiceConfiguration ext
 	 * @generated
 	 */
 	void setAuthflag(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Authpwd</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Authpwd</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Authpwd</em>' attribute.
-	 * @see #setAuthpwd(String)
-	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage#getControllerServiceStandardeventcollectorServiceConfiguration_Authpwd()
-	 * @model unique="false"
-	 *        annotation="http://openecomp.org type='configuration'"
-	 * @generated
-	 */
-	String getAuthpwd();
-
-	/**
-	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthpwd <em>Authpwd</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Authpwd</em>' attribute.
-	 * @see #getAuthpwd()
-	 * @generated
-	 */
-	void setAuthpwd(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Authfile</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Authfile</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Authfile</em>' attribute.
-	 * @see #setAuthfile(String)
-	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage#getControllerServiceStandardeventcollectorServiceConfiguration_Authfile()
-	 * @model unique="false"
-	 *        annotation="http://openecomp.org type='configuration'"
-	 * @generated
-	 */
-	String getAuthfile();
-
-	/**
-	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthfile <em>Authfile</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Authfile</em>' attribute.
-	 * @see #getAuthfile()
-	 * @generated
-	 */
-	void setAuthfile(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Checkschemaflag</b></em>' attribute.
@@ -349,4 +295,58 @@ public interface ControllerServiceStandardeventcollectorServiceConfiguration ext
 	 * @generated
 	 */
 	void setSchemafile(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Authlist</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Authlist</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Authlist</em>' attribute.
+	 * @see #setAuthlist(String)
+	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage#getControllerServiceStandardeventcollectorServiceConfiguration_Authlist()
+	 * @model unique="false"
+	 *        annotation="http://openecomp.org type='configuration'"
+	 * @generated
+	 */
+	String getAuthlist();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthlist <em>Authlist</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Authlist</em>' attribute.
+	 * @see #getAuthlist()
+	 * @generated
+	 */
+	void setAuthlist(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Streamid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Streamid</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Streamid</em>' attribute.
+	 * @see #setStreamid(String)
+	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage#getControllerServiceStandardeventcollectorServiceConfiguration_Streamid()
+	 * @model unique="false"
+	 *        annotation="http://openecomp.org type='configuration'"
+	 * @generated
+	 */
+	String getStreamid();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getStreamid <em>Streamid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Streamid</em>' attribute.
+	 * @see #getStreamid()
+	 * @generated
+	 */
+	void setStreamid(String value);
 } // ControllerServiceStandardeventcollectorServiceConfiguration

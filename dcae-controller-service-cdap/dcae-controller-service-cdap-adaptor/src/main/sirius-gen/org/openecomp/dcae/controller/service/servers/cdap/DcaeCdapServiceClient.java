@@ -30,6 +30,8 @@ import org.openecomp.ncomp.sirius.manager.GenericHttpClient;
 import org.apache.log4j.Logger;
 
 import org.openecomp.logger.EcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -54,33 +56,37 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 		DcaeCdapService.ecoreSetup(); 
 		client = new GenericHttpClient(file,name);
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 	public DcaeCdapServiceClient(String file, String name1, String name2) {
 		HighAvailabilityClient client1 = new HighAvailabilityClient(file,name1,name2);
 		client = client1.all; // requests should be forwarded to all.
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 	
 	public DcaeCdapServiceClient(AbstractClient c) {
 		client = c;
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 
 
 	@Override
 	public void updateInstanceConfiguration(java.lang.String instanceName) {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_updateInstanceConfiguration);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_updateInstanceConfiguration,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "updateInstanceConfiguration", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_updateInstanceConfiguration, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@updateInstanceConfiguration: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_updateInstanceConfiguration, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_updateInstanceConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_updateInstanceConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -88,16 +94,17 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 
 	@Override
 	public void deploy(java.lang.String instanceName, java.lang.String containerPath) {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_deploy);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_deploy,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "deploy", null, instanceName,containerPath);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_deploy, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@deploy: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_deploy, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_deploy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_deploy,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -105,16 +112,17 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 
 	@Override
 	public void undeploy(java.lang.String instanceName) {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_undeploy);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_undeploy,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "undeploy", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_undeploy, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@undeploy: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_undeploy, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_undeploy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_undeploy,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -122,16 +130,17 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 
 	@Override
 	public org.openecomp.dcae.controller.core.service.HealthTestResponse test(java.lang.String instanceName) {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_test);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_test,client.getRemote());
 		org.openecomp.dcae.controller.core.service.HealthTestResponse res;
 		try {
 		  res = (org.openecomp.dcae.controller.core.service.HealthTestResponse) client.operationPath("/resources", c, "test", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_test, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@test: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_test, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_test,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -139,16 +148,17 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 
 	@Override
 	public void suspend(java.lang.String instanceName) {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_suspend);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_suspend,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "suspend", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_suspend, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@suspend: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_suspend, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_suspend,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -156,16 +166,17 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 
 	@Override
 	public void resume(java.lang.String instanceName) {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_resume);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_resume,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "resume", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_resume, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@resume: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_resume, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_resume,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -173,16 +184,17 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 
 	@Override
 	public void pushManagerConfiguration(java.lang.String instanceName) {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_pushManagerConfiguration);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_pushManagerConfiguration,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "pushManagerConfiguration", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_pushManagerConfiguration, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@pushManagerConfiguration: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_pushManagerConfiguration, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_pushManagerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_pushManagerConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -190,16 +202,17 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 
 	@Override
 	public void pollManagerConfiguration(java.lang.String instanceName) {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_pollManagerConfiguration);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_pollManagerConfiguration,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "pollManagerConfiguration", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_pollManagerConfiguration, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@pollManagerConfiguration: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_pollManagerConfiguration, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_pollManagerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_pollManagerConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -207,16 +220,17 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 
 	@Override
 	public org.eclipse.emf.ecore.EObject managerConfiguration(java.lang.String instanceName) {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_managerConfiguration);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_managerConfiguration,client.getRemote());
 		org.eclipse.emf.ecore.EObject res;
 		try {
 		  res = (org.eclipse.emf.ecore.EObject) client.operationPath("/resources", c, "managerConfiguration", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_managerConfiguration, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@managerConfiguration: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_managerConfiguration, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_managerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_managerConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -224,16 +238,17 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 
 	@Override
 	public org.json.JSONObject managerOperation(java.lang.String instanceName, java.lang.String operation, org.json.JSONObject parameters) {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_managerOperation);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_managerOperation,client.getRemote());
 		org.json.JSONObject res;
 		try {
 		  res = (org.json.JSONObject) client.operationPath("/resources", c, "managerOperation", null, instanceName,operation,parameters);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_managerOperation, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@managerOperation: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_managerOperation, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_managerOperation,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_managerOperation,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -241,16 +256,17 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 
 	@Override
 	public void updateConfigurationFromPolicy(java.lang.String instanceName) {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_updateConfigurationFromPolicy);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_updateConfigurationFromPolicy,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "updateConfigurationFromPolicy", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_updateConfigurationFromPolicy, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@updateConfigurationFromPolicy: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_updateConfigurationFromPolicy, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_updateConfigurationFromPolicy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_updateConfigurationFromPolicy,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -258,16 +274,17 @@ public class DcaeCdapServiceClient extends CdapServiceImpl {
 
 	@Override
 	public void runHealthTests() {
-		EClass c = CdapPackage.eINSTANCE.getCdapService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapServiceOperationEnum.REMOTE_runHealthTests);
+		EClass c = CdapPackage.eINSTANCE.getCdapService(); 
+		ecomplogger.recordMetricEventStart(CdapServiceOperationEnum.CdapService_runHealthTests,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "runHealthTests", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_runHealthTests, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@runHealthTests: " + e);
+			ecomplogger.warn(CdapServiceMessageEnum.REMOTE_CALL_FAILED_runHealthTests, e.toString());
+			EcompException e1 = EcompException.create(CdapServiceMessageEnum.REMOTE_CALL_FAILED_runHealthTests,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapServiceMessageEnum.REMOTE_CALL_FAILED_runHealthTests,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		

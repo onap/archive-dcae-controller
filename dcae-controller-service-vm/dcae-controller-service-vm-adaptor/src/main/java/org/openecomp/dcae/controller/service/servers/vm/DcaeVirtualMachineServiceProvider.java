@@ -48,6 +48,7 @@ import org.openecomp.dcae.controller.core.service.HealthTestResponse;
 import org.openecomp.dcae.controller.core.service.HealthTestStatus;
 import org.openecomp.dcae.controller.core.service.ServiceFactory;
 import org.openecomp.dcae.controller.core.stream.DcaeStream;
+import org.openecomp.dcae.controller.core.stream.DmaapStream;
 import org.openecomp.dcae.controller.service.servers.vmmanager.DcaeVirtualMachineManagerConsole;
 import org.openecomp.dcae.controller.service.vm.InstallationStep;
 import org.openecomp.dcae.controller.service.vm.PhysicalMachine;
@@ -175,6 +176,7 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 					continue;
 				} 
 			}
+			createServerHook(o,i,server);
 			boolean floatingIpDone = false;
 			String ip2 = server.getNetworks().get(0).getIp();
 			for (NeutronFloatingIp fip : location.getOpenstackProject().getFloatingips()) {
@@ -247,6 +249,10 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 		// return res;
 	}
 
+	protected void createServerHook(VirtualMachineService o, VirtualMachineServiceInstance i, DcaeBasicServer server) {
+		
+	}
+
 	// used for testing only
 	static String userdataStatic(VirtualMachineServiceInstance i, int j, HashMap<DcaeBasicServer, Port> portMap) {
 		DcaeVirtualMachineServiceProvider pp = new DcaeVirtualMachineServiceProvider(null, null);
@@ -279,8 +285,6 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 			buf.append(configMap.get("init-script")).append("\n");
 		buf.append(userdataHosts(s, portMap));
 		buf.append(userdataCertificate(s));
-//		buf.append(userdataUam(i, s)).append("\n");
-//		buf.append(userdataIeds(i, s)).append("\n");
 		buf.append(userdataFromFile("CLOUDINIT",i, s)).append("\n");
 		for (User u : i.getAdminUsers()) {
 			buf.append(userdataSshKey(i.getAdminId(), u.getPublicKey()));
@@ -323,7 +327,7 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 		return buf.toString();
 	}
 
-	private String userdataConfig(Object o, DcaeBasicServer s) {
+	protected String userdataConfig(Object o, DcaeBasicServer s) {
 		StringBuffer buf = new StringBuffer();
 		@SuppressWarnings("unchecked")
 		HashMap<String, HashMap<String, String>> m1 = (HashMap<String, HashMap<String, String>>) o;
@@ -427,14 +431,8 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 		StringBuffer buf = new StringBuffer();
 		buf.append("cat >> /etc/hosts << HOSTS_EOF").append("\n");
 		for (DcaeBasicServer s1 : portMap.keySet()) {
-			if (s1 == s) {
-				for (FixedIp x : portMap.get(s1).getFixed_ips()) {
-					buf.append(x.getIp_address() + " " + dnsName(s) + " " + s1.getName()).append("\n");
-				}
-			} else {
-				for (FixedIp x : portMap.get(s1).getFixed_ips()) {
-					buf.append(x.getIp_address() + " " + s1.getName()).append("\n");
-				}
+			for (FixedIp x : portMap.get(s1).getFixed_ips()) {
+				buf.append(x.getIp_address() + " " + dnsName(s1) + " " + s1.getName()).append("\n");
 			}
 		}
 		buf.append("HOSTS_EOF").append("\n");
@@ -449,7 +447,7 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 		return buf.toString();
 	}
 
-	static String getTemplate(String resource) throws IOException {
+	protected static String getTemplate(String resource) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		byte[] data = new byte[65536];
 		InputStream is = DcaeVirtualMachineServiceProvider.class.getClassLoader().getResourceAsStream(resource);
@@ -536,7 +534,7 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 		}
 	}
 
-	private String dnsName(DcaeBasicServer s) {
+	protected static String dnsName(DcaeBasicServer s) {
 		return s.getNetworks().get(0).getDnsName();
 	}
 
@@ -621,7 +619,7 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 				s1.setPrivateIp(privateip);
 				s1.setPublicIp(publicip);
 				s1.setServer(svr);
-				if (svr != null)
+				if (svr != null && svr.getOS_EXT_STS_vm_state().equals("active"))
 					numDeployed++;
 				if (publicip == null && needPubIp && project.getPublicNetwork() != null) {
 					incomplete = s1.getName() + " has not public IP";
@@ -648,7 +646,7 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 
 	};
 
-	private void setStatus(VirtualMachineServiceInstance instance, DeploymentStatus newStatus,String reason) {
+	protected void setStatus(VirtualMachineServiceInstance instance, DeploymentStatus newStatus,String reason) {
 		if (instance.getStatus() != newStatus) {
 			String msg = "deployment status changed: " + ManagementServer.object2ref(instance) +
 					" " + instance.getStatus() + " -> " + newStatus + " " + reason;
@@ -660,22 +658,31 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 
 	public HealthTestResponse test(String instance) {
 		VirtualMachineServiceInstance i = findInstance(instance);
-		if (i.getStatus() != DeploymentStatus.DEPLOYED) {
-			HealthTestResponse s = ServiceFactory.eINSTANCE.createHealthTestResponse();
-			s = ServiceFactory.eINSTANCE.createHealthTestResponse();
-			s.setMessageCode("Not deployed");
-			s.setStatus(HealthTestStatus.YELLOW);
-			return s;
+		HealthTestResponse res  = ServiceFactory.eINSTANCE.createHealthTestResponse();
+		res.setStatus(HealthTestStatus.GREEN);
+		for (DcaeBasicServer s : i.getServers()) {
+			try {
+				AbstractClient c = getClient(i,s);
+				DcaeVirtualMachineManagerConsole console = new DcaeVirtualMachineManagerConsole(c);
+				HealthTestResponse h = console.test();
+				s.setHealthTestStatus(h.getStatus());
+				s.setHealthTestMessageCode(h.getMessageCode());
+				updateHealthResponse(res,h);
+			} catch (Exception e) {
+				res.setStatus(HealthTestStatus.RED);
+				res.setMessageCode("Health check failed to server: " + s.getName() + " " + e);
+			}
 		}
-		if (i.getManagerPortNumber() < 0) {
-			HealthTestResponse s = ServiceFactory.eINSTANCE.createHealthTestResponse();
-			s.setMessageCode("Health Check undefined");
-			s.setStatus(HealthTestStatus.YELLOW);
-			return s;
-		} 
-		AbstractClient c = getClient(i);
-		DcaeVirtualMachineManagerConsole console = new DcaeVirtualMachineManagerConsole(c);
-		return console.test();
+		return res;
+	}
+
+	protected void updateHealthResponse(HealthTestResponse h, HealthTestResponse h1) {
+		if (h.getStatus() == HealthTestStatus.RED) return;
+		if (h.getStatus() == HealthTestStatus.YELLOW && h1.getStatus() != HealthTestStatus.RED) return;
+		if (h.getStatus() == HealthTestStatus.GREEN && h1.getStatus() == HealthTestStatus.GREEN) return;
+		// h1 should be used
+		h.setStatus(h1.getStatus());
+		h.setMessageCode(h1.getMessageCode());
 	}
 
 	public void suspend(String instance) {
@@ -707,9 +714,19 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 			l1.addAll(EcoreUtil.copyAll(i.getInputStreams()));
 			EList<DcaeStream> l2 = new BasicEList<DcaeStream>();
 			l2.addAll(EcoreUtil.copyAll(i.getOutputStreams()));
-			console.updateStreams(l1, l2);
+			console.updateStreams(decrypt(l1), decrypt(l2));
 			console.configurationChanged();
 		}
+	}
+
+	protected EList<DcaeStream> decrypt(EList<DcaeStream> l) {
+		for (DcaeStream s : l) {
+			if (s instanceof DmaapStream) {
+				DmaapStream s1 = (DmaapStream) s;
+				s1.setDmaapPassword(JavaHttpClient.decryptPassword(s1.getDmaapPassword()));
+			}
+		}
+		return l;
 	}
 
 	protected EList<DcaeBasicServer> getServers(VirtualMachineServiceInstance i) {
@@ -752,7 +769,7 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 	}
 
 	public AbstractClient getClient(VirtualMachineServiceInstance i, DcaeBasicServer s) {
-		Jetty8Client c = new Jetty8Client("managers.properties", i.eClass().getInstanceClassName());
+		JavaHttpClient c = new JavaHttpClient("managers.properties", i.eClass().getInstanceClassName());
 		if (c.getBaseAddress() == null) {
 			throw new RuntimeException("unable to determine baseaddress in managers.properties for: "
 					+ i.eClass().getInstanceClassName());
@@ -790,7 +807,7 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 		return getClient(i, i.getLeaderServer());
 	}
 
-	private String vmName(VirtualMachineServiceInstance i, int index) {
+	protected String vmName(VirtualMachineServiceInstance i, int index) {
 		return i.getServers().get(index).getName();
 		// return "dcae:" + o.getName() + ":" + i.getName() + ":" + index;
 	}
@@ -835,30 +852,30 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 		return json;
 	}
 
-	public void updateConfigurationFromPolicy(String instanceName) {
-		VirtualMachineServiceInstance i = findInstance(instanceName);
-		JavaHttpClient client = new JavaHttpClient("controller.properties", "policy");
-		HashMap<String, String> headers = new HashMap<String, String>();
-		JSONObject json = new JSONObject();
-		headers.put("ClientAuth", "xxx");
-		JSONObject json2 = new JSONObject();
-		json.put("configAttributes", json2);
-		json2.put("uuid", "xxx");
-		json2.put("service", "ControllerServiceCollectorSdnlService");
-		json2.put("location", "Edge");
-		json.put("configName", "xxxx.sdn-l");
-		json.put("ecompcomponentName", "DCAE");
-		client.httpJsonTransaction("/PyPDPServer/getConfig", "POST", headers, json);
-	}
-
 	public void runHealthTests() {
+		// TODO is this every called??
+		System.err.println("TTTTTTTTT vm runHealthTests");
 		for (VirtualMachineServiceInstance i : o.getInstances()) {
 			HealthTestResponse s = null;
 			try {
-				s = o.test(i.getName());
+				if (i.getStatus() == DeploymentStatus.DEPLOYED) {
+					if (i.getManagerPortNumber() < 0) {
+						s = ServiceFactory.eINSTANCE.createHealthTestResponse();
+						s.setMessageCode("Health Check undefined");
+						s.setStatus(HealthTestStatus.YELLOW);
+					} else {
+						AbstractClient c = getClient(i);
+						DcaeVirtualMachineManagerConsole console = new DcaeVirtualMachineManagerConsole(c);
+						s = console.test();
+					}
+				} else {
+					s = ServiceFactory.eINSTANCE.createHealthTestResponse();
+					s.setMessageCode("Not deployed");
+					s.setStatus(HealthTestStatus.YELLOW);
+				}
 			} catch (Exception e) {
 				s = ServiceFactory.eINSTANCE.createHealthTestResponse();
-				s.setMessageCode("Health check failed: " + e);
+				s.setMessageCode(e.toString());
 				s.setStatus(HealthTestStatus.RED);
 			}
 			i.setHealthTestStatus(s.getStatus());
@@ -868,5 +885,9 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 			String path = "/lastHealthTest";
 			store.addLongValue(path, now, now.getTime(), "DateMetricAttribute", false);
 		}
+	}
+
+	public void updateConfigurationFromPolicy(String instanceName) {
+		throw new UnsupportedOperationException("should not get called");
 	}
 }

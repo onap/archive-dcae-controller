@@ -49,12 +49,13 @@ public class Generator {
 		String dir = p.getNsURI().replaceAll(p.getNsPrefix()+'$',"") + "servers." + p.getNsPrefix();
 		dir = "src/main/sirius-gen/" + dir.replace('.', '/');
 		ControllerModel m = ControllermodelFactory.eINSTANCE.createControllerModel();
-		m.setTemplateDirectory("../../dcae-org.openecomp.ncomp.sirius.manager/ncomp-sirius-manager-generator/src/main/templates");
+		m.setTemplateDirectory("../../../ncomp.sirius.manager/ncomp-sirius-manager-generator/src/main/templates");
 		m.setPrefix("Dcae");
 		m.setPluginName(p.getNsURI());
 		m.setName("ControllerServiceVmManager");
 		m.setTitle("ControllerServiceVmManager");
 		ControllerGenerator g = new ControllerGenerator(o, m);
+		g.setVersion("ONAP-R2");
 		g.setEnableIRequestHandler(false);
 		g.setEnableISiriusPlugin(false);
 		//  TODO Unclear why this fails.
@@ -72,18 +73,19 @@ public class Generator {
 		String dir = p.getNsURI().replace(p.getNsPrefix(),"") + "servers." + p.getNsPrefix();
 		dir= "src/main/sirius-gen/" + dir.replace('.', '/');
 		ControllerModel m = ControllermodelFactory.eINSTANCE.createControllerModel();
-		m.setTemplateDirectory("../../dcae-org.openecomp.ncomp.sirius.manager/ncomp-sirius-manager-generator/src/main/templates");
+		m.setTemplateDirectory("../../../ncomp.sirius.manager/ncomp-sirius-manager-generator/src/main/templates");
 		m.setPrefix("Dcae");
 		m.setPluginName(p.getNsURI());
 		m.setName("ControllerServiceVm");
 		m.setTitle("ControllerServiceVm");
 		ControllerGenerator g = new ControllerGenerator(o,m); 
+		g.setVersion("ONAP-R2");
 		g.setEnableIRequestHandler(false);
 		g.setEnableISiriusPlugin(true);
 		g.generate(dir);
 		g.generateScripts("src/main/server-gen/bin","controller-service-vm-adaptor"); 
 		String pName = p.getNsURI().replaceAll(p.getNsPrefix()+'$',"") + "servers." + p.getNsPrefix() +".logging";
-//		YamlToJava.convert("src/main/resources/DcaeServiceVirtualMachineAdaptor.yaml", dir + "/logging", pName);
+		YamlToJava.convert("src/main/resources/DcaeServiceVirtualMachineAdaptor.yaml", dir + "/logging", pName);
 		YamlToJava.convert("src/main/sirius-gen/VirtualMachineService.yaml", dir + "/logging", pName);
 	}
 

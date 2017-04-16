@@ -1,179 +1,147 @@
 operations:
-  test: {}
-  suspend: {}
-  resume: {}
-  publicKey: {}
-  configurationChanged: {}
-  updateStreams: {}
-  logs: {}
-  metrics: {}
-  properties: {}
-  uploadInfo: {}
-  getValues: {}
-  getValuesAll: {}
-  getMessages: {}
-  getRequestLogger: {}
-  evaluate: {}
-  update: {}
-  REMOTE_test:
-    decription: Remote call test
-  REMOTE_suspend:
-    decription: Remote call suspend
-  REMOTE_resume:
-    decription: Remote call resume
-  REMOTE_publicKey:
-    decription: Remote call publicKey
-  REMOTE_configurationChanged:
-    decription: Remote call configurationChanged
-  REMOTE_updateStreams:
-    decription: Remote call updateStreams
-  REMOTE_logs:
-    decription: Remote call logs
-  REMOTE_metrics:
-    decription: Remote call metrics
-  REMOTE_properties:
-    decription: Remote call properties
-  REMOTE_uploadInfo:
-    decription: Remote call uploadInfo
-  REMOTE_getValues:
-    decription: Remote call getValues
-  REMOTE_getValuesAll:
-    decription: Remote call getValuesAll
-  REMOTE_getMessages:
-    decription: Remote call getMessages
-  REMOTE_getRequestLogger:
-    decription: Remote call getRequestLogger
-  REMOTE_evaluate:
-    decription: Remote call evaluate
-  REMOTE_update:
-    decription: Remote call update
+  ControllerServiceDmaapDrsubManager@test: {}
+  ControllerServiceDmaapDrsubManager@suspend: {}
+  ControllerServiceDmaapDrsubManager@resume: {}
+  ControllerServiceDmaapDrsubManager@publicKey: {}
+  ControllerServiceDmaapDrsubManager@configurationChanged: {}
+  ControllerServiceDmaapDrsubManager@updateStreams: {}
+  ControllerServiceDmaapDrsubManager@logs: {}
+  ControllerServiceDmaapDrsubManager@metrics: {}
+  ControllerServiceDmaapDrsubManager@properties: {}
+  ControllerServiceDmaapDrsubManager@uploadInfo: {}
+  ControllerServiceDmaapDrsubManager@getValues: {}
+  ControllerServiceDmaapDrsubManager@getValuesAll: {}
+  ControllerServiceDmaapDrsubManager@getMessages: {}
+  ControllerServiceDmaapDrsubManager@getRequestLogger: {}
+  ControllerServiceDmaapDrsubManager@evaluate: {}
+  ControllerServiceDmaapDrsubManager@update: {}
 messages:
   dummy: {}
-  test:
-    errorCode: test-FAILED-5001W
+  REQUEST-FAILED-test:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  suspend:
-    errorCode: suspend-FAILED-5001W
+  REQUEST-FAILED-suspend:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  resume:
-    errorCode: resume-FAILED-5001W
+  REQUEST-FAILED-resume:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  publicKey:
-    errorCode: publicKey-FAILED-5001W
+  REQUEST-FAILED-publicKey:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  configurationChanged:
-    errorCode: configurationChanged-FAILED-5001W
+  REQUEST-FAILED-configurationChanged:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  updateStreams:
-    errorCode: updateStreams-FAILED-5001W
+  REQUEST-FAILED-updateStreams:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  logs:
-    errorCode: logs-FAILED-5001W
+  REQUEST-FAILED-logs:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  metrics:
-    errorCode: metrics-FAILED-5001W
+  REQUEST-FAILED-metrics:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  properties:
-    errorCode: properties-FAILED-5001W
+  REQUEST-FAILED-properties:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  uploadInfo:
-    errorCode: uploadInfo-FAILED-5001W
+  REQUEST-FAILED-uploadInfo:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  getValues:
-    errorCode: getValues-FAILED-5001W
+  REQUEST-FAILED-getValues:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  getValuesAll:
-    errorCode: getValuesAll-FAILED-5001W
+  REQUEST-FAILED-getValuesAll:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  getMessages:
-    errorCode: getMessages-FAILED-5001W
+  REQUEST-FAILED-getMessages:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  getRequestLogger:
-    errorCode: getRequestLogger-FAILED-5001W
+  REQUEST-FAILED-getRequestLogger:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  evaluate:
-    errorCode: evaluate-FAILED-5001W
+  REQUEST-FAILED-evaluate:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  update:
-    errorCode: update-FAILED-5001W
+  REQUEST-FAILED-update:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  REMOTE_test:
-    errorCode: REMOTE-test-FAILED-5001W
+  REMOTE-CALL-FAILED-test:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_suspend:
-    errorCode: REMOTE-suspend-FAILED-5001W
+  REMOTE-CALL-FAILED-suspend:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_resume:
-    errorCode: REMOTE-resume-FAILED-5001W
+  REMOTE-CALL-FAILED-resume:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_publicKey:
-    errorCode: REMOTE-publicKey-FAILED-5001W
+  REMOTE-CALL-FAILED-publicKey:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_configurationChanged:
-    errorCode: REMOTE-configurationChanged-FAILED-5001W
+  REMOTE-CALL-FAILED-configurationChanged:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_updateStreams:
-    errorCode: REMOTE-updateStreams-FAILED-5001W
+  REMOTE-CALL-FAILED-updateStreams:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_logs:
-    errorCode: REMOTE-logs-FAILED-5001W
+  REMOTE-CALL-FAILED-logs:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_metrics:
-    errorCode: REMOTE-metrics-FAILED-5001W
+  REMOTE-CALL-FAILED-metrics:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_properties:
-    errorCode: REMOTE-properties-FAILED-5001W
+  REMOTE-CALL-FAILED-properties:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_uploadInfo:
-    errorCode: REMOTE-uploadInfo-FAILED-5001W
+  REMOTE-CALL-FAILED-uploadInfo:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_getValues:
-    errorCode: REMOTE-getValues-FAILED-5001W
+  REMOTE-CALL-FAILED-getValues:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_getValuesAll:
-    errorCode: REMOTE-getValuesAll-FAILED-5001W
+  REMOTE-CALL-FAILED-getValuesAll:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_getMessages:
-    errorCode: REMOTE-getMessages-FAILED-5001W
+  REMOTE-CALL-FAILED-getMessages:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_getRequestLogger:
-    errorCode: REMOTE-getRequestLogger-FAILED-5001W
+  REMOTE-CALL-FAILED-getRequestLogger:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_evaluate:
-    errorCode: REMOTE-evaluate-FAILED-5001W
+  REMOTE-CALL-FAILED-evaluate:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_update:
-    errorCode: REMOTE-update-FAILED-5001W
+  REMOTE-CALL-FAILED-update:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception

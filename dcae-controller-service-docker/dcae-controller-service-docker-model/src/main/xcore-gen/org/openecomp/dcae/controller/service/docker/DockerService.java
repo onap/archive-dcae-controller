@@ -34,10 +34,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.docker.DockerService#getInstances <em>Instances</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.docker.DockerPackage#getDockerService()
  * @model

@@ -93,7 +93,7 @@ case $CMD in
     if [ -e $_DIR/logs/$PNAME.out ]; then mv $_DIR/logs/$PNAME.out $_DIR/logs/$PNAME.out.1; fi
     if [ -e $_DIR/logs/$PNAME.err ]; then mv $_DIR/logs/$PNAME.err $_DIR/logs/$PNAME.err.1; fi
 
-    nohup $JAVA_HOME/bin/java $JVMARGS -cp $_DIR/config:$_DIR/lib:$_DIR/lib/\*:$CP "$@" $CLASS > $_DIR/logs/$PNAME.out 2> $_DIR/logs/$PNAME.err  &
+    nohup $JAVA_HOME/bin/java $JVMARGS -cp $_DIR/config:$_DIR/lib:$_DIR/lib/\*:$CP "$@" $CLASS >> $_DIR/logs/$PNAME.out 2>> $_DIR/logs/$PNAME.err  &
 
     _PID=$!
     echo $_PID > $_PIDFILE

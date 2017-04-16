@@ -93,8 +93,8 @@ public class ManagerPackageImpl extends EPackageImpl implements ManagerPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		ServicePackage.eINSTANCE.eClass();
 		VmmanagerPackage.eINSTANCE.eClass();
+		ServicePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theManagerPackage.createPackageContents();

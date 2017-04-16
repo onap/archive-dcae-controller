@@ -25,24 +25,34 @@ package org.openecomp.dcae.controller.service.servers.dockermanager.gui;
 
 
 
+
+
 import java.io.InputStream;
 
 import org.openecomp.ncomp.sirius.manager.IRequestHandler;
+import org.openecomp.ncomp.sirius.manager.ISwaggerHandler;
 import org.openecomp.ncomp.sirius.manager.ISiriusPlugin;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
+import org.openecomp.ncomp.sirius.manager.ISiriusProvider;
+import org.openecomp.ncomp.sirius.manager.ManagementServer;
+import org.openecomp.ncomp.sirius.manager.SwaggerUtils;
 import org.openecomp.ncomp.sirius.function.FunctionUtils;
 import org.openecomp.ncomp.component.ApiRequestStatus;
 
 import org.apache.log4j.Logger;
 
-import org.openecomp.logger.EcompLogger;
+import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.json.JSONObject;
 
 import java.util.Date;
 
 import org.openecomp.dcae.controller.service.servers.dockermanager.gui.logging.GuiClientApiOperationEnum;
+import org.openecomp.dcae.controller.service.servers.dockermanager.gui.logging.GuiClientApiMessageEnum;
 
 
 
@@ -81,9 +91,9 @@ import org.openecomp.ncomp.gwt.siriusportal.model.impl.GuiClientApiImpl;
 
 
 
-public class DcaeGuiClientApi extends GuiClientApiImpl {
+public class DcaeGuiClientApi extends GuiClientApiImpl implements ISiriusProvider {
 	public static final Logger logger = Logger.getLogger(DcaeGuiClientApi.class);
-	static final EcompLogger ecomplogger = EcompLogger.getEcompLogger();
+	static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
 	public DcaeGuiClientApiProvider controller;
 	ISiriusServer server;
 
@@ -98,8 +108,8 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getTree", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(GuiClientApiOperationEnum.getTree);
+		ecomplogger.recordAuditEventStartIfNeeded(GuiClientApiOperationEnum.GuiClientApi_getTree,server,this);
+		ecomplogger.recordMetricEventStart(GuiClientApiOperationEnum.GuiClientApi_getTree,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getTree();
 		}
@@ -108,7 +118,10 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getTree", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(GuiClientApiMessageEnum.REQUEST_FAILED_getTree, e.toString());
+			EcompException e1 =  EcompException.create(GuiClientApiMessageEnum.REQUEST_FAILED_getTree,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, GuiClientApiMessageEnum.REQUEST_FAILED_getTree, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -123,8 +136,8 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getObject", ApiRequestStatus.START, duration_,path);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(GuiClientApiOperationEnum.getObject);
+		ecomplogger.recordAuditEventStartIfNeeded(GuiClientApiOperationEnum.GuiClientApi_getObject,server,this);
+		ecomplogger.recordMetricEventStart(GuiClientApiOperationEnum.GuiClientApi_getObject,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getObject(path);
 		}
@@ -133,7 +146,10 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getObject", ApiRequestStatus.ERROR, duration_,path);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(GuiClientApiMessageEnum.REQUEST_FAILED_getObject, e.toString());
+			EcompException e1 =  EcompException.create(GuiClientApiMessageEnum.REQUEST_FAILED_getObject,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, GuiClientApiMessageEnum.REQUEST_FAILED_getObject, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -148,8 +164,8 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getTimeSerie", ApiRequestStatus.START, duration_,path,start,end,duration);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(GuiClientApiOperationEnum.getTimeSerie);
+		ecomplogger.recordAuditEventStartIfNeeded(GuiClientApiOperationEnum.GuiClientApi_getTimeSerie,server,this);
+		ecomplogger.recordMetricEventStart(GuiClientApiOperationEnum.GuiClientApi_getTimeSerie,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getTimeSerie(path,start,end,duration);
 		}
@@ -158,7 +174,10 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getTimeSerie", ApiRequestStatus.ERROR, duration_,path,start,end,duration);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(GuiClientApiMessageEnum.REQUEST_FAILED_getTimeSerie, e.toString());
+			EcompException e1 =  EcompException.create(GuiClientApiMessageEnum.REQUEST_FAILED_getTimeSerie,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, GuiClientApiMessageEnum.REQUEST_FAILED_getTimeSerie, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -173,8 +192,8 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getTable", ApiRequestStatus.START, duration_,path,start,end);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(GuiClientApiOperationEnum.getTable);
+		ecomplogger.recordAuditEventStartIfNeeded(GuiClientApiOperationEnum.GuiClientApi_getTable,server,this);
+		ecomplogger.recordMetricEventStart(GuiClientApiOperationEnum.GuiClientApi_getTable,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getTable(path,start,end);
 		}
@@ -183,7 +202,10 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getTable", ApiRequestStatus.ERROR, duration_,path,start,end);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(GuiClientApiMessageEnum.REQUEST_FAILED_getTable, e.toString());
+			EcompException e1 =  EcompException.create(GuiClientApiMessageEnum.REQUEST_FAILED_getTable,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, GuiClientApiMessageEnum.REQUEST_FAILED_getTable, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -198,8 +220,8 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getHtml", ApiRequestStatus.START, duration_,path,start,end);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(GuiClientApiOperationEnum.getHtml);
+		ecomplogger.recordAuditEventStartIfNeeded(GuiClientApiOperationEnum.GuiClientApi_getHtml,server,this);
+		ecomplogger.recordMetricEventStart(GuiClientApiOperationEnum.GuiClientApi_getHtml,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getHtml(path,start,end);
 		}
@@ -208,7 +230,10 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getHtml", ApiRequestStatus.ERROR, duration_,path,start,end);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(GuiClientApiMessageEnum.REQUEST_FAILED_getHtml, e.toString());
+			EcompException e1 =  EcompException.create(GuiClientApiMessageEnum.REQUEST_FAILED_getHtml,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, GuiClientApiMessageEnum.REQUEST_FAILED_getHtml, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -223,8 +248,8 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getGraph", ApiRequestStatus.START, duration_,path,start,end);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(GuiClientApiOperationEnum.getGraph);
+		ecomplogger.recordAuditEventStartIfNeeded(GuiClientApiOperationEnum.GuiClientApi_getGraph,server,this);
+		ecomplogger.recordMetricEventStart(GuiClientApiOperationEnum.GuiClientApi_getGraph,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getGraph(path,start,end);
 		}
@@ -233,7 +258,10 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getGraph", ApiRequestStatus.ERROR, duration_,path,start,end);
 			System.err.println("ERROR: " + e);
-			throw e;
+			ecomplogger.warn(GuiClientApiMessageEnum.REQUEST_FAILED_getGraph, e.toString());
+			EcompException e1 =  EcompException.create(GuiClientApiMessageEnum.REQUEST_FAILED_getGraph,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, GuiClientApiMessageEnum.REQUEST_FAILED_getGraph, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -247,10 +275,12 @@ public class DcaeGuiClientApi extends GuiClientApiImpl {
 
 
 
+
+
 	public static void ecoreSetup() {
 		DcaeGuiClientApiProvider.ecoreSetup();
 	}
-	public DcaeGuiClientApiProvider getSomfProvider() {
+	public DcaeGuiClientApiProvider getSiriusProvider() {
 		return controller;
 	}
 }

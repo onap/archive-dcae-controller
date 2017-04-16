@@ -49,12 +49,17 @@ org.openecomp.dcae.controller.service.vm.VmPackage.eINSTANCE
 m.addFactory(org.openecomp.dcae.controller.service.vm.VmFactory.eINSTANCE)
 m.addRuntimeFactories(null)
 
-def o = m.load(options.directory)
-o = Utils.json2object(Utils.object2json(o))
+try {
+	def o = m.load(options.directory)
+	o = Utils.json2object(Utils.object2json(o))
+	if (options.debug) { println Utils.object2json(o).toString(2) }
+}
+catch (e) {
+	println "load error: $e"
+}
 
 def rootFile = new File("$options.directory/services")
 
-if (options.debug) { println Utils.object2json(o).toString(2) }
 
 def services = server.list("/services").services
 
@@ -75,13 +80,18 @@ rootFile.listFiles().each { File f ->
 //	println "json ${instance.toString(2)}"
 	instance.put('$nosave',1);
 //	instance.put('$useNull',1);
-	if (instances.contains(iname)) {
-      server.update("/services/$sname/instances/$iname",instance)
-      println "updating instance $iname" 
-    } else {
-      server.create("/services/$sname/instances/$iname",instance)
-      println "creating instance $iname" 
-    }
+	try {
+		if (instances.contains(iname)) {
+	      server.update("/services/$sname/instances/$iname",instance)
+	      println "updating instance $sname@$iname" 
+	    } else {
+	      server.create("/services/$sname/instances/$iname",instance)
+	      println "creating instance $sname@$iname" 
+	    }
+	}
+	catch (e) {
+		println "error instance $sname@$iname: $e"
+	}
   }
 }
 

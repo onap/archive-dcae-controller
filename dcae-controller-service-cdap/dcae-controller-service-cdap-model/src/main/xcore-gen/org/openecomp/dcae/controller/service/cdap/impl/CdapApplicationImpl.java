@@ -38,13 +38,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapApplicationImpl#getJarFile <em>Jar File</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapApplicationImpl#getArtifactName <em>Artifact Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapApplicationImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapApplicationImpl#getAppConfigFileContent <em>App Config File Content</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

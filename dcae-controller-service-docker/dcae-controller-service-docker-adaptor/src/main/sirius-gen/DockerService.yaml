@@ -1,124 +1,102 @@
 operations:
-  deploy: {}
-  undeploy: {}
-  test: {}
-  suspend: {}
-  resume: {}
-  pushManagerConfiguration: {}
-  pollManagerConfiguration: {}
-  managerConfiguration: {}
-  managerOperation: {}
-  updateConfigurationFromPolicy: {}
-  runHealthTests: {}
-  REMOTE_deploy:
-    decription: Remote call deploy
-  REMOTE_undeploy:
-    decription: Remote call undeploy
-  REMOTE_test:
-    decription: Remote call test
-  REMOTE_suspend:
-    decription: Remote call suspend
-  REMOTE_resume:
-    decription: Remote call resume
-  REMOTE_pushManagerConfiguration:
-    decription: Remote call pushManagerConfiguration
-  REMOTE_pollManagerConfiguration:
-    decription: Remote call pollManagerConfiguration
-  REMOTE_managerConfiguration:
-    decription: Remote call managerConfiguration
-  REMOTE_managerOperation:
-    decription: Remote call managerOperation
-  REMOTE_updateConfigurationFromPolicy:
-    decription: Remote call updateConfigurationFromPolicy
-  REMOTE_runHealthTests:
-    decription: Remote call runHealthTests
+  DockerService@deploy: {}
+  DockerService@undeploy: {}
+  DockerService@test: {}
+  DockerService@suspend: {}
+  DockerService@resume: {}
+  DockerService@pushManagerConfiguration: {}
+  DockerService@pollManagerConfiguration: {}
+  DockerService@managerConfiguration: {}
+  DockerService@managerOperation: {}
+  DockerService@updateConfigurationFromPolicy: {}
+  DockerService@runHealthTests: {}
 messages:
   dummy: {}
-  deploy:
-    errorCode: deploy-FAILED-5001W
+  REQUEST-FAILED-deploy:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  undeploy:
-    errorCode: undeploy-FAILED-5001W
+  REQUEST-FAILED-undeploy:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  test:
-    errorCode: test-FAILED-5001W
+  REQUEST-FAILED-test:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  suspend:
-    errorCode: suspend-FAILED-5001W
+  REQUEST-FAILED-suspend:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  resume:
-    errorCode: resume-FAILED-5001W
+  REQUEST-FAILED-resume:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  pushManagerConfiguration:
-    errorCode: pushManagerConfiguration-FAILED-5001W
+  REQUEST-FAILED-pushManagerConfiguration:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  pollManagerConfiguration:
-    errorCode: pollManagerConfiguration-FAILED-5001W
+  REQUEST-FAILED-pollManagerConfiguration:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  managerConfiguration:
-    errorCode: managerConfiguration-FAILED-5001W
+  REQUEST-FAILED-managerConfiguration:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  managerOperation:
-    errorCode: managerOperation-FAILED-5001W
+  REQUEST-FAILED-managerOperation:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  updateConfigurationFromPolicy:
-    errorCode: updateConfigurationFromPolicy-FAILED-5001W
+  REQUEST-FAILED-updateConfigurationFromPolicy:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  runHealthTests:
-    errorCode: runHealthTests-FAILED-5001W
+  REQUEST-FAILED-runHealthTests:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  REMOTE_deploy:
-    errorCode: REMOTE-deploy-FAILED-5001W
+  REMOTE-CALL-FAILED-deploy:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_undeploy:
-    errorCode: REMOTE-undeploy-FAILED-5001W
+  REMOTE-CALL-FAILED-undeploy:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_test:
-    errorCode: REMOTE-test-FAILED-5001W
+  REMOTE-CALL-FAILED-test:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_suspend:
-    errorCode: REMOTE-suspend-FAILED-5001W
+  REMOTE-CALL-FAILED-suspend:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_resume:
-    errorCode: REMOTE-resume-FAILED-5001W
+  REMOTE-CALL-FAILED-resume:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_pushManagerConfiguration:
-    errorCode: REMOTE-pushManagerConfiguration-FAILED-5001W
+  REMOTE-CALL-FAILED-pushManagerConfiguration:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_pollManagerConfiguration:
-    errorCode: REMOTE-pollManagerConfiguration-FAILED-5001W
+  REMOTE-CALL-FAILED-pollManagerConfiguration:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_managerConfiguration:
-    errorCode: REMOTE-managerConfiguration-FAILED-5001W
+  REMOTE-CALL-FAILED-managerConfiguration:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_managerOperation:
-    errorCode: REMOTE-managerOperation-FAILED-5001W
+  REMOTE-CALL-FAILED-managerOperation:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_updateConfigurationFromPolicy:
-    errorCode: REMOTE-updateConfigurationFromPolicy-FAILED-5001W
+  REMOTE-CALL-FAILED-updateConfigurationFromPolicy:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_runHealthTests:
-    errorCode: REMOTE-runHealthTests-FAILED-5001W
+  REMOTE-CALL-FAILED-runHealthTests:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception

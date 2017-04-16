@@ -25,9 +25,9 @@ package org.openecomp.dcae.controller.core.stream.impl;
 
 import org.openecomp.dcae.controller.core.stream.DatabusStreamTopic;
 import org.openecomp.dcae.controller.core.stream.DatabusStreamTopicClient;
+import org.openecomp.dcae.controller.core.stream.StreamAuthentication;
 import org.openecomp.dcae.controller.core.stream.StreamPackage;
 
-import org.openecomp.dcae.controller.core.stream.StreamAuthentication;
 import java.util.Collection;
 import java.util.Date;
 import org.eclipse.emf.common.notify.Notification;

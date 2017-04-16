@@ -106,6 +106,159 @@ public interface CdapFactory extends EFactory {
 	CdapServiceDescriptor createCdapServiceDescriptor();
 
 	/**
+	 * Returns a new object of class '<em>Load Artifact Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Load Artifact Step</em>'.
+	 * @generated
+	 */
+	CdapLoadArtifactStep createCdapLoadArtifactStep();
+
+	/**
+	 * Returns a new object of class '<em>Load Artifact With Config Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Load Artifact With Config Step</em>'.
+	 * @generated
+	 */
+	CdapLoadArtifactWithConfigStep createCdapLoadArtifactWithConfigStep();
+
+	/**
+	 * Returns a new object of class '<em>Create App Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Create App Step</em>'.
+	 * @generated
+	 */
+	CdapCreateAppStep createCdapCreateAppStep();
+
+	/**
+	 * Returns a new object of class '<em>Create App With Config Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Create App With Config Step</em>'.
+	 * @generated
+	 */
+	CdapCreateAppWithConfigStep createCdapCreateAppWithConfigStep();
+
+	/**
+	 * Returns a new object of class '<em>Deploy App Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Deploy App Step</em>'.
+	 * @generated
+	 */
+	CdapDeployAppStep createCdapDeployAppStep();
+
+	/**
+	 * Returns a new object of class '<em>Stop Flow Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Stop Flow Step</em>'.
+	 * @generated
+	 */
+	CdapStopFlowStep createCdapStopFlowStep();
+
+	/**
+	 * Returns a new object of class '<em>Stop Worker Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Stop Worker Step</em>'.
+	 * @generated
+	 */
+	CdapStopWorkerStep createCdapStopWorkerStep();
+
+	/**
+	 * Returns a new object of class '<em>Stop Service Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Stop Service Step</em>'.
+	 * @generated
+	 */
+	CdapStopServiceStep createCdapStopServiceStep();
+
+	/**
+	 * Returns a new object of class '<em>Stop App Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Stop App Step</em>'.
+	 * @generated
+	 */
+	CdapStopAppStep createCdapStopAppStep();
+
+	/**
+	 * Returns a new object of class '<em>Start Flow Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Start Flow Step</em>'.
+	 * @generated
+	 */
+	CdapStartFlowStep createCdapStartFlowStep();
+
+	/**
+	 * Returns a new object of class '<em>Start Worker Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Start Worker Step</em>'.
+	 * @generated
+	 */
+	CdapStartWorkerStep createCdapStartWorkerStep();
+
+	/**
+	 * Returns a new object of class '<em>Start Service Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Start Service Step</em>'.
+	 * @generated
+	 */
+	CdapStartServiceStep createCdapStartServiceStep();
+
+	/**
+	 * Returns a new object of class '<em>Start App Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Start App Step</em>'.
+	 * @generated
+	 */
+	CdapStartAppStep createCdapStartAppStep();
+
+	/**
+	 * Returns a new object of class '<em>Delete App Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Delete App Step</em>'.
+	 * @generated
+	 */
+	CdapDeleteAppStep createCdapDeleteAppStep();
+
+	/**
+	 * Returns a new object of class '<em>Delete Artifact</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Delete Artifact</em>'.
+	 * @generated
+	 */
+	CdapDeleteArtifact createCdapDeleteArtifact();
+
+	/**
+	 * Returns a new object of class '<em>Suspend Schedule Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Suspend Schedule Step</em>'.
+	 * @generated
+	 */
+	CdapSuspendScheduleStep createCdapSuspendScheduleStep();
+
+	/**
+	 * Returns a new object of class '<em>Resume Schedule Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Resume Schedule Step</em>'.
+	 * @generated
+	 */
+	CdapResumeScheduleStep createCdapResumeScheduleStep();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

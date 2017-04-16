@@ -77,7 +77,7 @@ public class DcaeDcaePlatformControllerProviderTemplate extends BasicManagementS
 	}
 
 
-public Object handleJson(String userName, String action, String resourcePath, JSONObject json, JSONObject context) {
+public Object handleJson(String userName, String action, String resourcePath, JSONObject json, JSONObject context, String clientVersion) {
 		// TODO Auto-generated method stub
 		return null;
 	}

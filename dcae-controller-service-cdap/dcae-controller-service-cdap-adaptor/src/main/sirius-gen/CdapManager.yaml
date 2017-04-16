@@ -1,69 +1,57 @@
 operations:
-  test: {}
-  suspend: {}
-  resume: {}
-  publicKey: {}
-  configurationChanged: {}
-  updateStreams: {}
-  REMOTE_test:
-    decription: Remote call test
-  REMOTE_suspend:
-    decription: Remote call suspend
-  REMOTE_resume:
-    decription: Remote call resume
-  REMOTE_publicKey:
-    decription: Remote call publicKey
-  REMOTE_configurationChanged:
-    decription: Remote call configurationChanged
-  REMOTE_updateStreams:
-    decription: Remote call updateStreams
+  CdapManager@test: {}
+  CdapManager@suspend: {}
+  CdapManager@resume: {}
+  CdapManager@publicKey: {}
+  CdapManager@configurationChanged: {}
+  CdapManager@updateStreams: {}
 messages:
   dummy: {}
-  test:
-    errorCode: test-FAILED-5001W
+  REQUEST-FAILED-test:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  suspend:
-    errorCode: suspend-FAILED-5001W
+  REQUEST-FAILED-suspend:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  resume:
-    errorCode: resume-FAILED-5001W
+  REQUEST-FAILED-resume:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  publicKey:
-    errorCode: publicKey-FAILED-5001W
+  REQUEST-FAILED-publicKey:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  configurationChanged:
-    errorCode: configurationChanged-FAILED-5001W
+  REQUEST-FAILED-configurationChanged:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  updateStreams:
-    errorCode: updateStreams-FAILED-5001W
+  REQUEST-FAILED-updateStreams:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
-  REMOTE_test:
-    errorCode: REMOTE-test-FAILED-5001W
+  REMOTE-CALL-FAILED-test:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_suspend:
-    errorCode: REMOTE-suspend-FAILED-5001W
+  REMOTE-CALL-FAILED-suspend:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_resume:
-    errorCode: REMOTE-resume-FAILED-5001W
+  REMOTE-CALL-FAILED-resume:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_publicKey:
-    errorCode: REMOTE-publicKey-FAILED-5001W
+  REMOTE-CALL-FAILED-publicKey:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_configurationChanged:
-    errorCode: REMOTE-configurationChanged-FAILED-5001W
+  REMOTE-CALL-FAILED-configurationChanged:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
-  REMOTE_updateStreams:
-    errorCode: REMOTE-updateStreams-FAILED-5001W
+  REMOTE-CALL-FAILED-updateStreams:
+    errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception

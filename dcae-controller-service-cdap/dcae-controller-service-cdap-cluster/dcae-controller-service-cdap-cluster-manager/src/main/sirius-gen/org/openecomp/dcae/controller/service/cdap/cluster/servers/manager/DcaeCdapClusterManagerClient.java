@@ -30,6 +30,8 @@ import org.openecomp.ncomp.sirius.manager.GenericHttpClient;
 import org.apache.log4j.Logger;
 
 import org.openecomp.logger.EcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -54,33 +56,37 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 		DcaeCdapClusterManager.ecoreSetup(); 
 		client = new GenericHttpClient(file,name);
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 	public DcaeCdapClusterManagerClient(String file, String name1, String name2) {
 		HighAvailabilityClient client1 = new HighAvailabilityClient(file,name1,name2);
 		client = client1.all; // requests should be forwarded to all.
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 	
 	public DcaeCdapClusterManagerClient(AbstractClient c) {
 		client = c;
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 
 
 	@Override
 	public org.openecomp.dcae.controller.core.service.HealthTestResponse test() {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_test);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_test,client.getRemote());
 		org.openecomp.dcae.controller.core.service.HealthTestResponse res;
 		try {
 		  res = (org.openecomp.dcae.controller.core.service.HealthTestResponse) client.operationPath("/resources", c, "test", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_test, e.toString());
-			throw new RuntimeException("remote call failed:  test", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_test, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_test,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -88,16 +94,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public void suspend() {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_suspend);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_suspend,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "suspend", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_suspend, e.toString());
-			throw new RuntimeException("remote call failed:  suspend", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_suspend, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_suspend,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -105,16 +112,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public void resume() {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_resume);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_resume,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "resume", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_resume, e.toString());
-			throw new RuntimeException("remote call failed:  resume", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_resume, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_resume,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -122,16 +130,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String publicKey() {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_publicKey);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_publicKey,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "publicKey", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_publicKey, e.toString());
-			throw new RuntimeException("remote call failed:  publicKey", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_publicKey, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_publicKey,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_publicKey,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -139,16 +148,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public void configurationChanged() {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_configurationChanged);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_configurationChanged,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "configurationChanged", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_configurationChanged, e.toString());
-			throw new RuntimeException("remote call failed:  configurationChanged", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_configurationChanged, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_configurationChanged,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_configurationChanged,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -156,16 +166,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public void updateStreams(EList<org.openecomp.dcae.controller.core.stream.DcaeStream> inputStreams, EList<org.openecomp.dcae.controller.core.stream.DcaeStream> outputStreams) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_updateStreams);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_updateStreams,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "updateStreams", null, inputStreams,outputStreams);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_updateStreams, e.toString());
-			throw new RuntimeException("remote call failed:  updateStreams", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_updateStreams, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_updateStreams,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_updateStreams,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -173,16 +184,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public void logs(org.json.JSONObject cx, EList<org.openecomp.ncomp.core.logs.LogMessage> logs) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_logs);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_logs,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "logs", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,logs);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_logs, e.toString());
-			throw new RuntimeException("remote call failed:  logs", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_logs, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_logs,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_logs,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -190,16 +202,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public void metrics(org.json.JSONObject cx, EList<org.openecomp.ncomp.core.metrics.Metric> metrics) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_metrics);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_metrics,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "metrics", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,metrics);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_metrics, e.toString());
-			throw new RuntimeException("remote call failed:  metrics", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_metrics, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_metrics,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_metrics,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -207,16 +220,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public void properties(org.json.JSONObject cx, EList<org.openecomp.ncomp.sirius.manager.properties.AbstractProperty> l) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_properties);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_properties,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "properties", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,l);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_properties, e.toString());
-			throw new RuntimeException("remote call failed:  properties", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_properties, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_properties,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_properties,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -224,16 +238,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public void uploadInfo(org.json.JSONObject cx, EList<org.openecomp.ncomp.sirius.manager.server.ManagementInfo> info) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_uploadInfo);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_uploadInfo,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "uploadInfo", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,info);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_uploadInfo, e.toString());
-			throw new RuntimeException("remote call failed:  uploadInfo", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_uploadInfo, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_uploadInfo,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_uploadInfo,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -241,16 +256,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.metrics.DoubleMetric> getValues(org.json.JSONObject cx, java.lang.String path, java.lang.Long start, java.lang.Long end, org.openecomp.ncomp.core.metrics.MetricValueOption option, boolean relativeInterval) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_getValues);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getValues,client.getRemote());
 		EList<org.openecomp.ncomp.core.metrics.DoubleMetric> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.metrics.DoubleMetric>) client.operationPath("/resources", c, "getValues", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,path,start,end,option,relativeInterval);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_getValues, e.toString());
-			throw new RuntimeException("remote call failed:  getValues", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getValues, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getValues,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getValues,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -258,16 +274,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.metrics.DoubleMetric> getValuesAll(org.json.JSONObject cx, java.lang.String path, EList<java.lang.String> metrics, java.lang.Long start, java.lang.Long end, org.openecomp.ncomp.core.metrics.MetricValueOption option, boolean relativeInterval) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_getValuesAll);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getValuesAll,client.getRemote());
 		EList<org.openecomp.ncomp.core.metrics.DoubleMetric> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.metrics.DoubleMetric>) client.operationPath("/resources", c, "getValuesAll", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,path,metrics,start,end,option,relativeInterval);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_getValuesAll, e.toString());
-			throw new RuntimeException("remote call failed:  getValuesAll", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getValuesAll, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getValuesAll,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getValuesAll,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -275,16 +292,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.logs.LogMessage> getMessages(org.json.JSONObject cx, java.lang.String path, java.lang.Long start, java.lang.Long end) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_getMessages);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getMessages,client.getRemote());
 		EList<org.openecomp.ncomp.core.logs.LogMessage> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.logs.LogMessage>) client.operationPath("/resources", c, "getMessages", cx != null && cx.has("timeout") ? cx.getLong("timeout") : null, cx,path,start,end);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_getMessages, e.toString());
-			throw new RuntimeException("remote call failed:  getMessages", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getMessages, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getMessages,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getMessages,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -292,16 +310,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public org.openecomp.ncomp.sirius.manager.server.LoggerInfo getRequestLogger(java.lang.String userName, java.lang.String action, java.lang.String resourcePath, org.json.JSONObject context) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_getRequestLogger);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getRequestLogger,client.getRemote());
 		org.openecomp.ncomp.sirius.manager.server.LoggerInfo res;
 		try {
 		  res = (org.openecomp.ncomp.sirius.manager.server.LoggerInfo) client.operationPath("/resources", c, "getRequestLogger", null, userName,action,resourcePath,context);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_getRequestLogger, e.toString());
-			throw new RuntimeException("remote call failed:  getRequestLogger", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getRequestLogger, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getRequestLogger,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getRequestLogger,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -309,16 +328,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public EList<org.openecomp.ncomp.core.function.ValuePair> evaluate(java.lang.String path, org.openecomp.ncomp.core.function.Function function) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_evaluate);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_evaluate,client.getRemote());
 		EList<org.openecomp.ncomp.core.function.ValuePair> res;
 		try {
 		  res = (EList<org.openecomp.ncomp.core.function.ValuePair>) client.operationPath("/resources", c, "evaluate", null, path,function);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_evaluate, e.toString());
-			throw new RuntimeException("remote call failed:  evaluate", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_evaluate, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_evaluate,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_evaluate,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -326,16 +346,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public void update(java.lang.String path, org.openecomp.ncomp.core.function.Function function) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_update);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_update,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "update", null, path,function);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_update, e.toString());
-			throw new RuntimeException("remote call failed:  update", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_update, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_update,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_update,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -343,16 +364,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String createNamespace(java.lang.String namespace) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_createNamespace);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_createNamespace,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "createNamespace", null, namespace);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_createNamespace, e.toString());
-			throw new RuntimeException("remote call failed:  createNamespace", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createNamespace, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createNamespace,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createNamespace,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -360,16 +382,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String deleteNamespace(java.lang.String namespace) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_deleteNamespace);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deleteNamespace,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "deleteNamespace", null, namespace);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_deleteNamespace, e.toString());
-			throw new RuntimeException("remote call failed:  deleteNamespace", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteNamespace, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteNamespace,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteNamespace,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -377,16 +400,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String deployApp(java.lang.String namespace, java.lang.String jarfile) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_deployApp);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deployApp,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "deployApp", null, namespace,jarfile);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_deployApp, e.toString());
-			throw new RuntimeException("remote call failed:  deployApp", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deployApp, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deployApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deployApp,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -394,16 +418,35 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String loadArtifact(java.lang.String namespace, java.lang.String artifactName, java.lang.String jarfile, java.lang.String version) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_loadArtifact);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_loadArtifact,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "loadArtifact", null, namespace,artifactName,jarfile,version);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_loadArtifact, e.toString());
-			throw new RuntimeException("remote call failed:  loadArtifact", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadArtifact, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadArtifact,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadArtifact,e.getMessage());
+			throw e1;
+		}
+		ecomplogger.recordMetricEventEnd();
+		return res;
+	}
+
+	@Override
+	public java.lang.String loadArtifactWithConfig(java.lang.String namespace, java.lang.String artifactName, java.lang.String jarfile, java.lang.String version, java.lang.String config) {
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_loadArtifactWithConfig,client.getRemote());
+		java.lang.String res;
+		try {
+		  res = (java.lang.String) client.operationPath("/resources", c, "loadArtifactWithConfig", null, namespace,artifactName,jarfile,version,config);
+		}
+		catch (Exception e) {
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadArtifactWithConfig, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadArtifactWithConfig,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadArtifactWithConfig,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -411,16 +454,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String deleteArtifact(java.lang.String namespace, java.lang.String artifactName, java.lang.String artifactVersion) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_deleteArtifact);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deleteArtifact,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "deleteArtifact", null, namespace,artifactName,artifactVersion);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_deleteArtifact, e.toString());
-			throw new RuntimeException("remote call failed:  deleteArtifact", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteArtifact, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteArtifact,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteArtifact,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -428,16 +472,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String startFlow(java.lang.String namespace, java.lang.String appName, java.lang.String flowId, java.lang.String extraArgs) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_startFlow);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_startFlow,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "startFlow", null, namespace,appName,flowId,extraArgs);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_startFlow, e.toString());
-			throw new RuntimeException("remote call failed:  startFlow", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startFlow, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startFlow,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startFlow,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -445,16 +490,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String startWorker(java.lang.String namespace, java.lang.String appName, java.lang.String workerId, java.lang.String extraArgs) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_startWorker);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_startWorker,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "startWorker", null, namespace,appName,workerId,extraArgs);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_startWorker, e.toString());
-			throw new RuntimeException("remote call failed:  startWorker", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startWorker, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startWorker,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startWorker,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -462,16 +508,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String startService(java.lang.String namespace, java.lang.String appName, java.lang.String serviceId, java.lang.String extraArgs) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_startService);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_startService,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "startService", null, namespace,appName,serviceId,extraArgs);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_startService, e.toString());
-			throw new RuntimeException("remote call failed:  startService", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startService, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startService,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startService,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -479,16 +526,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String startApp(java.lang.String namespace, java.lang.String appName) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_startApp);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_startApp,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "startApp", null, namespace,appName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_startApp, e.toString());
-			throw new RuntimeException("remote call failed:  startApp", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startApp, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_startApp,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -496,16 +544,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String stopApp(java.lang.String namespace, java.lang.String appName) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_stopApp);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_stopApp,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "stopApp", null, namespace,appName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_stopApp, e.toString());
-			throw new RuntimeException("remote call failed:  stopApp", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopApp, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopApp,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -513,16 +562,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String deleteApp(java.lang.String namespace, java.lang.String appName) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_deleteApp);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deleteApp,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "deleteApp", null, namespace,appName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_deleteApp, e.toString());
-			throw new RuntimeException("remote call failed:  deleteApp", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteApp, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteApp,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -530,16 +580,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String loadPreferencesApp(java.lang.String namespace, java.lang.String prefsFile, java.lang.String appId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_loadPreferencesApp);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_loadPreferencesApp,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "loadPreferencesApp", null, namespace,prefsFile,appId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_loadPreferencesApp, e.toString());
-			throw new RuntimeException("remote call failed:  loadPreferencesApp", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadPreferencesApp, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadPreferencesApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadPreferencesApp,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -547,16 +598,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String loadPreferencesFlow(java.lang.String namespace, java.lang.String prefsFile, java.lang.String appId, java.lang.String flowId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_loadPreferencesFlow);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_loadPreferencesFlow,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "loadPreferencesFlow", null, namespace,prefsFile,appId,flowId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_loadPreferencesFlow, e.toString());
-			throw new RuntimeException("remote call failed:  loadPreferencesFlow", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadPreferencesFlow, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadPreferencesFlow,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadPreferencesFlow,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -564,16 +616,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String loadPreferencesNameSpace(java.lang.String namespace, java.lang.String prefsFile) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_loadPreferencesNameSpace);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_loadPreferencesNameSpace,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "loadPreferencesNameSpace", null, namespace,prefsFile);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_loadPreferencesNameSpace, e.toString());
-			throw new RuntimeException("remote call failed:  loadPreferencesNameSpace", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadPreferencesNameSpace, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadPreferencesNameSpace,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_loadPreferencesNameSpace,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -581,16 +634,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String setPreferencesApp(java.lang.String namespace, java.lang.String prefsString, java.lang.String appId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_setPreferencesApp);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesApp,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "setPreferencesApp", null, namespace,prefsString,appId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_setPreferencesApp, e.toString());
-			throw new RuntimeException("remote call failed:  setPreferencesApp", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesApp, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesApp,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -598,16 +652,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String setPreferencesFlow(java.lang.String namespace, java.lang.String prefsString, java.lang.String appId, java.lang.String flowId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_setPreferencesFlow);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesFlow,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "setPreferencesFlow", null, namespace,prefsString,appId,flowId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_setPreferencesFlow, e.toString());
-			throw new RuntimeException("remote call failed:  setPreferencesFlow", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesFlow, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesFlow,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesFlow,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -615,16 +670,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String setPreferencesWorker(java.lang.String namespace, java.lang.String prefsString, java.lang.String appId, java.lang.String workerId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_setPreferencesWorker);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesWorker,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "setPreferencesWorker", null, namespace,prefsString,appId,workerId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_setPreferencesWorker, e.toString());
-			throw new RuntimeException("remote call failed:  setPreferencesWorker", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesWorker, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesWorker,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesWorker,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -632,16 +688,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String setPreferencesService(java.lang.String namespace, java.lang.String prefsString, java.lang.String appId, java.lang.String serviceId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_setPreferencesService);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesService,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "setPreferencesService", null, namespace,prefsString,appId,serviceId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_setPreferencesService, e.toString());
-			throw new RuntimeException("remote call failed:  setPreferencesService", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesService, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesService,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesService,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -649,16 +706,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String setPreferencesNameSpace(java.lang.String namespace, java.lang.String prefsString) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_setPreferencesNameSpace);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setPreferencesNameSpace,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "setPreferencesNameSpace", null, namespace,prefsString);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_setPreferencesNameSpace, e.toString());
-			throw new RuntimeException("remote call failed:  setPreferencesNameSpace", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesNameSpace, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesNameSpace,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setPreferencesNameSpace,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -666,16 +724,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String setFlowRunTimeArgs(java.lang.String namespace, java.lang.String appId, java.lang.String flowId, java.lang.String args) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_setFlowRunTimeArgs);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setFlowRunTimeArgs,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "setFlowRunTimeArgs", null, namespace,appId,flowId,args);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_setFlowRunTimeArgs, e.toString());
-			throw new RuntimeException("remote call failed:  setFlowRunTimeArgs", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setFlowRunTimeArgs, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setFlowRunTimeArgs,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setFlowRunTimeArgs,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -683,16 +742,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String setFlowletInstances(java.lang.String namespace, java.lang.String appId, java.lang.String flowId, java.lang.String flowletId, int nInstances) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_setFlowletInstances);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setFlowletInstances,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "setFlowletInstances", null, namespace,appId,flowId,flowletId,nInstances);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_setFlowletInstances, e.toString());
-			throw new RuntimeException("remote call failed:  setFlowletInstances", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setFlowletInstances, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setFlowletInstances,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setFlowletInstances,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -700,16 +760,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String stopFlow(java.lang.String namespace, java.lang.String appId, java.lang.String flowId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_stopFlow);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_stopFlow,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "stopFlow", null, namespace,appId,flowId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_stopFlow, e.toString());
-			throw new RuntimeException("remote call failed:  stopFlow", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopFlow, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopFlow,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopFlow,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -717,16 +778,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String stopWorker(java.lang.String namespace, java.lang.String appId, java.lang.String workerId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_stopWorker);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_stopWorker,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "stopWorker", null, namespace,appId,workerId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_stopWorker, e.toString());
-			throw new RuntimeException("remote call failed:  stopWorker", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopWorker, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopWorker,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopWorker,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -734,16 +796,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String stopService(java.lang.String namespace, java.lang.String appId, java.lang.String serviceId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_stopService);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_stopService,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "stopService", null, namespace,appId,serviceId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_stopService, e.toString());
-			throw new RuntimeException("remote call failed:  stopService", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopService, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopService,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopService,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -751,16 +814,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String truncateDataSet(java.lang.String namespace, java.lang.String datasetName) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_truncateDataSet);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_truncateDataSet,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "truncateDataSet", null, namespace,datasetName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_truncateDataSet, e.toString());
-			throw new RuntimeException("remote call failed:  truncateDataSet", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_truncateDataSet, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_truncateDataSet,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_truncateDataSet,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -768,16 +832,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String deleteDataset(java.lang.String namespace, java.lang.String datasetName) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_deleteDataset);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deleteDataset,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "deleteDataset", null, namespace,datasetName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_deleteDataset, e.toString());
-			throw new RuntimeException("remote call failed:  deleteDataset", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteDataset, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteDataset,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteDataset,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -785,16 +850,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String createStream(java.lang.String namespace, java.lang.String newStreamId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_createStream);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_createStream,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "createStream", null, namespace,newStreamId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_createStream, e.toString());
-			throw new RuntimeException("remote call failed:  createStream", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createStream, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createStream,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createStream,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -802,16 +868,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String deleteStream(java.lang.String namespace, java.lang.String streamId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_deleteStream);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_deleteStream,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "deleteStream", null, namespace,streamId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_deleteStream, e.toString());
-			throw new RuntimeException("remote call failed:  deleteStream", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteStream, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteStream,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_deleteStream,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -819,16 +886,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public EList<java.lang.String> getStreamEvents(java.lang.String namespace, java.lang.String streamId, java.lang.String startTime, java.lang.String endTime, int limit) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_getStreamEvents);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getStreamEvents,client.getRemote());
 		EList<java.lang.String> res;
 		try {
 		  res = (EList<java.lang.String>) client.operationPath("/resources", c, "getStreamEvents", null, namespace,streamId,startTime,endTime,limit);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_getStreamEvents, e.toString());
-			throw new RuntimeException("remote call failed:  getStreamEvents", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getStreamEvents, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getStreamEvents,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getStreamEvents,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -836,16 +904,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public EList<java.lang.String> getStreamStats(java.lang.String namespace, java.lang.String streamId, java.lang.String startTime, java.lang.String endTime, int limit) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_getStreamStats);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_getStreamStats,client.getRemote());
 		EList<java.lang.String> res;
 		try {
 		  res = (EList<java.lang.String>) client.operationPath("/resources", c, "getStreamStats", null, namespace,streamId,startTime,endTime,limit);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_getStreamStats, e.toString());
-			throw new RuntimeException("remote call failed:  getStreamStats", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getStreamStats, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getStreamStats,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_getStreamStats,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -853,16 +922,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String sendEventToStream(java.lang.String namespace, java.lang.String streamId, java.lang.String event) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_sendEventToStream);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_sendEventToStream,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "sendEventToStream", null, namespace,streamId,event);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_sendEventToStream, e.toString());
-			throw new RuntimeException("remote call failed:  sendEventToStream", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_sendEventToStream, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_sendEventToStream,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_sendEventToStream,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -870,16 +940,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String trucateStream(java.lang.String namespace, java.lang.String streamId) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_trucateStream);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_trucateStream,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "trucateStream", null, namespace,streamId);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_trucateStream, e.toString());
-			throw new RuntimeException("remote call failed:  trucateStream", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_trucateStream, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_trucateStream,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_trucateStream,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -887,16 +958,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String setStreamProperties(java.lang.String namespace, java.lang.String streamId, java.lang.String propsFile) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_setStreamProperties);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setStreamProperties,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "setStreamProperties", null, namespace,streamId,propsFile);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_setStreamProperties, e.toString());
-			throw new RuntimeException("remote call failed:  setStreamProperties", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setStreamProperties, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setStreamProperties,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setStreamProperties,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -904,16 +976,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String restartApp(java.lang.String namespace, java.lang.String appId, java.lang.String progTypes) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_restartApp);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_restartApp,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "restartApp", null, namespace,appId,progTypes);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_restartApp, e.toString());
-			throw new RuntimeException("remote call failed:  restartApp", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_restartApp, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_restartApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_restartApp,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -921,16 +994,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String createApp(java.lang.String namespace, java.lang.String appId, java.lang.String artifactName, java.lang.String artifactVersion, java.lang.String scope) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_createApp);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_createApp,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "createApp", null, namespace,appId,artifactName,artifactVersion,scope);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_createApp, e.toString());
-			throw new RuntimeException("remote call failed:  createApp", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createApp, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createApp,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createApp,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -938,16 +1012,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String createAppWithConfig(java.lang.String namespace, java.lang.String appId, java.lang.String artifactName, java.lang.String artifactVersion, java.lang.String scope, java.lang.String appConfig) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_createAppWithConfig);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_createAppWithConfig,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "createAppWithConfig", null, namespace,appId,artifactName,artifactVersion,scope,appConfig);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_createAppWithConfig, e.toString());
-			throw new RuntimeException("remote call failed:  createAppWithConfig", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createAppWithConfig, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createAppWithConfig,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_createAppWithConfig,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -955,16 +1030,17 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String setDatasetProperties(java.lang.String namespace, java.lang.String datasetName, java.lang.String datasetProperties) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_setDatasetProperties);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setDatasetProperties,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "setDatasetProperties", null, namespace,datasetName,datasetProperties);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_setDatasetProperties, e.toString());
-			throw new RuntimeException("remote call failed:  setDatasetProperties", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setDatasetProperties, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setDatasetProperties,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setDatasetProperties,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -972,16 +1048,53 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 
 	@Override
 	public java.lang.String setStreamTTL(java.lang.String namespace, java.lang.String streamName, int ttlSeconds) {
-		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(CdapClusterManagerOperationEnum.REMOTE_setStreamTTL);
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_setStreamTTL,client.getRemote());
 		java.lang.String res;
 		try {
 		  res = (java.lang.String) client.operationPath("/resources", c, "setStreamTTL", null, namespace,streamName,ttlSeconds);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_setStreamTTL, e.toString());
-			throw new RuntimeException("remote call failed:  setStreamTTL", e);
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setStreamTTL, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setStreamTTL,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_setStreamTTL,e.getMessage());
+			throw e1;
+		}
+		ecomplogger.recordMetricEventEnd();
+		return res;
+	}
+
+	@Override
+	public java.lang.String suspendSchedule(java.lang.String namespace, java.lang.String appId, java.lang.String scheduleId) {
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_suspendSchedule,client.getRemote());
+		java.lang.String res;
+		try {
+		  res = (java.lang.String) client.operationPath("/resources", c, "suspendSchedule", null, namespace,appId,scheduleId);
+		}
+		catch (Exception e) {
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_suspendSchedule, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_suspendSchedule,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_suspendSchedule,e.getMessage());
+			throw e1;
+		}
+		ecomplogger.recordMetricEventEnd();
+		return res;
+	}
+
+	@Override
+	public java.lang.String resumeSchedule(java.lang.String namespace, java.lang.String appId, java.lang.String scheduleId) {
+		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
+		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_resumeSchedule,client.getRemote());
+		java.lang.String res;
+		try {
+		  res = (java.lang.String) client.operationPath("/resources", c, "resumeSchedule", null, namespace,appId,scheduleId);
+		}
+		catch (Exception e) {
+			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_resumeSchedule, e.toString());
+			EcompException e1 = EcompException.create(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_resumeSchedule,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_resumeSchedule,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;

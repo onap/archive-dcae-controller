@@ -34,6 +34,7 @@ import org.openecomp.dcae.controller.service.dockermanager.DockerManager;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.manager.CommonDockerManager#getScript <em>Script</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.manager.CommonDockerManager#getConfigureTimeout <em>Configure Timeout</em>}</li>
@@ -42,7 +43,6 @@ import org.openecomp.dcae.controller.service.dockermanager.DockerManager;
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.manager.CommonDockerManager#getResumeTimeout <em>Resume Timeout</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.manager.CommonDockerManager#getDockerConfiguration <em>Docker Configuration</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.common.docker.manager.ManagerPackage#getCommonDockerManager()
  * @model

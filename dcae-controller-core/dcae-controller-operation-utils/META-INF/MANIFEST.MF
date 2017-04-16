@@ -4,9 +4,4 @@ Bundle-Name: dcae-controller-operation-utils
 Bundle-SymbolicName: dcae-controller-operation-utils
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.openecomp.dcae.controller.operation.utils
-Require-Bundle: dcae-controller-service-vm-model;bundle-version="0.1.0",
- dcae-controller-service-vm-adaptor;bundle-version="0.1.0",
- dcae-controller-platform-model;bundle-version="0.1.0",
- ncomp-sirius-manager-console;bundle-version="0.1.0",
- ncomp-sirius-manager-server;bundle-version="0.1.0",
- dcae-controller-core-model;bundle-version="0.1.0"
+

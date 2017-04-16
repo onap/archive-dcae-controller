@@ -33,10 +33,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapService#getInstances <em>Instances</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.cdap.CdapPackage#getCdapService()
  * @model

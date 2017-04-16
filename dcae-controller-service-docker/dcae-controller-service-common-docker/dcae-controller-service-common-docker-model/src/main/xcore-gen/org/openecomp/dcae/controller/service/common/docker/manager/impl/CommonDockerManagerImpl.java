@@ -44,6 +44,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.manager.impl.CommonDockerManagerImpl#getScript <em>Script</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.manager.impl.CommonDockerManagerImpl#getConfigureTimeout <em>Configure Timeout</em>}</li>
@@ -52,7 +53,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.manager.impl.CommonDockerManagerImpl#getResumeTimeout <em>Resume Timeout</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.common.docker.manager.impl.CommonDockerManagerImpl#getDockerConfiguration <em>Docker Configuration</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

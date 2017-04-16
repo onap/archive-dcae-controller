@@ -45,10 +45,10 @@ import org.openecomp.dcae.controller.core.stream.DcaeStreamSubscriber;
 import org.openecomp.dcae.controller.core.stream.DcaeStreamSubscriberExternal;
 import org.openecomp.dcae.controller.core.stream.DcaeStreamSubscriberInternal;
 import org.openecomp.dcae.controller.core.stream.DmaapStream;
+import org.openecomp.dcae.controller.core.stream.StreamAuthentication;
 import org.openecomp.dcae.controller.core.stream.StreamFactory;
 import org.openecomp.dcae.controller.core.stream.StreamPackage;
 
-import org.openecomp.dcae.controller.core.stream.StreamAuthentication;
 import org.openecomp.ncomp.core.CorePackage;
 
 import org.eclipse.emf.ecore.EAttribute;

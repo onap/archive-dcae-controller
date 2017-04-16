@@ -25,13 +25,13 @@
 package org.openecomp.dcae.controller.service.standardeventcollector.service
 
 
-import org.openecomp.dcae.controller.service.docker.DockerService 
+import org.openecomp.dcae.controller.service.docker.DockerService
 import org.openecomp.dcae.controller.service.docker.DockerServiceInstance 
 
-annotation "http://openecomp.org" as ecomp
+annotation "http://openecomp.org" as ecomp 
 
 class ControllerServiceStandardeventcollectorService extends DockerService {   
-	  
+ 	  
 } 
 
 // state in the controller
@@ -40,8 +40,6 @@ class ControllerServiceStandardeventcollectorServiceInstance extends DockerServi
 
 // state in both controller and manager
 class ControllerServiceStandardeventcollectorServiceConfiguration { 
-//	@ecomp(^type = "configuration")
-//	String cdapUrl
 	@ecomp(^type = "configuration")
 	String cport
 	@ecomp(^type = "configuration")
@@ -49,23 +47,21 @@ class ControllerServiceStandardeventcollectorServiceConfiguration {
 	@ecomp(^type = "configuration")
 	String keystoreloc
 	@ecomp(^type = "configuration")
-	String keystorepwd
+	String keystorealias
+	@ecomp(^type = "configuration")
+	String keystorepwdloc
     @ecomp(^type = "configuration")
 	String maxinputqueue
 	@ecomp(^type = "configuration")
-	String authid
-	@ecomp(^type = "configuration")
 	String authflag
-    @ecomp(^type = "configuration")
-	String authpwd
 	@ecomp(^type = "configuration")
-	String authfile
+	String authlist
 	@ecomp(^type = "configuration")
 	String checkschemaflag
 	@ecomp(^type = "configuration")
 	String schemafile
-	
- 
+	@ecomp(^type = "configuration")
+	String streamid	
 }
 
 

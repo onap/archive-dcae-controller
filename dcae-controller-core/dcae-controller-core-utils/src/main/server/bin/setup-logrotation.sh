@@ -1,28 +1,23 @@
 #!/bin/bash 
 
-APP=$1
-
-LOG1=$(echo $APP | sed s/dcae-//).err
-LOG2=$(echo $APP | sed s/dcae-//).out
-
-cat > | /etc/logrotate.d/$APP << EOF
-
-/opt/app/$APP/logs/$LOG1 {
-    missingok
-    compress
-    daily
-    rotate 14
-    dateext
-    copytruncate
-}
-
-/opt/app/$APP/logs/$LOG2 {
-    missingok
-    compress
-    daily
-    rotate 14
-    dateext
-    copytruncate
-}
-
-EOF
+case $(hostname) in
+  *coll??)
+	  /opt/app/dcae-controller-core-utils/bin/controller-setup-logrotation.sh dcae-controller-service-docker-host-manager
+	  ;;
+  *tplg??)
+	  /opt/app/dcae-controller-core-utils/bin/controller-setup-logrotation.sh dcae-controller-service-common-vm-manager
+	  ;;
+  *pstg??)
+	  /opt/app/dcae-controller-core-utils/bin/controller-setup-logrotation.sh dcae-controller-service-common-vm-manager
+	  ;;
+  *pgda??)
+	  /opt/app/dcae-controller-core-utils/bin/controller-setup-logrotation.sh dcae-controller-service-common-vm-manager
+	  ;;
+  *cdap??)
+	  /opt/app/dcae-controller-core-utils/bin/controller-setup-logrotation.sh dcae-controller-service-cdap-cluster-manager
+      /opt/app/dcae-controller-core-utils/bin/controller-setup-logrotation.sh dcae-controller-service-dmaap-drsub-manager
+	  ;;
+  *cont??)
+	  /opt/app/dcae-controller-core-utils/bin/controller-setup-logrotation.sh dcae-controller-platform-server
+	  ;;
+esac

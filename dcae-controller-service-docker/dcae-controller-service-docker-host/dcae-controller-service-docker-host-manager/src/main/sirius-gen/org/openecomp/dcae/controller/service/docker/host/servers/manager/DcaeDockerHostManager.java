@@ -26,20 +26,27 @@ package org.openecomp.dcae.controller.service.docker.host.servers.manager;
 
 
 
+
 import java.io.InputStream;
 
 import org.openecomp.ncomp.sirius.manager.IRequestHandler;
+import org.openecomp.ncomp.sirius.manager.ISwaggerHandler;
 import org.openecomp.ncomp.sirius.manager.ISiriusPlugin;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
+import org.openecomp.ncomp.sirius.manager.ISiriusProvider;
 import org.openecomp.ncomp.sirius.manager.ManagementServer;
+import org.openecomp.ncomp.sirius.manager.SwaggerUtils;
 import org.openecomp.ncomp.sirius.function.FunctionUtils;
 import org.openecomp.ncomp.component.ApiRequestStatus;
 
 import org.apache.log4j.Logger;
 
-import org.openecomp.logger.EcompLogger;
+import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.json.JSONObject;
 
 import java.util.Date;
@@ -72,9 +79,9 @@ import org.openecomp.dcae.controller.service.docker.host.manager.impl.DockerHost
 
 
 
-public class DcaeDockerHostManager extends DockerHostManagerImpl {
+public class DcaeDockerHostManager extends DockerHostManagerImpl implements ISiriusProvider {
 	public static final Logger logger = Logger.getLogger(DcaeDockerHostManager.class);
-	static final EcompLogger ecomplogger = EcompLogger.getEcompLogger();
+	static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
 	public DcaeDockerHostManagerProvider controller;
 	ISiriusServer server;
 
@@ -89,9 +96,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "updateContainerConfiguration", ApiRequestStatus.START, duration_,name,o,inputStreams,outputStreams);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.updateContainerConfiguration);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_updateContainerConfiguration,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_updateContainerConfiguration,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.updateContainerConfiguration(name,o,inputStreams,outputStreams);
 		}
@@ -100,8 +106,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "updateContainerConfiguration", ApiRequestStatus.ERROR, duration_,name,o,inputStreams,outputStreams);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.updateContainerConfiguration, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_updateContainerConfiguration, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_updateContainerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_updateContainerConfiguration, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -116,9 +124,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "suspendContainer", ApiRequestStatus.START, duration_,name);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.suspendContainer);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_suspendContainer,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_suspendContainer,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.suspendContainer(name);
 		}
@@ -127,8 +134,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "suspendContainer", ApiRequestStatus.ERROR, duration_,name);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.suspendContainer, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_suspendContainer, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_suspendContainer,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_suspendContainer, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -143,9 +152,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "resumeContainer", ApiRequestStatus.START, duration_,name);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.resumeContainer);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_resumeContainer,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_resumeContainer,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.resumeContainer(name);
 		}
@@ -154,8 +162,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "resumeContainer", ApiRequestStatus.ERROR, duration_,name);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.resumeContainer, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_resumeContainer, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_resumeContainer,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_resumeContainer, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -170,9 +180,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "testContainer", ApiRequestStatus.START, duration_,name);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.testContainer);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_testContainer,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_testContainer,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.testContainer(name);
 		}
@@ -181,8 +190,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "testContainer", ApiRequestStatus.ERROR, duration_,name);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.testContainer, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_testContainer, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_testContainer,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_testContainer, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -197,9 +208,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "setupConfiguration", ApiRequestStatus.START, duration_,service,instance);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.setupConfiguration);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_setupConfiguration,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_setupConfiguration,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.setupConfiguration(service,instance);
 		}
@@ -208,8 +218,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "setupConfiguration", ApiRequestStatus.ERROR, duration_,service,instance);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.setupConfiguration, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_setupConfiguration, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_setupConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_setupConfiguration, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -224,9 +236,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "test", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.test);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_test,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_test,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.test();
 		}
@@ -235,8 +246,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "test", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.test, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_test, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_test, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -251,9 +264,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.suspend);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_suspend,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_suspend,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.suspend();
 		}
@@ -262,8 +274,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "suspend", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.suspend, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_suspend, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_suspend, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -278,9 +292,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "resume", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.resume);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_resume,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_resume,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.resume();
 		}
@@ -289,8 +302,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "resume", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.resume, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_resume, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_resume, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -305,9 +320,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "publicKey", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.publicKey);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_publicKey,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_publicKey,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.publicKey();
 		}
@@ -316,8 +330,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "publicKey", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.publicKey, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_publicKey, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_publicKey,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_publicKey, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -332,9 +348,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "configurationChanged", ApiRequestStatus.START, duration_);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.configurationChanged);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_configurationChanged,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_configurationChanged,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.configurationChanged();
 		}
@@ -343,8 +358,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "configurationChanged", ApiRequestStatus.ERROR, duration_);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.configurationChanged, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_configurationChanged, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_configurationChanged,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_configurationChanged, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -359,9 +376,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "updateStreams", ApiRequestStatus.START, duration_,inputStreams,outputStreams);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.updateStreams);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_updateStreams,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_updateStreams,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.updateStreams(inputStreams,outputStreams);
 		}
@@ -370,8 +386,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "updateStreams", ApiRequestStatus.ERROR, duration_,inputStreams,outputStreams);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.updateStreams, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_updateStreams, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_updateStreams,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_updateStreams, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -386,9 +404,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "logs", ApiRequestStatus.START, duration_,cx,logs);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.logs);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_logs,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_logs,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.logs(cx,logs);
 		}
@@ -397,8 +414,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "logs", ApiRequestStatus.ERROR, duration_,cx,logs);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.logs, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_logs, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_logs,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_logs, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -413,9 +432,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "metrics", ApiRequestStatus.START, duration_,cx,metrics);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.metrics);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_metrics,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_metrics,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.metrics(cx,metrics);
 		}
@@ -424,8 +442,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "metrics", ApiRequestStatus.ERROR, duration_,cx,metrics);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.metrics, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_metrics, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_metrics,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_metrics, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -440,9 +460,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "properties", ApiRequestStatus.START, duration_,cx,l);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.properties);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_properties,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_properties,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.properties(cx,l);
 		}
@@ -451,8 +470,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "properties", ApiRequestStatus.ERROR, duration_,cx,l);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.properties, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_properties, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_properties,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_properties, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -467,9 +488,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "uploadInfo", ApiRequestStatus.START, duration_,cx,info);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.uploadInfo);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_uploadInfo,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_uploadInfo,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.uploadInfo(cx,info);
 		}
@@ -478,8 +498,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "uploadInfo", ApiRequestStatus.ERROR, duration_,cx,info);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.uploadInfo, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_uploadInfo, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_uploadInfo,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_uploadInfo, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -494,9 +516,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getValues", ApiRequestStatus.START, duration_,cx,path,start,end,option,relativeInterval);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.getValues);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_getValues,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_getValues,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getValues(cx,path,start,end,option,relativeInterval);
 		}
@@ -505,8 +526,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getValues", ApiRequestStatus.ERROR, duration_,cx,path,start,end,option,relativeInterval);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.getValues, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_getValues, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_getValues,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_getValues, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -521,9 +544,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getValuesAll", ApiRequestStatus.START, duration_,cx,path,metrics,start,end,option,relativeInterval);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.getValuesAll);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_getValuesAll,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_getValuesAll,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getValuesAll(cx,path,metrics,start,end,option,relativeInterval);
 		}
@@ -532,8 +554,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getValuesAll", ApiRequestStatus.ERROR, duration_,cx,path,metrics,start,end,option,relativeInterval);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.getValuesAll, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_getValuesAll, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_getValuesAll,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_getValuesAll, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -548,9 +572,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getMessages", ApiRequestStatus.START, duration_,cx,path,start,end);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.getMessages);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_getMessages,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_getMessages,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getMessages(cx,path,start,end);
 		}
@@ -559,8 +582,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getMessages", ApiRequestStatus.ERROR, duration_,cx,path,start,end);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.getMessages, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_getMessages, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_getMessages,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_getMessages, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -575,9 +600,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "getRequestLogger", ApiRequestStatus.START, duration_,userName,action,resourcePath,context);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.getRequestLogger);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_getRequestLogger,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_getRequestLogger,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.getRequestLogger(userName,action,resourcePath,context);
 		}
@@ -586,8 +610,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "getRequestLogger", ApiRequestStatus.ERROR, duration_,userName,action,resourcePath,context);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.getRequestLogger, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_getRequestLogger, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_getRequestLogger,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_getRequestLogger, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -602,9 +628,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "evaluate", ApiRequestStatus.START, duration_,path,function);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.evaluate);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_evaluate,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_evaluate,"self:" + ManagementServer.object2ref(this));
 		try {
 			res =  controller.evaluate(path,function);
 		}
@@ -613,8 +638,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "evaluate", ApiRequestStatus.ERROR, duration_,path,function);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.evaluate, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_evaluate, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_evaluate,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_evaluate, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -629,9 +656,8 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 		if (server != null)
 			server.getServer().recordApi(null, this, "update", ApiRequestStatus.START, duration_,path,function);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(DockerHostManagerOperationEnum.update);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(DockerHostManagerOperationEnum.DockerHostManager_update,server,this);
+		ecomplogger.recordMetricEventStart(DockerHostManagerOperationEnum.DockerHostManager_update,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.update(path,function);
 		}
@@ -640,8 +666,10 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 			if (server != null)
 				server.getServer().recordApi(null, this, "update", ApiRequestStatus.ERROR, duration_,path,function);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(DockerHostManagerMessageEnum.update, e.toString());
-			throw e;
+			ecomplogger.warn(DockerHostManagerMessageEnum.REQUEST_FAILED_update, e.toString());
+			EcompException e1 =  EcompException.create(DockerHostManagerMessageEnum.REQUEST_FAILED_update,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DockerHostManagerMessageEnum.REQUEST_FAILED_update, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -655,10 +683,12 @@ public class DcaeDockerHostManager extends DockerHostManagerImpl {
 
 
 
+
+
 	public static void ecoreSetup() {
 		DcaeDockerHostManagerProvider.ecoreSetup();
 	}
-	public DcaeDockerHostManagerProvider getSomfProvider() {
+	public DcaeDockerHostManagerProvider getSiriusProvider() {
 		return controller;
 	}
 }

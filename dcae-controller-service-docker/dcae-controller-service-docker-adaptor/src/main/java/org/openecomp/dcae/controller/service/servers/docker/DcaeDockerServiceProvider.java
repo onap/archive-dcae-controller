@@ -45,6 +45,7 @@ import org.openecomp.dcae.controller.service.docker.host.servers.service.DcaeDoc
 import org.openecomp.dcae.controller.service.docker.host.service.DockerHostServiceInstance;
 import org.openecomp.dcae.controller.service.servers.dockermanager.DcaeDockerManagerConsole;
 import org.openecomp.dcae.controller.service.servers.vmmanager.DcaeVirtualMachineManagerConsole;
+import org.openecomp.dcae.controller.service.vm.VirtualMachineService;
 import org.openecomp.dcae.controller.service.vm.VirtualMachineServiceInstance;
 import org.openecomp.ncomp.core.DeploymentStatus;
 import org.openecomp.ncomp.docker.ContainerOptions;
@@ -54,6 +55,7 @@ import org.openecomp.ncomp.docker.DockerFactory;
 import org.openecomp.ncomp.servers.docker.DockerDockerHostConsole;
 import org.openecomp.ncomp.sirius.manager.AbstractClient;
 import org.openecomp.ncomp.sirius.manager.BasicAdaptorProvider;
+import org.openecomp.ncomp.sirius.manager.ISiriusProvider;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
 import org.openecomp.ncomp.sirius.manager.JavaHttpClient;
 import org.openecomp.ncomp.sirius.manager.ManagementServer;
@@ -96,8 +98,8 @@ public class DcaeDockerServiceProvider extends BasicAdaptorProvider {
 		}
 		console(instanceName).setupConfiguration(o.getName(), instanceName);
 		consoleHost(i).dockerRunWithOptions("/resources/dockerHost", image(i), opts);
-		long toolate = System.currentTimeMillis() + 2 * 60 * 1000; 
-		// if has manager wait 2 minutes for container manager
+		long toolate = System.currentTimeMillis() + 15 * 60 * 1000; 
+		// wait 15 minutes for container manager
 		while (i.getManagerPortNumber() > 0 && System.currentTimeMillis() < toolate) {
 			try {
 				o.pushManagerConfiguration(instanceName);
@@ -136,15 +138,15 @@ public class DcaeDockerServiceProvider extends BasicAdaptorProvider {
 
 	public AbstractClient getClient(DockerServiceInstance i) {
 		DockerHostServiceInstance instance = i.getHostService();
-		DcaeDockerHostService service = (DcaeDockerHostService) instance.getService();
-		DcaeDockerHostServiceProvider provider = service.getSomfProvider();
+		VirtualMachineService service = instance.getService();
+		DcaeDockerHostServiceProvider provider = (DcaeDockerHostServiceProvider) ((ISiriusProvider) service).getSiriusProvider();
 		return provider.getClient(instance);
 	}
 
 	private DockerDockerHostConsole consoleHost(DockerServiceInstance i) {
 		DockerHostServiceInstance instance = i.getHostService();
-		DcaeDockerHostService service = (DcaeDockerHostService) instance.getService();
-		DcaeDockerHostServiceProvider provider = service.getSomfProvider();
+		VirtualMachineService service = instance.getService();
+		DcaeDockerHostServiceProvider provider = (DcaeDockerHostServiceProvider) ((ISiriusProvider) service).getSiriusProvider();
 		AbstractClient c = provider.getClient(instance);
 		return new DockerDockerHostConsole(c);
 	}
@@ -265,11 +267,17 @@ public class DcaeDockerServiceProvider extends BasicAdaptorProvider {
 	}
 
 	public void runHealthTests() {
-		System.out.println("DOCKER: runHealthTests" + o.getName());
+//		System.out.println("DOCKER: runHealthTests" + o.getName());
 		for (DockerServiceInstance i : o.getInstances()) {
 			HealthTestResponse s = null;
 			try {
-				s = o.test(i.getName());
+				if (i.getStatus() == DeploymentStatus.DEPLOYED) {
+					s = test(i.getName());
+				} else {
+					s = ServiceFactory.eINSTANCE.createHealthTestResponse();
+					s.setMessageCode("Not deployed");
+					s.setStatus(HealthTestStatus.YELLOW);
+				}
 			} catch (Exception e) {
 				s = ServiceFactory.eINSTANCE.createHealthTestResponse();
 				s.setMessageCode("Unable to determine health: " + e);

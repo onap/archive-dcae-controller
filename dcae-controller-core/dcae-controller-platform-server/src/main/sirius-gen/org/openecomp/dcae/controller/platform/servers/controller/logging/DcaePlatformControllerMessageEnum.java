@@ -1,25 +1,4 @@
 
-/*-
- * ============LICENSE_START==========================================
- * OPENECOMP - DCAE
- * ===================================================================
- * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
- * ===================================================================
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0 
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ============LICENSE_END============================================
- */
-	
-
 package org.openecomp.dcae.controller.platform.servers.controller.logging;
 
 import com.att.eelf.i18n.EELFResourceManager;
@@ -28,32 +7,32 @@ import org.openecomp.logger.EcompMessageEnum;
 public enum DcaePlatformControllerMessageEnum implements EcompMessageEnum {
 
   dummy,
-  logs,
-  metrics,
-  properties,
-  uploadInfo,
-  getValues,
-  getValuesAll,
-  getMessages,
-  getRequestLogger,
-  evaluate,
-  update,
-  deployDescriptor,
-  refreshDataBus,
-  REMOTE_logs,
-  REMOTE_metrics,
-  REMOTE_properties,
-  REMOTE_uploadInfo,
-  REMOTE_getValues,
-  REMOTE_getValuesAll,
-  REMOTE_getMessages,
-  REMOTE_getRequestLogger,
-  REMOTE_evaluate,
-  REMOTE_update,
-  REMOTE_deployDescriptor,
-  REMOTE_refreshDataBus;
+  REQUEST_FAILED_logs,
+  REQUEST_FAILED_metrics,
+  REQUEST_FAILED_properties,
+  REQUEST_FAILED_uploadInfo,
+  REQUEST_FAILED_getValues,
+  REQUEST_FAILED_getValuesAll,
+  REQUEST_FAILED_getMessages,
+  REQUEST_FAILED_getRequestLogger,
+  REQUEST_FAILED_evaluate,
+  REQUEST_FAILED_update,
+  REQUEST_FAILED_deployDescriptor,
+  REQUEST_FAILED_refreshDataBus,
+  REMOTE_CALL_FAILED_logs,
+  REMOTE_CALL_FAILED_metrics,
+  REMOTE_CALL_FAILED_properties,
+  REMOTE_CALL_FAILED_uploadInfo,
+  REMOTE_CALL_FAILED_getValues,
+  REMOTE_CALL_FAILED_getValuesAll,
+  REMOTE_CALL_FAILED_getMessages,
+  REMOTE_CALL_FAILED_getRequestLogger,
+  REMOTE_CALL_FAILED_evaluate,
+  REMOTE_CALL_FAILED_update,
+  REMOTE_CALL_FAILED_deployDescriptor,
+  REMOTE_CALL_FAILED_refreshDataBus;
 
 	static {
-		EELFResourceManager.loadMessageBundle("org.openecomp.dcae.controller.platform.servers.controller.logging.DcaePlatformController");
+		EELFResourceManager.loadMessageBundle("org/openecomp/dcae/controller/platform/servers/controller/logging/DcaePlatformController");
 	}
 }

@@ -30,6 +30,8 @@ import org.openecomp.ncomp.sirius.manager.GenericHttpClient;
 import org.apache.log4j.Logger;
 
 import org.openecomp.logger.EcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -54,33 +56,37 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 		DcaeControllerServiceDmaapDrsubService.ecoreSetup(); 
 		client = new GenericHttpClient(file,name);
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 	public DcaeControllerServiceDmaapDrsubServiceClient(String file, String name1, String name2) {
 		HighAvailabilityClient client1 = new HighAvailabilityClient(file,name1,name2);
 		client = client1.all; // requests should be forwarded to all.
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 	
 	public DcaeControllerServiceDmaapDrsubServiceClient(AbstractClient c) {
 		client = c;
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 
 
 	@Override
 	public void deploy(java.lang.String instanceName, java.lang.String containerPath) {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_deploy);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_deploy,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "deploy", null, instanceName,containerPath);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_deploy, e.toString());
-			throw new RuntimeException("remote call failed:  deploy", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_deploy, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_deploy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_deploy,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -88,16 +94,17 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 
 	@Override
 	public void undeploy(java.lang.String instanceName) {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_undeploy);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_undeploy,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "undeploy", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_undeploy, e.toString());
-			throw new RuntimeException("remote call failed:  undeploy", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_undeploy, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_undeploy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_undeploy,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -105,16 +112,17 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 
 	@Override
 	public org.openecomp.dcae.controller.core.service.HealthTestResponse test(java.lang.String instanceName) {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_test);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_test,client.getRemote());
 		org.openecomp.dcae.controller.core.service.HealthTestResponse res;
 		try {
 		  res = (org.openecomp.dcae.controller.core.service.HealthTestResponse) client.operationPath("/resources", c, "test", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_test, e.toString());
-			throw new RuntimeException("remote call failed:  test", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_test, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_test,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -122,16 +130,17 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 
 	@Override
 	public void suspend(java.lang.String instanceName) {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_suspend);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_suspend,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "suspend", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_suspend, e.toString());
-			throw new RuntimeException("remote call failed:  suspend", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_suspend, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_suspend,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -139,16 +148,17 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 
 	@Override
 	public void resume(java.lang.String instanceName) {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_resume);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_resume,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "resume", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_resume, e.toString());
-			throw new RuntimeException("remote call failed:  resume", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_resume, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_resume,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -156,16 +166,17 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 
 	@Override
 	public void pushManagerConfiguration(java.lang.String instanceName) {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_pushManagerConfiguration);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_pushManagerConfiguration,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "pushManagerConfiguration", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_pushManagerConfiguration, e.toString());
-			throw new RuntimeException("remote call failed:  pushManagerConfiguration", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_pushManagerConfiguration, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_pushManagerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_pushManagerConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -173,16 +184,17 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 
 	@Override
 	public void pollManagerConfiguration(java.lang.String instanceName) {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_pollManagerConfiguration);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_pollManagerConfiguration,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "pollManagerConfiguration", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_pollManagerConfiguration, e.toString());
-			throw new RuntimeException("remote call failed:  pollManagerConfiguration", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_pollManagerConfiguration, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_pollManagerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_pollManagerConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -190,16 +202,17 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 
 	@Override
 	public org.eclipse.emf.ecore.EObject managerConfiguration(java.lang.String instanceName) {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_managerConfiguration);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_managerConfiguration,client.getRemote());
 		org.eclipse.emf.ecore.EObject res;
 		try {
 		  res = (org.eclipse.emf.ecore.EObject) client.operationPath("/resources", c, "managerConfiguration", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_managerConfiguration, e.toString());
-			throw new RuntimeException("remote call failed:  managerConfiguration", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_managerConfiguration, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_managerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_managerConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -207,16 +220,17 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 
 	@Override
 	public org.json.JSONObject managerOperation(java.lang.String instanceName, java.lang.String operation, org.json.JSONObject parameters) {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_managerOperation);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_managerOperation,client.getRemote());
 		org.json.JSONObject res;
 		try {
 		  res = (org.json.JSONObject) client.operationPath("/resources", c, "managerOperation", null, instanceName,operation,parameters);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_managerOperation, e.toString());
-			throw new RuntimeException("remote call failed:  managerOperation", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_managerOperation, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_managerOperation,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_managerOperation,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -224,16 +238,17 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 
 	@Override
 	public void updateConfigurationFromPolicy(java.lang.String instanceName) {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_updateConfigurationFromPolicy);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_updateConfigurationFromPolicy,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "updateConfigurationFromPolicy", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_updateConfigurationFromPolicy, e.toString());
-			throw new RuntimeException("remote call failed:  updateConfigurationFromPolicy", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_updateConfigurationFromPolicy, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_updateConfigurationFromPolicy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_updateConfigurationFromPolicy,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -241,16 +256,17 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 
 	@Override
 	public void runHealthTests() {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_runHealthTests);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_runHealthTests,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "runHealthTests", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_runHealthTests, e.toString());
-			throw new RuntimeException("remote call failed:  runHealthTests", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_runHealthTests, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_runHealthTests,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_runHealthTests,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -258,16 +274,17 @@ public class DcaeControllerServiceDmaapDrsubServiceClient extends ControllerServ
 
 	@Override
 	public void updateDeploymentStatus() {
-		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerServiceDmaapDrsubServiceOperationEnum.REMOTE_updateDeploymentStatus);
+		EClass c = ServicePackage.eINSTANCE.getControllerServiceDmaapDrsubService(); 
+		ecomplogger.recordMetricEventStart(ControllerServiceDmaapDrsubServiceOperationEnum.ControllerServiceDmaapDrsubService_updateDeploymentStatus,client.getRemote());
 		
 		try {
 		  client.operationPath("/resources", c, "updateDeploymentStatus", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_updateDeploymentStatus, e.toString());
-			throw new RuntimeException("remote call failed:  updateDeploymentStatus", e);
+			ecomplogger.warn(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_updateDeploymentStatus, e.toString());
+			EcompException e1 = EcompException.create(ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_updateDeploymentStatus,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerServiceDmaapDrsubServiceMessageEnum.REMOTE_CALL_FAILED_updateDeploymentStatus,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		

@@ -36,6 +36,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getCdapName <em>Cdap Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getNamespace <em>Namespace</em>}</li>
@@ -43,6 +44,10 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getAppConfigFile <em>App Config File</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getArtifacts <em>Artifacts</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getApps <em>Apps</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getDeploySteps <em>Deploy Steps</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getUndeploySteps <em>Undeploy Steps</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getPreConfigurationSteps <em>Pre Configuration Steps</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getPostConfigurationSteps <em>Post Configuration Steps</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getAppNames <em>App Names</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getWorkerNames <em>Worker Names</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getFlowNames <em>Flow Names</em>}</li>
@@ -53,7 +58,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getCdapNamespace <em>Cdap Namespace</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceInstance#getService <em>Service</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.cdap.CdapPackage#getCdapServiceInstance()
  * @model
@@ -221,6 +225,70 @@ public interface CdapServiceInstance extends DcaeServiceInstance {
 	 * @generated
 	 */
 	EList<CdapApplication> getApps();
+
+	/**
+	 * Returns the value of the '<em><b>Deploy Steps</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openecomp.dcae.controller.service.cdap.CdapStep}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Deploy Steps</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Deploy Steps</em>' containment reference list.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapPackage#getCdapServiceInstance_DeploySteps()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<CdapStep> getDeploySteps();
+
+	/**
+	 * Returns the value of the '<em><b>Undeploy Steps</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openecomp.dcae.controller.service.cdap.CdapStep}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Undeploy Steps</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Undeploy Steps</em>' containment reference list.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapPackage#getCdapServiceInstance_UndeploySteps()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<CdapStep> getUndeploySteps();
+
+	/**
+	 * Returns the value of the '<em><b>Pre Configuration Steps</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openecomp.dcae.controller.service.cdap.CdapStep}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Pre Configuration Steps</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Pre Configuration Steps</em>' containment reference list.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapPackage#getCdapServiceInstance_PreConfigurationSteps()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<CdapStep> getPreConfigurationSteps();
+
+	/**
+	 * Returns the value of the '<em><b>Post Configuration Steps</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openecomp.dcae.controller.service.cdap.CdapStep}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Post Configuration Steps</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Post Configuration Steps</em>' containment reference list.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapPackage#getCdapServiceInstance_PostConfigurationSteps()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<CdapStep> getPostConfigurationSteps();
 
 	/**
 	 * Returns the value of the '<em><b>App Names</b></em>' attribute list.

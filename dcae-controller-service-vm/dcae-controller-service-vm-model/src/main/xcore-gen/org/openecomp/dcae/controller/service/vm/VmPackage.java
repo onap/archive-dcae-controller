@@ -980,6 +980,33 @@ public interface VmPackage extends EPackage {
 	int PHYSICAL_MACHINE__CERTIFICATE_PASSWORD = ServerPackage.DCAE_BASIC_SERVER__CERTIFICATE_PASSWORD;
 
 	/**
+	 * The feature id for the '<em><b>Last Health Test</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHYSICAL_MACHINE__LAST_HEALTH_TEST = ServerPackage.DCAE_BASIC_SERVER__LAST_HEALTH_TEST;
+
+	/**
+	 * The feature id for the '<em><b>Health Test Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHYSICAL_MACHINE__HEALTH_TEST_STATUS = ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Health Test Message Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PHYSICAL_MACHINE__HEALTH_TEST_MESSAGE_CODE = ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_MESSAGE_CODE;
+
+	/**
 	 * The feature id for the '<em><b>Manager Port Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1186,6 +1213,33 @@ public interface VmPackage extends EPackage {
 	 * @ordered
 	 */
 	int VIRTUAL_MACHINE__CERTIFICATE_PASSWORD = ServerPackage.DCAE_BASIC_SERVER__CERTIFICATE_PASSWORD;
+
+	/**
+	 * The feature id for the '<em><b>Last Health Test</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_MACHINE__LAST_HEALTH_TEST = ServerPackage.DCAE_BASIC_SERVER__LAST_HEALTH_TEST;
+
+	/**
+	 * The feature id for the '<em><b>Health Test Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_MACHINE__HEALTH_TEST_STATUS = ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Health Test Message Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_MACHINE__HEALTH_TEST_MESSAGE_CODE = ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_MESSAGE_CODE;
 
 	/**
 	 * The feature id for the '<em><b>Function Index</b></em>' attribute.
@@ -1397,7 +1451,6 @@ public interface VmPackage extends EPackage {
 	 */
 	int SHELL_INSTALLATION_STEP_OPERATION_COUNT = INSTALLATION_STEP_OPERATION_COUNT + 0;
 
-
 	/**
 	 * The meta object id for the '{@link org.openecomp.dcae.controller.service.vm.impl.MavenArtifactInstallationStepImpl <em>Maven Artifact Installation Step</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -1515,7 +1568,6 @@ public interface VmPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAVEN_ARTIFACT_INSTALLATION_STEP_OPERATION_COUNT = INSTALLATION_STEP_OPERATION_COUNT + 0;
-
 
 	/**
 	 * The meta object id for the '{@link org.openecomp.dcae.controller.service.vm.impl.HttpInstallationStepImpl <em>Http Installation Step</em>}' class.

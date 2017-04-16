@@ -6,14 +6,3 @@ Bundle-Version: 0.1.0.qualifier
 Export-Package: org.openecomp.dcae.controller.service.docker.manager.tools,
   org.openecomp.dcae.controller.service.servers.docker,
   org.openecomp.dcae.controller.service.servers.dockermanager
-Require-Bundle: ncomp-core-types,
- ncomp-sirius-manager-model,
- ncomp-sirius-manager-server,
- ncomp-sirius-manager-console,
- ncomp-sirius-manager-generator,
- dcae-controller-service-docker-model;bundle-version="0.1.0",
- ncomp-utils-java;bundle-version="0.1.0",
- ncomp-docker-adaptor;bundle-version="0.1.0",
- dcae-controller-service-docker-host-manager;bundle-version="0.1.0",
- dcae-controller-service-docker-host-model;bundle-version="0.1.0",
- dcae-controller-core-utils;bundle-version="0.1.0"

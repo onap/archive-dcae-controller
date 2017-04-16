@@ -261,13 +261,40 @@ public interface ServerPackage extends EPackage {
 	int DCAE_BASIC_SERVER__CERTIFICATE_PASSWORD = CorePackage.NAMED_ENTITY_FEATURE_COUNT + 14;
 
 	/**
+	 * The feature id for the '<em><b>Last Health Test</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DCAE_BASIC_SERVER__LAST_HEALTH_TEST = CorePackage.NAMED_ENTITY_FEATURE_COUNT + 15;
+
+	/**
+	 * The feature id for the '<em><b>Health Test Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DCAE_BASIC_SERVER__HEALTH_TEST_STATUS = CorePackage.NAMED_ENTITY_FEATURE_COUNT + 16;
+
+	/**
+	 * The feature id for the '<em><b>Health Test Message Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DCAE_BASIC_SERVER__HEALTH_TEST_MESSAGE_CODE = CorePackage.NAMED_ENTITY_FEATURE_COUNT + 17;
+
+	/**
 	 * The number of structural features of the '<em>Dcae Basic Server</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DCAE_BASIC_SERVER_FEATURE_COUNT = CorePackage.NAMED_ENTITY_FEATURE_COUNT + 15;
+	int DCAE_BASIC_SERVER_FEATURE_COUNT = CorePackage.NAMED_ENTITY_FEATURE_COUNT + 18;
 
 	/**
 	 * The number of operations of the '<em>Dcae Basic Server</em>' class.
@@ -494,6 +521,39 @@ public interface ServerPackage extends EPackage {
 	EAttribute getDcaeBasicServer_CertificatePassword();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getLastHealthTest <em>Last Health Test</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Health Test</em>'.
+	 * @see org.openecomp.dcae.controller.core.server.DcaeBasicServer#getLastHealthTest()
+	 * @see #getDcaeBasicServer()
+	 * @generated
+	 */
+	EAttribute getDcaeBasicServer_LastHealthTest();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getHealthTestStatus <em>Health Test Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Health Test Status</em>'.
+	 * @see org.openecomp.dcae.controller.core.server.DcaeBasicServer#getHealthTestStatus()
+	 * @see #getDcaeBasicServer()
+	 * @generated
+	 */
+	EAttribute getDcaeBasicServer_HealthTestStatus();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getHealthTestMessageCode <em>Health Test Message Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Health Test Message Code</em>'.
+	 * @see org.openecomp.dcae.controller.core.server.DcaeBasicServer#getHealthTestMessageCode()
+	 * @see #getDcaeBasicServer()
+	 * @generated
+	 */
+	EAttribute getDcaeBasicServer_HealthTestMessageCode();
+
+	/**
 	 * Returns the meta object for class '{@link org.openecomp.dcae.controller.core.server.DcaeBasicServerNetwork <em>Dcae Basic Server Network</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -634,6 +694,27 @@ public interface ServerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DCAE_BASIC_SERVER__CERTIFICATE_PASSWORD = eINSTANCE.getDcaeBasicServer_CertificatePassword();
+		/**
+		 * The meta object literal for the '<em><b>Last Health Test</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DCAE_BASIC_SERVER__LAST_HEALTH_TEST = eINSTANCE.getDcaeBasicServer_LastHealthTest();
+		/**
+		 * The meta object literal for the '<em><b>Health Test Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DCAE_BASIC_SERVER__HEALTH_TEST_STATUS = eINSTANCE.getDcaeBasicServer_HealthTestStatus();
+		/**
+		 * The meta object literal for the '<em><b>Health Test Message Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DCAE_BASIC_SERVER__HEALTH_TEST_MESSAGE_CODE = eINSTANCE.getDcaeBasicServer_HealthTestMessageCode();
 		/**
 		 * The meta object literal for the '{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerNetworkImpl <em>Dcae Basic Server Network</em>}' class.
 		 * <!-- begin-user-doc -->

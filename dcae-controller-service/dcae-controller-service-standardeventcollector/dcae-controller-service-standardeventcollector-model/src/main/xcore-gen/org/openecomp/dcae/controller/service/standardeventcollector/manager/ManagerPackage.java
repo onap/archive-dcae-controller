@@ -40,6 +40,24 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * -
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *  *        http://www.apache.org/licenses/LICENSE-2.0
+ *  * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ * <!-- end-model-doc -->
  * @see org.openecomp.dcae.controller.service.standardeventcollector.manager.ManagerFactory
  * @model kind="package"
  *        annotation="http://www.eclipse.org/emf/2002/GenModel modelDirectory='/dcae-controller-service-standardeventcollector-model/src/main/xcore-gen' basePackage='org.openecomp.dcae.controller.service.standardeventcollector'"
@@ -143,13 +161,22 @@ public interface ManagerPackage extends EPackage {
 	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTORELOC = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Keystorepwd</b></em>' attribute.
+	 * The feature id for the '<em><b>Keystorealias</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWD = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 3;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREALIAS = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Keystorepwdloc</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__KEYSTOREPWDLOC = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Maxinputqueue</b></em>' attribute.
@@ -158,16 +185,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__MAXINPUTQUEUE = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Authid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHID = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 5;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__MAXINPUTQUEUE = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Authflag</b></em>' attribute.
@@ -179,22 +197,13 @@ public interface ManagerPackage extends EPackage {
 	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFLAG = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Authpwd</b></em>' attribute.
+	 * The feature id for the '<em><b>Authlist</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHPWD = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Authfile</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHFILE = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 8;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHLIST = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Checkschemaflag</b></em>' attribute.
@@ -203,7 +212,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CHECKSCHEMAFLAG = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 9;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__CHECKSCHEMAFLAG = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Schemafile</b></em>' attribute.
@@ -212,7 +221,16 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__SCHEMAFILE = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 10;
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__SCHEMAFILE = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Streamid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__STREAMID = DockermanagerPackage.DOCKER_MANAGER_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Controller Service Standardeventcollector Manager</em>' class.

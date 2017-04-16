@@ -33,6 +33,7 @@ import org.openecomp.dcae.controller.service.cdap.CdapService;
 import org.openecomp.dcae.controller.service.cdap.CdapServiceInstance;
 
 import org.openecomp.dcae.controller.service.cdap.CdapServiceInstanceConfiguration;
+import org.openecomp.dcae.controller.service.cdap.CdapStep;
 import org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterServiceInstance;
 import org.openecomp.ncomp.cdap.CdapNamespace;
 
@@ -56,6 +57,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getCdapName <em>Cdap Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getNamespace <em>Namespace</em>}</li>
@@ -63,6 +65,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getAppConfigFile <em>App Config File</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getArtifacts <em>Artifacts</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getApps <em>Apps</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getDeploySteps <em>Deploy Steps</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getUndeploySteps <em>Undeploy Steps</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getPreConfigurationSteps <em>Pre Configuration Steps</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getPostConfigurationSteps <em>Post Configuration Steps</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getAppNames <em>App Names</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getWorkerNames <em>Worker Names</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getFlowNames <em>Flow Names</em>}</li>
@@ -73,7 +79,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getCdapNamespace <em>Cdap Namespace</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceInstanceImpl#getService <em>Service</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -177,6 +182,46 @@ public class CdapServiceInstanceImpl extends DcaeServiceInstanceImpl implements 
 	 * @ordered
 	 */
 	protected EList<CdapApplication> apps;
+
+	/**
+	 * The cached value of the '{@link #getDeploySteps() <em>Deploy Steps</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDeploySteps()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CdapStep> deploySteps;
+
+	/**
+	 * The cached value of the '{@link #getUndeploySteps() <em>Undeploy Steps</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUndeploySteps()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CdapStep> undeploySteps;
+
+	/**
+	 * The cached value of the '{@link #getPreConfigurationSteps() <em>Pre Configuration Steps</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPreConfigurationSteps()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CdapStep> preConfigurationSteps;
+
+	/**
+	 * The cached value of the '{@link #getPostConfigurationSteps() <em>Post Configuration Steps</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPostConfigurationSteps()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CdapStep> postConfigurationSteps;
 
 	/**
 	 * The cached value of the '{@link #getAppNames() <em>App Names</em>}' attribute list.
@@ -421,6 +466,54 @@ public class CdapServiceInstanceImpl extends DcaeServiceInstanceImpl implements 
 			apps = new EObjectContainmentEList<CdapApplication>(CdapApplication.class, this, CdapPackage.CDAP_SERVICE_INSTANCE__APPS);
 		}
 		return apps;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<CdapStep> getDeploySteps() {
+		if (deploySteps == null) {
+			deploySteps = new EObjectContainmentEList<CdapStep>(CdapStep.class, this, CdapPackage.CDAP_SERVICE_INSTANCE__DEPLOY_STEPS);
+		}
+		return deploySteps;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<CdapStep> getUndeploySteps() {
+		if (undeploySteps == null) {
+			undeploySteps = new EObjectContainmentEList<CdapStep>(CdapStep.class, this, CdapPackage.CDAP_SERVICE_INSTANCE__UNDEPLOY_STEPS);
+		}
+		return undeploySteps;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<CdapStep> getPreConfigurationSteps() {
+		if (preConfigurationSteps == null) {
+			preConfigurationSteps = new EObjectContainmentEList<CdapStep>(CdapStep.class, this, CdapPackage.CDAP_SERVICE_INSTANCE__PRE_CONFIGURATION_STEPS);
+		}
+		return preConfigurationSteps;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<CdapStep> getPostConfigurationSteps() {
+		if (postConfigurationSteps == null) {
+			postConfigurationSteps = new EObjectContainmentEList<CdapStep>(CdapStep.class, this, CdapPackage.CDAP_SERVICE_INSTANCE__POST_CONFIGURATION_STEPS);
+		}
+		return postConfigurationSteps;
 	}
 
 	/**
@@ -674,6 +767,14 @@ public class CdapServiceInstanceImpl extends DcaeServiceInstanceImpl implements 
 				return ((InternalEList<?>)getArtifacts()).basicRemove(otherEnd, msgs);
 			case CdapPackage.CDAP_SERVICE_INSTANCE__APPS:
 				return ((InternalEList<?>)getApps()).basicRemove(otherEnd, msgs);
+			case CdapPackage.CDAP_SERVICE_INSTANCE__DEPLOY_STEPS:
+				return ((InternalEList<?>)getDeploySteps()).basicRemove(otherEnd, msgs);
+			case CdapPackage.CDAP_SERVICE_INSTANCE__UNDEPLOY_STEPS:
+				return ((InternalEList<?>)getUndeploySteps()).basicRemove(otherEnd, msgs);
+			case CdapPackage.CDAP_SERVICE_INSTANCE__PRE_CONFIGURATION_STEPS:
+				return ((InternalEList<?>)getPreConfigurationSteps()).basicRemove(otherEnd, msgs);
+			case CdapPackage.CDAP_SERVICE_INSTANCE__POST_CONFIGURATION_STEPS:
+				return ((InternalEList<?>)getPostConfigurationSteps()).basicRemove(otherEnd, msgs);
 			case CdapPackage.CDAP_SERVICE_INSTANCE__CONFIGURATION:
 				return basicSetConfiguration(null, msgs);
 			case CdapPackage.CDAP_SERVICE_INSTANCE__CDAP_CONFIGURATION:
@@ -718,6 +819,14 @@ public class CdapServiceInstanceImpl extends DcaeServiceInstanceImpl implements 
 				return getArtifacts();
 			case CdapPackage.CDAP_SERVICE_INSTANCE__APPS:
 				return getApps();
+			case CdapPackage.CDAP_SERVICE_INSTANCE__DEPLOY_STEPS:
+				return getDeploySteps();
+			case CdapPackage.CDAP_SERVICE_INSTANCE__UNDEPLOY_STEPS:
+				return getUndeploySteps();
+			case CdapPackage.CDAP_SERVICE_INSTANCE__PRE_CONFIGURATION_STEPS:
+				return getPreConfigurationSteps();
+			case CdapPackage.CDAP_SERVICE_INSTANCE__POST_CONFIGURATION_STEPS:
+				return getPostConfigurationSteps();
 			case CdapPackage.CDAP_SERVICE_INSTANCE__APP_NAMES:
 				return getAppNames();
 			case CdapPackage.CDAP_SERVICE_INSTANCE__WORKER_NAMES:
@@ -771,6 +880,22 @@ public class CdapServiceInstanceImpl extends DcaeServiceInstanceImpl implements 
 			case CdapPackage.CDAP_SERVICE_INSTANCE__APPS:
 				getApps().clear();
 				getApps().addAll((Collection<? extends CdapApplication>)newValue);
+				return;
+			case CdapPackage.CDAP_SERVICE_INSTANCE__DEPLOY_STEPS:
+				getDeploySteps().clear();
+				getDeploySteps().addAll((Collection<? extends CdapStep>)newValue);
+				return;
+			case CdapPackage.CDAP_SERVICE_INSTANCE__UNDEPLOY_STEPS:
+				getUndeploySteps().clear();
+				getUndeploySteps().addAll((Collection<? extends CdapStep>)newValue);
+				return;
+			case CdapPackage.CDAP_SERVICE_INSTANCE__PRE_CONFIGURATION_STEPS:
+				getPreConfigurationSteps().clear();
+				getPreConfigurationSteps().addAll((Collection<? extends CdapStep>)newValue);
+				return;
+			case CdapPackage.CDAP_SERVICE_INSTANCE__POST_CONFIGURATION_STEPS:
+				getPostConfigurationSteps().clear();
+				getPostConfigurationSteps().addAll((Collection<? extends CdapStep>)newValue);
 				return;
 			case CdapPackage.CDAP_SERVICE_INSTANCE__APP_NAMES:
 				getAppNames().clear();
@@ -833,6 +958,18 @@ public class CdapServiceInstanceImpl extends DcaeServiceInstanceImpl implements 
 			case CdapPackage.CDAP_SERVICE_INSTANCE__APPS:
 				getApps().clear();
 				return;
+			case CdapPackage.CDAP_SERVICE_INSTANCE__DEPLOY_STEPS:
+				getDeploySteps().clear();
+				return;
+			case CdapPackage.CDAP_SERVICE_INSTANCE__UNDEPLOY_STEPS:
+				getUndeploySteps().clear();
+				return;
+			case CdapPackage.CDAP_SERVICE_INSTANCE__PRE_CONFIGURATION_STEPS:
+				getPreConfigurationSteps().clear();
+				return;
+			case CdapPackage.CDAP_SERVICE_INSTANCE__POST_CONFIGURATION_STEPS:
+				getPostConfigurationSteps().clear();
+				return;
 			case CdapPackage.CDAP_SERVICE_INSTANCE__APP_NAMES:
 				getAppNames().clear();
 				return;
@@ -884,6 +1021,14 @@ public class CdapServiceInstanceImpl extends DcaeServiceInstanceImpl implements 
 				return artifacts != null && !artifacts.isEmpty();
 			case CdapPackage.CDAP_SERVICE_INSTANCE__APPS:
 				return apps != null && !apps.isEmpty();
+			case CdapPackage.CDAP_SERVICE_INSTANCE__DEPLOY_STEPS:
+				return deploySteps != null && !deploySteps.isEmpty();
+			case CdapPackage.CDAP_SERVICE_INSTANCE__UNDEPLOY_STEPS:
+				return undeploySteps != null && !undeploySteps.isEmpty();
+			case CdapPackage.CDAP_SERVICE_INSTANCE__PRE_CONFIGURATION_STEPS:
+				return preConfigurationSteps != null && !preConfigurationSteps.isEmpty();
+			case CdapPackage.CDAP_SERVICE_INSTANCE__POST_CONFIGURATION_STEPS:
+				return postConfigurationSteps != null && !postConfigurationSteps.isEmpty();
 			case CdapPackage.CDAP_SERVICE_INSTANCE__APP_NAMES:
 				return appNames != null && !appNames.isEmpty();
 			case CdapPackage.CDAP_SERVICE_INSTANCE__WORKER_NAMES:

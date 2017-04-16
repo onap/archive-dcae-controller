@@ -1,137 +1,78 @@
 
-/*-
- * ============LICENSE_START==========================================
- * OPENECOMP - DCAE
- * ===================================================================
- * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
- * ===================================================================
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0 
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ============LICENSE_END============================================
- */
-	
-
 package org.openecomp.dcae.controller.service.cdap.cluster.servers.manager.logging;
 
 import org.openecomp.entity.EcompOperationEnum;
 
 public enum CdapClusterManagerOperationEnum implements EcompOperationEnum {
 
-  test,
-  suspend,
-  resume,
-  publicKey,
-  configurationChanged,
-  updateStreams,
-  logs,
-  metrics,
-  properties,
-  uploadInfo,
-  getValues,
-  getValuesAll,
-  getMessages,
-  getRequestLogger,
-  evaluate,
-  update,
-  createNamespace,
-  deleteNamespace,
-  deployApp,
-  loadArtifact,
-  deleteArtifact,
-  startFlow,
-  startWorker,
-  startService,
-  startApp,
-  stopApp,
-  deleteApp,
-  loadPreferencesApp,
-  loadPreferencesFlow,
-  loadPreferencesNameSpace,
-  setPreferencesApp,
-  setPreferencesFlow,
-  setPreferencesWorker,
-  setPreferencesService,
-  setPreferencesNameSpace,
-  setFlowRunTimeArgs,
-  setFlowletInstances,
-  stopFlow,
-  stopWorker,
-  stopService,
-  truncateDataSet,
-  deleteDataset,
-  createStream,
-  deleteStream,
-  getStreamEvents,
-  getStreamStats,
-  sendEventToStream,
-  trucateStream,
-  setStreamProperties,
-  restartApp,
-  createApp,
-  createAppWithConfig,
-  setDatasetProperties,
-  setStreamTTL,
-  REMOTE_test,
-  REMOTE_suspend,
-  REMOTE_resume,
-  REMOTE_publicKey,
-  REMOTE_configurationChanged,
-  REMOTE_updateStreams,
-  REMOTE_logs,
-  REMOTE_metrics,
-  REMOTE_properties,
-  REMOTE_uploadInfo,
-  REMOTE_getValues,
-  REMOTE_getValuesAll,
-  REMOTE_getMessages,
-  REMOTE_getRequestLogger,
-  REMOTE_evaluate,
-  REMOTE_update,
-  REMOTE_createNamespace,
-  REMOTE_deleteNamespace,
-  REMOTE_deployApp,
-  REMOTE_loadArtifact,
-  REMOTE_deleteArtifact,
-  REMOTE_startFlow,
-  REMOTE_startWorker,
-  REMOTE_startService,
-  REMOTE_startApp,
-  REMOTE_stopApp,
-  REMOTE_deleteApp,
-  REMOTE_loadPreferencesApp,
-  REMOTE_loadPreferencesFlow,
-  REMOTE_loadPreferencesNameSpace,
-  REMOTE_setPreferencesApp,
-  REMOTE_setPreferencesFlow,
-  REMOTE_setPreferencesWorker,
-  REMOTE_setPreferencesService,
-  REMOTE_setPreferencesNameSpace,
-  REMOTE_setFlowRunTimeArgs,
-  REMOTE_setFlowletInstances,
-  REMOTE_stopFlow,
-  REMOTE_stopWorker,
-  REMOTE_stopService,
-  REMOTE_truncateDataSet,
-  REMOTE_deleteDataset,
-  REMOTE_createStream,
-  REMOTE_deleteStream,
-  REMOTE_getStreamEvents,
-  REMOTE_getStreamStats,
-  REMOTE_sendEventToStream,
-  REMOTE_trucateStream,
-  REMOTE_setStreamProperties,
-  REMOTE_restartApp,
-  REMOTE_createApp,
-  REMOTE_createAppWithConfig,
-  REMOTE_setDatasetProperties,
-  REMOTE_setStreamTTL;
+  CdapClusterManager_test("CdapClusterManager@test"),
+  CdapClusterManager_suspend("CdapClusterManager@suspend"),
+  CdapClusterManager_resume("CdapClusterManager@resume"),
+  CdapClusterManager_publicKey("CdapClusterManager@publicKey"),
+  CdapClusterManager_configurationChanged("CdapClusterManager@configurationChanged"),
+  CdapClusterManager_updateStreams("CdapClusterManager@updateStreams"),
+  CdapClusterManager_logs("CdapClusterManager@logs"),
+  CdapClusterManager_metrics("CdapClusterManager@metrics"),
+  CdapClusterManager_properties("CdapClusterManager@properties"),
+  CdapClusterManager_uploadInfo("CdapClusterManager@uploadInfo"),
+  CdapClusterManager_getValues("CdapClusterManager@getValues"),
+  CdapClusterManager_getValuesAll("CdapClusterManager@getValuesAll"),
+  CdapClusterManager_getMessages("CdapClusterManager@getMessages"),
+  CdapClusterManager_getRequestLogger("CdapClusterManager@getRequestLogger"),
+  CdapClusterManager_evaluate("CdapClusterManager@evaluate"),
+  CdapClusterManager_update("CdapClusterManager@update"),
+  CdapClusterManager_createNamespace("CdapClusterManager@createNamespace"),
+  CdapClusterManager_deleteNamespace("CdapClusterManager@deleteNamespace"),
+  CdapClusterManager_deployApp("CdapClusterManager@deployApp"),
+  CdapClusterManager_loadArtifact("CdapClusterManager@loadArtifact"),
+  CdapClusterManager_loadArtifactWithConfig("CdapClusterManager@loadArtifactWithConfig"),
+  CdapClusterManager_deleteArtifact("CdapClusterManager@deleteArtifact"),
+  CdapClusterManager_startFlow("CdapClusterManager@startFlow"),
+  CdapClusterManager_startWorker("CdapClusterManager@startWorker"),
+  CdapClusterManager_startService("CdapClusterManager@startService"),
+  CdapClusterManager_startApp("CdapClusterManager@startApp"),
+  CdapClusterManager_stopApp("CdapClusterManager@stopApp"),
+  CdapClusterManager_deleteApp("CdapClusterManager@deleteApp"),
+  CdapClusterManager_loadPreferencesApp("CdapClusterManager@loadPreferencesApp"),
+  CdapClusterManager_loadPreferencesFlow("CdapClusterManager@loadPreferencesFlow"),
+  CdapClusterManager_loadPreferencesNameSpace("CdapClusterManager@loadPreferencesNameSpace"),
+  CdapClusterManager_setPreferencesApp("CdapClusterManager@setPreferencesApp"),
+  CdapClusterManager_setPreferencesFlow("CdapClusterManager@setPreferencesFlow"),
+  CdapClusterManager_setPreferencesWorker("CdapClusterManager@setPreferencesWorker"),
+  CdapClusterManager_setPreferencesService("CdapClusterManager@setPreferencesService"),
+  CdapClusterManager_setPreferencesNameSpace("CdapClusterManager@setPreferencesNameSpace"),
+  CdapClusterManager_setFlowRunTimeArgs("CdapClusterManager@setFlowRunTimeArgs"),
+  CdapClusterManager_setFlowletInstances("CdapClusterManager@setFlowletInstances"),
+  CdapClusterManager_stopFlow("CdapClusterManager@stopFlow"),
+  CdapClusterManager_stopWorker("CdapClusterManager@stopWorker"),
+  CdapClusterManager_stopService("CdapClusterManager@stopService"),
+  CdapClusterManager_truncateDataSet("CdapClusterManager@truncateDataSet"),
+  CdapClusterManager_deleteDataset("CdapClusterManager@deleteDataset"),
+  CdapClusterManager_createStream("CdapClusterManager@createStream"),
+  CdapClusterManager_deleteStream("CdapClusterManager@deleteStream"),
+  CdapClusterManager_getStreamEvents("CdapClusterManager@getStreamEvents"),
+  CdapClusterManager_getStreamStats("CdapClusterManager@getStreamStats"),
+  CdapClusterManager_sendEventToStream("CdapClusterManager@sendEventToStream"),
+  CdapClusterManager_trucateStream("CdapClusterManager@trucateStream"),
+  CdapClusterManager_setStreamProperties("CdapClusterManager@setStreamProperties"),
+  CdapClusterManager_restartApp("CdapClusterManager@restartApp"),
+  CdapClusterManager_createApp("CdapClusterManager@createApp"),
+  CdapClusterManager_createAppWithConfig("CdapClusterManager@createAppWithConfig"),
+  CdapClusterManager_setDatasetProperties("CdapClusterManager@setDatasetProperties"),
+  CdapClusterManager_setStreamTTL("CdapClusterManager@setStreamTTL"),
+  CdapClusterManager_suspendSchedule("CdapClusterManager@suspendSchedule"),
+  CdapClusterManager_resumeSchedule("CdapClusterManager@resumeSchedule") ; 
+
+
+	private String n;
+	
+	private CdapClusterManagerOperationEnum(String n) {
+		this.n = n;
+	}
+
+	@Override
+	public String toString() {
+		return n;
+	}
+
 }

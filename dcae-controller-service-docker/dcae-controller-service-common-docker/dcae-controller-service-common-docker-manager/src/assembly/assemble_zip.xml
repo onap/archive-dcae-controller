@@ -38,6 +38,7 @@
 			<directory>src/main/server-gen/bin</directory>
 			<outputDirectory>bin</outputDirectory>
 			<fileMode>0744</fileMode>
+			<lineEnding>unix</lineEnding>
 			<excludes>
 			</excludes>
 		</fileSet>
@@ -45,16 +46,19 @@
 			<directory>src/main/server/bin</directory>
 			<outputDirectory>bin</outputDirectory>
 			<fileMode>0744</fileMode>
+			<lineEnding>unix</lineEnding>
 			<excludes>
 			</excludes>
 		</fileSet>
 		<fileSet>
 			<directory>src/main/server-gen/scripts</directory>
 			<outputDirectory>scripts</outputDirectory>
+			<lineEnding>unix</lineEnding>
 		</fileSet>
 		<fileSet>
 			<directory>src/main/server/scripts</directory>
 			<outputDirectory>scripts</outputDirectory>
+			<lineEnding>unix</lineEnding>
 		</fileSet>
 	</fileSets>
 

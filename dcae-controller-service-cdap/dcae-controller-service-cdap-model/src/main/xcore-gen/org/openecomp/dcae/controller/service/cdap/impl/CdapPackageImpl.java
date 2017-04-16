@@ -26,13 +26,31 @@ package org.openecomp.dcae.controller.service.cdap.impl;
 import org.openecomp.dcae.controller.core.service.ServicePackage;
 import org.openecomp.dcae.controller.service.cdap.CdapApplication;
 import org.openecomp.dcae.controller.service.cdap.CdapArtifact;
+import org.openecomp.dcae.controller.service.cdap.CdapCreateAppStep;
+import org.openecomp.dcae.controller.service.cdap.CdapCreateAppWithConfigStep;
+import org.openecomp.dcae.controller.service.cdap.CdapDeleteAppStep;
+import org.openecomp.dcae.controller.service.cdap.CdapDeleteArtifact;
+import org.openecomp.dcae.controller.service.cdap.CdapDeployAppStep;
 import org.openecomp.dcae.controller.service.cdap.CdapFactory;
 import org.openecomp.dcae.controller.service.cdap.CdapInternalApplicationConfiguration;
+import org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep;
+import org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactWithConfigStep;
 import org.openecomp.dcae.controller.service.cdap.CdapPackage;
+import org.openecomp.dcae.controller.service.cdap.CdapResumeScheduleStep;
 import org.openecomp.dcae.controller.service.cdap.CdapService;
 import org.openecomp.dcae.controller.service.cdap.CdapServiceDescriptor;
 import org.openecomp.dcae.controller.service.cdap.CdapServiceInstance;
 import org.openecomp.dcae.controller.service.cdap.CdapServiceInstanceConfiguration;
+import org.openecomp.dcae.controller.service.cdap.CdapStartAppStep;
+import org.openecomp.dcae.controller.service.cdap.CdapStartFlowStep;
+import org.openecomp.dcae.controller.service.cdap.CdapStartServiceStep;
+import org.openecomp.dcae.controller.service.cdap.CdapStartWorkerStep;
+import org.openecomp.dcae.controller.service.cdap.CdapStep;
+import org.openecomp.dcae.controller.service.cdap.CdapStopAppStep;
+import org.openecomp.dcae.controller.service.cdap.CdapStopFlowStep;
+import org.openecomp.dcae.controller.service.cdap.CdapStopServiceStep;
+import org.openecomp.dcae.controller.service.cdap.CdapStopWorkerStep;
+import org.openecomp.dcae.controller.service.cdap.CdapSuspendScheduleStep;
 import org.openecomp.ncomp.core.CorePackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -97,6 +115,132 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * @generated
 	 */
 	private EClass cdapServiceDescriptorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapLoadArtifactStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapLoadArtifactWithConfigStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapCreateAppStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapCreateAppWithConfigStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapDeployAppStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapStopFlowStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapStopWorkerStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapStopServiceStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapStopAppStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapStartFlowStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapStartWorkerStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapStartServiceStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapStartAppStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapDeleteAppStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapDeleteArtifactEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapSuspendScheduleStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cdapResumeScheduleStepEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -213,7 +357,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * @generated
 	 */
 	public EReference getCdapServiceInstance_CdapNamespace() {
-		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(13);
+		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(17);
 	}
 
 	/**
@@ -266,8 +410,44 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCdapServiceInstance_DeploySteps() {
+		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCdapServiceInstance_UndeploySteps() {
+		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCdapServiceInstance_PreConfigurationSteps() {
+		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCdapServiceInstance_PostConfigurationSteps() {
+		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getCdapServiceInstance_AppNames() {
-		return (EAttribute)cdapServiceInstanceEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)cdapServiceInstanceEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -276,7 +456,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * @generated
 	 */
 	public EAttribute getCdapServiceInstance_WorkerNames() {
-		return (EAttribute)cdapServiceInstanceEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)cdapServiceInstanceEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -285,7 +465,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * @generated
 	 */
 	public EAttribute getCdapServiceInstance_FlowNames() {
-		return (EAttribute)cdapServiceInstanceEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)cdapServiceInstanceEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -294,7 +474,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * @generated
 	 */
 	public EAttribute getCdapServiceInstance_ServiceNames() {
-		return (EAttribute)cdapServiceInstanceEClass.getEStructuralFeatures().get(9);
+		return (EAttribute)cdapServiceInstanceEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -303,7 +483,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * @generated
 	 */
 	public EReference getCdapServiceInstance_Configuration() {
-		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(10);
+		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -312,7 +492,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * @generated
 	 */
 	public EReference getCdapServiceInstance_CdapConfiguration() {
-		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(11);
+		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -321,7 +501,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * @generated
 	 */
 	public EReference getCdapServiceInstance_ClusterService() {
-		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(12);
+		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -330,7 +510,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * @generated
 	 */
 	public EReference getCdapServiceInstance_Service() {
-		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(14);
+		return (EReference)cdapServiceInstanceEClass.getEStructuralFeatures().get(18);
 	}
 
 	/**
@@ -527,6 +707,474 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCdapStep() {
+		return cdapStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapLoadArtifactStep() {
+		return cdapLoadArtifactStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapLoadArtifactStep_ArtifactName() {
+		return (EAttribute)cdapLoadArtifactStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapLoadArtifactStep_Jarfile() {
+		return (EAttribute)cdapLoadArtifactStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapLoadArtifactStep_Version() {
+		return (EAttribute)cdapLoadArtifactStepEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapLoadArtifactWithConfigStep() {
+		return cdapLoadArtifactWithConfigStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapLoadArtifactWithConfigStep_Config() {
+		return (EAttribute)cdapLoadArtifactWithConfigStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapCreateAppStep() {
+		return cdapCreateAppStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapCreateAppStep_AppId() {
+		return (EAttribute)cdapCreateAppStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapCreateAppStep_ArtifactName() {
+		return (EAttribute)cdapCreateAppStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapCreateAppStep_Version() {
+		return (EAttribute)cdapCreateAppStepEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapCreateAppStep_Scope() {
+		return (EAttribute)cdapCreateAppStepEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapCreateAppWithConfigStep() {
+		return cdapCreateAppWithConfigStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapCreateAppWithConfigStep_AppConfig() {
+		return (EAttribute)cdapCreateAppWithConfigStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapDeployAppStep() {
+		return cdapDeployAppStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapDeployAppStep_Jarfile() {
+		return (EAttribute)cdapDeployAppStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapStopFlowStep() {
+		return cdapStopFlowStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStopFlowStep_AppId() {
+		return (EAttribute)cdapStopFlowStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStopFlowStep_FlowId() {
+		return (EAttribute)cdapStopFlowStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapStopWorkerStep() {
+		return cdapStopWorkerStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStopWorkerStep_AppId() {
+		return (EAttribute)cdapStopWorkerStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStopWorkerStep_WorkerId() {
+		return (EAttribute)cdapStopWorkerStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapStopServiceStep() {
+		return cdapStopServiceStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStopServiceStep_AppId() {
+		return (EAttribute)cdapStopServiceStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStopServiceStep_ServiceId() {
+		return (EAttribute)cdapStopServiceStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapStopAppStep() {
+		return cdapStopAppStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStopAppStep_AppId() {
+		return (EAttribute)cdapStopAppStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapStartFlowStep() {
+		return cdapStartFlowStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStartFlowStep_AppId() {
+		return (EAttribute)cdapStartFlowStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStartFlowStep_FlowId() {
+		return (EAttribute)cdapStartFlowStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStartFlowStep_ExtraArgs() {
+		return (EAttribute)cdapStartFlowStepEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapStartWorkerStep() {
+		return cdapStartWorkerStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStartWorkerStep_AppId() {
+		return (EAttribute)cdapStartWorkerStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStartWorkerStep_WorkerId() {
+		return (EAttribute)cdapStartWorkerStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStartWorkerStep_ExtraArgs() {
+		return (EAttribute)cdapStartWorkerStepEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapStartServiceStep() {
+		return cdapStartServiceStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStartServiceStep_AppId() {
+		return (EAttribute)cdapStartServiceStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStartServiceStep_ServiceId() {
+		return (EAttribute)cdapStartServiceStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStartServiceStep_ExtraArgs() {
+		return (EAttribute)cdapStartServiceStepEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapStartAppStep() {
+		return cdapStartAppStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapStartAppStep_AppId() {
+		return (EAttribute)cdapStartAppStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapDeleteAppStep() {
+		return cdapDeleteAppStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapDeleteAppStep_AppId() {
+		return (EAttribute)cdapDeleteAppStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapDeleteArtifact() {
+		return cdapDeleteArtifactEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapDeleteArtifact_ArtifactName() {
+		return (EAttribute)cdapDeleteArtifactEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapDeleteArtifact_Version() {
+		return (EAttribute)cdapDeleteArtifactEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapSuspendScheduleStep() {
+		return cdapSuspendScheduleStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapSuspendScheduleStep_AppId() {
+		return (EAttribute)cdapSuspendScheduleStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapSuspendScheduleStep_ScheduleId() {
+		return (EAttribute)cdapSuspendScheduleStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCdapResumeScheduleStep() {
+		return cdapResumeScheduleStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapResumeScheduleStep_AppId() {
+		return (EAttribute)cdapResumeScheduleStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCdapResumeScheduleStep_ScheduleId() {
+		return (EAttribute)cdapResumeScheduleStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CdapFactory getCdapFactory() {
 		return (CdapFactory)getEFactoryInstance();
 	}
@@ -561,6 +1209,10 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 		createEAttribute(cdapServiceInstanceEClass, CDAP_SERVICE_INSTANCE__APP_CONFIG_FILE);
 		createEReference(cdapServiceInstanceEClass, CDAP_SERVICE_INSTANCE__ARTIFACTS);
 		createEReference(cdapServiceInstanceEClass, CDAP_SERVICE_INSTANCE__APPS);
+		createEReference(cdapServiceInstanceEClass, CDAP_SERVICE_INSTANCE__DEPLOY_STEPS);
+		createEReference(cdapServiceInstanceEClass, CDAP_SERVICE_INSTANCE__UNDEPLOY_STEPS);
+		createEReference(cdapServiceInstanceEClass, CDAP_SERVICE_INSTANCE__PRE_CONFIGURATION_STEPS);
+		createEReference(cdapServiceInstanceEClass, CDAP_SERVICE_INSTANCE__POST_CONFIGURATION_STEPS);
 		createEAttribute(cdapServiceInstanceEClass, CDAP_SERVICE_INSTANCE__APP_NAMES);
 		createEAttribute(cdapServiceInstanceEClass, CDAP_SERVICE_INSTANCE__WORKER_NAMES);
 		createEAttribute(cdapServiceInstanceEClass, CDAP_SERVICE_INSTANCE__FLOW_NAMES);
@@ -596,6 +1248,76 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 		createEAttribute(cdapServiceDescriptorEClass, CDAP_SERVICE_DESCRIPTOR__SERVICE_CLASS);
 		createEAttribute(cdapServiceDescriptorEClass, CDAP_SERVICE_DESCRIPTOR__SERVICE_INSTANCE_CLASS);
 		createEAttribute(cdapServiceDescriptorEClass, CDAP_SERVICE_DESCRIPTOR__JAR_FILE);
+
+		cdapStepEClass = createEClass(CDAP_STEP);
+
+		cdapLoadArtifactStepEClass = createEClass(CDAP_LOAD_ARTIFACT_STEP);
+		createEAttribute(cdapLoadArtifactStepEClass, CDAP_LOAD_ARTIFACT_STEP__ARTIFACT_NAME);
+		createEAttribute(cdapLoadArtifactStepEClass, CDAP_LOAD_ARTIFACT_STEP__JARFILE);
+		createEAttribute(cdapLoadArtifactStepEClass, CDAP_LOAD_ARTIFACT_STEP__VERSION);
+
+		cdapLoadArtifactWithConfigStepEClass = createEClass(CDAP_LOAD_ARTIFACT_WITH_CONFIG_STEP);
+		createEAttribute(cdapLoadArtifactWithConfigStepEClass, CDAP_LOAD_ARTIFACT_WITH_CONFIG_STEP__CONFIG);
+
+		cdapCreateAppStepEClass = createEClass(CDAP_CREATE_APP_STEP);
+		createEAttribute(cdapCreateAppStepEClass, CDAP_CREATE_APP_STEP__APP_ID);
+		createEAttribute(cdapCreateAppStepEClass, CDAP_CREATE_APP_STEP__ARTIFACT_NAME);
+		createEAttribute(cdapCreateAppStepEClass, CDAP_CREATE_APP_STEP__VERSION);
+		createEAttribute(cdapCreateAppStepEClass, CDAP_CREATE_APP_STEP__SCOPE);
+
+		cdapCreateAppWithConfigStepEClass = createEClass(CDAP_CREATE_APP_WITH_CONFIG_STEP);
+		createEAttribute(cdapCreateAppWithConfigStepEClass, CDAP_CREATE_APP_WITH_CONFIG_STEP__APP_CONFIG);
+
+		cdapDeployAppStepEClass = createEClass(CDAP_DEPLOY_APP_STEP);
+		createEAttribute(cdapDeployAppStepEClass, CDAP_DEPLOY_APP_STEP__JARFILE);
+
+		cdapStopFlowStepEClass = createEClass(CDAP_STOP_FLOW_STEP);
+		createEAttribute(cdapStopFlowStepEClass, CDAP_STOP_FLOW_STEP__APP_ID);
+		createEAttribute(cdapStopFlowStepEClass, CDAP_STOP_FLOW_STEP__FLOW_ID);
+
+		cdapStopWorkerStepEClass = createEClass(CDAP_STOP_WORKER_STEP);
+		createEAttribute(cdapStopWorkerStepEClass, CDAP_STOP_WORKER_STEP__APP_ID);
+		createEAttribute(cdapStopWorkerStepEClass, CDAP_STOP_WORKER_STEP__WORKER_ID);
+
+		cdapStopServiceStepEClass = createEClass(CDAP_STOP_SERVICE_STEP);
+		createEAttribute(cdapStopServiceStepEClass, CDAP_STOP_SERVICE_STEP__APP_ID);
+		createEAttribute(cdapStopServiceStepEClass, CDAP_STOP_SERVICE_STEP__SERVICE_ID);
+
+		cdapStopAppStepEClass = createEClass(CDAP_STOP_APP_STEP);
+		createEAttribute(cdapStopAppStepEClass, CDAP_STOP_APP_STEP__APP_ID);
+
+		cdapStartFlowStepEClass = createEClass(CDAP_START_FLOW_STEP);
+		createEAttribute(cdapStartFlowStepEClass, CDAP_START_FLOW_STEP__APP_ID);
+		createEAttribute(cdapStartFlowStepEClass, CDAP_START_FLOW_STEP__FLOW_ID);
+		createEAttribute(cdapStartFlowStepEClass, CDAP_START_FLOW_STEP__EXTRA_ARGS);
+
+		cdapStartWorkerStepEClass = createEClass(CDAP_START_WORKER_STEP);
+		createEAttribute(cdapStartWorkerStepEClass, CDAP_START_WORKER_STEP__APP_ID);
+		createEAttribute(cdapStartWorkerStepEClass, CDAP_START_WORKER_STEP__WORKER_ID);
+		createEAttribute(cdapStartWorkerStepEClass, CDAP_START_WORKER_STEP__EXTRA_ARGS);
+
+		cdapStartServiceStepEClass = createEClass(CDAP_START_SERVICE_STEP);
+		createEAttribute(cdapStartServiceStepEClass, CDAP_START_SERVICE_STEP__APP_ID);
+		createEAttribute(cdapStartServiceStepEClass, CDAP_START_SERVICE_STEP__SERVICE_ID);
+		createEAttribute(cdapStartServiceStepEClass, CDAP_START_SERVICE_STEP__EXTRA_ARGS);
+
+		cdapStartAppStepEClass = createEClass(CDAP_START_APP_STEP);
+		createEAttribute(cdapStartAppStepEClass, CDAP_START_APP_STEP__APP_ID);
+
+		cdapDeleteAppStepEClass = createEClass(CDAP_DELETE_APP_STEP);
+		createEAttribute(cdapDeleteAppStepEClass, CDAP_DELETE_APP_STEP__APP_ID);
+
+		cdapDeleteArtifactEClass = createEClass(CDAP_DELETE_ARTIFACT);
+		createEAttribute(cdapDeleteArtifactEClass, CDAP_DELETE_ARTIFACT__ARTIFACT_NAME);
+		createEAttribute(cdapDeleteArtifactEClass, CDAP_DELETE_ARTIFACT__VERSION);
+
+		cdapSuspendScheduleStepEClass = createEClass(CDAP_SUSPEND_SCHEDULE_STEP);
+		createEAttribute(cdapSuspendScheduleStepEClass, CDAP_SUSPEND_SCHEDULE_STEP__APP_ID);
+		createEAttribute(cdapSuspendScheduleStepEClass, CDAP_SUSPEND_SCHEDULE_STEP__SCHEDULE_ID);
+
+		cdapResumeScheduleStepEClass = createEClass(CDAP_RESUME_SCHEDULE_STEP);
+		createEAttribute(cdapResumeScheduleStepEClass, CDAP_RESUME_SCHEDULE_STEP__APP_ID);
+		createEAttribute(cdapResumeScheduleStepEClass, CDAP_RESUME_SCHEDULE_STEP__SCHEDULE_ID);
 	}
 
 	/**
@@ -638,6 +1360,24 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 		cdapApplicationEClass.getESuperTypes().add(theCorePackage.getNamedEntity());
 		cdapArtifactEClass.getESuperTypes().add(theCorePackage.getNamedEntity());
 		cdapServiceDescriptorEClass.getESuperTypes().add(theServicePackage_1.getDcaeServiceDescriptor());
+		cdapStepEClass.getESuperTypes().add(theCorePackage.getNamedEntity());
+		cdapLoadArtifactStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapLoadArtifactWithConfigStepEClass.getESuperTypes().add(this.getCdapLoadArtifactStep());
+		cdapCreateAppStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapCreateAppWithConfigStepEClass.getESuperTypes().add(this.getCdapCreateAppStep());
+		cdapDeployAppStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapStopFlowStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapStopWorkerStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapStopServiceStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapStopAppStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapStartFlowStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapStartWorkerStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapStartServiceStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapStartAppStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapDeleteAppStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapDeleteArtifactEClass.getESuperTypes().add(this.getCdapStep());
+		cdapSuspendScheduleStepEClass.getESuperTypes().add(this.getCdapStep());
+		cdapResumeScheduleStepEClass.getESuperTypes().add(this.getCdapStep());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(cdapServiceEClass, CdapService.class, "CdapService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -653,6 +1393,10 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 		initEAttribute(getCdapServiceInstance_AppConfigFile(), theEcorePackage.getEString(), "appConfigFile", null, 0, 1, CdapServiceInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCdapServiceInstance_Artifacts(), this.getCdapArtifact(), null, "artifacts", null, 0, -1, CdapServiceInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCdapServiceInstance_Apps(), this.getCdapApplication(), null, "apps", null, 0, -1, CdapServiceInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCdapServiceInstance_DeploySteps(), this.getCdapStep(), null, "deploySteps", null, 0, -1, CdapServiceInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCdapServiceInstance_UndeploySteps(), this.getCdapStep(), null, "undeploySteps", null, 0, -1, CdapServiceInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCdapServiceInstance_PreConfigurationSteps(), this.getCdapStep(), null, "preConfigurationSteps", null, 0, -1, CdapServiceInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCdapServiceInstance_PostConfigurationSteps(), this.getCdapStep(), null, "postConfigurationSteps", null, 0, -1, CdapServiceInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCdapServiceInstance_AppNames(), theEcorePackage.getEString(), "appNames", null, 0, -1, CdapServiceInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCdapServiceInstance_WorkerNames(), theEcorePackage.getEString(), "workerNames", null, 0, -1, CdapServiceInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCdapServiceInstance_FlowNames(), theEcorePackage.getEString(), "flowNames", null, 0, -1, CdapServiceInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -689,6 +1433,76 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 		initEAttribute(getCdapServiceDescriptor_ServiceInstanceClass(), theEcorePackage.getEString(), "serviceInstanceClass", null, 0, 1, CdapServiceDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCdapServiceDescriptor_JarFile(), theEcorePackage.getEString(), "jarFile", null, 0, 1, CdapServiceDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(cdapStepEClass, CdapStep.class, "CdapStep", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(cdapLoadArtifactStepEClass, CdapLoadArtifactStep.class, "CdapLoadArtifactStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapLoadArtifactStep_ArtifactName(), theEcorePackage.getEString(), "artifactName", null, 0, 1, CdapLoadArtifactStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapLoadArtifactStep_Jarfile(), theEcorePackage.getEString(), "jarfile", null, 0, 1, CdapLoadArtifactStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapLoadArtifactStep_Version(), theEcorePackage.getEString(), "version", null, 0, 1, CdapLoadArtifactStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapLoadArtifactWithConfigStepEClass, CdapLoadArtifactWithConfigStep.class, "CdapLoadArtifactWithConfigStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapLoadArtifactWithConfigStep_Config(), theEcorePackage.getEString(), "config", null, 0, 1, CdapLoadArtifactWithConfigStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapCreateAppStepEClass, CdapCreateAppStep.class, "CdapCreateAppStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapCreateAppStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapCreateAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapCreateAppStep_ArtifactName(), theEcorePackage.getEString(), "artifactName", null, 0, 1, CdapCreateAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapCreateAppStep_Version(), theEcorePackage.getEString(), "version", null, 0, 1, CdapCreateAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapCreateAppStep_Scope(), theEcorePackage.getEString(), "scope", null, 0, 1, CdapCreateAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapCreateAppWithConfigStepEClass, CdapCreateAppWithConfigStep.class, "CdapCreateAppWithConfigStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapCreateAppWithConfigStep_AppConfig(), theEcorePackage.getEString(), "appConfig", null, 0, 1, CdapCreateAppWithConfigStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapDeployAppStepEClass, CdapDeployAppStep.class, "CdapDeployAppStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapDeployAppStep_Jarfile(), theEcorePackage.getEString(), "jarfile", null, 0, 1, CdapDeployAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapStopFlowStepEClass, CdapStopFlowStep.class, "CdapStopFlowStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapStopFlowStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapStopFlowStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapStopFlowStep_FlowId(), theEcorePackage.getEString(), "flowId", null, 0, 1, CdapStopFlowStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapStopWorkerStepEClass, CdapStopWorkerStep.class, "CdapStopWorkerStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapStopWorkerStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapStopWorkerStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapStopWorkerStep_WorkerId(), theEcorePackage.getEString(), "workerId", null, 0, 1, CdapStopWorkerStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapStopServiceStepEClass, CdapStopServiceStep.class, "CdapStopServiceStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapStopServiceStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapStopServiceStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapStopServiceStep_ServiceId(), theEcorePackage.getEString(), "serviceId", null, 0, 1, CdapStopServiceStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapStopAppStepEClass, CdapStopAppStep.class, "CdapStopAppStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapStopAppStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapStopAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapStartFlowStepEClass, CdapStartFlowStep.class, "CdapStartFlowStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapStartFlowStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapStartFlowStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapStartFlowStep_FlowId(), theEcorePackage.getEString(), "flowId", null, 0, 1, CdapStartFlowStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapStartFlowStep_ExtraArgs(), theEcorePackage.getEString(), "extraArgs", null, 0, 1, CdapStartFlowStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapStartWorkerStepEClass, CdapStartWorkerStep.class, "CdapStartWorkerStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapStartWorkerStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapStartWorkerStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapStartWorkerStep_WorkerId(), theEcorePackage.getEString(), "workerId", null, 0, 1, CdapStartWorkerStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapStartWorkerStep_ExtraArgs(), theEcorePackage.getEString(), "extraArgs", null, 0, 1, CdapStartWorkerStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapStartServiceStepEClass, CdapStartServiceStep.class, "CdapStartServiceStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapStartServiceStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapStartServiceStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapStartServiceStep_ServiceId(), theEcorePackage.getEString(), "serviceId", null, 0, 1, CdapStartServiceStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapStartServiceStep_ExtraArgs(), theEcorePackage.getEString(), "extraArgs", null, 0, 1, CdapStartServiceStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapStartAppStepEClass, CdapStartAppStep.class, "CdapStartAppStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapStartAppStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapStartAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapDeleteAppStepEClass, CdapDeleteAppStep.class, "CdapDeleteAppStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapDeleteAppStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapDeleteAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapDeleteArtifactEClass, CdapDeleteArtifact.class, "CdapDeleteArtifact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapDeleteArtifact_ArtifactName(), theEcorePackage.getEString(), "artifactName", null, 0, 1, CdapDeleteArtifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapDeleteArtifact_Version(), theEcorePackage.getEString(), "version", null, 0, 1, CdapDeleteArtifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapSuspendScheduleStepEClass, CdapSuspendScheduleStep.class, "CdapSuspendScheduleStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapSuspendScheduleStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapSuspendScheduleStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapSuspendScheduleStep_ScheduleId(), theEcorePackage.getEString(), "scheduleId", null, 0, 1, CdapSuspendScheduleStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cdapResumeScheduleStepEClass, CdapResumeScheduleStep.class, "CdapResumeScheduleStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCdapResumeScheduleStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapResumeScheduleStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapResumeScheduleStep_ScheduleId(), theEcorePackage.getEString(), "scheduleId", null, 0, 1, CdapResumeScheduleStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -696,7 +1510,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 		// http://www.eclipse.org/emf/2011/Xcore
 		createXcoreAnnotations();
 		// http://openecomp.org
-		createEcompAnnotations();
+		createOpenecompAnnotations();
 	}
 
 	/**
@@ -722,7 +1536,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createEcompAnnotations() {
+	protected void createOpenecompAnnotations() {
 		String source = "http://openecomp.org";	
 		addAnnotation
 		  (getCdapServiceInstance_Configuration(), 

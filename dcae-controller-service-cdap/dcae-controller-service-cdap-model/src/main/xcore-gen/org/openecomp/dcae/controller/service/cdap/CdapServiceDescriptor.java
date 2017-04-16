@@ -32,13 +32,13 @@ import org.openecomp.dcae.controller.core.service.DcaeServiceDescriptor;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceDescriptor#getServicePackage <em>Service Package</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceDescriptor#getServiceClass <em>Service Class</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceDescriptor#getServiceInstanceClass <em>Service Instance Class</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapServiceDescriptor#getJarFile <em>Jar File</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.service.cdap.CdapPackage#getCdapServiceDescriptor()
  * @model

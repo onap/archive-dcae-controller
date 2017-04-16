@@ -73,6 +73,7 @@ public class DcaeControllerServiceDmaapDrsubServiceProvider extends DcaeVirtualM
 			if (s != null && s.o != null 
 					&& ((CdapClusterServiceInstance) s.o).getStatus() == DeploymentStatus.DEPLOYED) {
 				i.setCdapClusterInstance((CdapClusterServiceInstance) s.o);
+				i.setLocation(i.getCdapClusterInstance().getLocation());
 				switch (cmd) {
 				case "pushManagerConfiguration":
 					o.pushManagerConfiguration(instanceName);

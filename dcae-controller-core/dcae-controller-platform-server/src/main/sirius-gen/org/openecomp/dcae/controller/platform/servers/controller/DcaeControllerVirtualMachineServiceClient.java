@@ -30,6 +30,8 @@ import org.openecomp.ncomp.sirius.manager.GenericHttpClient;
 import org.apache.log4j.Logger;
 
 import org.openecomp.logger.EcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -55,33 +57,37 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 		DcaeDcaePlatformController.ecoreSetup(); 
 		client = new GenericHttpClient(file,name);
 		client.add("/cont", this);
+		client.setVersion("ONAP-R2");
 	}
 
 	public DcaeControllerVirtualMachineServiceClient(String file, String name1, String name2) {
 		HighAvailabilityClient client1 = new HighAvailabilityClient(file,name1,name2);
 		client = client1.all; // requests should be forwarded to all.
 		client.add("/cont", this);
+		client.setVersion("ONAP-R2");
 	}
 	
 	public DcaeControllerVirtualMachineServiceClient(AbstractClient c) {
 		client = c;
 		client.add("/resources", this);
+		client.setVersion("ONAP-R2");
 	}
 
 
 
 	
 	public void deploy(String path, java.lang.String instanceName, java.lang.String containerPath) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_deploy);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_deploy,client.getRemote());
 		
 		try {
 		  client.operationPath(path, c, "deploy", null, instanceName,containerPath);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_deploy, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@deploy: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_deploy, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_deploy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_deploy,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -89,16 +95,17 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 
 	
 	public void undeploy(String path, java.lang.String instanceName) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_undeploy);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_undeploy,client.getRemote());
 		
 		try {
 		  client.operationPath(path, c, "undeploy", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_undeploy, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@undeploy: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_undeploy, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_undeploy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_undeploy,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -106,16 +113,17 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 
 	
 	public org.openecomp.dcae.controller.core.service.HealthTestResponse test(String path, java.lang.String instanceName) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_test);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_test,client.getRemote());
 		org.openecomp.dcae.controller.core.service.HealthTestResponse res;
 		try {
 		  res = (org.openecomp.dcae.controller.core.service.HealthTestResponse) client.operationPath(path, c, "test", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_test, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@test: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_test, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_test,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_test,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -123,16 +131,17 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 
 	
 	public void suspend(String path, java.lang.String instanceName) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_suspend);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_suspend,client.getRemote());
 		
 		try {
 		  client.operationPath(path, c, "suspend", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_suspend, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@suspend: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_suspend, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_suspend,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_suspend,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -140,16 +149,17 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 
 	
 	public void resume(String path, java.lang.String instanceName) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_resume);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_resume,client.getRemote());
 		
 		try {
 		  client.operationPath(path, c, "resume", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_resume, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@resume: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_resume, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_resume,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_resume,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -157,16 +167,17 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 
 	
 	public void pushManagerConfiguration(String path, java.lang.String instanceName) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_pushManagerConfiguration);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_pushManagerConfiguration,client.getRemote());
 		
 		try {
 		  client.operationPath(path, c, "pushManagerConfiguration", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_pushManagerConfiguration, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@pushManagerConfiguration: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_pushManagerConfiguration, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_pushManagerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_pushManagerConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -174,16 +185,17 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 
 	
 	public void pollManagerConfiguration(String path, java.lang.String instanceName) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_pollManagerConfiguration);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_pollManagerConfiguration,client.getRemote());
 		
 		try {
 		  client.operationPath(path, c, "pollManagerConfiguration", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_pollManagerConfiguration, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@pollManagerConfiguration: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_pollManagerConfiguration, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_pollManagerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_pollManagerConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -191,16 +203,17 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 
 	
 	public org.eclipse.emf.ecore.EObject managerConfiguration(String path, java.lang.String instanceName) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_managerConfiguration);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_managerConfiguration,client.getRemote());
 		org.eclipse.emf.ecore.EObject res;
 		try {
 		  res = (org.eclipse.emf.ecore.EObject) client.operationPath(path, c, "managerConfiguration", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_managerConfiguration, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@managerConfiguration: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_managerConfiguration, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_managerConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_managerConfiguration,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -208,16 +221,17 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 
 	
 	public org.json.JSONObject managerOperation(String path, java.lang.String instanceName, java.lang.String operation, org.json.JSONObject parameters) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_managerOperation);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_managerOperation,client.getRemote());
 		org.json.JSONObject res;
 		try {
 		  res = (org.json.JSONObject) client.operationPath(path, c, "managerOperation", null, instanceName,operation,parameters);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_managerOperation, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@managerOperation: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_managerOperation, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_managerOperation,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_managerOperation,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		return res;
@@ -225,16 +239,17 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 
 	
 	public void updateConfigurationFromPolicy(String path, java.lang.String instanceName) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_updateConfigurationFromPolicy);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_updateConfigurationFromPolicy,client.getRemote());
 		
 		try {
 		  client.operationPath(path, c, "updateConfigurationFromPolicy", null, instanceName);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_updateConfigurationFromPolicy, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@updateConfigurationFromPolicy: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_updateConfigurationFromPolicy, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_updateConfigurationFromPolicy,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_updateConfigurationFromPolicy,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -242,16 +257,17 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 
 	
 	public void runHealthTests(String path) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_runHealthTests);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_runHealthTests,client.getRemote());
 		
 		try {
 		  client.operationPath(path, c, "runHealthTests", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_runHealthTests, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@runHealthTests: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_runHealthTests, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_runHealthTests,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_runHealthTests,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		
@@ -259,16 +275,17 @@ public class DcaeControllerVirtualMachineServiceClient extends ControllerVirtual
 
 	
 	public void updateDeploymentStatus(String path) {
-		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); //foo
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerVirtualMachineServiceOperationEnum.REMOTE_updateDeploymentStatus);
+		EClass c = ControllerPackage.eINSTANCE.getControllerVirtualMachineService(); 
+		ecomplogger.recordMetricEventStart(ControllerVirtualMachineServiceOperationEnum.ControllerVirtualMachineService_updateDeploymentStatus,client.getRemote());
 		
 		try {
 		  client.operationPath(path, c, "updateDeploymentStatus", null);
 		}
 		catch (Exception e) {
-			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_updateDeploymentStatus, e.toString());
-			throw new RuntimeException("remote call failed: " + client.getRemote() + "@updateDeploymentStatus: " + e);
+			ecomplogger.warn(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_updateDeploymentStatus, e.toString());
+			EcompException e1 = EcompException.create(ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_updateDeploymentStatus,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,ControllerVirtualMachineServiceMessageEnum.REMOTE_CALL_FAILED_updateDeploymentStatus,e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		

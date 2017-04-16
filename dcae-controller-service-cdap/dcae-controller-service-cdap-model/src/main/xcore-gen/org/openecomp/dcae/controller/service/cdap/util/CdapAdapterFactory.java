@@ -121,6 +121,78 @@ public class CdapAdapterFactory extends AdapterFactoryImpl {
 				return createCdapServiceDescriptorAdapter();
 			}
 			@Override
+			public Adapter caseCdapStep(CdapStep object) {
+				return createCdapStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapLoadArtifactStep(CdapLoadArtifactStep object) {
+				return createCdapLoadArtifactStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapLoadArtifactWithConfigStep(CdapLoadArtifactWithConfigStep object) {
+				return createCdapLoadArtifactWithConfigStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapCreateAppStep(CdapCreateAppStep object) {
+				return createCdapCreateAppStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapCreateAppWithConfigStep(CdapCreateAppWithConfigStep object) {
+				return createCdapCreateAppWithConfigStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapDeployAppStep(CdapDeployAppStep object) {
+				return createCdapDeployAppStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapStopFlowStep(CdapStopFlowStep object) {
+				return createCdapStopFlowStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapStopWorkerStep(CdapStopWorkerStep object) {
+				return createCdapStopWorkerStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapStopServiceStep(CdapStopServiceStep object) {
+				return createCdapStopServiceStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapStopAppStep(CdapStopAppStep object) {
+				return createCdapStopAppStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapStartFlowStep(CdapStartFlowStep object) {
+				return createCdapStartFlowStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapStartWorkerStep(CdapStartWorkerStep object) {
+				return createCdapStartWorkerStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapStartServiceStep(CdapStartServiceStep object) {
+				return createCdapStartServiceStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapStartAppStep(CdapStartAppStep object) {
+				return createCdapStartAppStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapDeleteAppStep(CdapDeleteAppStep object) {
+				return createCdapDeleteAppStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapDeleteArtifact(CdapDeleteArtifact object) {
+				return createCdapDeleteArtifactAdapter();
+			}
+			@Override
+			public Adapter caseCdapSuspendScheduleStep(CdapSuspendScheduleStep object) {
+				return createCdapSuspendScheduleStepAdapter();
+			}
+			@Override
+			public Adapter caseCdapResumeScheduleStep(CdapResumeScheduleStep object) {
+				return createCdapResumeScheduleStepAdapter();
+			}
+			@Override
 			public Adapter caseNamedEntity(NamedEntity object) {
 				return createNamedEntityAdapter();
 			}
@@ -251,6 +323,258 @@ public class CdapAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCdapServiceDescriptorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapStep <em>Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapStep
+	 * @generated
+	 */
+	public Adapter createCdapStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep <em>Load Artifact Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep
+	 * @generated
+	 */
+	public Adapter createCdapLoadArtifactStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactWithConfigStep <em>Load Artifact With Config Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactWithConfigStep
+	 * @generated
+	 */
+	public Adapter createCdapLoadArtifactWithConfigStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapCreateAppStep <em>Create App Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapCreateAppStep
+	 * @generated
+	 */
+	public Adapter createCdapCreateAppStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapCreateAppWithConfigStep <em>Create App With Config Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapCreateAppWithConfigStep
+	 * @generated
+	 */
+	public Adapter createCdapCreateAppWithConfigStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapDeployAppStep <em>Deploy App Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapDeployAppStep
+	 * @generated
+	 */
+	public Adapter createCdapDeployAppStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapStopFlowStep <em>Stop Flow Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapStopFlowStep
+	 * @generated
+	 */
+	public Adapter createCdapStopFlowStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapStopWorkerStep <em>Stop Worker Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapStopWorkerStep
+	 * @generated
+	 */
+	public Adapter createCdapStopWorkerStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapStopServiceStep <em>Stop Service Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapStopServiceStep
+	 * @generated
+	 */
+	public Adapter createCdapStopServiceStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapStopAppStep <em>Stop App Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapStopAppStep
+	 * @generated
+	 */
+	public Adapter createCdapStopAppStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapStartFlowStep <em>Start Flow Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapStartFlowStep
+	 * @generated
+	 */
+	public Adapter createCdapStartFlowStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapStartWorkerStep <em>Start Worker Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapStartWorkerStep
+	 * @generated
+	 */
+	public Adapter createCdapStartWorkerStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapStartServiceStep <em>Start Service Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapStartServiceStep
+	 * @generated
+	 */
+	public Adapter createCdapStartServiceStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapStartAppStep <em>Start App Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapStartAppStep
+	 * @generated
+	 */
+	public Adapter createCdapStartAppStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapDeleteAppStep <em>Delete App Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapDeleteAppStep
+	 * @generated
+	 */
+	public Adapter createCdapDeleteAppStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapDeleteArtifact <em>Delete Artifact</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapDeleteArtifact
+	 * @generated
+	 */
+	public Adapter createCdapDeleteArtifactAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapSuspendScheduleStep <em>Suspend Schedule Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapSuspendScheduleStep
+	 * @generated
+	 */
+	public Adapter createCdapSuspendScheduleStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.service.cdap.CdapResumeScheduleStep <em>Resume Schedule Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapResumeScheduleStep
+	 * @generated
+	 */
+	public Adapter createCdapResumeScheduleStepAdapter() {
 		return null;
 	}
 

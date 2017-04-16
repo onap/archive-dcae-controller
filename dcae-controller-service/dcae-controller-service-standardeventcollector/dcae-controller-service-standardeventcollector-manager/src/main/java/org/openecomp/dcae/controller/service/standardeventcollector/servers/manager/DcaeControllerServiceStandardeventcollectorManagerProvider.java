@@ -38,6 +38,7 @@ import org.openecomp.ncomp.sirius.manager.IRequestHandler;
 import org.openecomp.ncomp.sirius.manager.ISiriusPlugin;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
 import org.openecomp.ncomp.sirius.function.FunctionUtils;
+import org.openecomp.ncomp.utils.ShellCmd;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -51,9 +52,17 @@ import java.util.List;
 
 
 
+
+
+
+import java.util.concurrent.TimeoutException;
+
 import org.openecomp.dcae.controller.service.servers.dockermanager.DcaeDockerManagerProvider;
 import org.openecomp.dcae.controller.service.standardeventcollector.manager.impl.ControllerServiceStandardeventcollectorManagerImpl;
 import org.openecomp.dcae.controller.service.standardeventcollector.manager.ControllerServiceStandardeventcollectorManager;
+import org.openecomp.dcae.controller.core.service.HealthTestResponse;
+import org.openecomp.dcae.controller.core.service.HealthTestStatus;
+import org.openecomp.dcae.controller.core.service.impl.ServiceFactoryImpl;
 
 
 public class DcaeControllerServiceStandardeventcollectorManagerProvider extends DcaeDockerManagerProvider {
@@ -67,8 +76,9 @@ public class DcaeControllerServiceStandardeventcollectorManagerProvider extends 
 	//private static final String HP_MAIN_CONFIG = "/home/dcae/SEC/SE-Collector-1.0.0-SNAPSHOT/etc/HPProcessingConfig.json";
 	//private static final String HP_MAIN_CONFIG_COPY = "/home/dcae/SEC/SE-Collector-1.0.0-SNAPSHOT/etc/HPProcessingConfig.json.copy";
 
-	private static final String HP_MAIN_CONFIG = "/opt/app/SEC/etc/HPProcessingConfig.json";
-	private static final String HP_MAIN_CONFIG_COPY = "/opt/app/SEC/etc/HPProcessingConfig.json";
+	private static final String HP_MAIN_CONFIG = "/opt/app/VESCollector/etc/DmaapConfig.json";
+	//private static final String HP_MAIN_CONFIG_COPY = "/opt/app/SEC/etc/DmaapConfig.json";
+	
 
 
 	public DcaeControllerServiceStandardeventcollectorManagerProvider(ISiriusServer controller, ControllerServiceStandardeventcollectorManager o) {
@@ -95,6 +105,46 @@ public class DcaeControllerServiceStandardeventcollectorManagerProvider extends 
 			e.printStackTrace();
 		}
     }
+
+
+	/** **/
+	@Override
+	public HealthTestResponse test() {
+		super.start();
+		HealthTestResponse resp = new ServiceFactoryImpl().createHealthTestResponse();
+		String cmdOutput = "";
+		try {
+			ShellCmd c = new ShellCmd("/opt/app/VESCollector/bin/VESrestfulCollector_Status.sh");
+			String s = c.result(60000);
+			int i = s.indexOf("\n");
+			System.out.println("DEBUG:HealthTestResponse i:" + i + " String S:" + s);
+			cmdOutput = i > 0 ? s.substring(0,i + 1) : s;
+		} catch (IOException | InterruptedException | TimeoutException e) {
+			System.out.println("HealthCheck test execution FAILED");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("test() VESCollecter check " + cmdOutput);
+		if (cmdOutput.startsWith("VESCollecter_Is_Running ")) {
+			resp.setStatus(HealthTestStatus.GREEN);
+			resp.setMessageCode("OK");
+			logger.error("HealthTest: VESCollecter_Is_Running");
+			System.out.println("INFO: HealthTest: VESCollecter_Is_Running");
+		} else if (cmdOutput.startsWith("VESCollecter_Is_HavingError")) {
+			resp.setStatus(HealthTestStatus.YELLOW);
+			resp.setMessageCode("ERROR: VESCollecter_Is_HavingError");
+			logger.error("HealthTest: VESCollecter_Is_HavingError");
+			System.out.println("ERROR: HealthTest: VESCollecter_Is_HavingError");
+		} else {
+			resp.setStatus(HealthTestStatus.RED);
+			resp.setMessageCode("ERROR: VESCollecter_Is_Not_Running");
+			logger.error("HealthTest: VESCollecter_Is_Not_Running");
+			System.out.println("ERROR: HealthTest: VESCollecter_Is_Not_Running");
+		}
+
+		return resp;
+	}
 
 
       @Override
@@ -128,7 +178,7 @@ public class DcaeControllerServiceStandardeventcollectorManagerProvider extends 
 		  String cport = o.getCport();
 		  if (cport !=null) {
 					String cmd="";
-			cmd = "bin/Cec_controller_update.sh " + "collector.service.port" +" "+ cport;
+			cmd = "bin/VES_controller_update.sh " + "collector.service.port" +" "+ cport;
 			executeCommand(cmd);
 		  }
 
@@ -136,7 +186,7 @@ public class DcaeControllerServiceStandardeventcollectorManagerProvider extends 
 		  String csecport = o.getCsecport();
 		  if (csecport !=null) {
 					String cmd="";
-						cmd = "bin/Cec_controller_update.sh " + "collector.service.secure.port" +" "+ csecport;
+						cmd = "bin/VES_controller_update.sh " + "collector.service.secure.port" +" "+ csecport;
 			executeCommand(cmd);
 		  }
 
@@ -144,85 +194,73 @@ public class DcaeControllerServiceStandardeventcollectorManagerProvider extends 
 		  String keystoreloc = o.getKeystoreloc();
 		  if (cport !=null) {
 					String cmd="";
-						cmd = "bin/Cec_controller_update.sh " + "collector.keystore.file.location" +" "+ keystoreloc;
+						cmd = "bin/VES_controller_update.sh " + "collector.keystore.file.location" +" "+ keystoreloc;
 			executeCommand(cmd);
 		  }
 
-		  //Collector keystorepwd
-		  String keystorepwd = o.getKeystorepwd();
+		  //Collector keystorepwdfile
+		  String keystorepwdfile = o.getKeystorepwdloc();
 		  if (cport !=null) {
 					String cmd="";
-						cmd = "bin/Cec_controller_update.sh " + "collector.keystore.password" +" "+ keystorepwd;
+						cmd = "bin/VES_controller_update.sh " + "collector.keystore.passwordfile" +" "+ keystorepwdfile;
 			executeCommand(cmd);
 		  }
 
+		  //Collector keystorealias
+		  String keystorealias = o.getKeystorealias();
+		  if (cport !=null) {
+					String cmd="";
+						cmd = "bin/VES_controller_update.sh " + "collector.keystore.alias" +" "+ keystorealias;
+			executeCommand(cmd);
+		  }
 		  //Collector maxinputqueue
 		  String maxinputqueue = o.getCport();
 		  if (cport !=null) {
 					String cmd="";
-			cmd = "bin/Cec_controller_update.sh " + "collector.inputQueue.maxPending" +" "+ maxinputqueue;
+			cmd = "bin/VES_controller_update.sh " + "collector.inputQueue.maxPending" +" "+ maxinputqueue;
 			executeCommand(cmd);
 		  }
 		
-		  //authid
-		  String authid = o.getAuthid();
-		  if (authid != null && !authid.equals("")) {
-				  String cmd="";
-				 cmd = "bin/Cec_controller_update.sh " + "header.authid" +" "+ authid;
-		         executeCommand(cmd);
-			} else {
-				System.out.println("Auth ID is null");
-		   }
-
-			//authpwd
-			String authpwd = o.getAuthpwd();
-			if (authpwd != null && !authpwd.equals("")) {
-				  String cmd="";
-				  cmd = "bin/Cec_controller_update.sh " + "header.authpwd" +" "+ authpwd;
-		          executeCommand(cmd);
-
-			} else {
-				System.out.println("Auth Password is null");
-			}
-
-			// Auth file
-			String authfile = o.getAuthfile();
-			if (authfile != null && !authfile.equals("")) {
-				  String cmd="";
-				  cmd = "bin/Cec_controller_update.sh " + "header.authstore" +" "+ authfile;
-		          executeCommand(cmd);
-
-			} else {
-				System.out.println("authfile is null");
-			}
-			
-			// Auth Flag
-			String authflag = o.getAuthflag();
-			if (authflag != null && !authflag.equals("")) {
-				  String cmd="";
-				  cmd = "bin/Cec_controller_update.sh " + "header.authflag" +" "+ authflag;
-		          executeCommand(cmd);
-
-			} else {
-				System.out.println("authflag is null");
-			}
-
 			//checkschemaflag
 			String checkschemaflag = o.getCheckschemaflag();
 			if (checkschemaflag != null && !checkschemaflag.equals("")) {
 				  String cmd="";
-				  cmd = "bin/Cec_controller_update.sh " + "collector.schema.checkflag" +" "+ checkschemaflag;
+				  cmd = "bin/VES_controller_update.sh " + "collector.schema.checkflag" +" "+ checkschemaflag;
 		          executeCommand(cmd);
 
 			} else {
 				System.out.println("Schemaflag is null");
 			}
 
+			//authlist - replaces authid/pwd
+			String authlist = o.getAuthlist();
+			if (authlist != null && !authlist.equals("")) {
+				  String cmd="";
+				  cmd = "bin/VES_controller_update.sh " + "header.authlist" +" "+ authlist;
+		          executeCommand(cmd);
+
+			} else {
+				System.out.println("authlist is null");
+			}
+
+			//StreamID
+			String streamid = o.getStreamid();
+			if (streamid != null && !streamid.equals("")) {
+				  String cmd="";
+				  cmd = "bin/VES_controller_update.sh " + "collector.dmaap.streamid" +" "+ streamid;
+		          executeCommand(cmd);
+
+			} else {
+				System.out.println("streamid is null");
+			}
+
+
+			
 			// schemafile
 			String schemafile = o.getSchemafile();
 			if (schemafile != null && !schemafile.equals("")) {
 				  String cmd="";
-				  cmd = "bin/Cec_controller_update.sh " + "collector.schema.file" +" "+ schemafile;
+				  cmd = "bin/VES_controller_update.sh " + "collector.schema.file" +" "+ schemafile;
 		          executeCommand(cmd);
 
 			} else {
@@ -328,8 +366,8 @@ private  JSONObject buildHpChannel(JSONObject tmpObj) {
 		mrClass = "HpCambriaInputStream";// getDmaapClass();
 	}
 
-	//basicAuthUsername = tmpObj.getString("dmaapUserName");
-	//basicAuthPassword = tmpObj.getString("dmaapPassword");
+	basicAuthUsername = tmpObj.getString("dmaapUserName");
+	basicAuthPassword = tmpObj.getString("dmaapPassword");
 	String dataTypeTmp = tmpObj.getString("dmaapDataType");
 	if (!dmaapDataType.equals(dataTypeTmp)) {
 		System.out.println("Invalid DataType (non message) recieved" + dataTypeTmp );
@@ -337,15 +375,7 @@ private  JSONObject buildHpChannel(JSONObject tmpObj) {
 	}
 	if (null != urlParts) {
 		mrUrl = urlParts[2];
-		
-		if (urlParts[3].equals("events"))
-		{
-			mrTopic = urlParts[4];
-		}
-		else
-		{
-			mrTopic = urlParts[3];
-		}
+		mrTopic = urlParts[4];
 		if (mrType.equals("subscribe") || mrType.equals("in")) {
 			if (urlParts.length > 4) {
 				hpGroup = urlParts[5];
@@ -358,16 +388,14 @@ private  JSONObject buildHpChannel(JSONObject tmpObj) {
 
 	hpName = tmpObj.getString("dmaapStreamId");
 
-	String[] hostport = mrUrl.split(":");
 	hpC.put("name", hpName);
 	hpC.put("type", mrType);
 	hpC.put("class", mrClass);
-	//hpC.put("cambria.url", mrUrl);
-	hpC.put("cambria.hosts", hostport[0]);
+	hpC.put("cambria.url", mrUrl);
 	hpC.put("cambria.topic", mrTopic);
-	//hpC.put("cambria.connectionType", sType);
-	//hpC.put("basicAuthUsername", basicAuthUsername);
-	//hpC.put("basicAuthPassword", basicAuthPassword);
+	hpC.put("cambria.connectionType", sType);
+	hpC.put("basicAuthUsername", basicAuthUsername);
+	hpC.put("basicAuthPassword", basicAuthPassword);
 	if (mrType.equals("out")) {
 		hpC.put("stripHpId", "true");
 	} else {
@@ -433,7 +461,7 @@ private void updateJsonToHPConfig(String sourceName,String targetfile, JSONArray
 	@Override  
 	public void start() {
 		  String cmd="";
-		  cmd = "bin/Cec_controller_update.sh " + "ADMIN" +" "+ "start";
+		  cmd = "bin/VES_controller_update.sh " + "ADMIN" +" "+ "start";
           executeCommand(cmd);
 
 		// TODO IMPLEMENT
@@ -443,7 +471,7 @@ private void updateJsonToHPConfig(String sourceName,String targetfile, JSONArray
 	@Override
 	public void suspend() {
 		  String cmd="";
-		  cmd = "bin/Cec_controller_update.sh " + "ADMIN" +" "+ "stop";
+		  cmd = "bin/VES_controller_update.sh " + "ADMIN" +" "+ "stop";
 		  executeCommand(cmd);
 	}
 
@@ -451,11 +479,11 @@ private void updateJsonToHPConfig(String sourceName,String targetfile, JSONArray
 	public void resume() {
 		
 		String cmd="";
-		cmd = "bin/Cec_controller_update.sh " + "ADMIN" +" "+ "stop";
+		cmd = "bin/VES_controller_update.sh " + "ADMIN" +" "+ "stop";
 		executeCommand(cmd);
 		  
 		cmd="";
-    	cmd = "bin/Cec_controller_update.sh " + "ADMIN" +" "+ "start";
+    	cmd = "bin/VES_controller_update.sh " + "ADMIN" +" "+ "start";
         executeCommand(cmd);
 
         // TODO IMPLEMENT

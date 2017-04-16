@@ -27,6 +27,7 @@ import org.openecomp.dcae.controller.core.server.DcaeBasicServer;
 import org.openecomp.dcae.controller.core.server.DcaeBasicServerNetwork;
 import org.openecomp.dcae.controller.core.server.ServerFactory;
 import org.openecomp.dcae.controller.core.server.ServerPackage;
+import org.openecomp.dcae.controller.core.service.ServicePackage;
 import org.openecomp.ncomp.core.CorePackage;
 import org.openecomp.ncomp.core.logs.LogsPackage;
 import org.openecomp.ncomp.openstack.compute.ComputePackage;
@@ -106,9 +107,9 @@ public class ServerPackageImpl extends EPackageImpl implements ServerPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		CollectdPackage.eINSTANCE.eClass();
+		ServicePackage.eINSTANCE.eClass();
 		PropertiesPackage.eINSTANCE.eClass();
-		LocationPackage.eINSTANCE.eClass();
+		CollectdPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theServerPackage.createPackageContents();
@@ -238,6 +239,33 @@ public class ServerPackageImpl extends EPackageImpl implements ServerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDcaeBasicServer_LastHealthTest() {
+		return (EAttribute)dcaeBasicServerEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDcaeBasicServer_HealthTestStatus() {
+		return (EAttribute)dcaeBasicServerEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDcaeBasicServer_HealthTestMessageCode() {
+		return (EAttribute)dcaeBasicServerEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDcaeBasicServerNetwork() {
 		return dcaeBasicServerNetworkEClass;
 	}
@@ -300,6 +328,9 @@ public class ServerPackageImpl extends EPackageImpl implements ServerPackage {
 		createEReference(dcaeBasicServerEClass, DCAE_BASIC_SERVER__HYPERVISOR);
 		createEReference(dcaeBasicServerEClass, DCAE_BASIC_SERVER__VM_TYPE);
 		createEAttribute(dcaeBasicServerEClass, DCAE_BASIC_SERVER__CERTIFICATE_PASSWORD);
+		createEAttribute(dcaeBasicServerEClass, DCAE_BASIC_SERVER__LAST_HEALTH_TEST);
+		createEAttribute(dcaeBasicServerEClass, DCAE_BASIC_SERVER__HEALTH_TEST_STATUS);
+		createEAttribute(dcaeBasicServerEClass, DCAE_BASIC_SERVER__HEALTH_TEST_MESSAGE_CODE);
 
 		dcaeBasicServerNetworkEClass = createEClass(DCAE_BASIC_SERVER_NETWORK);
 		createEAttribute(dcaeBasicServerNetworkEClass, DCAE_BASIC_SERVER_NETWORK__IP);
@@ -338,6 +369,7 @@ public class ServerPackageImpl extends EPackageImpl implements ServerPackage {
 		ComputePackage theComputePackage = (ComputePackage)EPackage.Registry.INSTANCE.getEPackage(ComputePackage.eNS_URI);
 		LocationPackage theLocationPackage = (LocationPackage)EPackage.Registry.INSTANCE.getEPackage(LocationPackage.eNS_URI);
 		org.openecomp.ncomp.openstack.core.CorePackage theCorePackage_1 = (org.openecomp.ncomp.openstack.core.CorePackage)EPackage.Registry.INSTANCE.getEPackage(org.openecomp.ncomp.openstack.core.CorePackage.eNS_URI);
+		ServicePackage theServicePackage = (ServicePackage)EPackage.Registry.INSTANCE.getEPackage(ServicePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -362,6 +394,9 @@ public class ServerPackageImpl extends EPackageImpl implements ServerPackage {
 		initEReference(getDcaeBasicServer_Hypervisor(), theLocationPackage.getHypervisor(), null, "hypervisor", null, 0, 1, DcaeBasicServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDcaeBasicServer_VmType(), theCorePackage_1.getVirtualMachineType(), null, "vmType", null, 0, 1, DcaeBasicServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDcaeBasicServer_CertificatePassword(), theEcorePackage.getEString(), "certificatePassword", null, 0, 1, DcaeBasicServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDcaeBasicServer_LastHealthTest(), theCorePackage.getDateMetricAttribute(), "lastHealthTest", null, 0, 1, DcaeBasicServer.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDcaeBasicServer_HealthTestStatus(), theServicePackage.getHealthTestStatus(), "healthTestStatus", null, 0, 1, DcaeBasicServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDcaeBasicServer_HealthTestMessageCode(), theEcorePackage.getEString(), "healthTestMessageCode", null, 0, 1, DcaeBasicServer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dcaeBasicServerNetworkEClass, DcaeBasicServerNetwork.class, "DcaeBasicServerNetwork", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDcaeBasicServerNetwork_Ip(), theEcorePackage.getEString(), "ip", null, 0, 1, DcaeBasicServerNetwork.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

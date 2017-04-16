@@ -51,12 +51,13 @@ public class Generator {
 		String dir = p.getNsURI().replaceAll(p.getNsPrefix()+'$',"") + "servers." + p.getNsPrefix();
 		dir = "src/main/sirius-gen/" + dir.replace('.', '/');
 		ControllerModel m = ControllermodelFactory.eINSTANCE.createControllerModel();
-		m.setTemplateDirectory("../../dcae-org.openecomp.ncomp.sirius.manager/ncomp-sirius-manager-generator/src/main/templates");
+		m.setTemplateDirectory("../../../ncomp.sirius.manager/ncomp-sirius-manager-generator/src/main/templates");
 		m.setPrefix("Dcae");
 		m.setPluginName(p.getNsURI());
 		m.setName("ControllerServiceDockerManager");
 		m.setTitle("ControllerServiceDockerManager");
 		ControllerGenerator g = new ControllerGenerator(o, m);
+		g.setVersion("ONAP-R2");
 		g.setEnableIRequestHandler(false);
 		g.setEnableISiriusPlugin(false);
 		g.addFactory("org.openecomp.ncomp.servers.docker.DockerDockerFactory");
@@ -68,6 +69,7 @@ public class Generator {
 		String pName = p.getNsURI().replaceAll(p.getNsPrefix()+'$',"") + "servers." + p.getNsPrefix() +".logging";
 //		YamlToJava.convert("src/main/resources/DockerAdaptor.yaml", dir + "/logging", pName);
 		YamlToJava.convert("src/main/sirius-gen/DockerManager.yaml", dir + "/logging", pName);
+		YamlToJava.convert("src/main/java/DockerManager2.yaml", dir + "/logging", pName);
 		String pName1 = p.getNsURI().replaceAll(p.getNsPrefix()+'$',"") + "servers." + p.getNsPrefix() +".gui.logging";
 		YamlToJava.convert("src/main/sirius-gen/GuiClientApi.yaml", dir + "/gui/logging", pName1);
 	}
@@ -78,19 +80,19 @@ public class Generator {
 		String dir = p.getNsURI().replaceAll(p.getNsPrefix()+"$", "") + "servers." + p.getNsPrefix();
 		dir = "src/main/sirius-gen/" + dir.replace('.', '/');
 		ControllerModel m = ControllermodelFactory.eINSTANCE.createControllerModel();
-		m.setTemplateDirectory("../../dcae-org.openecomp.ncomp.sirius.manager/ncomp-sirius-manager-generator/src/main/templates");
+		m.setTemplateDirectory("../../../ncomp.sirius.manager/ncomp-sirius-manager-generator/src/main/templates");
 		m.setPrefix("Dcae");
 		m.setPluginName(p.getNsURI());
 		m.setName("ControllerServiceDockerService");
 		m.setTitle("ControllerServiceDockerService");
 		ControllerGenerator g = new ControllerGenerator(o, m);
+		g.setVersion("ONAP-R2");
 		g.setEnableIRequestHandler(false);
 		g.setEnableISiriusPlugin(true);
 		g.generate(dir);
 		String pName = p.getNsURI().replaceAll(p.getNsPrefix()+'$',"") + "servers." + p.getNsPrefix() +".logging";
 //		YamlToJava.convert("src/main/resources/DcaeServiceDockerHost.yaml", dir + "/logging", pName);
 		YamlToJava.convert("src/main/sirius-gen/DockerService.yaml", dir + "/logging", pName);
-
 	}
 
 }

@@ -76,16 +76,15 @@ public class DcaeCommonVmManagerProvider extends DcaeVirtualMachineManagerProvid
 		String s = run(o.getScript() + " test", o.getTestTimeout());
 		String a[] = s.split(":");
 		int index = s.indexOf(":");
-		String msg = index < 0 ? null : s.substring(index).trim();
-		String status = a[0].trim();
+		String msg = index < 0 ? null : s.substring(index);
 		HealthTestResponse res = ServiceFactory.eINSTANCE.createHealthTestResponse();
-		if ("GREEN".equalsIgnoreCase(status)) {
+		if ("GREEN".equalsIgnoreCase(a[0])) {
 			res.setStatus(HealthTestStatus.GREEN);
 			res.setMessageCode(msg);
-		} else if ("YELLOW".equalsIgnoreCase(status)) {
+		} else if ("YELLOW".equalsIgnoreCase(a[0])) {
 			res.setStatus(HealthTestStatus.YELLOW);
 			res.setMessageCode(msg);
-		} else if ("RED".equalsIgnoreCase(status)) {
+		} else if ("RED".equalsIgnoreCase(a[0])) {
 			res.setStatus(HealthTestStatus.RED);
 			res.setMessageCode(msg);
 		} else {

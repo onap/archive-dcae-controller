@@ -27,13 +27,13 @@ package org.openecomp.dcae.controller.platform.servers.controller;
 
 
 
-
 import java.io.InputStream;
 
 import org.openecomp.ncomp.sirius.manager.IRequestHandler;
 import org.openecomp.ncomp.sirius.manager.ISwaggerHandler;
 import org.openecomp.ncomp.sirius.manager.ISiriusPlugin;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
+import org.openecomp.ncomp.sirius.manager.ISiriusProvider;
 import org.openecomp.ncomp.sirius.manager.ManagementServer;
 import org.openecomp.ncomp.sirius.manager.SwaggerUtils;
 import org.openecomp.ncomp.sirius.function.FunctionUtils;
@@ -41,7 +41,9 @@ import org.openecomp.ncomp.component.ApiRequestStatus;
 
 import org.apache.log4j.Logger;
 
-import org.openecomp.logger.EcompLogger;
+import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
+import org.openecomp.logger.StatusCodeEnum;
+import org.openecomp.logger.EcompException;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -59,9 +61,9 @@ import org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterI
 
 
 
-public class DcaeControllerCluster extends ControllerClusterImpl implements ISiriusPlugin {
+public class DcaeControllerCluster extends ControllerClusterImpl implements ISiriusProvider, ISiriusPlugin {
 	public static final Logger logger = Logger.getLogger(DcaeControllerCluster.class);
-	static final EcompLogger ecomplogger = EcompLogger.getEcompLogger();
+	static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
 	public DcaeControllerClusterProvider controller;
 	ISiriusServer server;
 
@@ -76,9 +78,8 @@ public class DcaeControllerCluster extends ControllerClusterImpl implements ISir
 		if (server != null)
 			server.getServer().recordApi(null, this, "pushData", ApiRequestStatus.START, duration_,serverName,dataName);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerClusterOperationEnum.pushData);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerClusterOperationEnum.ControllerCluster_pushData,server,this);
+		ecomplogger.recordMetricEventStart(ControllerClusterOperationEnum.ControllerCluster_pushData,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.pushData(serverName,dataName);
 		}
@@ -87,8 +88,10 @@ public class DcaeControllerCluster extends ControllerClusterImpl implements ISir
 			if (server != null)
 				server.getServer().recordApi(null, this, "pushData", ApiRequestStatus.ERROR, duration_,serverName,dataName);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(ControllerClusterMessageEnum.pushData, e.toString());
-			throw e;
+			ecomplogger.warn(ControllerClusterMessageEnum.REQUEST_FAILED_pushData, e.toString());
+			EcompException e1 =  EcompException.create(ControllerClusterMessageEnum.REQUEST_FAILED_pushData,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerClusterMessageEnum.REQUEST_FAILED_pushData, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -103,9 +106,8 @@ public class DcaeControllerCluster extends ControllerClusterImpl implements ISir
 		if (server != null)
 			server.getServer().recordApi(null, this, "receiveData", ApiRequestStatus.START, duration_,serverName,dataName,time,content);
 		Date now_ = new Date();
-		ecomplogger.recordMetricEventStart();
-		ecomplogger.setOperation(ControllerClusterOperationEnum.receiveData);
-		ecomplogger.setInstanceId(ManagementServer.object2ref(this));
+		ecomplogger.recordAuditEventStartIfNeeded(ControllerClusterOperationEnum.ControllerCluster_receiveData,server,this);
+		ecomplogger.recordMetricEventStart(ControllerClusterOperationEnum.ControllerCluster_receiveData,"self:" + ManagementServer.object2ref(this));
 		try {
 			 controller.receiveData(serverName,dataName,time,content);
 		}
@@ -114,8 +116,10 @@ public class DcaeControllerCluster extends ControllerClusterImpl implements ISir
 			if (server != null)
 				server.getServer().recordApi(null, this, "receiveData", ApiRequestStatus.ERROR, duration_,serverName,dataName,time,content);
 			System.err.println("ERROR: " + e);
-			ecomplogger.warn(ControllerClusterMessageEnum.receiveData, e.toString());
-			throw e;
+			ecomplogger.warn(ControllerClusterMessageEnum.REQUEST_FAILED_receiveData, e.toString());
+			EcompException e1 =  EcompException.create(ControllerClusterMessageEnum.REQUEST_FAILED_receiveData,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, ControllerClusterMessageEnum.REQUEST_FAILED_receiveData, e.getMessage());
+			throw e1;
 		}
 		ecomplogger.recordMetricEventEnd();
 		duration_ = new Date().getTime()-now_.getTime();
@@ -139,7 +143,7 @@ public class DcaeControllerCluster extends ControllerClusterImpl implements ISir
 	public static void ecoreSetup() {
 		DcaeControllerClusterProvider.ecoreSetup();
 	}
-	public DcaeControllerClusterProvider getSomfProvider() {
+	public DcaeControllerClusterProvider getSiriusProvider() {
 		return controller;
 	}
 }

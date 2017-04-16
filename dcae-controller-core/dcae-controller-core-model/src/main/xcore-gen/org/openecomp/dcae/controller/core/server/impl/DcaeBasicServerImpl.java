@@ -26,6 +26,7 @@ package org.openecomp.dcae.controller.core.server.impl;
 import org.openecomp.dcae.controller.core.server.DcaeBasicServer;
 import org.openecomp.dcae.controller.core.server.DcaeBasicServerNetwork;
 import org.openecomp.dcae.controller.core.server.ServerPackage;
+import org.openecomp.dcae.controller.core.service.HealthTestStatus;
 import org.openecomp.ncomp.core.CorePackage;
 import org.openecomp.ncomp.core.HasOperationalState;
 import org.openecomp.ncomp.core.OperationalState;
@@ -73,6 +74,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerImpl#getHypervisor <em>Hypervisor</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerImpl#getVmType <em>Vm Type</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerImpl#getCertificatePassword <em>Certificate Password</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerImpl#getLastHealthTest <em>Last Health Test</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerImpl#getHealthTestStatus <em>Health Test Status</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerImpl#getHealthTestMessageCode <em>Health Test Message Code</em>}</li>
  * </ul>
  * </p>
  *
@@ -288,6 +292,66 @@ public class DcaeBasicServerImpl extends NamedEntityImpl implements DcaeBasicSer
 	 * @ordered
 	 */
 	protected String certificatePassword = CERTIFICATE_PASSWORD_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLastHealthTest() <em>Last Health Test</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastHealthTest()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final DateMetricAttribute LAST_HEALTH_TEST_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLastHealthTest() <em>Last Health Test</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastHealthTest()
+	 * @generated
+	 * @ordered
+	 */
+	protected DateMetricAttribute lastHealthTest = LAST_HEALTH_TEST_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getHealthTestStatus() <em>Health Test Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHealthTestStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final HealthTestStatus HEALTH_TEST_STATUS_EDEFAULT = HealthTestStatus.GREEN;
+
+	/**
+	 * The cached value of the '{@link #getHealthTestStatus() <em>Health Test Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHealthTestStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected HealthTestStatus healthTestStatus = HEALTH_TEST_STATUS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getHealthTestMessageCode() <em>Health Test Message Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHealthTestMessageCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String HEALTH_TEST_MESSAGE_CODE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getHealthTestMessageCode() <em>Health Test Message Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHealthTestMessageCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected String healthTestMessageCode = HEALTH_TEST_MESSAGE_CODE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -687,6 +751,69 @@ public class DcaeBasicServerImpl extends NamedEntityImpl implements DcaeBasicSer
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DateMetricAttribute getLastHealthTest() {
+		return lastHealthTest;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLastHealthTest(DateMetricAttribute newLastHealthTest) {
+		DateMetricAttribute oldLastHealthTest = lastHealthTest;
+		lastHealthTest = newLastHealthTest;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ServerPackage.DCAE_BASIC_SERVER__LAST_HEALTH_TEST, oldLastHealthTest, lastHealthTest));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public HealthTestStatus getHealthTestStatus() {
+		return healthTestStatus;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHealthTestStatus(HealthTestStatus newHealthTestStatus) {
+		HealthTestStatus oldHealthTestStatus = healthTestStatus;
+		healthTestStatus = newHealthTestStatus == null ? HEALTH_TEST_STATUS_EDEFAULT : newHealthTestStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_STATUS, oldHealthTestStatus, healthTestStatus));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getHealthTestMessageCode() {
+		return healthTestMessageCode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHealthTestMessageCode(String newHealthTestMessageCode) {
+		String oldHealthTestMessageCode = healthTestMessageCode;
+		healthTestMessageCode = newHealthTestMessageCode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_MESSAGE_CODE, oldHealthTestMessageCode, healthTestMessageCode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -747,6 +874,12 @@ public class DcaeBasicServerImpl extends NamedEntityImpl implements DcaeBasicSer
 				return basicGetVmType();
 			case ServerPackage.DCAE_BASIC_SERVER__CERTIFICATE_PASSWORD:
 				return getCertificatePassword();
+			case ServerPackage.DCAE_BASIC_SERVER__LAST_HEALTH_TEST:
+				return getLastHealthTest();
+			case ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_STATUS:
+				return getHealthTestStatus();
+			case ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_MESSAGE_CODE:
+				return getHealthTestMessageCode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -809,6 +942,15 @@ public class DcaeBasicServerImpl extends NamedEntityImpl implements DcaeBasicSer
 			case ServerPackage.DCAE_BASIC_SERVER__CERTIFICATE_PASSWORD:
 				setCertificatePassword((String)newValue);
 				return;
+			case ServerPackage.DCAE_BASIC_SERVER__LAST_HEALTH_TEST:
+				setLastHealthTest((DateMetricAttribute)newValue);
+				return;
+			case ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_STATUS:
+				setHealthTestStatus((HealthTestStatus)newValue);
+				return;
+			case ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_MESSAGE_CODE:
+				setHealthTestMessageCode((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -866,6 +1008,15 @@ public class DcaeBasicServerImpl extends NamedEntityImpl implements DcaeBasicSer
 			case ServerPackage.DCAE_BASIC_SERVER__CERTIFICATE_PASSWORD:
 				setCertificatePassword(CERTIFICATE_PASSWORD_EDEFAULT);
 				return;
+			case ServerPackage.DCAE_BASIC_SERVER__LAST_HEALTH_TEST:
+				setLastHealthTest(LAST_HEALTH_TEST_EDEFAULT);
+				return;
+			case ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_STATUS:
+				setHealthTestStatus(HEALTH_TEST_STATUS_EDEFAULT);
+				return;
+			case ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_MESSAGE_CODE:
+				setHealthTestMessageCode(HEALTH_TEST_MESSAGE_CODE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -908,6 +1059,12 @@ public class DcaeBasicServerImpl extends NamedEntityImpl implements DcaeBasicSer
 				return vmType != null;
 			case ServerPackage.DCAE_BASIC_SERVER__CERTIFICATE_PASSWORD:
 				return CERTIFICATE_PASSWORD_EDEFAULT == null ? certificatePassword != null : !CERTIFICATE_PASSWORD_EDEFAULT.equals(certificatePassword);
+			case ServerPackage.DCAE_BASIC_SERVER__LAST_HEALTH_TEST:
+				return LAST_HEALTH_TEST_EDEFAULT == null ? lastHealthTest != null : !LAST_HEALTH_TEST_EDEFAULT.equals(lastHealthTest);
+			case ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_STATUS:
+				return healthTestStatus != HEALTH_TEST_STATUS_EDEFAULT;
+			case ServerPackage.DCAE_BASIC_SERVER__HEALTH_TEST_MESSAGE_CODE:
+				return HEALTH_TEST_MESSAGE_CODE_EDEFAULT == null ? healthTestMessageCode != null : !HEALTH_TEST_MESSAGE_CODE_EDEFAULT.equals(healthTestMessageCode);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -982,6 +1139,12 @@ public class DcaeBasicServerImpl extends NamedEntityImpl implements DcaeBasicSer
 		result.append(usingMonitoringAgent);
 		result.append(", certificatePassword: ");
 		result.append(certificatePassword);
+		result.append(", lastHealthTest: ");
+		result.append(lastHealthTest);
+		result.append(", healthTestStatus: ");
+		result.append(healthTestStatus);
+		result.append(", healthTestMessageCode: ");
+		result.append(healthTestMessageCode);
 		result.append(')');
 		return result.toString();
 	}

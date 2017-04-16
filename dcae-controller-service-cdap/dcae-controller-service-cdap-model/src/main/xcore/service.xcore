@@ -49,6 +49,10 @@ class CdapServiceInstance extends DcaeServiceInstance {
 	String appConfigFile
 	contains CdapArtifact[] artifacts
 	contains CdapApplication[] apps
+	contains CdapStep[] deploySteps
+	contains CdapStep[] undeploySteps
+	contains CdapStep[] preConfigurationSteps
+	contains CdapStep[] postConfigurationSteps
 	String[] appNames
 	String[] workerNames 
 	String[] flowNames 
@@ -98,4 +102,98 @@ class CdapServiceDescriptor extends DcaeServiceDescriptor {
 	String serviceInstanceClass 	
 	String jarFile
 }
+
+abstract class CdapStep extends NamedEntity {
+	
+}
+
+class CdapLoadArtifactStep extends CdapStep {
+	String artifactName
+	String jarfile
+	String version
+}
+
+class CdapLoadArtifactWithConfigStep extends CdapLoadArtifactStep {
+	String config
+}
+
+class CdapCreateAppStep extends CdapStep {
+	String appId
+	String artifactName
+	String version
+	String scope 
+}
+
+class CdapCreateAppWithConfigStep extends CdapCreateAppStep {
+	String appConfig
+}
+
+class CdapDeployAppStep extends CdapStep {
+	String jarfile
+}
+
+class CdapStopFlowStep extends CdapStep {
+	String appId
+	String flowId
+}
+
+class CdapStopWorkerStep extends CdapStep {
+	String appId
+	String workerId
+}
+
+class CdapStopServiceStep extends CdapStep {
+	String appId
+	String serviceId
+}
+
+class CdapStopAppStep extends CdapStep {
+	String appId
+}
+
+class CdapStartFlowStep extends CdapStep {
+	String appId
+	String flowId
+	String extraArgs
+}
+
+class CdapStartWorkerStep extends CdapStep {
+	String appId
+	String workerId
+	String extraArgs
+}
+
+class CdapStartServiceStep extends CdapStep {
+	String appId
+	String serviceId
+	String extraArgs
+}
+
+class CdapStartAppStep extends CdapStep {
+	String appId
+}
+
+class CdapDeleteAppStep extends CdapStep {
+	String appId
+}
+
+class CdapDeleteArtifact extends CdapStep {
+	String artifactName
+	String version
+}
+
+class CdapSuspendScheduleStep extends CdapStep {
+	String appId
+	String scheduleId
+}
+
+class CdapResumeScheduleStep extends CdapStep {
+	String appId
+	String scheduleId
+}
+
+
+
+
+
 

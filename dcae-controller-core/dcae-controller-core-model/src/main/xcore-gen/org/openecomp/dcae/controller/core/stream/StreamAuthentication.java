@@ -31,7 +31,7 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Topic Authentication</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Authentication</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getStreamAuthentication()
@@ -47,7 +47,9 @@ public enum StreamAuthentication implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	AAF(0, "AAF", "aaf"), /**
+	AAF(0, "AAF", "aaf"),
+
+	/**
 	 * The '<em><b>NONE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -55,7 +57,9 @@ public enum StreamAuthentication implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NONE(0, "NONE", "none"), /**
+	NONE(0, "NONE", "none"),
+
+	/**
 	 * The '<em><b>PASSWORD</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -247,4 +251,4 @@ public enum StreamAuthentication implements Enumerator {
 		return literal;
 	}
 	
-} //TopicAuthentication
+} //StreamAuthentication

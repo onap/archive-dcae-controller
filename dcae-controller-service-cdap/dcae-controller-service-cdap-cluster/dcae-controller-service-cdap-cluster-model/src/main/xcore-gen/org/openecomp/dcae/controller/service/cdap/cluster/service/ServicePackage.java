@@ -25,6 +25,7 @@ package org.openecomp.dcae.controller.service.cdap.cluster.service;
 
 import org.openecomp.dcae.controller.service.vm.VmPackage;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -41,6 +42,24 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * -
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *  *        http://www.apache.org/licenses/LICENSE-2.0
+ *  * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ * <!-- end-model-doc -->
  * @see org.openecomp.dcae.controller.service.cdap.cluster.service.ServiceFactory
  * @model kind="package"
  *        annotation="http://www.eclipse.org/emf/2002/GenModel modelDirectory='/dcae-controller-service-cdap-cluster-model/src/main/xcore-gen' basePackage='org.openecomp.dcae.controller.service.cdap.cluster'"
@@ -578,13 +597,40 @@ public interface ServicePackage extends EPackage {
 	int CDAP_CLUSTER_SERVICE_INSTANCE__CLUSTER = VmPackage.VIRTUAL_MACHINE_SERVICE_INSTANCE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Cdap Service Servers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_SERVICE_INSTANCE__CDAP_SERVICE_SERVERS = VmPackage.VIRTUAL_MACHINE_SERVICE_INSTANCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Health Check Script</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_SERVICE_INSTANCE__HEALTH_CHECK_SCRIPT = VmPackage.VIRTUAL_MACHINE_SERVICE_INSTANCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Test Timeout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_SERVICE_INSTANCE__TEST_TIMEOUT = VmPackage.VIRTUAL_MACHINE_SERVICE_INSTANCE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Cdap Cluster Service Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_SERVICE_INSTANCE_FEATURE_COUNT = VmPackage.VIRTUAL_MACHINE_SERVICE_INSTANCE_FEATURE_COUNT + 1;
+	int CDAP_CLUSTER_SERVICE_INSTANCE_FEATURE_COUNT = VmPackage.VIRTUAL_MACHINE_SERVICE_INSTANCE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Cdap Cluster Service Instance</em>' class.
@@ -615,13 +661,40 @@ public interface ServicePackage extends EPackage {
 	int CDAP_CLUSTER_CONFIGURATION__CLUSTER = 0;
 
 	/**
+	 * The feature id for the '<em><b>Cdap Service Servers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Health Check Script</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Test Timeout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT = 3;
+
+	/**
 	 * The number of structural features of the '<em>Cdap Cluster Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_CONFIGURATION_FEATURE_COUNT = 1;
+	int CDAP_CLUSTER_CONFIGURATION_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Cdap Cluster Configuration</em>' class.
@@ -673,6 +746,39 @@ public interface ServicePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCdapClusterConfiguration_Cluster();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getCdapServiceServers <em>Cdap Service Servers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Cdap Service Servers</em>'.
+	 * @see org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getCdapServiceServers()
+	 * @see #getCdapClusterConfiguration()
+	 * @generated
+	 */
+	EAttribute getCdapClusterConfiguration_CdapServiceServers();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getHealthCheckScript <em>Health Check Script</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Health Check Script</em>'.
+	 * @see org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getHealthCheckScript()
+	 * @see #getCdapClusterConfiguration()
+	 * @generated
+	 */
+	EAttribute getCdapClusterConfiguration_HealthCheckScript();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getTestTimeout <em>Test Timeout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Test Timeout</em>'.
+	 * @see org.openecomp.dcae.controller.service.cdap.cluster.service.CdapClusterConfiguration#getTestTimeout()
+	 * @see #getCdapClusterConfiguration()
+	 * @generated
+	 */
+	EAttribute getCdapClusterConfiguration_TestTimeout();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -734,6 +840,30 @@ public interface ServicePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CDAP_CLUSTER_CONFIGURATION__CLUSTER = eINSTANCE.getCdapClusterConfiguration_Cluster();
+
+		/**
+		 * The meta object literal for the '<em><b>Cdap Service Servers</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS = eINSTANCE.getCdapClusterConfiguration_CdapServiceServers();
+
+		/**
+		 * The meta object literal for the '<em><b>Health Check Script</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT = eINSTANCE.getCdapClusterConfiguration_HealthCheckScript();
+
+		/**
+		 * The meta object literal for the '<em><b>Test Timeout</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT = eINSTANCE.getCdapClusterConfiguration_TestTimeout();
 
 	}
 

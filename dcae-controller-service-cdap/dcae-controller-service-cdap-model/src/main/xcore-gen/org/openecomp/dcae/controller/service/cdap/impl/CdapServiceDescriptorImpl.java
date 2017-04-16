@@ -40,13 +40,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceDescriptorImpl#getServicePackage <em>Service Package</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceDescriptorImpl#getServiceClass <em>Service Class</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceDescriptorImpl#getServiceInstanceClass <em>Service Instance Class</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapServiceDescriptorImpl#getJarFile <em>Jar File</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -32,6 +32,7 @@ import org.openecomp.ncomp.core.NamedEntity
 import org.openecomp.ncomp.openstack.core.VirtualMachineType
 import org.openecomp.ncomp.openstack.compute.Server
 import org.openecomp.ncomp.openstack.location.Hypervisor
+import org.openecomp.dcae.controller.core.service.HealthTestStatus
 
 class DcaeBasicServer extends NamedEntity, HasOperationalState, LogMessageContainer {
 	String privateIp
@@ -45,6 +46,9 @@ class DcaeBasicServer extends NamedEntity, HasOperationalState, LogMessageContai
 	refers Hypervisor hypervisor 
 	refers VirtualMachineType vmType
 	String certificatePassword
+	transient DateMetricAttribute lastHealthTest
+	HealthTestStatus healthTestStatus
+	String healthTestMessageCode
 }
 
 class DcaeBasicServerNetwork extends NamedEntity {

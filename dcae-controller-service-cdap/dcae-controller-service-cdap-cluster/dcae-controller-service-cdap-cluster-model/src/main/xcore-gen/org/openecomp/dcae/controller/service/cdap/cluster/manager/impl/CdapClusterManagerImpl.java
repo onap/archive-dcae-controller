@@ -32,12 +32,14 @@ import org.openecomp.ncomp.cdap.CdapApi;
 import org.openecomp.ncomp.cdap.CdapCluster;
 import org.openecomp.ncomp.cdap.CdapPackage;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,10 +47,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.manager.impl.CdapClusterManagerImpl#getCluster <em>Cluster</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.manager.impl.CdapClusterManagerImpl#getCdapServiceServers <em>Cdap Service Servers</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.manager.impl.CdapClusterManagerImpl#getHealthCheckScript <em>Health Check Script</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.cluster.manager.impl.CdapClusterManagerImpl#getTestTimeout <em>Test Timeout</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -62,6 +67,56 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 	 * @ordered
 	 */
 	protected CdapCluster cluster;
+
+	/**
+	 * The cached value of the '{@link #getCdapServiceServers() <em>Cdap Service Servers</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCdapServiceServers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> cdapServiceServers;
+
+	/**
+	 * The default value of the '{@link #getHealthCheckScript() <em>Health Check Script</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHealthCheckScript()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String HEALTH_CHECK_SCRIPT_EDEFAULT = "bin/healthCheck.sh";
+
+	/**
+	 * The cached value of the '{@link #getHealthCheckScript() <em>Health Check Script</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHealthCheckScript()
+	 * @generated
+	 * @ordered
+	 */
+	protected String healthCheckScript = HEALTH_CHECK_SCRIPT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTestTimeout() <em>Test Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTestTimeout()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int TEST_TIMEOUT_EDEFAULT = 60000;
+
+	/**
+	 * The cached value of the '{@link #getTestTimeout() <em>Test Timeout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTestTimeout()
+	 * @generated
+	 * @ordered
+	 */
+	protected int testTimeout = TEST_TIMEOUT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -130,6 +185,60 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getCdapServiceServers() {
+		if (cdapServiceServers == null) {
+			cdapServiceServers = new EDataTypeEList<String>(String.class, this, ManagerPackage.CDAP_CLUSTER_MANAGER__CDAP_SERVICE_SERVERS);
+		}
+		return cdapServiceServers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getHealthCheckScript() {
+		return healthCheckScript;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHealthCheckScript(String newHealthCheckScript) {
+		String oldHealthCheckScript = healthCheckScript;
+		healthCheckScript = newHealthCheckScript;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManagerPackage.CDAP_CLUSTER_MANAGER__HEALTH_CHECK_SCRIPT, oldHealthCheckScript, healthCheckScript));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getTestTimeout() {
+		return testTimeout;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTestTimeout(int newTestTimeout) {
+		int oldTestTimeout = testTimeout;
+		testTimeout = newTestTimeout;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManagerPackage.CDAP_CLUSTER_MANAGER__TEST_TIMEOUT, oldTestTimeout, testTimeout));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String createNamespace(String namespace) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -164,6 +273,17 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 	 * @generated
 	 */
 	public String loadArtifact(String namespace, String artifactName, String jarfile, String version) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String loadArtifactWithConfig(String namespace, String artifactName, String jarfile, String version, String config) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -548,6 +668,28 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String suspendSchedule(String namespace, String appId, String scheduleId) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String resumeSchedule(String namespace, String appId, String scheduleId) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -567,6 +709,12 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 		switch (featureID) {
 			case ManagerPackage.CDAP_CLUSTER_MANAGER__CLUSTER:
 				return getCluster();
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__CDAP_SERVICE_SERVERS:
+				return getCdapServiceServers();
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__HEALTH_CHECK_SCRIPT:
+				return getHealthCheckScript();
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__TEST_TIMEOUT:
+				return getTestTimeout();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -576,11 +724,22 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ManagerPackage.CDAP_CLUSTER_MANAGER__CLUSTER:
 				setCluster((CdapCluster)newValue);
+				return;
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__CDAP_SERVICE_SERVERS:
+				getCdapServiceServers().clear();
+				getCdapServiceServers().addAll((Collection<? extends String>)newValue);
+				return;
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__HEALTH_CHECK_SCRIPT:
+				setHealthCheckScript((String)newValue);
+				return;
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__TEST_TIMEOUT:
+				setTestTimeout((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -597,6 +756,15 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 			case ManagerPackage.CDAP_CLUSTER_MANAGER__CLUSTER:
 				setCluster((CdapCluster)null);
 				return;
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__CDAP_SERVICE_SERVERS:
+				getCdapServiceServers().clear();
+				return;
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__HEALTH_CHECK_SCRIPT:
+				setHealthCheckScript(HEALTH_CHECK_SCRIPT_EDEFAULT);
+				return;
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__TEST_TIMEOUT:
+				setTestTimeout(TEST_TIMEOUT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -611,6 +779,12 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 		switch (featureID) {
 			case ManagerPackage.CDAP_CLUSTER_MANAGER__CLUSTER:
 				return cluster != null;
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__CDAP_SERVICE_SERVERS:
+				return cdapServiceServers != null && !cdapServiceServers.isEmpty();
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__HEALTH_CHECK_SCRIPT:
+				return HEALTH_CHECK_SCRIPT_EDEFAULT == null ? healthCheckScript != null : !HEALTH_CHECK_SCRIPT_EDEFAULT.equals(healthCheckScript);
+			case ManagerPackage.CDAP_CLUSTER_MANAGER__TEST_TIMEOUT:
+				return testTimeout != TEST_TIMEOUT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -625,6 +799,9 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 		if (baseClass == CdapClusterConfiguration.class) {
 			switch (derivedFeatureID) {
 				case ManagerPackage.CDAP_CLUSTER_MANAGER__CLUSTER: return ServicePackage.CDAP_CLUSTER_CONFIGURATION__CLUSTER;
+				case ManagerPackage.CDAP_CLUSTER_MANAGER__CDAP_SERVICE_SERVERS: return ServicePackage.CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS;
+				case ManagerPackage.CDAP_CLUSTER_MANAGER__HEALTH_CHECK_SCRIPT: return ServicePackage.CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT;
+				case ManagerPackage.CDAP_CLUSTER_MANAGER__TEST_TIMEOUT: return ServicePackage.CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT;
 				default: return -1;
 			}
 		}
@@ -646,6 +823,9 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 		if (baseClass == CdapClusterConfiguration.class) {
 			switch (baseFeatureID) {
 				case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CLUSTER: return ManagerPackage.CDAP_CLUSTER_MANAGER__CLUSTER;
+				case ServicePackage.CDAP_CLUSTER_CONFIGURATION__CDAP_SERVICE_SERVERS: return ManagerPackage.CDAP_CLUSTER_MANAGER__CDAP_SERVICE_SERVERS;
+				case ServicePackage.CDAP_CLUSTER_CONFIGURATION__HEALTH_CHECK_SCRIPT: return ManagerPackage.CDAP_CLUSTER_MANAGER__HEALTH_CHECK_SCRIPT;
+				case ServicePackage.CDAP_CLUSTER_CONFIGURATION__TEST_TIMEOUT: return ManagerPackage.CDAP_CLUSTER_MANAGER__TEST_TIMEOUT;
 				default: return -1;
 			}
 		}
@@ -675,6 +855,7 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 				case CdapPackage.CDAP_API___DELETE_NAMESPACE__STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___DELETE_NAMESPACE__STRING;
 				case CdapPackage.CDAP_API___DEPLOY_APP__STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___DEPLOY_APP__STRING_STRING;
 				case CdapPackage.CDAP_API___LOAD_ARTIFACT__STRING_STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___LOAD_ARTIFACT__STRING_STRING_STRING_STRING;
+				case CdapPackage.CDAP_API___LOAD_ARTIFACT_WITH_CONFIG__STRING_STRING_STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___LOAD_ARTIFACT_WITH_CONFIG__STRING_STRING_STRING_STRING_STRING;
 				case CdapPackage.CDAP_API___DELETE_ARTIFACT__STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___DELETE_ARTIFACT__STRING_STRING_STRING;
 				case CdapPackage.CDAP_API___START_FLOW__STRING_STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___START_FLOW__STRING_STRING_STRING_STRING;
 				case CdapPackage.CDAP_API___START_WORKER__STRING_STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___START_WORKER__STRING_STRING_STRING_STRING;
@@ -709,6 +890,8 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 				case CdapPackage.CDAP_API___CREATE_APP_WITH_CONFIG__STRING_STRING_STRING_STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___CREATE_APP_WITH_CONFIG__STRING_STRING_STRING_STRING_STRING_STRING;
 				case CdapPackage.CDAP_API___SET_DATASET_PROPERTIES__STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___SET_DATASET_PROPERTIES__STRING_STRING_STRING;
 				case CdapPackage.CDAP_API___SET_STREAM_TTL__STRING_STRING_INT: return ManagerPackage.CDAP_CLUSTER_MANAGER___SET_STREAM_TTL__STRING_STRING_INT;
+				case CdapPackage.CDAP_API___SUSPEND_SCHEDULE__STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___SUSPEND_SCHEDULE__STRING_STRING_STRING;
+				case CdapPackage.CDAP_API___RESUME_SCHEDULE__STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___RESUME_SCHEDULE__STRING_STRING_STRING;
 				default: return -1;
 			}
 		}
@@ -731,6 +914,8 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 				return deployApp((String)arguments.get(0), (String)arguments.get(1));
 			case ManagerPackage.CDAP_CLUSTER_MANAGER___LOAD_ARTIFACT__STRING_STRING_STRING_STRING:
 				return loadArtifact((String)arguments.get(0), (String)arguments.get(1), (String)arguments.get(2), (String)arguments.get(3));
+			case ManagerPackage.CDAP_CLUSTER_MANAGER___LOAD_ARTIFACT_WITH_CONFIG__STRING_STRING_STRING_STRING_STRING:
+				return loadArtifactWithConfig((String)arguments.get(0), (String)arguments.get(1), (String)arguments.get(2), (String)arguments.get(3), (String)arguments.get(4));
 			case ManagerPackage.CDAP_CLUSTER_MANAGER___DELETE_ARTIFACT__STRING_STRING_STRING:
 				return deleteArtifact((String)arguments.get(0), (String)arguments.get(1), (String)arguments.get(2));
 			case ManagerPackage.CDAP_CLUSTER_MANAGER___START_FLOW__STRING_STRING_STRING_STRING:
@@ -799,8 +984,32 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 				return setDatasetProperties((String)arguments.get(0), (String)arguments.get(1), (String)arguments.get(2));
 			case ManagerPackage.CDAP_CLUSTER_MANAGER___SET_STREAM_TTL__STRING_STRING_INT:
 				return setStreamTTL((String)arguments.get(0), (String)arguments.get(1), (Integer)arguments.get(2));
+			case ManagerPackage.CDAP_CLUSTER_MANAGER___SUSPEND_SCHEDULE__STRING_STRING_STRING:
+				return suspendSchedule((String)arguments.get(0), (String)arguments.get(1), (String)arguments.get(2));
+			case ManagerPackage.CDAP_CLUSTER_MANAGER___RESUME_SCHEDULE__STRING_STRING_STRING:
+				return resumeSchedule((String)arguments.get(0), (String)arguments.get(1), (String)arguments.get(2));
 		}
 		return super.eInvoke(operationID, arguments);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (cdapServiceServers: ");
+		result.append(cdapServiceServers);
+		result.append(", healthCheckScript: ");
+		result.append(healthCheckScript);
+		result.append(", testTimeout: ");
+		result.append(testTimeout);
+		result.append(')');
+		return result.toString();
 	}
 
 } //CdapClusterManagerImpl

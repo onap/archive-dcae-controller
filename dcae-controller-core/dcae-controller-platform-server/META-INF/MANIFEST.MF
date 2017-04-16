@@ -5,17 +5,4 @@ Bundle-SymbolicName: dcae-controller-platform-server
 Bundle-Version: 0.1.0.qualifier
 Export-Package: org.openecomp.dcae.controller.platform.server.tools,
   org.openecomp.dcae.controller.platform.servers.controller
-Require-Bundle: ncomp-core-types,
- ncomp-sirius-manager-model,
- ncomp-sirius-manager-server,
- ncomp-sirius-manager-console,
- ncomp-sirius-manager-generator,
- dcae-controller-platform-model;bundle-version="0.1.0",
- ncomp-utils-java;bundle-version="0.1.0",
- ncomp-openstack-controller;bundle-version="0.1.0",
- ncomp-openstack-model;bundle-version="0.1.0",
- dcae-controller-core-model;bundle-version="0.1.0",
- dcae-controller-service-vm-model,
- operation-utils;bundle-version="0.1.0",
- dcae-controller-service-cdap-model,
- dcae-controller-service-docker-model
+

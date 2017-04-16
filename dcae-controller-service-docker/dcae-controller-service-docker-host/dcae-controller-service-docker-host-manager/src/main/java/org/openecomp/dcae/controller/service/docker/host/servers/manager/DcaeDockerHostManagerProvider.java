@@ -39,8 +39,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.json.JSONObject;
 
 import org.openecomp.dcae.controller.core.service.HealthTestResponse;
-import org.openecomp.dcae.controller.core.service.HealthTestStatus;
-import org.openecomp.dcae.controller.core.service.ServiceFactory;
 import org.openecomp.dcae.controller.core.stream.DcaeStream;
 import org.openecomp.dcae.controller.service.servers.vmmanager.DcaeVirtualMachineManagerProvider;
 import org.openecomp.dcae.controller.service.docker.host.manager.DockerHostManager;
@@ -117,17 +115,6 @@ public class DcaeDockerHostManagerProvider extends DcaeVirtualMachineManagerProv
 			logger.warn("ERROR: " + e);
 		}
 
-	}
-	
-	@Override
-	public HealthTestResponse test() {
-		HealthTestResponse res = ServiceFactory.eINSTANCE.createHealthTestResponse();
-		res.setStatus(HealthTestStatus.GREEN);
-		if (o.getDockerHost() == null || o.getDockerHost().getNetworks().size() == 0) {
-			res.setMessageCode("Docker Engine not working");
-			res.setStatus(HealthTestStatus.RED);
-		}
-		return res;
 	}
 
 }
