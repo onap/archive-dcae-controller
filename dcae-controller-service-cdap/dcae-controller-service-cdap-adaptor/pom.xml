@@ -7,7 +7,7 @@
 		<groupId>org.openecomp.ncomp.sirius.manager</groupId>
 		<artifactId>ncomp-sirius-manager-base</artifactId>
 		<version>1.1.0-SNAPSHOT</version>
-		<relativePath>../../../dcae-org.openecomp.ncomp.sirius.manager/ncomp-sirius-manager-base</relativePath>
+		<relativePath>../../../ncomp.sirius.manager/ncomp-sirius-manager-base</relativePath>
 	</parent>
 
 	
