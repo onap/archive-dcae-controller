@@ -33,13 +33,13 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DcaeStreamDefinition#getStreamType <em>Stream Type</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DcaeStreamDefinition#getDatabusType <em>Databus Type</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DcaeStreamDefinition#getPublishers <em>Publishers</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DcaeStreamDefinition#getSubscribers <em>Subscribers</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDcaeStreamDefinition()
  * @model

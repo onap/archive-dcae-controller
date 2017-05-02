@@ -47,6 +47,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.DcaeServiceInstanceImpl#getServiceContainer <em>Service Container</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.DcaeServiceInstanceImpl#getStatus <em>Status</em>}</li>
@@ -56,7 +57,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.DcaeServiceInstanceImpl#getHealthTestStatus <em>Health Test Status</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.DcaeServiceInstanceImpl#getHealthTestMessageCode <em>Health Test Message Code</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

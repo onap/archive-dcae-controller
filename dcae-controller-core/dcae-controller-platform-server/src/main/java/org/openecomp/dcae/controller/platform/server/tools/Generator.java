@@ -28,9 +28,10 @@ import org.openecomp.ncomp.sirius.manager.controllermodel.ControllerModel;
 import org.openecomp.ncomp.sirius.manager.controllermodel.ControllermodelFactory;
 import org.openecomp.ncomp.sirius.manager.generator.ControllerGenerator;
 import org.openecomp.ncomp.gwt.siriusportal.model.*;
+import org.openecomp.dcae.controller.inventory.InventoryFactory;
 import org.openecomp.dcae.controller.platform.controller.ControllerFactory;
 import org.openecomp.dcae.controller.service.vm.VmFactory;
-import org.openecomp.utils.YamlToJava;
+import org.openecomp.utils.YamlToJava;  
 
 
 public class Generator {
@@ -58,6 +59,8 @@ public class Generator {
 		g.addApi("cluster", cluster, m, false, true);
 		EObject cont = ControllerFactory.eINSTANCE.createControllerVirtualMachineService();
 		g.addApi("cont", cont, m, false, true);
+		EObject inventory = InventoryFactory.eINSTANCE.createDcaeInventory();
+		g.addObject("inventory",inventory,m);
 		EObject gui = ModelFactory.eINSTANCE.createGuiClientApi();
 		g.addObject("gui",gui,m);
 		g.addAlias("/test");
@@ -74,6 +77,8 @@ public class Generator {
 		YamlToJava.convert("src/main/sirius-gen/ControllerVirtualMachineService.yaml", dir + "/logging", pName);
 		String pName1 = p.getNsURI().replaceAll(p.getNsPrefix()+'$',"") + "servers." + p.getNsPrefix() +".gui.logging";
 		YamlToJava.convert("src/main/sirius-gen/GuiClientApi.yaml", dir + "/gui/logging", pName1);
+		String pName2 = p.getNsURI().replaceAll(p.getNsPrefix()+'$',"") + "servers." + p.getNsPrefix() +".inventory.logging";
+		YamlToJava.convert("src/main/sirius-gen/DcaeInventory.yaml", dir + "/inventory/logging", pName2);
 	}
 
 

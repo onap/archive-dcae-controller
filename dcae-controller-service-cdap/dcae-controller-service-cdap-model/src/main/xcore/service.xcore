@@ -109,7 +109,7 @@ abstract class CdapStep extends NamedEntity {
 
 class CdapLoadArtifactStep extends CdapStep {
 	String artifactName
-	String jarfile
+	String jarFile
 	String version
 }
 
@@ -129,7 +129,7 @@ class CdapCreateAppWithConfigStep extends CdapCreateAppStep {
 }
 
 class CdapDeployAppStep extends CdapStep {
-	String jarfile
+	String jarFile
 }
 
 class CdapStopFlowStep extends CdapStep {

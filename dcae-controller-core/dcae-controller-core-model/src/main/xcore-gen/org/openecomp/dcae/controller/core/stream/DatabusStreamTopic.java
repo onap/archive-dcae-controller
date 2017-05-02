@@ -34,6 +34,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getTopicName <em>Topic Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getTopicDescription <em>Topic Description</em>}</li>
@@ -47,8 +48,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getPublishURL <em>Publish URL</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getSubscribeURL <em>Subscribe URL</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getAuthenticationMethod <em>Authentication Method</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getReplicationCase <em>Replication Case</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getGlobalMrURL <em>Global Mr URL</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDatabusStreamTopic()
  * @model
@@ -360,4 +362,56 @@ public interface DatabusStreamTopic extends DatabusStream {
 	 * @generated
 	 */
 	void setAuthenticationMethod(StreamAuthentication value);
+
+	/**
+	 * Returns the value of the '<em><b>Replication Case</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Replication Case</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Replication Case</em>' attribute.
+	 * @see #setReplicationCase(String)
+	 * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDatabusStreamTopic_ReplicationCase()
+	 * @model unique="false"
+	 * @generated
+	 */
+	String getReplicationCase();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getReplicationCase <em>Replication Case</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Replication Case</em>' attribute.
+	 * @see #getReplicationCase()
+	 * @generated
+	 */
+	void setReplicationCase(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Global Mr URL</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Global Mr URL</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Global Mr URL</em>' attribute.
+	 * @see #setGlobalMrURL(String)
+	 * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDatabusStreamTopic_GlobalMrURL()
+	 * @model unique="false"
+	 * @generated
+	 */
+	String getGlobalMrURL();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getGlobalMrURL <em>Global Mr URL</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Global Mr URL</em>' attribute.
+	 * @see #getGlobalMrURL()
+	 * @generated
+	 */
+	void setGlobalMrURL(String value);
 } // DatabusStreamTopic

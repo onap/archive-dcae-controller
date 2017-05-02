@@ -39,12 +39,12 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamExternalEndPointImpl#getUser <em>User</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamExternalEndPointImpl#getPassword <em>Password</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamExternalEndPointImpl#getUrl <em>Url</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

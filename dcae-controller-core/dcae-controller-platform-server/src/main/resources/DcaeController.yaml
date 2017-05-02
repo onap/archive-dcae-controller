@@ -5,6 +5,8 @@ operations:
     description: Polling of new configuration from ECOMP Policy for all DCAE service instances.
   DATABUS_POLLING:
     description: Polling of new configuration from DCAE Data Bus Controller.
+  INVENTORY_POLLING:
+    description: Polling of new configuration from DCAE Inventory.
   CLUSTER_DATA_REPLICATION:
     description: Data replication from master to slave controllers.
 messages:
@@ -26,6 +28,14 @@ messages:
         description: Exception that happened.
     resolution: Contact Tier 4. This is a software bug.
     description: Police Polling on the service level fails.
+  INVENTORY-POLLING-FAILED:
+    errorCode: 5001W
+    messageFormat: '{0}'
+    parameters:
+      exception: 
+        description: Exception that happened.
+    resolution: Contact Tier 4. This is a software bug.
+    description: INVENTORY Polling on the service level fails.   
   DATABUS-POLLING-FAILED:
     errorCode: 5001W
     messageFormat: '{0}'

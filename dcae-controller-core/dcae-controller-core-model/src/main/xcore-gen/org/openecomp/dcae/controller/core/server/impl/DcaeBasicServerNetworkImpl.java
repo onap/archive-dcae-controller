@@ -40,11 +40,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerNetworkImpl#getIp <em>Ip</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerNetworkImpl#getDnsName <em>Dns Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

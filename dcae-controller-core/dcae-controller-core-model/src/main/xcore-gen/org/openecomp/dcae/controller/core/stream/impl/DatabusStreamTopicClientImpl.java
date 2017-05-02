@@ -45,6 +45,7 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicClientImpl#getLocalStreamId <em>Local Stream Id</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicClientImpl#getDcaeLocationName <em>Dcae Location Name</em>}</li>
@@ -56,7 +57,6 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicClientImpl#getMrClientId <em>Mr Client Id</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicClientImpl#getTopicURL <em>Topic URL</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

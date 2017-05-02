@@ -46,6 +46,24 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * -
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *  *        http://www.apache.org/licenses/LICENSE-2.0
+ *  * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ * <!-- end-model-doc -->
  * @see org.openecomp.dcae.controller.platform.controller.ControllerFactory
  * @model kind="package"
  *        annotation="http://www.eclipse.org/emf/2002/GenModel modelDirectory='/dcae-controller-platform-model/src/main/xcore-gen' basePackage='org.openecomp.dcae.controller.platform'"
@@ -149,13 +167,22 @@ public interface ControllerPackage extends EPackage {
 	int DCAE_PLATFORM_CONTROLLER__DATABUS = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Inventory</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DCAE_PLATFORM_CONTROLLER__INVENTORY = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Descriptors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DCAE_PLATFORM_CONTROLLER__DESCRIPTORS = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 6;
+	int DCAE_PLATFORM_CONTROLLER__DESCRIPTORS = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Services</b></em>' containment reference list.
@@ -164,7 +191,7 @@ public interface ControllerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DCAE_PLATFORM_CONTROLLER__SERVICES = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 7;
+	int DCAE_PLATFORM_CONTROLLER__SERVICES = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Users</b></em>' containment reference list.
@@ -173,7 +200,7 @@ public interface ControllerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DCAE_PLATFORM_CONTROLLER__USERS = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 8;
+	int DCAE_PLATFORM_CONTROLLER__USERS = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Admin Users</b></em>' reference list.
@@ -182,7 +209,7 @@ public interface ControllerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DCAE_PLATFORM_CONTROLLER__ADMIN_USERS = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 9;
+	int DCAE_PLATFORM_CONTROLLER__ADMIN_USERS = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Dcae Platform Controller</em>' class.
@@ -191,7 +218,7 @@ public interface ControllerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DCAE_PLATFORM_CONTROLLER_FEATURE_COUNT = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 10;
+	int DCAE_PLATFORM_CONTROLLER_FEATURE_COUNT = ServerPackage.SOUTH_BOUND_API_WITH_PROXY_FEATURE_COUNT + 11;
 
 	/**
 	 * The operation id for the '<em>Logs</em>' operation.
@@ -943,6 +970,17 @@ public interface ControllerPackage extends EPackage {
 	EReference getDcaePlatformController_Databus();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getInventory <em>Inventory</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Inventory</em>'.
+	 * @see org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getInventory()
+	 * @see #getDcaePlatformController()
+	 * @generated
+	 */
+	EReference getDcaePlatformController_Inventory();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getServices <em>Services</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1359,6 +1397,14 @@ public interface ControllerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DCAE_PLATFORM_CONTROLLER__DATABUS = eINSTANCE.getDcaePlatformController_Databus();
+
+		/**
+		 * The meta object literal for the '<em><b>Inventory</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DCAE_PLATFORM_CONTROLLER__INVENTORY = eINSTANCE.getDcaePlatformController_Inventory();
 
 		/**
 		 * The meta object literal for the '<em><b>Services</b></em>' containment reference list feature.

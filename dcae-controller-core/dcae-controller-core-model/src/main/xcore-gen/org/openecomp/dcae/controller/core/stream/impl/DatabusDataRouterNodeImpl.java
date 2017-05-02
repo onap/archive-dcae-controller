@@ -35,12 +35,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusDataRouterNodeImpl#getDcaeLocationName <em>Dcae Location Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusDataRouterNodeImpl#getHostFqdn <em>Host Fqdn</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusDataRouterNodeImpl#getVersion <em>Version</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -44,6 +44,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamFeedImpl#getFeedName <em>Feed Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamFeedImpl#getFeedVersion <em>Feed Version</em>}</li>
@@ -59,7 +60,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamFeedImpl#getPublishers <em>Publishers</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamFeedImpl#getSubscribers <em>Subscribers</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

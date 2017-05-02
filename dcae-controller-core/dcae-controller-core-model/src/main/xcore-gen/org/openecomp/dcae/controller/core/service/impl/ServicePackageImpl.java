@@ -155,8 +155,8 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		LocationPackage.eINSTANCE.eClass();
 		StreamPackage.eINSTANCE.eClass();
+		LocationPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theServicePackage.createPackageContents();
@@ -746,7 +746,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 		// http://www.eclipse.org/emf/2011/Xcore
 		createXcoreAnnotations();
 		// http://openecomp.org
-		createEcompAnnotations();
+		createOpenecompAnnotations();
 		// http://openecomp.org/cdap
 		createCdapAnnotations();
 	}
@@ -774,7 +774,7 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void createEcompAnnotations() {
+	protected void createOpenecompAnnotations() {
 		String source = "http://openecomp.org";	
 		addAnnotation
 		  (getDcaeServiceInstance_ServiceContainer(), 

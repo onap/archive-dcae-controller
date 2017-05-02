@@ -1,0 +1,93 @@
+operations:
+  DcaeInventory@getDcaeServiceTypes: {}
+  DcaeInventory@deleteDcaeServiceTypesType: {}
+  DcaeInventory@getDcaeServiceTypesType: {}
+  DcaeInventory@createDcaeServiceTypesTypeName: {}
+  DcaeInventory@getDcaeServices: {}
+  DcaeInventory@getDcaeServicesGroupbyPropertyName: {}
+  DcaeInventory@deleteDcaeServicesService: {}
+  DcaeInventory@getDcaeServicesService: {}
+  DcaeInventory@createDcaeServicesService: {}
+  DcaeInventory@poll: {}
+messages:
+  dummy: {}
+  REQUEST-FAILED-getDcaeServiceTypes:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REQUEST-FAILED-deleteDcaeServiceTypesType:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REQUEST-FAILED-getDcaeServiceTypesType:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REQUEST-FAILED-createDcaeServiceTypesTypeName:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REQUEST-FAILED-getDcaeServices:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REQUEST-FAILED-getDcaeServicesGroupbyPropertyName:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REQUEST-FAILED-deleteDcaeServicesService:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REQUEST-FAILED-getDcaeServicesService:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REQUEST-FAILED-createDcaeServicesService:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REQUEST-FAILED-poll:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
+  REMOTE-CALL-FAILED-getDcaeServiceTypes:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE-CALL-FAILED-deleteDcaeServiceTypesType:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE-CALL-FAILED-getDcaeServiceTypesType:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE-CALL-FAILED-createDcaeServiceTypesTypeName:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE-CALL-FAILED-getDcaeServices:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE-CALL-FAILED-getDcaeServicesGroupbyPropertyName:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE-CALL-FAILED-deleteDcaeServicesService:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE-CALL-FAILED-getDcaeServicesService:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE-CALL-FAILED-createDcaeServicesService:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE-CALL-FAILED-poll:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception

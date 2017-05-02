@@ -33,11 +33,11 @@ import org.openecomp.ncomp.openstack.location.OpenStackProject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.service.DcaeLocation#getLocationType <em>Location Type</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.DcaeLocation#getOpenstackProject <em>Openstack Project</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.service.ServicePackage#getDcaeLocation()
  * @model

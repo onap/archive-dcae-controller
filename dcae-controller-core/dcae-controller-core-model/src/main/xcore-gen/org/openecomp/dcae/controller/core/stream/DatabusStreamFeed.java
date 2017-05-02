@@ -33,6 +33,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamFeed#getFeedName <em>Feed Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamFeed#getFeedVersion <em>Feed Version</em>}</li>
@@ -48,7 +49,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamFeed#getPublishers <em>Publishers</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamFeed#getSubscribers <em>Subscribers</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDatabusStreamFeed()
  * @model

@@ -50,13 +50,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamDefinitionImpl#getStreamType <em>Stream Type</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamDefinitionImpl#getDatabusType <em>Databus Type</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamDefinitionImpl#getPublishers <em>Publishers</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamDefinitionImpl#getSubscribers <em>Subscribers</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

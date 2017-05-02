@@ -32,11 +32,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.service.HealthTestResponse#getStatus <em>Status</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.HealthTestResponse#getMessageCode <em>Message Code</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.service.ServicePackage#getHealthTestResponse()
  * @model

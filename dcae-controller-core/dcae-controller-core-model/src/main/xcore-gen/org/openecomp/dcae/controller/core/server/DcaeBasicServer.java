@@ -42,6 +42,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getPrivateIp <em>Private Ip</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getPublicIp <em>Public Ip</em>}</li>
@@ -58,7 +59,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getHealthTestStatus <em>Health Test Status</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.server.DcaeBasicServer#getHealthTestMessageCode <em>Health Test Message Code</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.server.ServerPackage#getDcaeBasicServer()
  * @model

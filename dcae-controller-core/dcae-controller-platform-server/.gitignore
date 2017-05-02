@@ -1,3 +1,6 @@
 /target/
 .*.sw?
 /config/
+/test-config/
+/debug-logs/
+/logs/

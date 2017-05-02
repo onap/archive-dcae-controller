@@ -1122,13 +1122,13 @@ public interface CdapPackage extends EPackage {
 	int CDAP_LOAD_ARTIFACT_STEP__ARTIFACT_NAME = CDAP_STEP_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Jarfile</b></em>' attribute.
+	 * The feature id for the '<em><b>Jar File</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_LOAD_ARTIFACT_STEP__JARFILE = CDAP_STEP_FEATURE_COUNT + 1;
+	int CDAP_LOAD_ARTIFACT_STEP__JAR_FILE = CDAP_STEP_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -1213,13 +1213,13 @@ public interface CdapPackage extends EPackage {
 	int CDAP_LOAD_ARTIFACT_WITH_CONFIG_STEP__ARTIFACT_NAME = CDAP_LOAD_ARTIFACT_STEP__ARTIFACT_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Jarfile</b></em>' attribute.
+	 * The feature id for the '<em><b>Jar File</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_LOAD_ARTIFACT_WITH_CONFIG_STEP__JARFILE = CDAP_LOAD_ARTIFACT_STEP__JARFILE;
+	int CDAP_LOAD_ARTIFACT_WITH_CONFIG_STEP__JAR_FILE = CDAP_LOAD_ARTIFACT_STEP__JAR_FILE;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -1513,13 +1513,13 @@ public interface CdapPackage extends EPackage {
 	int CDAP_DEPLOY_APP_STEP__CREATED = CDAP_STEP__CREATED;
 
 	/**
-	 * The feature id for the '<em><b>Jarfile</b></em>' attribute.
+	 * The feature id for the '<em><b>Jar File</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_DEPLOY_APP_STEP__JARFILE = CDAP_STEP_FEATURE_COUNT + 0;
+	int CDAP_DEPLOY_APP_STEP__JAR_FILE = CDAP_STEP_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Deploy App Step</em>' class.
@@ -3031,15 +3031,15 @@ public interface CdapPackage extends EPackage {
 	EAttribute getCdapLoadArtifactStep_ArtifactName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep#getJarfile <em>Jarfile</em>}'.
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep#getJarFile <em>Jar File</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Jarfile</em>'.
-	 * @see org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep#getJarfile()
+	 * @return the meta object for the attribute '<em>Jar File</em>'.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep#getJarFile()
 	 * @see #getCdapLoadArtifactStep()
 	 * @generated
 	 */
-	EAttribute getCdapLoadArtifactStep_Jarfile();
+	EAttribute getCdapLoadArtifactStep_JarFile();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep#getVersion <em>Version</em>}'.
@@ -3159,15 +3159,15 @@ public interface CdapPackage extends EPackage {
 	EClass getCdapDeployAppStep();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.cdap.CdapDeployAppStep#getJarfile <em>Jarfile</em>}'.
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.cdap.CdapDeployAppStep#getJarFile <em>Jar File</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Jarfile</em>'.
-	 * @see org.openecomp.dcae.controller.service.cdap.CdapDeployAppStep#getJarfile()
+	 * @return the meta object for the attribute '<em>Jar File</em>'.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapDeployAppStep#getJarFile()
 	 * @see #getCdapDeployAppStep()
 	 * @generated
 	 */
-	EAttribute getCdapDeployAppStep_Jarfile();
+	EAttribute getCdapDeployAppStep_JarFile();
 
 	/**
 	 * Returns the meta object for class '{@link org.openecomp.dcae.controller.service.cdap.CdapStopFlowStep <em>Stop Flow Step</em>}'.
@@ -3924,12 +3924,12 @@ public interface CdapPackage extends EPackage {
 		 */
 		EAttribute CDAP_LOAD_ARTIFACT_STEP__ARTIFACT_NAME = eINSTANCE.getCdapLoadArtifactStep_ArtifactName();
 		/**
-		 * The meta object literal for the '<em><b>Jarfile</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Jar File</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CDAP_LOAD_ARTIFACT_STEP__JARFILE = eINSTANCE.getCdapLoadArtifactStep_Jarfile();
+		EAttribute CDAP_LOAD_ARTIFACT_STEP__JAR_FILE = eINSTANCE.getCdapLoadArtifactStep_JarFile();
 		/**
 		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
@@ -4016,12 +4016,12 @@ public interface CdapPackage extends EPackage {
 		 */
 		EClass CDAP_DEPLOY_APP_STEP = eINSTANCE.getCdapDeployAppStep();
 		/**
-		 * The meta object literal for the '<em><b>Jarfile</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Jar File</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CDAP_DEPLOY_APP_STEP__JARFILE = eINSTANCE.getCdapDeployAppStep_Jarfile();
+		EAttribute CDAP_DEPLOY_APP_STEP__JAR_FILE = eINSTANCE.getCdapDeployAppStep_JarFile();
 		/**
 		 * The meta object literal for the '{@link org.openecomp.dcae.controller.service.cdap.impl.CdapStopFlowStepImpl <em>Stop Flow Step</em>}' class.
 		 * <!-- begin-user-doc -->

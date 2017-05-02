@@ -46,4 +46,12 @@
             genModel="src/main/xcore/manager.xcore"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated inventory -->
+      <package
+            uri="org.openecomp.dcae.controller.inventory"
+            class="org.openecomp.dcae.controller.inventory.InventoryPackage"
+            genModel="src/main/xcore/inventory.xcore"/>
+   </extension>
+
 </plugin>

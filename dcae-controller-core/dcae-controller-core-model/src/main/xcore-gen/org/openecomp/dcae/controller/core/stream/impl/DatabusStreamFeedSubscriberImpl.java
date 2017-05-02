@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamFeedSubscriberImpl#getLocalStreamId <em>Local Stream Id</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamFeedSubscriberImpl#getDcaeLocationName <em>Dcae Location Name</em>}</li>
@@ -50,7 +51,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamFeedSubscriberImpl#getUserpwd <em>Userpwd</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamFeedSubscriberImpl#getDeliveryURL <em>Delivery URL</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

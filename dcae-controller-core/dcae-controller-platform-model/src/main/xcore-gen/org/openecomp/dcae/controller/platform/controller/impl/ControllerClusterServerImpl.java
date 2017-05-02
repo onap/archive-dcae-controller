@@ -45,12 +45,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterServerImpl#getRole <em>Role</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterServerImpl#getData <em>Data</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterServerImpl#getServer <em>Server</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -32,6 +32,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopicClient#getLocalStreamId <em>Local Stream Id</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopicClient#getDcaeLocationName <em>Dcae Location Name</em>}</li>
@@ -43,7 +44,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopicClient#getMrClientId <em>Mr Client Id</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopicClient#getTopicURL <em>Topic URL</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDatabusStreamTopicClient()
  * @model

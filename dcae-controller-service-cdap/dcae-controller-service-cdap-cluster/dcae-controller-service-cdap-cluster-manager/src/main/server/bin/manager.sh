@@ -22,9 +22,13 @@ VMTYPE=$(ls /tmp/vm-*manager.properties | sed s/-manager.properties// | sed sx/t
 case $CMD1 in
   start) 
     CLUSTER_FILE=data/resources/cluster.json
+    if [ -e config/version.json ]; then
+		rm -rf data/resources/configuration/version*
+		cp config/version.json data/resources/configuration/
+	fi
     if [ ! -e $CLUSTER_FILE ]; then
        mkdir -p $(dirname $CLUSTER_FILE)
-       echo '{ "baseUrl": "http://localhost:10000/v3", "pollingFrequency": "30000" }' > $CLUSTER_FILE
+    echo '{ "baseUrl": "http://localhost:10000/v3", "pollingFrequency": "30000", "$version": "ONAP-R2" }' > $CLUSTER_FILE
     fi
     JVMARGS=$(cat config/manager.properties | grep JVMARGS | sed 's/[^=]*=//')
     $CMD $CMD1 $JVMARGS

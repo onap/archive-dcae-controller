@@ -43,6 +43,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterServerDataImpl#getPushInterval <em>Push Interval</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterServerDataImpl#getLastPush <em>Last Push</em>}</li>
@@ -52,7 +53,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterServerDataImpl#getNumberDataReceived <em>Number Data Received</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterServerDataImpl#getNumberDataReceivedErrors <em>Number Data Received Errors</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

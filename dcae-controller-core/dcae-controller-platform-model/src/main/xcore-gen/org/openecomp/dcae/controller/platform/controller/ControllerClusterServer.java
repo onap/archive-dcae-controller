@@ -34,12 +34,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.ControllerClusterServer#getRole <em>Role</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.ControllerClusterServer#getData <em>Data</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.ControllerClusterServer#getServer <em>Server</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.platform.controller.ControllerPackage#getControllerClusterServer()
  * @model

@@ -26,6 +26,7 @@ package org.openecomp.dcae.controller.platform.controller;
 import org.openecomp.dcae.controller.core.service.DcaeLocation;
 import org.openecomp.dcae.controller.core.service.DcaeService;
 import org.openecomp.dcae.controller.core.service.DcaeServiceDescriptor;
+import org.openecomp.dcae.controller.inventory.DcaeInventory;
 import org.openecomp.ncomp.core.User;
 import org.openecomp.ncomp.openstack.OpenStackController;
 import org.openecomp.ncomp.sirius.manager.server.AbstractManagementServer;
@@ -39,17 +40,18 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getCluster <em>Cluster</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getOpenstack <em>Openstack</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getLocations <em>Locations</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getDatabus <em>Databus</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getInventory <em>Inventory</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getDescriptors <em>Descriptors</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getServices <em>Services</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getUsers <em>Users</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getAdminUsers <em>Admin Users</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.platform.controller.ControllerPackage#getDcaePlatformController()
  * @model
@@ -149,6 +151,32 @@ public interface DcaePlatformController extends SouthBoundApiWithProxy, Abstract
 	 * @generated
 	 */
 	void setDatabus(DcaeDataBus value);
+
+	/**
+	 * Returns the value of the '<em><b>Inventory</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Inventory</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Inventory</em>' containment reference.
+	 * @see #setInventory(DcaeInventory)
+	 * @see org.openecomp.dcae.controller.platform.controller.ControllerPackage#getDcaePlatformController_Inventory()
+	 * @model containment="true"
+	 * @generated
+	 */
+	DcaeInventory getInventory();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.platform.controller.DcaePlatformController#getInventory <em>Inventory</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Inventory</em>' containment reference.
+	 * @see #getInventory()
+	 * @generated
+	 */
+	void setInventory(DcaeInventory value);
 
 	/**
 	 * Returns the value of the '<em><b>Services</b></em>' containment reference list.

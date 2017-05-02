@@ -18,7 +18,7 @@
  * limitations under the License.
  * ============LICENSE_END============================================
  */
-	
+
 package org.openecomp.dcae.controller.platform.servers.controller;
 
 import java.io.BufferedReader;
@@ -37,6 +37,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.json.JSONArray;
@@ -62,10 +63,12 @@ import org.openecomp.dcae.controller.core.stream.DcaeStream;
 import org.openecomp.dcae.controller.core.stream.DmaapStream;
 import org.openecomp.dcae.controller.core.stream.StreamAuthentication;
 import org.openecomp.dcae.controller.core.stream.StreamFactory;
+import org.openecomp.dcae.controller.inventory.DcaeInventory;
 import org.openecomp.dcae.controller.platform.controller.ControllerPackage;
 import org.openecomp.dcae.controller.platform.controller.DcaeDataBus;
 import org.openecomp.dcae.controller.platform.controller.DcaePlatformController;
 import org.openecomp.dcae.controller.platform.controller.ServerRole;
+import org.openecomp.dcae.controller.platform.servers.controller.inventory.DcaeInventoryFactory;
 import org.openecomp.dcae.controller.platform.servers.controller.logging.DcaeControllerMessageEnum;
 import org.openecomp.dcae.controller.platform.servers.controller.logging.DcaeControllerOperationEnum;
 import org.openecomp.dcae.controller.service.cdap.CdapService;
@@ -170,7 +173,8 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 							System.out.println("PPPPPPPPPPP polling start");
 							for (DcaeService s : o.getServices()) {
 								for (DcaeServiceInstance i : instances(s)) {
-									System.out.println("PPPPPPPPPPP updateObjectUsingPolicy list: " + s.getName() + "/" + i.getName());
+									System.out.println("PPPPPPPPPPP updateObjectUsingPolicy list: " + s.getName() + "/"
+											+ i.getName());
 									if (i.getStatus() != DeploymentStatus.DEPLOYED)
 										continue;
 									EList<DcaePolicyEntity> l = findPolicyEnabledObjects(i);
@@ -249,6 +253,51 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		};
 		t3.start();
 
+		Thread t4 = new Thread("inventory polling") {
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						switch (o.getCluster().getRole()) {
+						case MASTER:
+						case UNKNOWN:
+						case STANDALONE:
+							ecomplogger.setOperation(DcaeControllerOperationEnum.INVENTORY_POLLING);
+							ecomplogger.newRequestId();
+							ecomplogger.setInstanceId(controller, o);
+							ecomplogger.recordAuditEventStart();
+							try {
+								DcaeInventory inv = o.getInventory();
+								if (inv == null) {
+									inv = new DcaeInventoryFactory(controller).createDcaeInventory();
+									o.setInventory(inv);
+								}
+								inv.poll();
+								ecomplogger.recordAuditEventEnd();
+							} catch (Exception e) {
+								ecomplogger.warn(DcaeControllerMessageEnum.INVENTORY_POLLING_FAILED, e.toString());
+								ManagementServerUtils.printStackTrace(e);
+								ecomplogger.recordAuditEventEnd(StatusCodeEnum.ERROR);
+							}
+							break;
+						case SLAVE:
+							break;
+						}
+						Thread.sleep(1 * 60000); // sleep 1 minutes
+					} catch (Exception e) {
+						ManagementServerUtils.printStackTrace(e);
+						logger.fatal("health checks: " + e);
+						try {
+							Thread.sleep(30000);
+						} catch (InterruptedException e1) {
+						}
+					}
+				}
+			}
+
+		};
+		t4.start();
+
 	}
 
 	protected void updateDatabusInformation() {
@@ -321,17 +370,17 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				if (i.getStatus() == DeploymentStatus.DEPLOYED && !before.equals(after)) {
 					try {
 						s.pushManagerConfiguration(i.getName());
-						okay = true; 
+						okay = true;
 					} catch (Exception e) {
 						logger.warn("Unable to push configuration: " + ManagementServer.object2ref(i));
 						e.printStackTrace();
 					}
-				} 
-				else {
+				} else {
 					okay = true;
 				}
-				if (! okay && !before.equals(after)) {
-					// need to restore previous state so next attempt will be made.
+				if (!okay && !before.equals(after)) {
+					// need to restore previous state so next attempt will be
+					// made.
 					i.getInputStreams().clear();
 					i.getInputStreams().addAll(in);
 					i.getOutputStreams().clear();
@@ -375,7 +424,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		json2.put("dmaapName", client.props.get("databus.dmaapName"));
 		json2.put("drProvUrl", client.props.get("databus.drProvUrl"));
 		json2.put("version", "1");
-		json2.put("topicNsRoot", client.props.getProperty("databus.topicNsRoot","org.openecomp.dcae.dmaap"));
+		json2.put("topicNsRoot", client.props.getProperty("databus.topicNsRoot", "org.openecomp.dcae.dmaap"));
 		json2.put("bridgeAdminTopic", "DCAE_MM_AGENT");
 		try {
 			client.httpJsonTransaction("/webapi/dmaap", "PUT", headers, json2);
@@ -459,8 +508,9 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 					if (!(s2 instanceof DatabusStreamFeed))
 						continue;
 					DatabusStreamFeed feed2 = (DatabusStreamFeed) s2;
-					if (feed2.getPublishURL() == null) continue;
-					if (! feed2.getPublishURL().equals(sub.getDeliveryURL())) {
+					if (feed2.getPublishURL() == null)
+						continue;
+					if (!feed2.getPublishURL().equals(sub.getDeliveryURL())) {
 						System.err.println("FEED: forward URL wrong: " + feed.getName() + " " + sub.getDeliveryURL()
 								+ " != " + feed2.getPublishURL());
 						o.refreshDataBus(feed.getName());
@@ -736,8 +786,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			if (topic.getFqtn() != null) {
 				try {
 					client.httpJsonTransaction("/webapi/topics/" + topic.getFqtn(), "DELETE", headers, null);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					System.err.println("TOPIC0: delete existing topic: " + topicName + " " + e);
 				}
 				System.err.println("TOPIC0: delete existing topic: " + topicName);
@@ -816,8 +865,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 
 	public static void main(String[] args) throws IOException {
 		server = new ManagementServer();
-		JSONObject json = JsonUtils
-				.file2json("CONFIG/controller-gen/resources/databus.json");
+		JSONObject json = JsonUtils.file2json("CONFIG/controller-gen/resources/databus.json");
 		DcaeDataBus d = (DcaeDataBus) server.json2ecore(ControllerPackage.eINSTANCE.getDcaeDataBus(), json);
 		databusPoll(d);
 		for (DatabusStream stream : d.getStreams()) {
@@ -932,6 +980,10 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			logger.warn("No Policy Endpoint configured");
 			return;
 		}
+		EAnnotation anno = o2.eClass().getEAnnotation("http://openecomp.org/policy");
+		String matchingType = "policy-name";
+		if (anno != null && anno.getDetails().get("matchingType") != null)
+			matchingType = anno.getDetails().get("matchingType");
 		HashMap<String, String> headers = new HashMap<String, String>();
 		JSONObject json = new JSONObject();
 		headers.put("ClientAuth", client.props.getProperty("policy.clientAuth"));
@@ -941,59 +993,89 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		String uuid = ManagementServer.object2ref(o2).toLowerCase();
 		String pName = o2.getPolicyName();
 		String matchPolicyName = pName;
-		json2.put("uuid", uuid);
-		json.put("policyName", matchPolicyName);
-		JSONObject res = client.httpJsonTransaction("/getConfig", "POST", headers, json);
-		System.out.println("PPPPPPPPPPP 0: " + uuid);
-		JSONArray a = res.getJSONArray("$list");
+		System.out.println("PPPPPPPPPPP 0: match type=" + matchingType);
+		JSONArray a = null;
+		switch (matchingType) {
+		case "policy-name":
+			json.put("policyName", matchPolicyName);
+			JSONObject res = client.httpJsonTransaction("/getConfig", "POST", headers, json);
+			a = res.getJSONArray("$list");
+			break;
+		case "uuid-path":
+			// ONAP R1
+			for (Object k : client.props.keySet()) {
+				String key = (String) k;
+				if (key.startsWith("policy.substitution.")) {
+					uuid = uuid.replace(key.substring(20), client.props.getProperty(key));
+				}
+			}
+			json2.put("uuid", uuid);
+			json.put("policyName", ".*");
+			JSONObject res1 = client.httpJsonTransaction("/PyPDPServer/getConfig", "POST", headers, json);
+			System.out.println("PPPPPPPPPPP 0: uuid=" + uuid);
+			JSONArray a1 = res1.getJSONArray("$list");
+			a = new JSONArray();
+			for (int j = 0; j < a1.length(); j++) {
+				JSONObject c1 = a1.getJSONObject(j);
+				JSONObject newConfig;
+				try {
+					newConfig = new JSONObject(c1.getString("config"));
+				} catch (Exception e) {
+					System.out.println("PPPPPPPPPPP 1.1: " + c1.toString(2));
+					continue;
+				}
+				if (!uuid.equals(newConfig.getString("uuid").toLowerCase()))
+					continue;
+				a.put(c1);
+			}
+		}
+
 		switch (a.length()) {
-		case 0: 
+		case 0:
 			System.out.println("PPPPPPPPPPP 0 no policies: " + matchPolicyName + " " + uuid);
 			return;
-		case 1: break;
+		case 1:
+			break;
 		default:
 			System.out.println("PPPPPPPPPPP 0 too many policies: " + matchPolicyName + " " + uuid + " " + a.length());
 			return;
 		}
-		for (int j = 0; j < a.length(); j++) {
-			JSONObject c1 = a.getJSONObject(j);
-			JSONObject newConfig;
-			try {
-				newConfig = new JSONObject(c1.getString("config"));
-			} catch (Exception e) {
-				System.out.println("PPPPPPPPPPP 1: " + c1.toString(2));
-				continue;
-			}
-			System.out.println("PPPPPPPPPPP 2: " + newConfig.toString(2) + " uuid:" + newConfig.get("uuid"));
-//			if (!uuid.equals(newConfig.getString("uuid").toLowerCase()))
-//				continue;
-			JSONObject content = new JSONObject(newConfig.getString("content"));
-			System.out.println("PPPPPPPPPPP 3: " + content.toString(2));
-			content.put("policyDescription", newConfig.getString("description"));
-			content.put("policyConfigName", newConfig.getString("configName"));
-			content.put("policyTemplateVersion", newConfig.getString("templateVersion"));
-			content.put("policyVersion", newConfig.getString("version"));
-			content.put("policyPriority", newConfig.getString("priority"));
-			content.put("policyScope", newConfig.getString("policyScope"));
-			System.out.println("PPPPPPPPPPP 4: " + content.toString(2));
-			ManagementServer server = controller.getServer();
-			EObject oo = server.json2ecore(o2.eClass(), content);
-			// System.out.println("PPPPPPPPPPP 4_1: " +
-			// ManagementServer.ecore2json(oo, 1000, null, true).toString(2));
-			JSONObject before = cleanJson(o2);
-			ManagementServer.merge(o2, oo, content, true, null);
-			o2.setPolicyName(pName);
-			JSONObject after = cleanJson(o2);
-			ManagementServer.ecore2json(o2, 1000, null, true);
-			if (!before.toString(2).equals(after.toString(2))) {
-				System.out.println("PPPPPPPPPPP configuration change 5: " + ManagementServer.object2ref(i) + " using: " +  c1.getString("policyName"));
-				System.out.println("PPPPPPPPPPP before: " + before.toString(2));
-				System.out.println("PPPPPPPPPPP after: " + after.toString(2));
-				s.pushManagerConfiguration(i.getName());
-			}
+		JSONObject c1 = a.getJSONObject(0);
+		JSONObject newConfig;
+		try {
+			newConfig = new JSONObject(c1.getString("config"));
+		} catch (Exception e) {
+			System.out.println("PPPPPPPPPPP 1: " + c1.toString(2));
 			return;
 		}
-		System.out.println("PPPPPPPPPPP ERROR no policy found: " + uuid);
+		System.out.println("PPPPPPPPPPP 2: " + newConfig.toString(2) + " uuid:" + newConfig.get("uuid"));
+		// if (!uuid.equals(newConfig.getString("uuid").toLowerCase()))
+		// continue;
+		JSONObject content = new JSONObject(newConfig.getString("content"));
+		System.out.println("PPPPPPPPPPP 3: " + content.toString(2));
+		content.put("policyDescription", newConfig.getString("description"));
+		content.put("policyConfigName", newConfig.getString("configName"));
+		content.put("policyTemplateVersion", newConfig.getString("templateVersion"));
+		content.put("policyVersion", newConfig.getString("version"));
+		content.put("policyPriority", newConfig.getString("priority"));
+		content.put("policyScope", newConfig.getString("policyScope"));
+		System.out.println("PPPPPPPPPPP 4: " + content.toString(2));
+		ManagementServer server = controller.getServer();
+		EObject oo = server.json2ecore(o2.eClass(), content);
+		// System.out.println("PPPPPPPPPPP 4_1: " +
+		// ManagementServer.ecore2json(oo, 1000, null, true).toString(2));
+		JSONObject before = cleanJson(o2);
+		ManagementServer.merge(o2, oo, content, true, null);
+		o2.setPolicyName(pName);
+		JSONObject after = cleanJson(o2);
+		ManagementServer.ecore2json(o2, 1000, null, true);
+		if (!before.toString(2).equals(after.toString(2))) {
+			System.out.println("PPPPPPPPPPP configuration change 5: " + ManagementServer.object2ref(i) + " using: "
+					+ c1.getString("policyName"));
+			System.out.println("PPPPPPPPPPP before: " + before.toString(2));
+			System.out.println("PPPPPPPPPPP after: " + after.toString(2));
+			s.pushManagerConfiguration(i.getName());
+		}
 	}
 
 	private JSONObject cleanJson(EObject o2) {
@@ -1115,7 +1197,8 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		}
 	}
 
-	public Object handleJson(String userName, String action, String resourcePath, JSONObject json, JSONObject context, String clientVersion) {
+	public Object handleJson(String userName, String action, String resourcePath, JSONObject json, JSONObject context,
+			String clientVersion) {
 		// System.err.println("XXXXXX handleJson: " + action + " " +
 		// resourcePath + " " + context);
 		switch ((String) context.get("path")) {
@@ -1141,8 +1224,8 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 	}
 
 	public void refreshDataBus(String nameMatch) {
-		System.err.println("BBBBBBBBB: numberOfErrors=" + numberOfErrors + " tooMany=" + tooMany + " nameMatch="
-				+ nameMatch);
+		System.err.println(
+				"BBBBBBBBB: numberOfErrors=" + numberOfErrors + " tooMany=" + tooMany + " nameMatch=" + nameMatch);
 		numberOfErrors = 0;
 		for (DatabusStream s : o.getDatabus().getStreams()) {
 			if (nameMatch != null && !s.getName().matches(nameMatch))
@@ -1151,8 +1234,8 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				DatabusStreamFeed f = (DatabusStreamFeed) s;
 				if (f.getFeedName() == null)
 					continue;
-				System.err.println("BBBBBBBBB: feed change to null " + ManagementServer.object2ref(s) + " "
-						+ f.getFeedName());
+				System.err.println(
+						"BBBBBBBBB: feed change to null " + ManagementServer.object2ref(s) + " " + f.getFeedName());
 				f.setFeedName(null);
 				for (DatabusStreamFeedPublisher c : f.getPublishers()) {
 					c.setFeedId(null);
@@ -1170,8 +1253,8 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				DatabusStreamTopic t = (DatabusStreamTopic) s;
 				if (t.getTopicName() == null)
 					continue;
-				System.err.println("BBBBBBBBB: topic change to null " + ManagementServer.object2ref(s) + " "
-						+ t.getTopicName());
+				System.err.println(
+						"BBBBBBBBB: topic change to null " + ManagementServer.object2ref(s) + " " + t.getTopicName());
 				t.setTopicName(null);
 				for (DatabusStreamTopicClient c : t.getClients()) {
 					c.setTopicURL(null);

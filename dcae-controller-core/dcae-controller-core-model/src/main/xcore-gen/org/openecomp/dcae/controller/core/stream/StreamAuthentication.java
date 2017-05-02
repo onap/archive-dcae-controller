@@ -139,6 +139,8 @@ public enum StreamAuthentication implements Enumerator {
 	 * Returns the '<em><b>Authentication</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static StreamAuthentication get(String literal) {
@@ -155,6 +157,8 @@ public enum StreamAuthentication implements Enumerator {
 	 * Returns the '<em><b>Authentication</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static StreamAuthentication getByName(String name) {
@@ -171,6 +175,8 @@ public enum StreamAuthentication implements Enumerator {
 	 * Returns the '<em><b>Authentication</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static StreamAuthentication get(int value) {

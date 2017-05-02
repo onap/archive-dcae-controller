@@ -33,12 +33,12 @@ import java.util.Date;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusEntity#getStatus <em>Status</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusEntity#getLastModified <em>Last Modified</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusEntity#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDatabusEntity()
  * @model

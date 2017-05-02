@@ -58,11 +58,9 @@ public class DcaeControllerServiceStandardeventcollectorServiceProvider extends 
 
 	@Override
     public EObject managerConfiguration(String instanceName) {
-            //EObject o1 =  ManagerFactory.eINSTANCE.createControllerServiceStandardeventcollectorManager();
 			ControllerServiceStandardeventcollectorManager o1 =  ManagerFactory.eINSTANCE.createControllerServiceStandardeventcollectorManager();
             ManagementServer.copy(findInstance(instanceName),o1);
-            //o1.setKeystorepwd(JavaHttpClient.decryptPassword(o1.getKeystorepwd()));
-            
+            o1.setAuthlist(JavaHttpClient.decryptEmbeddedPassword(o1.getAuthlist()));
             return o1;
     }
 

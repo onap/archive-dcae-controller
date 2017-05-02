@@ -33,6 +33,8 @@ import org.openecomp.ncomp.sirius.manager.ManagementServerError;
 
     
 
+import org.openecomp.dcae.controller.platform.servers.controller.inventory.DcaeDcaeInventoryConsole;       
+
 import org.openecomp.dcae.controller.platform.servers.controller.gui.DcaeGuiClientApiConsole;   
 
 
@@ -43,6 +45,7 @@ public class DcaeDcaePlatformControllerConsole extends Console {
     
         DcaeControllerClusterConsole cluster;       
         DcaeControllerVirtualMachineServiceConsole cont;       
+        DcaeDcaeInventoryConsole inventory;       
         DcaeGuiClientApiConsole gui;   
 
 
@@ -53,6 +56,7 @@ public class DcaeDcaePlatformControllerConsole extends Console {
     
             cluster = new  DcaeControllerClusterConsole(filename,name);       
             cont = new  DcaeControllerVirtualMachineServiceConsole(filename,name);       
+            inventory = new  DcaeDcaeInventoryConsole(filename,name);       
             gui = new  DcaeGuiClientApiConsole(filename,name);   
     }
     

@@ -45,6 +45,8 @@ import org.openecomp.dcae.controller.platform.servers.controller.DcaeControllerF
     
 import org.openecomp.dcae.controller.platform.servers.controller.DcaeControllerFactory;
     
+import org.openecomp.dcae.controller.platform.servers.controller.inventory.DcaeInventoryFactory;
+    
 import org.openecomp.dcae.controller.platform.servers.controller.gui.DcaeModelFactory;
 
 
@@ -67,6 +69,9 @@ public class DcaeDcaePlatformControllerServer implements ISiriusServer, IRequest
     
     String contPath;
     ManagementServer contServer;
+    
+    String inventoryPath;
+    ManagementServer inventoryServer;
     
     String guiPath;
     ManagementServer guiServer;
@@ -101,6 +106,12 @@ public class DcaeDcaePlatformControllerServer implements ISiriusServer, IRequest
 		webServer.add("/swagger",controller);
 
 
+    
+		EFactory inventoryFactory = new DcaeInventoryFactory(this);
+		inventoryPath = serverPath + "/inventory";
+		inventoryServer = new ManagementServer(inventoryFactory, "DcaeInventory", inventoryPath, "inventory.properties");
+		inventoryServer.start();
+		webServer.add("/inventory",inventoryServer);
     
 		EFactory guiFactory = new DcaeModelFactory(this);
 		guiPath = serverPath + "/gui";

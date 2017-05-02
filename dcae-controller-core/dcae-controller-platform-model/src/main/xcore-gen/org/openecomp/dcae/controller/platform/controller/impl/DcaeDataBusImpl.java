@@ -44,13 +44,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaeDataBusImpl#getStreams <em>Streams</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaeDataBusImpl#getLocations <em>Locations</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaeDataBusImpl#getMrClusters <em>Mr Clusters</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaeDataBusImpl#getDrNodes <em>Dr Nodes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

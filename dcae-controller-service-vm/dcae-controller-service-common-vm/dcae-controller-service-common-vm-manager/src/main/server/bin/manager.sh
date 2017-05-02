@@ -18,7 +18,8 @@ CMD1=$1
 VMTYPE=$(ls /tmp/vm-*manager.properties | sed s/-manager.properties// | sed sx/tmp/xx)
 
 case $CMD1 in
-  start) 
+start)
+	umask 022
     for jar in /opt/app/{ncomp,dcae}-*-model/lib/*jar; do cp -p $jar lib/; done
     JVMARGS=$(cat config/manager.properties | grep JVMARGS | sed 's/[^=]*=//')
     $CMD $CMD1 $JVMARGS

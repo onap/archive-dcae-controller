@@ -58,6 +58,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerImpl#getOperationalState <em>Operational State</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerImpl#getLogMessageConfiguration <em>Log Message Configuration</em>}</li>
@@ -78,7 +79,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerImpl#getHealthTestStatus <em>Health Test Status</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.server.impl.DcaeBasicServerImpl#getHealthTestMessageCode <em>Health Test Message Code</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

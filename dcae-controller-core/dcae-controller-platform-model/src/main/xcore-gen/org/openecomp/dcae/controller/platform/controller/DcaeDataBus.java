@@ -37,13 +37,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaeDataBus#getStreams <em>Streams</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaeDataBus#getLocations <em>Locations</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaeDataBus#getMrClusters <em>Mr Clusters</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.DcaeDataBus#getDrNodes <em>Dr Nodes</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.platform.controller.ControllerPackage#getDcaeDataBus()
  * @model

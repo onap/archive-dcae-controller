@@ -37,8 +37,6 @@ import org.json.JSONObject;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Dcae Service</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

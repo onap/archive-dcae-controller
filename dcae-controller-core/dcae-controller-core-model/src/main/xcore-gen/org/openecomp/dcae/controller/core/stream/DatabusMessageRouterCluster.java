@@ -32,6 +32,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusMessageRouterCluster#getDcaeLocationName <em>Dcae Location Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusMessageRouterCluster#getServiceFqdn <em>Service Fqdn</em>}</li>
@@ -39,7 +40,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusMessageRouterCluster#getTopicPort <em>Topic Port</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusMessageRouterCluster#getTopicProtocol <em>Topic Protocol</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDatabusMessageRouterCluster()
  * @model

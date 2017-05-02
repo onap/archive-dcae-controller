@@ -141,64 +141,77 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 
 	private void doSteps(DcaeCdapClusterManagerConsole console, CdapServiceInstance i, EList<CdapStep> steps) {
 		for (CdapStep s : steps) {
-			if (s instanceof CdapLoadArtifactStep) {
-				CdapLoadArtifactStep s1 = (CdapLoadArtifactStep) s;
-				console.loadArtifact(i.getCdapName(), s1.getArtifactName(), s1.getJarfile(), s1.getVersion());
-			}
 			if (s instanceof CdapLoadArtifactWithConfigStep) {
 				CdapLoadArtifactWithConfigStep s1 = (CdapLoadArtifactWithConfigStep) s;
-				console.loadArtifactWithConfig(i.getCdapName(), s1.getArtifactName(), s1.getJarfile(), s1.getVersion(),
+				console.loadArtifactWithConfig(i.getCdapName(), s1.getArtifactName(), s1.getJarFile(), s1.getVersion(),
 						s1.getConfig());
+				continue;
+			}
+			if (s instanceof CdapLoadArtifactStep) {
+				CdapLoadArtifactStep s1 = (CdapLoadArtifactStep) s;
+				console.loadArtifact(i.getCdapName(), s1.getArtifactName(), s1.getJarFile(), s1.getVersion());
+				continue;
 			}
 			if (s instanceof CdapDeployAppStep) {
 				CdapDeployAppStep s1 = (CdapDeployAppStep) s;
-				console.deployApp(i.getCdapName(), s1.getJarfile());
-			}
-			if (s instanceof CdapCreateAppStep) {
-				CdapCreateAppStep s1 = (CdapCreateAppStep) s;
-				console.createApp(i.getCdapName(), s1.getAppId(), s1.getArtifactName(), s1.getVersion(), s1.getScope());
+				console.deployApp(i.getCdapName(), s1.getJarFile());
+				continue;
 			}
 			if (s instanceof CdapCreateAppWithConfigStep) {
 				CdapCreateAppWithConfigStep s1 = (CdapCreateAppWithConfigStep) s;
 				console.createAppWithConfig(i.getCdapName(), s1.getAppId(), s1.getArtifactName(), s1.getVersion(),
 						s1.getScope(), s1.getAppConfig());
+				continue;
+			}
+			if (s instanceof CdapCreateAppStep) {
+				CdapCreateAppStep s1 = (CdapCreateAppStep) s;
+				console.createApp(i.getCdapName(), s1.getAppId(), s1.getArtifactName(), s1.getVersion(), s1.getScope());
+				continue;
 			}
 			if (s instanceof CdapStartAppStep) {
 				CdapStartAppStep s1 = (CdapStartAppStep) s;
 				console.startApp(i.getCdapName(), s1.getAppId());
+				continue;
 			}
 			if (s instanceof CdapStartFlowStep) {
 				CdapStartFlowStep s1 = (CdapStartFlowStep) s;
 				console.startFlow(i.getCdapName(), s1.getAppId(), s1.getFlowId(), s1.getExtraArgs());
+				continue;
 			}
 			if (s instanceof CdapStartWorkerStep) {
 				CdapStartWorkerStep s1 = (CdapStartWorkerStep) s;
 				console.startWorker(i.getCdapName(), s1.getAppId(), s1.getWorkerId(), s1.getExtraArgs());
+				continue;
 			}
 			if (s instanceof CdapStartServiceStep) {
 				CdapStartServiceStep s1 = (CdapStartServiceStep) s;
 				console.startService(i.getCdapName(), s1.getAppId(), s1.getServiceId(), s1.getExtraArgs());
+				continue;
 			}
 			if (s instanceof CdapStopAppStep) {
 				CdapStopAppStep s1 = (CdapStopAppStep) s;
 				console.stopApp(i.getCdapName(), s1.getAppId());
+				continue;
 			}
 			if (s instanceof CdapStopFlowStep) {
 				CdapStopFlowStep s1 = (CdapStopFlowStep) s;
 				console.stopFlow(i.getCdapName(), s1.getAppId(), s1.getFlowId());
+				continue;
 			}
 			if (s instanceof CdapStopWorkerStep) {
 				CdapStopWorkerStep s1 = (CdapStopWorkerStep) s;
 				console.stopWorker(i.getCdapName(), s1.getAppId(), s1.getWorkerId());
+				continue;
 			}
 			if (s instanceof CdapStopServiceStep) {
 				CdapStopServiceStep s1 = (CdapStopServiceStep) s;
 				console.stopService(i.getCdapName(), s1.getAppId(), s1.getServiceId());
+				continue;
 			}
 			if (s instanceof CdapResumeScheduleStep) {
 				CdapResumeScheduleStep s1 = (CdapResumeScheduleStep) s;
 				console.resumeSchedule(i.getCdapName(), s1.getAppId(), s1.getScheduleId());
-
+				continue;
 			}
 		}
 	}

@@ -107,9 +107,9 @@ public class ServerPackageImpl extends EPackageImpl implements ServerPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		ServicePackage.eINSTANCE.eClass();
-		PropertiesPackage.eINSTANCE.eClass();
 		CollectdPackage.eINSTANCE.eClass();
+		PropertiesPackage.eINSTANCE.eClass();
+		ServicePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theServerPackage.createPackageContents();

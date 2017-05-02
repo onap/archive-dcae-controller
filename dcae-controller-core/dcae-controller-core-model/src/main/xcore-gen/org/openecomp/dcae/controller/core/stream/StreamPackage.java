@@ -43,6 +43,24 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * -
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *  *        http://www.apache.org/licenses/LICENSE-2.0
+ *  * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ * <!-- end-model-doc -->
  * @see org.openecomp.dcae.controller.core.stream.StreamFactory
  * @model kind="package"
  *        annotation="http://www.eclipse.org/emf/2002/GenModel modelDirectory='/dcae-controller-core-model/src/main/xcore-gen' basePackage='org.openecomp.dcae.controller.core'"
@@ -1162,13 +1180,31 @@ public interface StreamPackage extends EPackage {
 	int DATABUS_STREAM_TOPIC__AUTHENTICATION_METHOD = DATABUS_STREAM_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Replication Case</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATABUS_STREAM_TOPIC__REPLICATION_CASE = DATABUS_STREAM_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Global Mr URL</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATABUS_STREAM_TOPIC__GLOBAL_MR_URL = DATABUS_STREAM_FEATURE_COUNT + 13;
+
+	/**
 	 * The number of structural features of the '<em>Databus Stream Topic</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATABUS_STREAM_TOPIC_FEATURE_COUNT = DATABUS_STREAM_FEATURE_COUNT + 12;
+	int DATABUS_STREAM_TOPIC_FEATURE_COUNT = DATABUS_STREAM_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of operations of the '<em>Databus Stream Topic</em>' class.
@@ -2701,6 +2737,28 @@ public interface StreamPackage extends EPackage {
 	EAttribute getDatabusStreamTopic_AuthenticationMethod();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getReplicationCase <em>Replication Case</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Replication Case</em>'.
+	 * @see org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getReplicationCase()
+	 * @see #getDatabusStreamTopic()
+	 * @generated
+	 */
+	EAttribute getDatabusStreamTopic_ReplicationCase();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getGlobalMrURL <em>Global Mr URL</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Global Mr URL</em>'.
+	 * @see org.openecomp.dcae.controller.core.stream.DatabusStreamTopic#getGlobalMrURL()
+	 * @see #getDatabusStreamTopic()
+	 * @generated
+	 */
+	EAttribute getDatabusStreamTopic_GlobalMrURL();
+
+	/**
 	 * Returns the meta object for class '{@link org.openecomp.dcae.controller.core.stream.DatabusStreamTopicClient <em>Databus Stream Topic Client</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3712,6 +3770,20 @@ public interface StreamPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DATABUS_STREAM_TOPIC__AUTHENTICATION_METHOD = eINSTANCE.getDatabusStreamTopic_AuthenticationMethod();
+		/**
+		 * The meta object literal for the '<em><b>Replication Case</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATABUS_STREAM_TOPIC__REPLICATION_CASE = eINSTANCE.getDatabusStreamTopic_ReplicationCase();
+		/**
+		 * The meta object literal for the '<em><b>Global Mr URL</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATABUS_STREAM_TOPIC__GLOBAL_MR_URL = eINSTANCE.getDatabusStreamTopic_GlobalMrURL();
 		/**
 		 * The meta object literal for the '{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicClientImpl <em>Databus Stream Topic Client</em>}' class.
 		 * <!-- begin-user-doc -->

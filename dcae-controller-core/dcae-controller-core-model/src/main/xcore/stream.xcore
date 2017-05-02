@@ -88,6 +88,8 @@ class DatabusStreamTopic extends DatabusStream {
 	String publishURL
 	String subscribeURL
 	StreamAuthentication authenticationMethod
+	String replicationCase
+	String globalMrURL
 }
 
 class DatabusStreamTopicClient extends DatabusStream {

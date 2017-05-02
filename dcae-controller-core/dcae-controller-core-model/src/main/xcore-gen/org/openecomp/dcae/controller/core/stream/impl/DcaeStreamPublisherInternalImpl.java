@@ -39,11 +39,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamPublisherInternalImpl#getLocalName <em>Local Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamPublisherInternalImpl#getServiceName <em>Service Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

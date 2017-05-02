@@ -1,0 +1,198 @@
+/*-
+ * ============LICENSE_START==========================================
+ * OPENECOMP - DCAE
+ * ===================================================================
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ * ===================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0 
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END============================================
+ */
+@GenModel(modelDirectory="/dcae-controller-core-model/src/main/xcore-gen")
+package org.openecomp.dcae.controller.inventory
+
+import org.openecomp.ncomp.core.NamedEntity
+
+class DcaeInventory {
+	contains DCAEServiceType[] serviceTypes
+	contains DCAEService[] services
+	op DcaeServiceTypeResults getDcaeServiceTypes(String typeName, Boolean onlyLatest, Boolean onlyActive, String vnfType, String serviceId, String serviceLocation, String asdcServiceId, String asdcResourceId, Integer offset)
+	op ApiResponseMessage deleteDcaeServiceTypesType(String[1] typeId)
+	op DCAEServiceType getDcaeServiceTypesType(String typeId)
+	op DCAEServiceType createDcaeServiceTypesTypeName(DCAEServiceTypeRequest body)
+	op DcaeServiceResults getDcaeServices(String typeId, String vnfId, String vnfType, String vnfLocation, String componentType, Boolean shareable, String created, Integer offset)
+	op DCAEServiceGroupByResults getDcaeServicesGroupbyPropertyName(String propertyName)
+	op void deleteDcaeServicesService(String serviceId)
+	op DCAEService getDcaeServicesService(String serviceId)
+	op DCAEService createDcaeServicesService(String serviceId, DCAEServiceRequest body)
+	op void poll()
+}
+
+class ApiResponseMessage {
+	Integer code
+	String ^type
+	String message
+}
+
+class DCAEServiceComponent extends NamedEntity {
+	/* The id format is unique to the source */
+	String componentId
+	/* Link to the underlying resource of this component */
+	contains Link componentLink
+	Date created1
+	Date modified
+	String componentType
+	/* Specifies the name of the underying source service that is responsible for this components */
+	String componentSource
+	String status
+	/* Location information of the component */
+	String location
+	/* Used to determine if this component can be shared amongst different DCAE services */
+	Integer shareable
+}
+
+class DCAEServiceComponentRequest {
+	/* The id format is unique to the source */
+	String componentId
+	String componentType
+	/* Specifies the name of the underying source service that is responsible for this components */
+	String componentSource
+	/* Used to determine if this component can be shared amongst different DCAE services */
+	Integer shareable
+}
+
+class DCAEService extends NamedEntity {
+	String serviceId
+	/* Link.title is serviceId */
+	contains Link selfLink
+	Date created1
+	Date modified
+	/* Link.title is typeId */
+	contains Link typeLink
+	String vnfId
+	/* Link.title is vnfId */
+	contains Link vnfLink
+	String vnfType
+	/* Location information of the associated VNF */
+	String vnfLocation
+	/* Reference to a Cloudify deployment */
+	String deploymentRef
+	contains DCAEServiceComponent[] components
+}
+
+class DCAEServiceGroupByResults {
+	/* Property name of DCAE service that the group by operation was performed on */
+	String propertyName
+	contains DCAEServiceGroupByResultsPropertyValues[] propertyValues
+}
+
+class DCAEServiceGroupByResultsPropertyValues {
+	Integer count
+	String propertyValue
+	/* Link.title is the DCAE service property value. Following this link will provide a list of DCAE services that all have this property value. */
+	contains Link dcaeServiceQueryLink
+}
+
+class DCAEServiceRequest {
+	/* Id of the associated DCAE service type */
+	String typeId
+	/* Id of the associated VNF that this service is monitoring */
+	String vnfId
+	/* The type of the associated VNF that this service is monitoring */
+	String vnfType
+	/* Location identifier of the associated VNF that this service is monitoring */
+	String vnfLocation
+	/* Reference to a Cloudify deployment */
+	String deploymentRef
+	/* List of DCAE service components that this service is composed of */
+	contains DCAEServiceComponentRequest[] components
+}
+
+class DCAEServiceType extends NamedEntity {
+	String owner
+	/* Descriptive name for this DCAE service type */
+	String typeName
+	/* Version number for this DCAE service type */
+	Integer typeVersion
+	/* String representation of a Cloudify blueprint with unbound variables */
+	String blueprintTemplate
+	/* List of service ids that are used to associate with DCAE service type. DCAE service types with this propery as null or empty means them apply for every service id. */
+	String[] serviceIds
+	String[] vnfTypes
+	/* List of service locations that are used to associate with DCAE service type. DCAE service types with this propery as null or empty means them apply for every service location. */
+	String[] serviceLocations
+	/* Id of service this DCAE service type is associated with. Value source is from ASDC's notification event's field `serviceInvariantUUID`. */
+	String asdcServiceId
+	/* Id of vf/vnf instance this DCAE service type is associated with. Value source is from ASDC's notification event's field `resourceInvariantUUID`. */
+	String asdcResourceId
+	/* URL to the ASDC service model */
+	String asdcServiceURL
+	/* Unique identifier for this DCAE service type */
+	String typeId
+	/* Link to self where the Link.title is typeName */
+	contains Link selfLink
+	/* Created timestamp for this DCAE service type in epoch time */
+	Date created1
+	/* Deactivated timestamp for this DCAE service type in epoch time */
+	Date deactivated
+}
+
+class DCAEServiceTypeRequest {
+	String owner
+	/* Descriptive name for this DCAE service type */
+	String typeName
+	/* Version number for this DCAE service type */
+	Integer typeVersion
+	/* String representation of a Cloudify blueprint with unbound variables */
+	String blueprintTemplate
+	/* List of service ids that are used to associate with DCAE service type. DCAE service types with this propery as null or empty means them apply for every service id. */
+	String[] serviceIds
+	String[] vnfTypes
+	/* List of service locations that are used to associate with DCAE service type. DCAE service types with this propery as null or empty means them apply for every service location. */
+	String[] serviceLocations
+	/* Id of service this DCAE service type is associated with. Value source is from ASDC's notification event's field `serviceInvariantUUID`. */
+	String asdcServiceId
+	/* Id of vf/vnf instance this DCAE service type is associated with. Value source is from ASDC's notification event's field `resourceInvariantUUID`. */
+	String asdcResourceId
+	/* URL to the ASDC service model */
+	String asdcServiceURL
+}
+
+class DcaeServiceResults {
+	contains Link[] links
+	Integer totalCount
+	contains DCAEService[] items
+}
+
+class DcaeServiceTypeResults {
+	contains Link[] links
+	Integer totalCount
+	contains DCAEServiceType[] items
+}
+
+class Link extends NamedEntity {
+	contains Parameter[] params
+	String title
+	String rel
+	String href
+	String uri
+	contains UriBuilder uriBuilder
+	String[] rels
+	String ^type
+}
+
+class Parameter extends NamedEntity {
+	String value
+}
+
+class UriBuilder {
+}

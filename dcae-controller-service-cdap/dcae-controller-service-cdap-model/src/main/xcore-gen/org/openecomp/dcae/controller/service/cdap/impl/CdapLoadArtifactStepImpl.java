@@ -18,7 +18,7 @@ import org.openecomp.dcae.controller.service.cdap.CdapPackage;
  * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapLoadArtifactStepImpl#getArtifactName <em>Artifact Name</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapLoadArtifactStepImpl#getJarfile <em>Jarfile</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapLoadArtifactStepImpl#getJarFile <em>Jar File</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapLoadArtifactStepImpl#getVersion <em>Version</em>}</li>
  * </ul>
  *
@@ -44,23 +44,23 @@ public class CdapLoadArtifactStepImpl extends CdapStepImpl implements CdapLoadAr
 	 */
 	protected String artifactName = ARTIFACT_NAME_EDEFAULT;
 	/**
-	 * The default value of the '{@link #getJarfile() <em>Jarfile</em>}' attribute.
+	 * The default value of the '{@link #getJarFile() <em>Jar File</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getJarfile()
+	 * @see #getJarFile()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String JARFILE_EDEFAULT = null;
+	protected static final String JAR_FILE_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getJarfile() <em>Jarfile</em>}' attribute.
+	 * The cached value of the '{@link #getJarFile() <em>Jar File</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getJarfile()
+	 * @see #getJarFile()
 	 * @generated
 	 * @ordered
 	 */
-	protected String jarfile = JARFILE_EDEFAULT;
+	protected String jarFile = JAR_FILE_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -125,8 +125,8 @@ public class CdapLoadArtifactStepImpl extends CdapStepImpl implements CdapLoadAr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getJarfile() {
-		return jarfile;
+	public String getJarFile() {
+		return jarFile;
 	}
 
 	/**
@@ -134,11 +134,11 @@ public class CdapLoadArtifactStepImpl extends CdapStepImpl implements CdapLoadAr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setJarfile(String newJarfile) {
-		String oldJarfile = jarfile;
-		jarfile = newJarfile;
+	public void setJarFile(String newJarFile) {
+		String oldJarFile = jarFile;
+		jarFile = newJarFile;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CdapPackage.CDAP_LOAD_ARTIFACT_STEP__JARFILE, oldJarfile, jarfile));
+			eNotify(new ENotificationImpl(this, Notification.SET, CdapPackage.CDAP_LOAD_ARTIFACT_STEP__JAR_FILE, oldJarFile, jarFile));
 	}
 
 	/**
@@ -172,8 +172,8 @@ public class CdapLoadArtifactStepImpl extends CdapStepImpl implements CdapLoadAr
 		switch (featureID) {
 			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__ARTIFACT_NAME:
 				return getArtifactName();
-			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__JARFILE:
-				return getJarfile();
+			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__JAR_FILE:
+				return getJarFile();
 			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__VERSION:
 				return getVersion();
 		}
@@ -191,8 +191,8 @@ public class CdapLoadArtifactStepImpl extends CdapStepImpl implements CdapLoadAr
 			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__ARTIFACT_NAME:
 				setArtifactName((String)newValue);
 				return;
-			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__JARFILE:
-				setJarfile((String)newValue);
+			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__JAR_FILE:
+				setJarFile((String)newValue);
 				return;
 			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__VERSION:
 				setVersion((String)newValue);
@@ -212,8 +212,8 @@ public class CdapLoadArtifactStepImpl extends CdapStepImpl implements CdapLoadAr
 			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__ARTIFACT_NAME:
 				setArtifactName(ARTIFACT_NAME_EDEFAULT);
 				return;
-			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__JARFILE:
-				setJarfile(JARFILE_EDEFAULT);
+			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__JAR_FILE:
+				setJarFile(JAR_FILE_EDEFAULT);
 				return;
 			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__VERSION:
 				setVersion(VERSION_EDEFAULT);
@@ -232,8 +232,8 @@ public class CdapLoadArtifactStepImpl extends CdapStepImpl implements CdapLoadAr
 		switch (featureID) {
 			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__ARTIFACT_NAME:
 				return ARTIFACT_NAME_EDEFAULT == null ? artifactName != null : !ARTIFACT_NAME_EDEFAULT.equals(artifactName);
-			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__JARFILE:
-				return JARFILE_EDEFAULT == null ? jarfile != null : !JARFILE_EDEFAULT.equals(jarfile);
+			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__JAR_FILE:
+				return JAR_FILE_EDEFAULT == null ? jarFile != null : !JAR_FILE_EDEFAULT.equals(jarFile);
 			case CdapPackage.CDAP_LOAD_ARTIFACT_STEP__VERSION:
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 		}
@@ -252,8 +252,8 @@ public class CdapLoadArtifactStepImpl extends CdapStepImpl implements CdapLoadAr
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (artifactName: ");
 		result.append(artifactName);
-		result.append(", jarfile: ");
-		result.append(jarfile);
+		result.append(", jarFile: ");
+		result.append(jarFile);
 		result.append(", version: ");
 		result.append(version);
 		result.append(')');

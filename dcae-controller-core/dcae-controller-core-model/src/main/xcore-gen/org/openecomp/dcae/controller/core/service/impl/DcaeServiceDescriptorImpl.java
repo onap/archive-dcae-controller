@@ -40,12 +40,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.DcaeServiceDescriptorImpl#getGroupId <em>Group Id</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.DcaeServiceDescriptorImpl#getArtifact <em>Artifact</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.DcaeServiceDescriptorImpl#getVersion <em>Version</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

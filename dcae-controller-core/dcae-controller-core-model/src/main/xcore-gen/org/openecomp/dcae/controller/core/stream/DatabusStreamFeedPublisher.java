@@ -32,6 +32,7 @@ import org.openecomp.ncomp.core.NamedEntity;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamFeedPublisher#getLocalStreamId <em>Local Stream Id</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamFeedPublisher#getDcaeLocationName <em>Dcae Location Name</em>}</li>
@@ -41,7 +42,6 @@ import org.openecomp.ncomp.core.NamedEntity;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamFeedPublisher#getUsername <em>Username</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusStreamFeedPublisher#getUserpwd <em>Userpwd</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDatabusStreamFeedPublisher()
  * @model

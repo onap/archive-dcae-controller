@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DmaapStreamImpl#getDmaapDataType <em>Dmaap Data Type</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DmaapStreamImpl#getDmaapAction <em>Dmaap Action</em>}</li>
@@ -46,7 +47,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DmaapStreamImpl#getDmaapPassword <em>Dmaap Password</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DmaapStreamImpl#getDmaapAuthMethod <em>Dmaap Auth Method</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

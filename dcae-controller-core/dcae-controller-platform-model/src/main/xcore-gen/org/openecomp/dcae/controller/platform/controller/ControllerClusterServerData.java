@@ -35,6 +35,7 @@ import org.openecomp.ncomp.core.types.metrics.IncreasingULongMetricAttribute;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.ControllerClusterServerData#getPushInterval <em>Push Interval</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.ControllerClusterServerData#getLastPush <em>Last Push</em>}</li>
@@ -44,7 +45,6 @@ import org.openecomp.ncomp.core.types.metrics.IncreasingULongMetricAttribute;
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.ControllerClusterServerData#getNumberDataReceived <em>Number Data Received</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.ControllerClusterServerData#getNumberDataReceivedErrors <em>Number Data Received Errors</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.platform.controller.ControllerPackage#getControllerClusterServerData()
  * @model

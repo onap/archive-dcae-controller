@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.ControllerCluster#getMyServerName <em>My Server Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.ControllerCluster#getRole <em>Role</em>}</li>
@@ -42,7 +43,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.ControllerCluster#getServers <em>Servers</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.ControllerCluster#getRemoteServers <em>Remote Servers</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.platform.controller.ControllerPackage#getControllerCluster()
  * @model

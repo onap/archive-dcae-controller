@@ -40,11 +40,11 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.HealthTestResponseImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.HealthTestResponseImpl#getMessageCode <em>Message Code</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

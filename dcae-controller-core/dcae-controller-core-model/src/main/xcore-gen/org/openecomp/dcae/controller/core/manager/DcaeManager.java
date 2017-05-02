@@ -37,11 +37,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.manager.DcaeManager#getInputStreams <em>Input Streams</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.manager.DcaeManager#getOutputStreams <em>Output Streams</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.manager.ManagerPackage#getDcaeManager()
  * @model abstract="true"

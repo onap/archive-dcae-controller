@@ -51,11 +51,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.manager.impl.DcaeManagerImpl#getInputStreams <em>Input Streams</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.manager.impl.DcaeManagerImpl#getOutputStreams <em>Output Streams</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -32,11 +32,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DcaeStreamInternalEndPoint#getLocalName <em>Local Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DcaeStreamInternalEndPoint#getServiceName <em>Service Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDcaeStreamInternalEndPoint()
  * @model

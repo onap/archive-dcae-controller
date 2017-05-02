@@ -41,12 +41,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusEntityImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusEntityImpl#getLastModified <em>Last Modified</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusEntityImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -19,31 +19,31 @@ import org.openecomp.dcae.controller.service.cdap.CdapPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapDeployAppStepImpl#getJarfile <em>Jarfile</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapDeployAppStepImpl#getJarFile <em>Jar File</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class CdapDeployAppStepImpl extends CdapStepImpl implements CdapDeployAppStep {
 	/**
-	 * The default value of the '{@link #getJarfile() <em>Jarfile</em>}' attribute.
+	 * The default value of the '{@link #getJarFile() <em>Jar File</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getJarfile()
+	 * @see #getJarFile()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String JARFILE_EDEFAULT = null;
+	protected static final String JAR_FILE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getJarfile() <em>Jarfile</em>}' attribute.
+	 * The cached value of the '{@link #getJarFile() <em>Jar File</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getJarfile()
+	 * @see #getJarFile()
 	 * @generated
 	 * @ordered
 	 */
-	protected String jarfile = JARFILE_EDEFAULT;
+	protected String jarFile = JAR_FILE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,8 +69,8 @@ public class CdapDeployAppStepImpl extends CdapStepImpl implements CdapDeployApp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getJarfile() {
-		return jarfile;
+	public String getJarFile() {
+		return jarFile;
 	}
 
 	/**
@@ -78,11 +78,11 @@ public class CdapDeployAppStepImpl extends CdapStepImpl implements CdapDeployApp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setJarfile(String newJarfile) {
-		String oldJarfile = jarfile;
-		jarfile = newJarfile;
+	public void setJarFile(String newJarFile) {
+		String oldJarFile = jarFile;
+		jarFile = newJarFile;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CdapPackage.CDAP_DEPLOY_APP_STEP__JARFILE, oldJarfile, jarfile));
+			eNotify(new ENotificationImpl(this, Notification.SET, CdapPackage.CDAP_DEPLOY_APP_STEP__JAR_FILE, oldJarFile, jarFile));
 	}
 
 	/**
@@ -93,8 +93,8 @@ public class CdapDeployAppStepImpl extends CdapStepImpl implements CdapDeployApp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CdapPackage.CDAP_DEPLOY_APP_STEP__JARFILE:
-				return getJarfile();
+			case CdapPackage.CDAP_DEPLOY_APP_STEP__JAR_FILE:
+				return getJarFile();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -107,8 +107,8 @@ public class CdapDeployAppStepImpl extends CdapStepImpl implements CdapDeployApp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CdapPackage.CDAP_DEPLOY_APP_STEP__JARFILE:
-				setJarfile((String)newValue);
+			case CdapPackage.CDAP_DEPLOY_APP_STEP__JAR_FILE:
+				setJarFile((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -122,8 +122,8 @@ public class CdapDeployAppStepImpl extends CdapStepImpl implements CdapDeployApp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CdapPackage.CDAP_DEPLOY_APP_STEP__JARFILE:
-				setJarfile(JARFILE_EDEFAULT);
+			case CdapPackage.CDAP_DEPLOY_APP_STEP__JAR_FILE:
+				setJarFile(JAR_FILE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -137,8 +137,8 @@ public class CdapDeployAppStepImpl extends CdapStepImpl implements CdapDeployApp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CdapPackage.CDAP_DEPLOY_APP_STEP__JARFILE:
-				return JARFILE_EDEFAULT == null ? jarfile != null : !JARFILE_EDEFAULT.equals(jarfile);
+			case CdapPackage.CDAP_DEPLOY_APP_STEP__JAR_FILE:
+				return JAR_FILE_EDEFAULT == null ? jarFile != null : !JAR_FILE_EDEFAULT.equals(jarFile);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -153,8 +153,8 @@ public class CdapDeployAppStepImpl extends CdapStepImpl implements CdapDeployApp
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (jarfile: ");
-		result.append(jarfile);
+		result.append(" (jarFile: ");
+		result.append(jarFile);
 		result.append(')');
 		return result.toString();
 	}

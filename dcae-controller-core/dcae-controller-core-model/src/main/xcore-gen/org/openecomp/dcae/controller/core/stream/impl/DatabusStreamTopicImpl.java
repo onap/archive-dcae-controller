@@ -45,6 +45,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicImpl#getTopicName <em>Topic Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicImpl#getTopicDescription <em>Topic Description</em>}</li>
@@ -58,8 +59,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicImpl#getPublishURL <em>Publish URL</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicImpl#getSubscribeURL <em>Subscribe URL</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicImpl#getAuthenticationMethod <em>Authentication Method</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicImpl#getReplicationCase <em>Replication Case</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusStreamTopicImpl#getGlobalMrURL <em>Global Mr URL</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -274,6 +276,43 @@ public class DatabusStreamTopicImpl extends DatabusStreamImpl implements Databus
 	 * @ordered
 	 */
 	protected StreamAuthentication authenticationMethod = AUTHENTICATION_METHOD_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getReplicationCase() <em>Replication Case</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReplicationCase()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String REPLICATION_CASE_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getReplicationCase() <em>Replication Case</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReplicationCase()
+	 * @generated
+	 * @ordered
+	 */
+	protected String replicationCase = REPLICATION_CASE_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getGlobalMrURL() <em>Global Mr URL</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGlobalMrURL()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String GLOBAL_MR_URL_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getGlobalMrURL() <em>Global Mr URL</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGlobalMrURL()
+	 * @generated
+	 * @ordered
+	 */
+	protected String globalMrURL = GLOBAL_MR_URL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -542,6 +581,48 @@ public class DatabusStreamTopicImpl extends DatabusStreamImpl implements Databus
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getReplicationCase() {
+		return replicationCase;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReplicationCase(String newReplicationCase) {
+		String oldReplicationCase = replicationCase;
+		replicationCase = newReplicationCase;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StreamPackage.DATABUS_STREAM_TOPIC__REPLICATION_CASE, oldReplicationCase, replicationCase));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGlobalMrURL() {
+		return globalMrURL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGlobalMrURL(String newGlobalMrURL) {
+		String oldGlobalMrURL = globalMrURL;
+		globalMrURL = newGlobalMrURL;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StreamPackage.DATABUS_STREAM_TOPIC__GLOBAL_MR_URL, oldGlobalMrURL, globalMrURL));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -583,6 +664,10 @@ public class DatabusStreamTopicImpl extends DatabusStreamImpl implements Databus
 				return getSubscribeURL();
 			case StreamPackage.DATABUS_STREAM_TOPIC__AUTHENTICATION_METHOD:
 				return getAuthenticationMethod();
+			case StreamPackage.DATABUS_STREAM_TOPIC__REPLICATION_CASE:
+				return getReplicationCase();
+			case StreamPackage.DATABUS_STREAM_TOPIC__GLOBAL_MR_URL:
+				return getGlobalMrURL();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -633,6 +718,12 @@ public class DatabusStreamTopicImpl extends DatabusStreamImpl implements Databus
 			case StreamPackage.DATABUS_STREAM_TOPIC__AUTHENTICATION_METHOD:
 				setAuthenticationMethod((StreamAuthentication)newValue);
 				return;
+			case StreamPackage.DATABUS_STREAM_TOPIC__REPLICATION_CASE:
+				setReplicationCase((String)newValue);
+				return;
+			case StreamPackage.DATABUS_STREAM_TOPIC__GLOBAL_MR_URL:
+				setGlobalMrURL((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -681,6 +772,12 @@ public class DatabusStreamTopicImpl extends DatabusStreamImpl implements Databus
 			case StreamPackage.DATABUS_STREAM_TOPIC__AUTHENTICATION_METHOD:
 				setAuthenticationMethod(AUTHENTICATION_METHOD_EDEFAULT);
 				return;
+			case StreamPackage.DATABUS_STREAM_TOPIC__REPLICATION_CASE:
+				setReplicationCase(REPLICATION_CASE_EDEFAULT);
+				return;
+			case StreamPackage.DATABUS_STREAM_TOPIC__GLOBAL_MR_URL:
+				setGlobalMrURL(GLOBAL_MR_URL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -717,6 +814,10 @@ public class DatabusStreamTopicImpl extends DatabusStreamImpl implements Databus
 				return SUBSCRIBE_URL_EDEFAULT == null ? subscribeURL != null : !SUBSCRIBE_URL_EDEFAULT.equals(subscribeURL);
 			case StreamPackage.DATABUS_STREAM_TOPIC__AUTHENTICATION_METHOD:
 				return authenticationMethod != AUTHENTICATION_METHOD_EDEFAULT;
+			case StreamPackage.DATABUS_STREAM_TOPIC__REPLICATION_CASE:
+				return REPLICATION_CASE_EDEFAULT == null ? replicationCase != null : !REPLICATION_CASE_EDEFAULT.equals(replicationCase);
+			case StreamPackage.DATABUS_STREAM_TOPIC__GLOBAL_MR_URL:
+				return GLOBAL_MR_URL_EDEFAULT == null ? globalMrURL != null : !GLOBAL_MR_URL_EDEFAULT.equals(globalMrURL);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -753,6 +854,10 @@ public class DatabusStreamTopicImpl extends DatabusStreamImpl implements Databus
 		result.append(subscribeURL);
 		result.append(", authenticationMethod: ");
 		result.append(authenticationMethod);
+		result.append(", replicationCase: ");
+		result.append(replicationCase);
+		result.append(", globalMrURL: ");
+		result.append(globalMrURL);
 		result.append(')');
 		return result.toString();
 	}

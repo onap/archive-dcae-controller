@@ -25,6 +25,7 @@ case $CMD1 in
     fi
 	if [ -e config/version.json ]; then
 		rm -rf data/resources/configuration/version*
+        echo '{}' >  data/resources/configuration.json
 		cp config/version.json data/resources/configuration/
 	fi
     sed -i s/FQDN/$(hostname -f)/ config/docker.properties

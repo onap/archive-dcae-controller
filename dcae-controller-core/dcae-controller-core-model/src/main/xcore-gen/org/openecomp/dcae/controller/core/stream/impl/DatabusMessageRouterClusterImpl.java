@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusMessageRouterClusterImpl#getDcaeLocationName <em>Dcae Location Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusMessageRouterClusterImpl#getServiceFqdn <em>Service Fqdn</em>}</li>
@@ -45,7 +46,6 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusMessageRouterClusterImpl#getTopicPort <em>Topic Port</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusMessageRouterClusterImpl#getTopicProtocol <em>Topic Protocol</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

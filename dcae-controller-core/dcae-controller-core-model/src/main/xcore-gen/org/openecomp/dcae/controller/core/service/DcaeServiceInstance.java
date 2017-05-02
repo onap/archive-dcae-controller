@@ -36,6 +36,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.service.DcaeServiceInstance#getServiceContainer <em>Service Container</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.DcaeServiceInstance#getStatus <em>Status</em>}</li>
@@ -45,7 +46,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openecomp.dcae.controller.core.service.DcaeServiceInstance#getHealthTestStatus <em>Health Test Status</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.DcaeServiceInstance#getHealthTestMessageCode <em>Health Test Message Code</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.service.ServicePackage#getDcaeServiceInstance()
  * @model abstract="true"

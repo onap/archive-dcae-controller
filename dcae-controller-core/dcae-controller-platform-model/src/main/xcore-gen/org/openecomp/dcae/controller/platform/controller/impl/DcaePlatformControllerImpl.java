@@ -26,6 +26,7 @@ package org.openecomp.dcae.controller.platform.controller.impl;
 import org.openecomp.dcae.controller.core.service.DcaeLocation;
 import org.openecomp.dcae.controller.core.service.DcaeService;
 import org.openecomp.dcae.controller.core.service.DcaeServiceDescriptor;
+import org.openecomp.dcae.controller.inventory.DcaeInventory;
 import org.openecomp.dcae.controller.platform.controller.ControllerCluster;
 import org.openecomp.dcae.controller.platform.controller.ControllerPackage;
 import org.openecomp.dcae.controller.platform.controller.DcaeDataBus;
@@ -62,6 +63,7 @@ import org.json.JSONObject;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaePlatformControllerImpl#getConfiguration <em>Configuration</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaePlatformControllerImpl#getComponent <em>Component</em>}</li>
@@ -69,12 +71,12 @@ import org.json.JSONObject;
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaePlatformControllerImpl#getOpenstack <em>Openstack</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaePlatformControllerImpl#getLocations <em>Locations</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaePlatformControllerImpl#getDatabus <em>Databus</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaePlatformControllerImpl#getInventory <em>Inventory</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaePlatformControllerImpl#getDescriptors <em>Descriptors</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaePlatformControllerImpl#getServices <em>Services</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaePlatformControllerImpl#getUsers <em>Users</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.DcaePlatformControllerImpl#getAdminUsers <em>Admin Users</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -138,6 +140,16 @@ public class DcaePlatformControllerImpl extends SouthBoundApiWithProxyImpl imple
 	 * @ordered
 	 */
 	protected DcaeDataBus databus;
+
+	/**
+	 * The cached value of the '{@link #getInventory() <em>Inventory</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInventory()
+	 * @generated
+	 * @ordered
+	 */
+	protected DcaeInventory inventory;
 
 	/**
 	 * The cached value of the '{@link #getDescriptors() <em>Descriptors</em>}' containment reference list.
@@ -430,6 +442,49 @@ public class DcaePlatformControllerImpl extends SouthBoundApiWithProxyImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DcaeInventory getInventory() {
+		return inventory;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetInventory(DcaeInventory newInventory, NotificationChain msgs) {
+		DcaeInventory oldInventory = inventory;
+		inventory = newInventory;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ControllerPackage.DCAE_PLATFORM_CONTROLLER__INVENTORY, oldInventory, newInventory);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInventory(DcaeInventory newInventory) {
+		if (newInventory != inventory) {
+			NotificationChain msgs = null;
+			if (inventory != null)
+				msgs = ((InternalEObject)inventory).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ControllerPackage.DCAE_PLATFORM_CONTROLLER__INVENTORY, null, msgs);
+			if (newInventory != null)
+				msgs = ((InternalEObject)newInventory).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ControllerPackage.DCAE_PLATFORM_CONTROLLER__INVENTORY, null, msgs);
+			msgs = basicSetInventory(newInventory, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ControllerPackage.DCAE_PLATFORM_CONTROLLER__INVENTORY, newInventory, newInventory));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<DcaeService> getServices() {
 		if (services == null) {
 			services = new EObjectContainmentEList<DcaeService>(DcaeService.class, this, ControllerPackage.DCAE_PLATFORM_CONTROLLER__SERVICES);
@@ -581,6 +636,8 @@ public class DcaePlatformControllerImpl extends SouthBoundApiWithProxyImpl imple
 				return ((InternalEList<?>)getLocations()).basicRemove(otherEnd, msgs);
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__DATABUS:
 				return basicSetDatabus(null, msgs);
+			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__INVENTORY:
+				return basicSetInventory(null, msgs);
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__DESCRIPTORS:
 				return ((InternalEList<?>)getDescriptors()).basicRemove(otherEnd, msgs);
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__SERVICES:
@@ -611,6 +668,8 @@ public class DcaePlatformControllerImpl extends SouthBoundApiWithProxyImpl imple
 				return getLocations();
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__DATABUS:
 				return getDatabus();
+			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__INVENTORY:
+				return getInventory();
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__DESCRIPTORS:
 				return getDescriptors();
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__SERVICES:
@@ -650,6 +709,9 @@ public class DcaePlatformControllerImpl extends SouthBoundApiWithProxyImpl imple
 				return;
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__DATABUS:
 				setDatabus((DcaeDataBus)newValue);
+				return;
+			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__INVENTORY:
+				setInventory((DcaeInventory)newValue);
 				return;
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__DESCRIPTORS:
 				getDescriptors().clear();
@@ -697,6 +759,9 @@ public class DcaePlatformControllerImpl extends SouthBoundApiWithProxyImpl imple
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__DATABUS:
 				setDatabus((DcaeDataBus)null);
 				return;
+			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__INVENTORY:
+				setInventory((DcaeInventory)null);
+				return;
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__DESCRIPTORS:
 				getDescriptors().clear();
 				return;
@@ -733,6 +798,8 @@ public class DcaePlatformControllerImpl extends SouthBoundApiWithProxyImpl imple
 				return locations != null && !locations.isEmpty();
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__DATABUS:
 				return databus != null;
+			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__INVENTORY:
+				return inventory != null;
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__DESCRIPTORS:
 				return descriptors != null && !descriptors.isEmpty();
 			case ControllerPackage.DCAE_PLATFORM_CONTROLLER__SERVICES:

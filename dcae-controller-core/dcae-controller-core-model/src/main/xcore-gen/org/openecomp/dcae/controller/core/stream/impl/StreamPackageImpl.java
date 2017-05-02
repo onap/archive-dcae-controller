@@ -657,6 +657,24 @@ public class StreamPackageImpl extends EPackageImpl implements StreamPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDatabusStreamTopic_ReplicationCase() {
+		return (EAttribute)databusStreamTopicEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDatabusStreamTopic_GlobalMrURL() {
+		return (EAttribute)databusStreamTopicEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDatabusStreamTopicClient() {
 		return databusStreamTopicClientEClass;
 	}
@@ -1299,6 +1317,8 @@ public class StreamPackageImpl extends EPackageImpl implements StreamPackage {
 		createEAttribute(databusStreamTopicEClass, DATABUS_STREAM_TOPIC__PUBLISH_URL);
 		createEAttribute(databusStreamTopicEClass, DATABUS_STREAM_TOPIC__SUBSCRIBE_URL);
 		createEAttribute(databusStreamTopicEClass, DATABUS_STREAM_TOPIC__AUTHENTICATION_METHOD);
+		createEAttribute(databusStreamTopicEClass, DATABUS_STREAM_TOPIC__REPLICATION_CASE);
+		createEAttribute(databusStreamTopicEClass, DATABUS_STREAM_TOPIC__GLOBAL_MR_URL);
 
 		databusStreamTopicClientEClass = createEClass(DATABUS_STREAM_TOPIC_CLIENT);
 		createEAttribute(databusStreamTopicClientEClass, DATABUS_STREAM_TOPIC_CLIENT__LOCAL_STREAM_ID);
@@ -1483,6 +1503,8 @@ public class StreamPackageImpl extends EPackageImpl implements StreamPackage {
 		initEAttribute(getDatabusStreamTopic_PublishURL(), theEcorePackage.getEString(), "publishURL", null, 0, 1, DatabusStreamTopic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDatabusStreamTopic_SubscribeURL(), theEcorePackage.getEString(), "subscribeURL", null, 0, 1, DatabusStreamTopic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDatabusStreamTopic_AuthenticationMethod(), this.getStreamAuthentication(), "authenticationMethod", null, 0, 1, DatabusStreamTopic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDatabusStreamTopic_ReplicationCase(), theEcorePackage.getEString(), "replicationCase", null, 0, 1, DatabusStreamTopic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDatabusStreamTopic_GlobalMrURL(), theEcorePackage.getEString(), "globalMrURL", null, 0, 1, DatabusStreamTopic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(databusStreamTopicClientEClass, DatabusStreamTopicClient.class, "DatabusStreamTopicClient", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDatabusStreamTopicClient_LocalStreamId(), theEcorePackage.getEString(), "localStreamId", null, 0, 1, DatabusStreamTopicClient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

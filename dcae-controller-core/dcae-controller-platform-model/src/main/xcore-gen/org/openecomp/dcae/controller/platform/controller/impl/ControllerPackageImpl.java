@@ -25,6 +25,7 @@ package org.openecomp.dcae.controller.platform.controller.impl;
 
 import org.openecomp.dcae.controller.core.service.ServicePackage;
 import org.openecomp.dcae.controller.core.stream.StreamPackage;
+import org.openecomp.dcae.controller.inventory.InventoryPackage;
 import org.openecomp.dcae.controller.platform.controller.ControllerCluster;
 import org.openecomp.dcae.controller.platform.controller.ControllerClusterServer;
 import org.openecomp.dcae.controller.platform.controller.ControllerClusterServerData;
@@ -150,9 +151,10 @@ public class ControllerPackageImpl extends EPackageImpl implements ControllerPac
 		isInited = true;
 
 		// Initialize simple dependencies
-		VmPackage.eINSTANCE.eClass();
 		ServerPackage.eINSTANCE.eClass();
 		OpenstackPackage.eINSTANCE.eClass();
+		InventoryPackage.eINSTANCE.eClass();
+		VmPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theControllerPackage.createPackageContents();
@@ -219,25 +221,7 @@ public class ControllerPackageImpl extends EPackageImpl implements ControllerPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDcaePlatformController_Services() {
-		return (EReference)dcaePlatformControllerEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDcaePlatformController_Users() {
-		return (EReference)dcaePlatformControllerEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDcaePlatformController_Descriptors() {
+	public EReference getDcaePlatformController_Inventory() {
 		return (EReference)dcaePlatformControllerEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -246,8 +230,35 @@ public class ControllerPackageImpl extends EPackageImpl implements ControllerPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDcaePlatformController_AdminUsers() {
+	public EReference getDcaePlatformController_Services() {
+		return (EReference)dcaePlatformControllerEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDcaePlatformController_Users() {
 		return (EReference)dcaePlatformControllerEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDcaePlatformController_Descriptors() {
+		return (EReference)dcaePlatformControllerEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDcaePlatformController_AdminUsers() {
+		return (EReference)dcaePlatformControllerEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -544,6 +555,7 @@ public class ControllerPackageImpl extends EPackageImpl implements ControllerPac
 		createEReference(dcaePlatformControllerEClass, DCAE_PLATFORM_CONTROLLER__OPENSTACK);
 		createEReference(dcaePlatformControllerEClass, DCAE_PLATFORM_CONTROLLER__LOCATIONS);
 		createEReference(dcaePlatformControllerEClass, DCAE_PLATFORM_CONTROLLER__DATABUS);
+		createEReference(dcaePlatformControllerEClass, DCAE_PLATFORM_CONTROLLER__INVENTORY);
 		createEReference(dcaePlatformControllerEClass, DCAE_PLATFORM_CONTROLLER__DESCRIPTORS);
 		createEReference(dcaePlatformControllerEClass, DCAE_PLATFORM_CONTROLLER__SERVICES);
 		createEReference(dcaePlatformControllerEClass, DCAE_PLATFORM_CONTROLLER__USERS);
@@ -613,6 +625,7 @@ public class ControllerPackageImpl extends EPackageImpl implements ControllerPac
 		ServerPackage theServerPackage = (ServerPackage)EPackage.Registry.INSTANCE.getEPackage(ServerPackage.eNS_URI);
 		OpenstackPackage theOpenstackPackage = (OpenstackPackage)EPackage.Registry.INSTANCE.getEPackage(OpenstackPackage.eNS_URI);
 		ServicePackage theServicePackage = (ServicePackage)EPackage.Registry.INSTANCE.getEPackage(ServicePackage.eNS_URI);
+		InventoryPackage theInventoryPackage = (InventoryPackage)EPackage.Registry.INSTANCE.getEPackage(InventoryPackage.eNS_URI);
 		CorePackage theCorePackage = (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
 		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 		StreamPackage theStreamPackage = (StreamPackage)EPackage.Registry.INSTANCE.getEPackage(StreamPackage.eNS_URI);
@@ -636,6 +649,7 @@ public class ControllerPackageImpl extends EPackageImpl implements ControllerPac
 		initEReference(getDcaePlatformController_Openstack(), theOpenstackPackage.getOpenStackController(), null, "openstack", null, 0, 1, DcaePlatformController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDcaePlatformController_Locations(), theServicePackage.getDcaeLocation(), null, "locations", null, 0, -1, DcaePlatformController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDcaePlatformController_Databus(), this.getDcaeDataBus(), null, "databus", null, 0, 1, DcaePlatformController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDcaePlatformController_Inventory(), theInventoryPackage.getDcaeInventory(), null, "inventory", null, 0, 1, DcaePlatformController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDcaePlatformController_Descriptors(), theServicePackage.getDcaeServiceDescriptor(), null, "descriptors", null, 0, -1, DcaePlatformController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDcaePlatformController_Services(), theServicePackage.getDcaeService(), null, "services", null, 0, -1, DcaePlatformController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDcaePlatformController_Users(), theCorePackage.getUser(), null, "users", null, 0, -1, DcaePlatformController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

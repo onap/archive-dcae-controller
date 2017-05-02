@@ -13,7 +13,7 @@ package org.openecomp.dcae.controller.service.cdap;
  * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep#getArtifactName <em>Artifact Name</em>}</li>
- *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep#getJarfile <em>Jarfile</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep#getJarFile <em>Jar File</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep#getVersion <em>Version</em>}</li>
  * </ul>
  *
@@ -50,30 +50,30 @@ public interface CdapLoadArtifactStep extends CdapStep {
 	void setArtifactName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Jarfile</b></em>' attribute.
+	 * Returns the value of the '<em><b>Jar File</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Jarfile</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Jar File</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Jarfile</em>' attribute.
-	 * @see #setJarfile(String)
-	 * @see org.openecomp.dcae.controller.service.cdap.CdapPackage#getCdapLoadArtifactStep_Jarfile()
+	 * @return the value of the '<em>Jar File</em>' attribute.
+	 * @see #setJarFile(String)
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapPackage#getCdapLoadArtifactStep_JarFile()
 	 * @model unique="false"
 	 * @generated
 	 */
-	String getJarfile();
+	String getJarFile();
 
 	/**
-	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep#getJarfile <em>Jarfile</em>}' attribute.
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.cdap.CdapLoadArtifactStep#getJarFile <em>Jar File</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Jarfile</em>' attribute.
-	 * @see #getJarfile()
+	 * @param value the new value of the '<em>Jar File</em>' attribute.
+	 * @see #getJarFile()
 	 * @generated
 	 */
-	void setJarfile(String value);
+	void setJarFile(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Version</b></em>' attribute.

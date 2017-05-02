@@ -35,10 +35,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DatabusLocationImpl#getDcaeLayer <em>Dcae Layer</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

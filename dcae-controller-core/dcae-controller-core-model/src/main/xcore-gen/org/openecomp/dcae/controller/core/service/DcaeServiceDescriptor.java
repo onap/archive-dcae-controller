@@ -32,12 +32,12 @@ import org.openecomp.ncomp.core.NamedEntity;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.service.DcaeServiceDescriptor#getGroupId <em>Group Id</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.DcaeServiceDescriptor#getArtifact <em>Artifact</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.DcaeServiceDescriptor#getVersion <em>Version</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.service.ServicePackage#getDcaeServiceDescriptor()
  * @model

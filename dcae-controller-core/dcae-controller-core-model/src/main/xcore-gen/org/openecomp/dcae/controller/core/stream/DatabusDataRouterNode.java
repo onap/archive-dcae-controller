@@ -31,12 +31,12 @@ package org.openecomp.dcae.controller.core.stream;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusDataRouterNode#getDcaeLocationName <em>Dcae Location Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusDataRouterNode#getHostFqdn <em>Host Fqdn</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusDataRouterNode#getVersion <em>Version</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDatabusDataRouterNode()
  * @model

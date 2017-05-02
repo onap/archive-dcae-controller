@@ -31,10 +31,10 @@ package org.openecomp.dcae.controller.core.stream;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DatabusLocation#getDcaeLayer <em>Dcae Layer</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDatabusLocation()
  * @model

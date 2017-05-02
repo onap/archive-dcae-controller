@@ -734,7 +734,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCdapLoadArtifactStep_Jarfile() {
+	public EAttribute getCdapLoadArtifactStep_JarFile() {
 		return (EAttribute)cdapLoadArtifactStepEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -842,7 +842,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCdapDeployAppStep_Jarfile() {
+	public EAttribute getCdapDeployAppStep_JarFile() {
 		return (EAttribute)cdapDeployAppStepEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1253,7 +1253,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 
 		cdapLoadArtifactStepEClass = createEClass(CDAP_LOAD_ARTIFACT_STEP);
 		createEAttribute(cdapLoadArtifactStepEClass, CDAP_LOAD_ARTIFACT_STEP__ARTIFACT_NAME);
-		createEAttribute(cdapLoadArtifactStepEClass, CDAP_LOAD_ARTIFACT_STEP__JARFILE);
+		createEAttribute(cdapLoadArtifactStepEClass, CDAP_LOAD_ARTIFACT_STEP__JAR_FILE);
 		createEAttribute(cdapLoadArtifactStepEClass, CDAP_LOAD_ARTIFACT_STEP__VERSION);
 
 		cdapLoadArtifactWithConfigStepEClass = createEClass(CDAP_LOAD_ARTIFACT_WITH_CONFIG_STEP);
@@ -1269,7 +1269,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 		createEAttribute(cdapCreateAppWithConfigStepEClass, CDAP_CREATE_APP_WITH_CONFIG_STEP__APP_CONFIG);
 
 		cdapDeployAppStepEClass = createEClass(CDAP_DEPLOY_APP_STEP);
-		createEAttribute(cdapDeployAppStepEClass, CDAP_DEPLOY_APP_STEP__JARFILE);
+		createEAttribute(cdapDeployAppStepEClass, CDAP_DEPLOY_APP_STEP__JAR_FILE);
 
 		cdapStopFlowStepEClass = createEClass(CDAP_STOP_FLOW_STEP);
 		createEAttribute(cdapStopFlowStepEClass, CDAP_STOP_FLOW_STEP__APP_ID);
@@ -1437,7 +1437,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 
 		initEClass(cdapLoadArtifactStepEClass, CdapLoadArtifactStep.class, "CdapLoadArtifactStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCdapLoadArtifactStep_ArtifactName(), theEcorePackage.getEString(), "artifactName", null, 0, 1, CdapLoadArtifactStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCdapLoadArtifactStep_Jarfile(), theEcorePackage.getEString(), "jarfile", null, 0, 1, CdapLoadArtifactStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapLoadArtifactStep_JarFile(), theEcorePackage.getEString(), "jarFile", null, 0, 1, CdapLoadArtifactStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCdapLoadArtifactStep_Version(), theEcorePackage.getEString(), "version", null, 0, 1, CdapLoadArtifactStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cdapLoadArtifactWithConfigStepEClass, CdapLoadArtifactWithConfigStep.class, "CdapLoadArtifactWithConfigStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1453,7 +1453,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 		initEAttribute(getCdapCreateAppWithConfigStep_AppConfig(), theEcorePackage.getEString(), "appConfig", null, 0, 1, CdapCreateAppWithConfigStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cdapDeployAppStepEClass, CdapDeployAppStep.class, "CdapDeployAppStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCdapDeployAppStep_Jarfile(), theEcorePackage.getEString(), "jarfile", null, 0, 1, CdapDeployAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapDeployAppStep_JarFile(), theEcorePackage.getEString(), "jarFile", null, 0, 1, CdapDeployAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cdapStopFlowStepEClass, CdapStopFlowStep.class, "CdapStopFlowStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCdapStopFlowStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapStopFlowStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -39,11 +39,11 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamInternalEndPointImpl#getLocalName <em>Local Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamInternalEndPointImpl#getServiceName <em>Service Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

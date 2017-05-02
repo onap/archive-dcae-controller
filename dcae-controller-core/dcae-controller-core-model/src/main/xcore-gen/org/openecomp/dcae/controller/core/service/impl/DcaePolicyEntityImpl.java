@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.DcaePolicyEntityImpl#getPolicyName <em>Policy Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.DcaePolicyEntityImpl#getPolicyDescription <em>Policy Description</em>}</li>
@@ -48,7 +49,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.DcaePolicyEntityImpl#getPolicyPriority <em>Policy Priority</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.service.impl.DcaePolicyEntityImpl#getPolicyScope <em>Policy Scope</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

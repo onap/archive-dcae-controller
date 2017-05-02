@@ -31,6 +31,7 @@ package org.openecomp.dcae.controller.core.stream;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DmaapStream#getDmaapDataType <em>Dmaap Data Type</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DmaapStream#getDmaapAction <em>Dmaap Action</em>}</li>
@@ -39,7 +40,6 @@ package org.openecomp.dcae.controller.core.stream;
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DmaapStream#getDmaapPassword <em>Dmaap Password</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.DmaapStream#getDmaapAuthMethod <em>Dmaap Auth Method</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.openecomp.dcae.controller.core.stream.StreamPackage#getDmaapStream()
  * @model

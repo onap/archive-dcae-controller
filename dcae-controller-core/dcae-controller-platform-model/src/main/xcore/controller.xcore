@@ -38,13 +38,15 @@ import org.openecomp.dcae.controller.core.server.DcaeBasicServer
 import org.openecomp.dcae.controller.core.stream.DatabusLocation
 import org.openecomp.dcae.controller.core.stream.DatabusMessageRouterCluster
 import org.openecomp.dcae.controller.core.stream.DatabusDataRouterNode
-import org.openecomp.dcae.controller.service.vm.VirtualMachineService   
+import org.openecomp.dcae.controller.service.vm.VirtualMachineService
+import org.openecomp.dcae.controller.inventory.DcaeInventory  
 
 class DcaePlatformController extends SouthBoundApiWithProxy, AbstractManagementServer {   
 	contains ControllerCluster cluster
 	contains OpenStackController openstack
 	contains unordered DcaeLocation[] locations
 	contains DcaeDataBus databus
+	contains DcaeInventory inventory
 	contains unordered DcaeServiceDescriptor[] descriptors
 	contains unordered DcaeService[] services
 	contains unordered User[] users

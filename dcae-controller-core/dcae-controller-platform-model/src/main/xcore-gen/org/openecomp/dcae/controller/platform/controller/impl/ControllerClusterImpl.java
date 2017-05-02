@@ -50,6 +50,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterImpl#getMyServerName <em>My Server Name</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterImpl#getRole <em>Role</em>}</li>
@@ -57,7 +58,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterImpl#getServers <em>Servers</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.platform.controller.impl.ControllerClusterImpl#getRemoteServers <em>Remote Servers</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -39,12 +39,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamPublisherExternalImpl#getUser <em>User</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamPublisherExternalImpl#getPassword <em>Password</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.core.stream.impl.DcaeStreamPublisherExternalImpl#getUrl <em>Url</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
