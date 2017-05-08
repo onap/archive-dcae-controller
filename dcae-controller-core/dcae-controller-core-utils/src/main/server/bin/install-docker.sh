@@ -86,6 +86,13 @@ if [ ! -d /home/ubuntu/.docker ]; then
 	mkdir -p /home/ubuntu/.docker || _fatal "Could not create /home/ubuntu/.docker dir"
 fi
 
+# handle MTU issues. The NIC on the VM may use less than 1500
+
+MTU=$(/sbin/ifconfig | grep MTU | sed 's/.*MTU://' | sed 's/ .*//' | sort -n | head -1)
+FILE1=/etc/default/docker
+echo DOCKER_OPTS=\"\$DOCKER_OPTS --mtu=$MTU\" >> $FILE1
+
+
 #
 # Start Docker
 #
