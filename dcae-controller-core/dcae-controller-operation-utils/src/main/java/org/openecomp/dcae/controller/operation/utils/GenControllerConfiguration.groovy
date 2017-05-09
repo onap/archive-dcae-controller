@@ -230,7 +230,7 @@ class GenControllerConfiguration extends DocUtils {
 				return 
 			}
 			def n1 = n.replace("vm-", "dcae-")
-			save("/openstack/vmTypes/$n1",platformConfig.genVmType(n))
+			save("/openstack/vmTypes/$n1",substitute(platformConfig.genVmType(n),[:],n,null))
 		}
 		def chef = file2object("$release-$env/chef.yaml", false)
 		def maven = file2object("$release-$env/maven.yaml", false)
@@ -398,7 +398,7 @@ class GenControllerConfiguration extends DocUtils {
 				m.chefUser = (envMap['chef'] ?: [:])['user'] ?: "TBD - env.yaml@chef.user"
 				m.chefOrg = (envMap['chef'] ?: [:])['org'] ?: "TBD - env.yaml@chef.group"
 				m.chefTopology = "$release-$env"
-				m.openstackFlavor = platformConfig.flavor(s,i)
+				m.openstackFlavor = substitute(platformConfig.flavor(s,i),[:],s,i)
 				if ((vmTemplate['dns-arecords'] ?: []).contains('site')) {
 					platformConfig.init(s,i)
 					m.serviceFqdn = platformConfig.siteServiceFqdn()
