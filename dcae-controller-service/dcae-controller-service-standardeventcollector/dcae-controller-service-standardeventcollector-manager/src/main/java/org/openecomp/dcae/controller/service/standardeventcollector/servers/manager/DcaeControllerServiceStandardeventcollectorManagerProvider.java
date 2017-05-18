@@ -145,7 +145,7 @@ public class DcaeControllerServiceStandardeventcollectorManagerProvider extends 
                         System.out.println ("Sleep time expired");
                   }
                   JSONArray charray = retrieveDmaapSetting();
-                  System.out.println("Modified HPchannel config:" + charray);
+              //System.out.println("Modified HPchannel config:" + charray);
                   logger.info("Modified HPchannel config: " + charray);
 
                   JSONObject channelconfig = new JSONObject();
@@ -342,8 +342,8 @@ private  JSONObject buildHpChannel(JSONObject tmpObj) {
         String mrTopic = "";
         String hpGroup = "";
         String hpInstance = "0";
-        String basicAuthUsername = null; // UEB apiKey, DMaaP: dmaapUserName
-        String basicAuthPassword = null; // DMaaP: dmaapPassword
+        String basicUname = null; // UEB apiKey, DMaaP: dmaapUserName
+        String basicPwd = null; // DMaaP: dmaapPassword
         String dmaapDataType = "message";
 
         mrUrl = tmpObj.getString("dmaapUrl");
@@ -364,14 +364,14 @@ private  JSONObject buildHpChannel(JSONObject tmpObj) {
 
         if (tmpObj.has("dmaapUserName") && tmpObj.has("dmaapPassword") )
         {
-                basicAuthPassword = tmpObj.getString("dmaapPassword");
-                basicAuthUsername = tmpObj.getString("dmaapUserName");
-                 if (basicAuthUsername != null && !basicAuthUsername.equals(""))
+                basicPwd = tmpObj.getString("dmaapPassword");
+                basicUname = tmpObj.getString("dmaapUserName");
+                 if (basicUname != null && !basicUname.equals(""))
                 {
-                        if (basicAuthPassword != null && !basicAuthPassword.equals(""))
+                        if (basicPwd != null && !basicPwd.equals(""))
                         {
-                                        hpC.put("basicAuthUsername", basicAuthUsername);
-                                hpC.put("basicAuthPassword", basicAuthPassword);
+                                        hpC.put("basicAuthUsername", basicUname);
+                                hpC.put("basicAuthPassword", basicPwd);
                                 hpC.put("cambria.connectionType", sType);
                         }
                 }
@@ -441,8 +441,8 @@ private static void writeJsonToFile(String fileName, JSONObject obj) {
 
 /***
  *      Dmaap url structure
- *  pub - https://<dmaaphostname>:<port>/events/<namespace>.dmaap.<dmaapcluster>.<topic>,
- *  sub - https://<dmaaphostname>:<port>/events/<namespace>.dmaap.<dmaapcluster>.<topic>/G1/u1";
+ *  pub - https://<dmaaphostname>:<port>/events/<namespace>.<dmaapcluster>.<topic>,
+ *  sub - https://<dmaaphostname>:<port>/events/<namespace>.<dmaapcluster>.<topic>/G1/u1";
  *
  *  Onap url structure
  *  pub - http://<dmaaphostname>:<port>/<unauthenticated>.<topic>,
@@ -518,3 +518,4 @@ private void updateJsonToHPConfig(String sourceName,String targetfile, JSONArray
 
 
 }
+
