@@ -115,6 +115,12 @@ public class DcaeDcaeInventoryProviderTemplate extends BasicAdaptorProvider {
      throw new UnsupportedOperationException();
 	}
 
+	public void updateConfiguration() {
+		
+     // TODO IMPLEMENT
+     throw new UnsupportedOperationException();
+	}
+
 
 
 

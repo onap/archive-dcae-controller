@@ -225,6 +225,15 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authlist() {
+		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Checkschemaflag() {
 		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(8);
 	}
@@ -236,15 +245,6 @@ public class ServicePackageImpl extends EPackageImpl implements ServicePackage {
 	 */
 	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Schemafile() {
 		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authlist() {
-		return (EAttribute)controllerServiceStandardeventcollectorServiceConfigurationEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**

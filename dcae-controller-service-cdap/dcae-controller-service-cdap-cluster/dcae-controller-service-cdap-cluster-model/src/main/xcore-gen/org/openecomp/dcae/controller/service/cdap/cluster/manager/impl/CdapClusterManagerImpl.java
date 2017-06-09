@@ -349,7 +349,7 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String stopApp(String namespace, String appName) {
+	public String stopApp(String namespace, String appName, String programTypes) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -861,7 +861,7 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 				case CdapPackage.CDAP_API___START_WORKER__STRING_STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___START_WORKER__STRING_STRING_STRING_STRING;
 				case CdapPackage.CDAP_API___START_SERVICE__STRING_STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___START_SERVICE__STRING_STRING_STRING_STRING;
 				case CdapPackage.CDAP_API___START_APP__STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___START_APP__STRING_STRING;
-				case CdapPackage.CDAP_API___STOP_APP__STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___STOP_APP__STRING_STRING;
+				case CdapPackage.CDAP_API___STOP_APP__STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___STOP_APP__STRING_STRING_STRING;
 				case CdapPackage.CDAP_API___DELETE_APP__STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___DELETE_APP__STRING_STRING;
 				case CdapPackage.CDAP_API___LOAD_PREFERENCES_APP__STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___LOAD_PREFERENCES_APP__STRING_STRING_STRING;
 				case CdapPackage.CDAP_API___LOAD_PREFERENCES_FLOW__STRING_STRING_STRING_STRING: return ManagerPackage.CDAP_CLUSTER_MANAGER___LOAD_PREFERENCES_FLOW__STRING_STRING_STRING_STRING;
@@ -926,8 +926,8 @@ public class CdapClusterManagerImpl extends VirtualMachineManagerImpl implements
 				return startService((String)arguments.get(0), (String)arguments.get(1), (String)arguments.get(2), (String)arguments.get(3));
 			case ManagerPackage.CDAP_CLUSTER_MANAGER___START_APP__STRING_STRING:
 				return startApp((String)arguments.get(0), (String)arguments.get(1));
-			case ManagerPackage.CDAP_CLUSTER_MANAGER___STOP_APP__STRING_STRING:
-				return stopApp((String)arguments.get(0), (String)arguments.get(1));
+			case ManagerPackage.CDAP_CLUSTER_MANAGER___STOP_APP__STRING_STRING_STRING:
+				return stopApp((String)arguments.get(0), (String)arguments.get(1), (String)arguments.get(2));
 			case ManagerPackage.CDAP_CLUSTER_MANAGER___DELETE_APP__STRING_STRING:
 				return deleteApp((String)arguments.get(0), (String)arguments.get(1));
 			case ManagerPackage.CDAP_CLUSTER_MANAGER___LOAD_PREFERENCES_APP__STRING_STRING_STRING:

@@ -426,6 +426,27 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getAuthlist() {
+		return authlist;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAuthlist(String newAuthlist) {
+		String oldAuthlist = authlist;
+		authlist = newAuthlist;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ManagerPackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_MANAGER__AUTHLIST, oldAuthlist, authlist));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getCheckschemaflag() {
 		return checkschemaflag;
 	}
@@ -707,18 +728,6 @@ public class ControllerServiceStandardeventcollectorManagerImpl extends DockerMa
 		result.append(streamid);
 		result.append(')');
 		return result.toString();
-	}
-
-	@Override
-	public String getAuthlist() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setAuthlist(String value) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/**

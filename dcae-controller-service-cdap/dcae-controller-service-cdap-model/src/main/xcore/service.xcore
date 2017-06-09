@@ -149,6 +149,7 @@ class CdapStopServiceStep extends CdapStep {
 
 class CdapStopAppStep extends CdapStep {
 	String appId
+	String programTypes
 }
 
 class CdapStartFlowStep extends CdapStep {

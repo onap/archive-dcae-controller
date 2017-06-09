@@ -580,12 +580,8 @@ class GenControllerConfiguration extends DocUtils {
 	}
 	
 	def createEforc() {
-		def x = platformConfig.eforc()
-		saveYaml("/eforc",x.m,"general")
 		saveYaml("/dns",platformConfig.dns(),"general")
 		saveYaml("/ssl",platformConfig.ssl(),"general")
-		saveTable("/eforc-table",x.list,"general")
-		saveTable("/eforc-subnet-table",x.list2,"general")
 		saveYaml("/flavors",platformConfig.showFlavors(),"general")
 	}
 

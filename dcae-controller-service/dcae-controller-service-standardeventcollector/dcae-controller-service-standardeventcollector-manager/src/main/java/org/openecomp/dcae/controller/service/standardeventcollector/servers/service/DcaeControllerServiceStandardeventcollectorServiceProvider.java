@@ -45,6 +45,7 @@ import org.openecomp.dcae.controller.service.standardeventcollector.manager.Cont
 import org.openecomp.dcae.controller.service.standardeventcollector.manager.ManagerFactory;
 import org.openecomp.dcae.controller.service.standardeventcollector.service.impl.ControllerServiceStandardeventcollectorServiceImpl;
 import org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorService;
+import org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceInstance;
 
 
 public class DcaeControllerServiceStandardeventcollectorServiceProvider extends DcaeDockerServiceProvider {
@@ -59,13 +60,10 @@ public class DcaeControllerServiceStandardeventcollectorServiceProvider extends 
 	@Override
     public EObject managerConfiguration(String instanceName) {
 			ControllerServiceStandardeventcollectorManager o1 =  ManagerFactory.eINSTANCE.createControllerServiceStandardeventcollectorManager();
-            ManagementServer.copy(findInstance(instanceName),o1);
+            ControllerServiceStandardeventcollectorServiceInstance o2 = (ControllerServiceStandardeventcollectorServiceInstance) findInstance(instanceName);
+            ManagementServer.copy(o2,o1);
             o1.setAuthlist(JavaHttpClient.decryptEmbeddedPassword(o1.getAuthlist()));
             return o1;
     }
-
-
-
-
 	
 }

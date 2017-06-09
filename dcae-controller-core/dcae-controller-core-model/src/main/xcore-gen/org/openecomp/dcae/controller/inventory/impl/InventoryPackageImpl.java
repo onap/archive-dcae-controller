@@ -22,6 +22,7 @@ import org.openecomp.dcae.controller.inventory.DCAEServiceType;
 import org.openecomp.dcae.controller.inventory.DCAEServiceTypeRequest;
 import org.openecomp.dcae.controller.inventory.DcaeInventory;
 import org.openecomp.dcae.controller.inventory.DcaeServiceTypeResults;
+import org.openecomp.dcae.controller.inventory.InventoryConfigurationRule;
 import org.openecomp.dcae.controller.inventory.DcaeServiceResults;
 import org.openecomp.dcae.controller.inventory.InventoryFactory;
 import org.openecomp.dcae.controller.inventory.InventoryPackage;
@@ -144,6 +145,13 @@ public class InventoryPackageImpl extends EPackageImpl implements InventoryPacka
 	private EClass uriBuilderEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass inventoryConfigurationRuleEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -239,6 +247,15 @@ public class InventoryPackageImpl extends EPackageImpl implements InventoryPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDcaeInventory_Rules() {
+		return (EReference)dcaeInventoryEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getDcaeInventory__GetDcaeServiceTypes__String_Boolean_Boolean_String_String_String_String_String_Integer() {
 		return dcaeInventoryEClass.getEOperations().get(0);
 	}
@@ -322,6 +339,15 @@ public class InventoryPackageImpl extends EPackageImpl implements InventoryPacka
 	 */
 	public EOperation getDcaeInventory__Poll() {
 		return dcaeInventoryEClass.getEOperations().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getDcaeInventory__UpdateConfiguration() {
+		return dcaeInventoryEClass.getEOperations().get(10);
 	}
 
 	/**
@@ -1148,6 +1174,51 @@ public class InventoryPackageImpl extends EPackageImpl implements InventoryPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getInventoryConfigurationRule() {
+		return inventoryConfigurationRuleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getInventoryConfigurationRule_TypeNameMatch() {
+		return (EAttribute)inventoryConfigurationRuleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getInventoryConfigurationRule_ServiceNameMatch() {
+		return (EAttribute)inventoryConfigurationRuleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getInventoryConfigurationRule_InstanceNameMatch() {
+		return (EAttribute)inventoryConfigurationRuleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getInventoryConfigurationRule_BpNodeNameMatch() {
+		return (EAttribute)inventoryConfigurationRuleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public InventoryFactory getInventoryFactory() {
 		return (InventoryFactory)getEFactoryInstance();
 	}
@@ -1174,6 +1245,7 @@ public class InventoryPackageImpl extends EPackageImpl implements InventoryPacka
 		dcaeInventoryEClass = createEClass(DCAE_INVENTORY);
 		createEReference(dcaeInventoryEClass, DCAE_INVENTORY__SERVICE_TYPES);
 		createEReference(dcaeInventoryEClass, DCAE_INVENTORY__SERVICES);
+		createEReference(dcaeInventoryEClass, DCAE_INVENTORY__RULES);
 		createEOperation(dcaeInventoryEClass, DCAE_INVENTORY___GET_DCAE_SERVICE_TYPES__STRING_BOOLEAN_BOOLEAN_STRING_STRING_STRING_STRING_STRING_INTEGER);
 		createEOperation(dcaeInventoryEClass, DCAE_INVENTORY___DELETE_DCAE_SERVICE_TYPES_TYPE__STRING);
 		createEOperation(dcaeInventoryEClass, DCAE_INVENTORY___GET_DCAE_SERVICE_TYPES_TYPE__STRING);
@@ -1184,6 +1256,7 @@ public class InventoryPackageImpl extends EPackageImpl implements InventoryPacka
 		createEOperation(dcaeInventoryEClass, DCAE_INVENTORY___GET_DCAE_SERVICES_SERVICE__STRING);
 		createEOperation(dcaeInventoryEClass, DCAE_INVENTORY___CREATE_DCAE_SERVICES_SERVICE__STRING_DCAESERVICEREQUEST);
 		createEOperation(dcaeInventoryEClass, DCAE_INVENTORY___POLL);
+		createEOperation(dcaeInventoryEClass, DCAE_INVENTORY___UPDATE_CONFIGURATION);
 
 		apiResponseMessageEClass = createEClass(API_RESPONSE_MESSAGE);
 		createEAttribute(apiResponseMessageEClass, API_RESPONSE_MESSAGE__CODE);
@@ -1289,6 +1362,12 @@ public class InventoryPackageImpl extends EPackageImpl implements InventoryPacka
 		createEAttribute(parameterEClass, PARAMETER__VALUE);
 
 		uriBuilderEClass = createEClass(URI_BUILDER);
+
+		inventoryConfigurationRuleEClass = createEClass(INVENTORY_CONFIGURATION_RULE);
+		createEAttribute(inventoryConfigurationRuleEClass, INVENTORY_CONFIGURATION_RULE__TYPE_NAME_MATCH);
+		createEAttribute(inventoryConfigurationRuleEClass, INVENTORY_CONFIGURATION_RULE__SERVICE_NAME_MATCH);
+		createEAttribute(inventoryConfigurationRuleEClass, INVENTORY_CONFIGURATION_RULE__INSTANCE_NAME_MATCH);
+		createEAttribute(inventoryConfigurationRuleEClass, INVENTORY_CONFIGURATION_RULE__BP_NODE_NAME_MATCH);
 	}
 
 	/**
@@ -1328,11 +1407,13 @@ public class InventoryPackageImpl extends EPackageImpl implements InventoryPacka
 		dcaeServiceTypeEClass.getESuperTypes().add(theCorePackage.getNamedEntity());
 		linkEClass.getESuperTypes().add(theCorePackage.getNamedEntity());
 		parameterEClass.getESuperTypes().add(theCorePackage.getNamedEntity());
+		inventoryConfigurationRuleEClass.getESuperTypes().add(theCorePackage.getNamedEntity());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(dcaeInventoryEClass, DcaeInventory.class, "DcaeInventory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDcaeInventory_ServiceTypes(), this.getDCAEServiceType(), null, "serviceTypes", null, 0, -1, DcaeInventory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDcaeInventory_Services(), this.getDCAEService(), null, "services", null, 0, -1, DcaeInventory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDcaeInventory_Rules(), this.getInventoryConfigurationRule(), null, "rules", null, 0, -1, DcaeInventory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getDcaeInventory__GetDcaeServiceTypes__String_Boolean_Boolean_String_String_String_String_String_Integer(), this.getDcaeServiceTypeResults(), "getDcaeServiceTypes", 0, 1, !IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "typeName", 0, 1, !IS_UNIQUE, IS_ORDERED);
@@ -1378,6 +1459,8 @@ public class InventoryPackageImpl extends EPackageImpl implements InventoryPacka
 		addEParameter(op, this.getDCAEServiceRequest(), "body", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getDcaeInventory__Poll(), null, "poll", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getDcaeInventory__UpdateConfiguration(), null, "updateConfiguration", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(apiResponseMessageEClass, ApiResponseMessage.class, "ApiResponseMessage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getApiResponseMessage_Code(), theEcorePackage.getEIntegerObject(), "code", null, 0, 1, ApiResponseMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1483,6 +1566,12 @@ public class InventoryPackageImpl extends EPackageImpl implements InventoryPacka
 		initEAttribute(getParameter_Value(), theEcorePackage.getEString(), "value", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(uriBuilderEClass, UriBuilder.class, "UriBuilder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(inventoryConfigurationRuleEClass, InventoryConfigurationRule.class, "InventoryConfigurationRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getInventoryConfigurationRule_TypeNameMatch(), theEcorePackage.getEString(), "typeNameMatch", null, 0, 1, InventoryConfigurationRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInventoryConfigurationRule_ServiceNameMatch(), theEcorePackage.getEString(), "serviceNameMatch", null, 0, 1, InventoryConfigurationRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInventoryConfigurationRule_InstanceNameMatch(), theEcorePackage.getEString(), "instanceNameMatch", null, 0, 1, InventoryConfigurationRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInventoryConfigurationRule_BpNodeNameMatch(), theEcorePackage.getEString(), "bpNodeNameMatch", null, 0, 1, InventoryConfigurationRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

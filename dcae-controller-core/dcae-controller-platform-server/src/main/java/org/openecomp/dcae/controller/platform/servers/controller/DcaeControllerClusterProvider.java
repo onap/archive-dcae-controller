@@ -38,6 +38,7 @@ import org.json.JSONObject;
 import org.openecomp.ncomp.sirius.manager.BasicAdaptorProvider;
 import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
 import org.openecomp.ncomp.sirius.manager.metrics.MetricManager;
+import org.openecomp.ncomp.utils.SecurityUtils;
 import org.openecomp.ncomp.webservice.utils.DateUtils;
 import org.openecomp.dcae.controller.core.server.DcaeBasicServer;
 import org.openecomp.dcae.controller.platform.controller.ControllerCluster;
@@ -149,7 +150,7 @@ public class DcaeControllerClusterProvider extends BasicAdaptorProvider implemen
 	public void start() {
 //		System.out.println("CLUSTER: start");
 		try {
-			String hostname = InetAddress.getLocalHost().getHostName();
+			String hostname = SecurityUtils.getHostName();
 			if (hostname.indexOf(".") > 0)
 				hostname = hostname.substring(0, hostname.indexOf("."));
 			o.setMyServerName(hostname);
@@ -168,7 +169,7 @@ public class DcaeControllerClusterProvider extends BasicAdaptorProvider implemen
 					}
 				}
 			}
-		} catch (UnknownHostException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 //		System.out.println("CLUSTER: start");

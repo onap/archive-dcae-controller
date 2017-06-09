@@ -26,6 +26,7 @@ import org.openecomp.dcae.controller.inventory.DCAEServiceType;
 import org.openecomp.dcae.controller.inventory.DCAEServiceTypeRequest;
 import org.openecomp.dcae.controller.inventory.DcaeInventory;
 import org.openecomp.dcae.controller.inventory.DcaeServiceTypeResults;
+import org.openecomp.dcae.controller.inventory.InventoryConfigurationRule;
 import org.openecomp.dcae.controller.inventory.DcaeServiceResults;
 import org.openecomp.dcae.controller.inventory.InventoryPackage;
 
@@ -39,6 +40,7 @@ import org.openecomp.dcae.controller.inventory.InventoryPackage;
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.inventory.impl.DcaeInventoryImpl#getServiceTypes <em>Service Types</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.inventory.impl.DcaeInventoryImpl#getServices <em>Services</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.inventory.impl.DcaeInventoryImpl#getRules <em>Rules</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,6 +65,16 @@ public class DcaeInventoryImpl extends MinimalEObjectImpl.Container implements D
 	 * @ordered
 	 */
 	protected EList<DCAEService> services;
+
+	/**
+	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRules()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<InventoryConfigurationRule> rules;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,6 +117,18 @@ public class DcaeInventoryImpl extends MinimalEObjectImpl.Container implements D
 			services = new EObjectContainmentEList<DCAEService>(DCAEService.class, this, InventoryPackage.DCAE_INVENTORY__SERVICES);
 		}
 		return services;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<InventoryConfigurationRule> getRules() {
+		if (rules == null) {
+			rules = new EObjectContainmentEList<InventoryConfigurationRule>(InventoryConfigurationRule.class, this, InventoryPackage.DCAE_INVENTORY__RULES);
+		}
+		return rules;
 	}
 
 	/**
@@ -222,6 +246,17 @@ public class DcaeInventoryImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void updateConfiguration() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -229,6 +264,8 @@ public class DcaeInventoryImpl extends MinimalEObjectImpl.Container implements D
 				return ((InternalEList<?>)getServiceTypes()).basicRemove(otherEnd, msgs);
 			case InventoryPackage.DCAE_INVENTORY__SERVICES:
 				return ((InternalEList<?>)getServices()).basicRemove(otherEnd, msgs);
+			case InventoryPackage.DCAE_INVENTORY__RULES:
+				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -245,6 +282,8 @@ public class DcaeInventoryImpl extends MinimalEObjectImpl.Container implements D
 				return getServiceTypes();
 			case InventoryPackage.DCAE_INVENTORY__SERVICES:
 				return getServices();
+			case InventoryPackage.DCAE_INVENTORY__RULES:
+				return getRules();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -266,6 +305,10 @@ public class DcaeInventoryImpl extends MinimalEObjectImpl.Container implements D
 				getServices().clear();
 				getServices().addAll((Collection<? extends DCAEService>)newValue);
 				return;
+			case InventoryPackage.DCAE_INVENTORY__RULES:
+				getRules().clear();
+				getRules().addAll((Collection<? extends InventoryConfigurationRule>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -284,6 +327,9 @@ public class DcaeInventoryImpl extends MinimalEObjectImpl.Container implements D
 			case InventoryPackage.DCAE_INVENTORY__SERVICES:
 				getServices().clear();
 				return;
+			case InventoryPackage.DCAE_INVENTORY__RULES:
+				getRules().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -300,6 +346,8 @@ public class DcaeInventoryImpl extends MinimalEObjectImpl.Container implements D
 				return serviceTypes != null && !serviceTypes.isEmpty();
 			case InventoryPackage.DCAE_INVENTORY__SERVICES:
 				return services != null && !services.isEmpty();
+			case InventoryPackage.DCAE_INVENTORY__RULES:
+				return rules != null && !rules.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -333,6 +381,9 @@ public class DcaeInventoryImpl extends MinimalEObjectImpl.Container implements D
 				return createDcaeServicesService((String)arguments.get(0), (DCAEServiceRequest)arguments.get(1));
 			case InventoryPackage.DCAE_INVENTORY___POLL:
 				poll();
+				return null;
+			case InventoryPackage.DCAE_INVENTORY___UPDATE_CONFIGURATION:
+				updateConfiguration();
 				return null;
 		}
 		return super.eInvoke(operationID, arguments);

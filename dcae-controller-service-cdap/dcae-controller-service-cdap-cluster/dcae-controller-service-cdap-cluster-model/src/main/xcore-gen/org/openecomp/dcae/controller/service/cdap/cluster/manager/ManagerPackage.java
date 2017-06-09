@@ -427,7 +427,7 @@ public interface ManagerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_CLUSTER_MANAGER___STOP_APP__STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 10;
+	int CDAP_CLUSTER_MANAGER___STOP_APP__STRING_STRING_STRING = VmmanagerPackage.VIRTUAL_MACHINE_MANAGER_OPERATION_COUNT + 10;
 
 	/**
 	 * The operation id for the '<em>Delete App</em>' operation.

@@ -20,6 +20,7 @@ import org.openecomp.dcae.controller.service.cdap.CdapStopAppStep;
  * </p>
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapStopAppStepImpl#getAppId <em>App Id</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.service.cdap.impl.CdapStopAppStepImpl#getProgramTypes <em>Program Types</em>}</li>
  * </ul>
  *
  * @generated
@@ -44,6 +45,26 @@ public class CdapStopAppStepImpl extends CdapStepImpl implements CdapStopAppStep
 	 * @ordered
 	 */
 	protected String appId = APP_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getProgramTypes() <em>Program Types</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProgramTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PROGRAM_TYPES_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getProgramTypes() <em>Program Types</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProgramTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected String programTypes = PROGRAM_TYPES_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,11 +111,34 @@ public class CdapStopAppStepImpl extends CdapStepImpl implements CdapStopAppStep
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getProgramTypes() {
+		return programTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProgramTypes(String newProgramTypes) {
+		String oldProgramTypes = programTypes;
+		programTypes = newProgramTypes;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CdapPackage.CDAP_STOP_APP_STEP__PROGRAM_TYPES, oldProgramTypes, programTypes));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CdapPackage.CDAP_STOP_APP_STEP__APP_ID:
 				return getAppId();
+			case CdapPackage.CDAP_STOP_APP_STEP__PROGRAM_TYPES:
+				return getProgramTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,6 +153,9 @@ public class CdapStopAppStepImpl extends CdapStepImpl implements CdapStopAppStep
 		switch (featureID) {
 			case CdapPackage.CDAP_STOP_APP_STEP__APP_ID:
 				setAppId((String)newValue);
+				return;
+			case CdapPackage.CDAP_STOP_APP_STEP__PROGRAM_TYPES:
+				setProgramTypes((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,6 +172,9 @@ public class CdapStopAppStepImpl extends CdapStepImpl implements CdapStopAppStep
 			case CdapPackage.CDAP_STOP_APP_STEP__APP_ID:
 				setAppId(APP_ID_EDEFAULT);
 				return;
+			case CdapPackage.CDAP_STOP_APP_STEP__PROGRAM_TYPES:
+				setProgramTypes(PROGRAM_TYPES_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -139,6 +189,8 @@ public class CdapStopAppStepImpl extends CdapStepImpl implements CdapStopAppStep
 		switch (featureID) {
 			case CdapPackage.CDAP_STOP_APP_STEP__APP_ID:
 				return APP_ID_EDEFAULT == null ? appId != null : !APP_ID_EDEFAULT.equals(appId);
+			case CdapPackage.CDAP_STOP_APP_STEP__PROGRAM_TYPES:
+				return PROGRAM_TYPES_EDEFAULT == null ? programTypes != null : !PROGRAM_TYPES_EDEFAULT.equals(programTypes);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -155,6 +207,8 @@ public class CdapStopAppStepImpl extends CdapStepImpl implements CdapStopAppStep
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (appId: ");
 		result.append(appId);
+		result.append(", programTypes: ");
+		result.append(programTypes);
 		result.append(')');
 		return result.toString();
 	}

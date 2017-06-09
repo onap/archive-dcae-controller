@@ -50,7 +50,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
-
+import org.openecomp.ncomp.utils.SecurityUtils;
 import org.openecomp.dcae.controller.service.servers.vmmanager.DcaeVirtualMachineManagerProvider;
 import org.openecomp.dcae.controller.service.dmaap.drsub.manager.ControllerServiceDmaapDrsubManager;
 
@@ -97,7 +97,8 @@ public class DcaeControllerServiceDmaapDrsubManagerProvider extends DcaeVirtualM
        String confFile = APP_HOME_ENV == null || APP_HOME_ENV == "" ?
     		   APP_HOME + "/conf/conf.json" :
     		   APP_HOME_ENV + "/conf/conf.json";
-       logger.info("confFile: " + confFile);
+       confFile = SecurityUtils.safeFileName(confFile);
+       logger.info("confFile: " + p(confFile));
        
        // save backup copy of configuration file
        try {
@@ -135,7 +136,11 @@ public class DcaeControllerServiceDmaapDrsubManagerProvider extends DcaeVirtualM
        resume();
     }
     
-    @Override
+    private String p(Object v) {
+		return SecurityUtils.logForcingProtection(v);
+	}
+
+	@Override
     public void suspend() {
     	super.suspend();
     	
@@ -165,7 +170,7 @@ public class DcaeControllerServiceDmaapDrsubManagerProvider extends DcaeVirtualM
 	}
 	
     private void runScript(List<String> command) {
-		String appBin = APP_HOME_ENV;
+		String appBin = SecurityUtils.safeFileName(APP_HOME_ENV);
 			    
 		if (appBin == null || appBin.equals("")) {
 		    appBin=APP_HOME;
@@ -176,8 +181,8 @@ public class DcaeControllerServiceDmaapDrsubManagerProvider extends DcaeVirtualM
 			if (cmdFile.exists()) {
 			    try {
 			    	ProcessBuilder builder = new ProcessBuilder(appBin+"/"+command.get(0),command.get(1));
-			    	logger.info("command: ["+appBin+"/"+command.get(0)+" "+command.get(1)+"]");
-			    	System.out.println("command: ["+appBin+"/"+command.get(0)+" "+command.get(1)+"]");
+			    	logger.info("command: ["+p(appBin)+"/"+command.get(0)+" "+command.get(1)+"]");
+			    	System.out.println("command: ["+p(appBin)+"/"+command.get(0)+" "+command.get(1)+"]");
 			        Process process = builder.start();
 			        InputStream inStream = process.getInputStream();
 			        process.waitFor();
@@ -186,7 +191,7 @@ public class DcaeControllerServiceDmaapDrsubManagerProvider extends DcaeVirtualM
 			            e.printStackTrace();
 			    }
 			} else {
-		    	logger.error("\""+appBin+"/"+command.get(0)+"\" does not exist.");
+		    	logger.error("\""+p(appBin)+"/"+command.get(0)+"\" does not exist.");
 		    }
 		}
     }

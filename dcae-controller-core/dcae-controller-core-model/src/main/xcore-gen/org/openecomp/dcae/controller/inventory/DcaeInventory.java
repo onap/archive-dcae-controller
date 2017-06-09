@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.openecomp.dcae.controller.inventory.DcaeInventory#getServiceTypes <em>Service Types</em>}</li>
  *   <li>{@link org.openecomp.dcae.controller.inventory.DcaeInventory#getServices <em>Services</em>}</li>
+ *   <li>{@link org.openecomp.dcae.controller.inventory.DcaeInventory#getRules <em>Rules</em>}</li>
  * </ul>
  *
  * @see org.openecomp.dcae.controller.inventory.InventoryPackage#getDcaeInventory()
@@ -55,6 +56,22 @@ public interface DcaeInventory extends EObject {
 	 * @generated
 	 */
 	EList<DCAEService> getServices();
+
+	/**
+	 * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openecomp.dcae.controller.inventory.InventoryConfigurationRule}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rules</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rules</em>' containment reference list.
+	 * @see org.openecomp.dcae.controller.inventory.InventoryPackage#getDcaeInventory_Rules()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<InventoryConfigurationRule> getRules();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -135,5 +152,13 @@ public interface DcaeInventory extends EObject {
 	 * @generated
 	 */
 	void poll();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void updateConfiguration();
 
 } // DcaeInventory

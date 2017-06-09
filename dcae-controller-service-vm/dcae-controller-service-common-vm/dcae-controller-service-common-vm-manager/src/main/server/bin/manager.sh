@@ -20,7 +20,7 @@ VMTYPE=$(ls /tmp/vm-*manager.properties | sed s/-manager.properties// | sed sx/t
 case $CMD1 in
 start)
 	umask 022
-    for jar in /opt/app/{ncomp,dcae}-*-model/lib/*jar; do cp -p $jar lib/; done
+for jar in /opt/app/{ncomp,dcae}-*-{model,jars}/lib/*jar; do cp -p $jar lib/; done
     JVMARGS=$(cat config/manager.properties | grep JVMARGS | sed 's/[^=]*=//')
     $CMD $CMD1 $JVMARGS
     ;;

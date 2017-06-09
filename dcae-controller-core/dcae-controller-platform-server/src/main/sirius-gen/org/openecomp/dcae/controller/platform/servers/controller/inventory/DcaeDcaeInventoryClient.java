@@ -255,4 +255,22 @@ public class DcaeDcaeInventoryClient extends DcaeInventoryImpl {
 		
 	}
 
+	@Override
+	public void updateConfiguration() {
+		EClass c = InventoryPackage.eINSTANCE.getDcaeInventory(); 
+		ecomplogger.recordMetricEventStart(DcaeInventoryOperationEnum.DcaeInventory_updateConfiguration,client.getRemote());
+		
+		try {
+		  client.operationPath("/inventory", c, "updateConfiguration", null);
+		}
+		catch (Exception e) {
+			ecomplogger.warn(DcaeInventoryMessageEnum.REMOTE_CALL_FAILED_updateConfiguration, e.toString());
+			EcompException e1 = EcompException.create(DcaeInventoryMessageEnum.REMOTE_CALL_FAILED_updateConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR,DcaeInventoryMessageEnum.REMOTE_CALL_FAILED_updateConfiguration,e.getMessage());
+			throw e1;
+		}
+		ecomplogger.recordMetricEventEnd();
+		
+	}
+
 }

@@ -223,8 +223,8 @@ public class DcaeCdapClusterManagerProvider extends DcaeVirtualMachineManagerPro
 //		System.err.println(json.toString(2));
 	}
 
-	public String stopApp(String namespace, String appName) {
-		return getCluster().stopApp(namespace, appName);
+	public String stopApp(String namespace, String appName, String programTypes) {
+		return getCluster().stopApp(namespace, appName, programTypes);
 	}
 
 	public String startWorker(String namespace, String appName,

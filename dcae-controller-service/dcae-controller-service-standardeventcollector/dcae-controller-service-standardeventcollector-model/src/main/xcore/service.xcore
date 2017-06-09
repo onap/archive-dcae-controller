@@ -55,7 +55,7 @@ class ControllerServiceStandardeventcollectorServiceConfiguration {
 	@ecomp(^type = "configuration")
 	String authflag
 	@ecomp(^type = "configuration")
-	String authlist
+	String authlist 
 	@ecomp(^type = "configuration")
 	String checkschemaflag
 	@ecomp(^type = "configuration")
@@ -63,5 +63,4 @@ class ControllerServiceStandardeventcollectorServiceConfiguration {
 	@ecomp(^type = "configuration")
 	String streamid	
 }
-
 

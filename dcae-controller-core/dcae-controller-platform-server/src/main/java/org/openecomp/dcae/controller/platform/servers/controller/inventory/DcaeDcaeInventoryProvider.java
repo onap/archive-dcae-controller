@@ -24,6 +24,8 @@ package org.openecomp.dcae.controller.platform.servers.controller.inventory;
 import org.openecomp.ncomp.sirius.manager.ISiriusServer;
 import org.openecomp.ncomp.sirius.manager.JavaHttpClient;
 import org.openecomp.ncomp.sirius.manager.ManagementServer;
+import org.openecomp.ncomp.sirius.manager.console.Utils;
+import org.yaml.snakeyaml.Yaml;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,11 +35,14 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.mvel2.optimizers.impl.refl.nodes.ArrayLength;
+import org.openecomp.ncomp.core.DeploymentStatus;
 import org.openecomp.ncomp.sirius.manager.BasicAdaptorProvider;
-
+import org.openecomp.dcae.controller.core.service.DcaeService;
+import org.openecomp.dcae.controller.core.service.DcaeServiceInstance;
 import org.openecomp.dcae.controller.inventory.ApiResponseMessage;
 import org.openecomp.dcae.controller.inventory.DCAEService;
 import org.openecomp.dcae.controller.inventory.DCAEServiceGroupByResults;
@@ -46,9 +51,17 @@ import org.openecomp.dcae.controller.inventory.DCAEServiceType;
 import org.openecomp.dcae.controller.inventory.DCAEServiceTypeRequest;
 import org.openecomp.dcae.controller.inventory.DcaeInventory;
 import org.openecomp.dcae.controller.inventory.DcaeServiceTypeResults;
+import org.openecomp.dcae.controller.inventory.InventoryConfigurationRule;
 import org.openecomp.dcae.controller.inventory.InventoryPackage;
 import org.openecomp.dcae.controller.inventory.Link;
+import org.openecomp.dcae.controller.platform.controller.DcaePlatformController;
+import org.openecomp.dcae.controller.service.cdap.CdapService;
+import org.openecomp.dcae.controller.service.cdap.CdapServiceInstance;
+import org.openecomp.dcae.controller.service.docker.DockerService;
+import org.openecomp.dcae.controller.service.vm.VirtualMachineService;
 import org.openecomp.dcae.controller.inventory.DcaeServiceResults;
+
+import static org.openecomp.dcae.controller.platform.servers.controller.DcaeDcaePlatformControllerProvider.*;
 
 public class DcaeDcaeInventoryProvider extends BasicAdaptorProvider {
 	private static final Logger logger = Logger.getLogger(DcaeDcaeInventoryProvider.class);
@@ -71,7 +84,7 @@ public class DcaeDcaeInventoryProvider extends BasicAdaptorProvider {
 		// TODO handle parameters, but for now only use is complete dump
 		addQuery(query,"offset", offset);
 		JSONObject json = client.httpJsonTransaction("/dcae-service-types" + queryUrl(query), "GET", headers, null);
-		System.err.println(json.toString(2));
+//		System.out.println(json.toString(2));
 		JSONArray items = json.getJSONArray("items");
 		for (int i = 0; i < items.length(); i++) {
 			JSONObject item = items.getJSONObject(i);
@@ -112,7 +125,7 @@ public class DcaeDcaeInventoryProvider extends BasicAdaptorProvider {
 		// TODO handle parameters, but for now only use is complete dump
 		addQuery(query,"offset", offset);
 		JSONObject json = client.httpJsonTransaction("/dcae-services" + queryUrl(query), "GET", headers, null);
-		System.err.println(json.toString(2));
+//		System.out.println(json.toString(2));
 		JSONArray items = json.getJSONArray("items");
 		for (int i = 0; i < items.length(); i++) {
 			JSONObject item = items.getJSONObject(i);
@@ -220,7 +233,7 @@ public class DcaeDcaeInventoryProvider extends BasicAdaptorProvider {
 			o.getServiceTypes().addAll(s.getItems());
 			offset = offset(s.getLinks());
 		}
-		System.out.println(ManagementServer.ecore2json(o, 1000, null, true).toString(2));
+//		System.out.println(ManagementServer.ecore2json(o, 1000, null, true).toString(2));
 	}
 
 	private int offset(EList<Link> links) {
@@ -231,4 +244,122 @@ public class DcaeDcaeInventoryProvider extends BasicAdaptorProvider {
 		}
 		return -1;
 	}
+	
+	
+	public void updateConfiguration() {
+		System.out.println("BBBBBBB: updateConfiguration");
+		DcaePlatformController root = (DcaePlatformController) controller.getServer().getObject();
+		for (DcaeService s : root.getServices()) {
+			for (DcaeServiceInstance i : instances(s)) {
+				if (! ( i instanceof CdapServiceInstance)) continue;
+				CdapServiceInstance i1 = (CdapServiceInstance) i;
+				for (InventoryConfigurationRule r : o.getRules()) {
+					try {
+						if (r.getServiceNameMatch() != null && ! r.getServiceNameMatch().equals(s.getName())) continue;
+						if (r.getInstanceNameMatch() != null && ! r.getInstanceNameMatch().equals(i.getName())) continue;
+						JSONObject json = findBluePrint(r);
+						System.out.println("BBBBBBB: updateConfiguration " + s.getName() + " " + i.getName() + " " + r + " " + (json ==null ? "NULL" : json.toString(2)));
+						if (json == null) {
+							System.out.println("BBBBBBB: NULL");
+							continue;
+						}
+						EObject oo = controller.getServer().json2ecore(i1.getConfiguration().eClass(), json);
+						JSONObject before = cleanJson(i1.getConfiguration());
+						ManagementServer.merge(i1.getConfiguration(), oo, json, true, null);
+						JSONObject after = cleanJson(i1.getConfiguration());
+						System.out.println("BBBBBBB before: " + before.toString(2));
+						System.out.println("BBBBBBB after: " + after.toString(2));
+						System.out.println("BBBBBBB equal: " + !before.toString(2).equals(after.toString(2)));
+						if (!before.toString(2).equals(after.toString(2))) {
+							System.out.println("BBBBBBB before: " + before.toString(2));
+							System.out.println("BBBBBBB after: " + after.toString(2));
+							if (i.getStatus() == DeploymentStatus.DEPLOYED)
+								s.pushManagerConfiguration(i.getName());
+						}
+					}
+					catch (Exception e) {
+						e.printStackTrace(System.out);
+						System.out.println("BBBBBBB: error "+ s.getName() + " " + i.getName() + " " + e);
+					}
+				}
+			}
+		}
+	}
+
+	private JSONObject findBluePrint(InventoryConfigurationRule r) {
+		DCAEServiceType t = null;
+		int version = -1;
+		for (DCAEServiceType t1 : o.getServiceTypes()) {
+			System.out.println("BBBBBBB: type match: " + t1.getTypeName() + " " + r.getTypeNameMatch());
+			if (t1.getTypeName() == null) continue;
+			if ( ! t1.getTypeName().equals(r.getTypeNameMatch())) continue;
+			System.out.println("BBBBBBB: type version: " + t1.getTypeVersion() + " " + version);
+			if (t1.getTypeVersion() != null && version  > t1.getTypeVersion()) continue;
+			System.out.println("BBBBBBB: type match found: " + t1.getTypeName());
+			t = t1;
+		}
+		if (t == null) {
+			System.out.println("BBBBBBB: no type for: " + r.getServiceNameMatch());
+			return null;
+		}
+		JSONObject bp;
+		try {
+			System.out.println("BBBBBBB: bp 1=" );
+			Yaml y = new Yaml();
+			System.out.println("BBBBBBB: bp 2=");
+			bp = (JSONObject) Utils.object2json(y.load(t.getBlueprintTemplate()));
+			System.out.println("BBBBBBB: bp 3=");
+			System.out.println("BBBBBBB: bp=" + bp.toString(2));
+			JSONObject topology_template = getJSONObject(bp,"topology_template");
+			JSONObject node_templates = getJSONObject(topology_template,"node_templates");
+			JSONObject node = null;
+			for (Iterator<String> i = node_templates.keys(); i.hasNext();) {
+				String type = (String) i.next();
+				System.out.println("BBBBBBB: node: " + type);
+				if (type.matches(r.getBpNodeNameMatch())) node = getJSONObject(node_templates,type); 
+			}
+			if (node == null) {
+				System.out.println("BBBBBBB: no node for: " + r.getBpNodeNameMatch());
+				return null;
+			}
+			JSONObject p = getJSONObject(node,"properties");
+			JSONObject app_preferences = getJSONObject(p ,"app_preferences");
+			System.out.println("BBBBBBB: app_preferences=" + app_preferences.toString(2));
+			JSONObject json = new JSONObject();
+			for (Iterator<String> i = app_preferences.keys(); i.hasNext();) {
+				String path = (String) i.next();
+				String a[] = path.split("\\.");
+				try {
+					updateJson(json,a,0, app_preferences.get(path));
+				}
+				catch (Exception e) {};
+			}
+			System.out.println("BBBBBBB: fixed value: " + json.toString(2));
+			return json;
+		}
+		catch (Exception e) {
+			e.printStackTrace(System.out);
+			System.out.println("BBBBBBB: bp error=" + e);
+			return null;
+		}
+	}
+
+	private void updateJson(JSONObject json, String[] a, int i, Object v) {
+		if (i == a.length - 1) {
+			json.put(a[i], v);
+		}
+		else {
+			if (! json.has(a[i])) 
+				json.put(a[i], new JSONObject());
+			updateJson(json.getJSONObject(a[i]), a, i+1, v);
+		}
+	}
+
+	private JSONObject getJSONObject(JSONObject json, String key) {
+		if (json.has(key)) return json.getJSONObject(key);
+		System.out.println("BBBBBBB: json does not have key =" + json.toString(2) + " " + key);
+		throw new RuntimeException("Unable to find: " + key);
+	}
+
+	
 }

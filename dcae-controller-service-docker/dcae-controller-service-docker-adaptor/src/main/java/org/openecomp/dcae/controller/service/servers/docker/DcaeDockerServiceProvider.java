@@ -81,7 +81,7 @@ public class DcaeDockerServiceProvider extends BasicAdaptorProvider {
 				throw new RuntimeException("Unable to find container object: " + containerPath);
 			}
 			if (!(s.o instanceof DockerHostServiceInstance))
-				throw new RuntimeException("Unable to deploy to this container: " + s.o);
+				throw new RuntimeException("Unable to deploy to this non docker host container: " + containerPath);
 			i.setHostService((DockerHostServiceInstance) s.o);
 		}
 		if (i.getHostService() == null) {
@@ -239,7 +239,7 @@ public class DcaeDockerServiceProvider extends BasicAdaptorProvider {
 					System.err.println("ZZZZZ: unencrypted pw: " + ManagementServer.object2ref(s));
 				continue;
 			}
-			System.err.println("ZZZZZ: unknown type: " + s);
+			System.err.println("ZZZZZ: unknown type: " + s.getClass().getName());
 		}
 		return l;
 	}
