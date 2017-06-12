@@ -43,6 +43,8 @@ import org.openecomp.dcae.controller.service.cdap.CdapApplication;
 import org.openecomp.dcae.controller.service.cdap.CdapArtifact;
 import org.openecomp.dcae.controller.service.cdap.CdapCreateAppStep;
 import org.openecomp.dcae.controller.service.cdap.CdapCreateAppWithConfigStep;
+import org.openecomp.dcae.controller.service.cdap.CdapDeleteAppStep;
+import org.openecomp.dcae.controller.service.cdap.CdapDeleteArtifact;
 import org.openecomp.dcae.controller.service.cdap.CdapDeployAppStep;
 import org.openecomp.dcae.controller.service.cdap.CdapFactory;
 import org.openecomp.dcae.controller.service.cdap.CdapInternalApplicationConfiguration;
@@ -60,6 +62,7 @@ import org.openecomp.dcae.controller.service.cdap.CdapStopAppStep;
 import org.openecomp.dcae.controller.service.cdap.CdapStopFlowStep;
 import org.openecomp.dcae.controller.service.cdap.CdapStopServiceStep;
 import org.openecomp.dcae.controller.service.cdap.CdapStopWorkerStep;
+import org.openecomp.dcae.controller.service.cdap.CdapSuspendScheduleStep;
 import org.openecomp.dcae.controller.service.cdap.cluster.servers.manager.DcaeCdapClusterManagerConsole;
 import org.openecomp.dcae.controller.service.cdap.cluster.servers.service.DcaeCdapClusterService;
 import org.openecomp.dcae.controller.service.cdap.cluster.servers.service.DcaeCdapClusterServiceProvider;
@@ -98,7 +101,7 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 				throw new RuntimeException("Unable to find container object: " + containerPath);
 			}
 			if (!(s.o instanceof CdapClusterServiceInstance))
-				throw new RuntimeException("Unable to deploy to this container: " + s.o);
+				throw new RuntimeException("Unable to deploy to this non cdap cluster container: " + containerPath);
 			i.setClusterService((CdapClusterServiceInstance) s.o);
 		}
 		i.setCdapName(cdapName(i));
@@ -190,7 +193,7 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 			}
 			if (s instanceof CdapStopAppStep) {
 				CdapStopAppStep s1 = (CdapStopAppStep) s;
-				console.stopApp(i.getCdapName(), s1.getAppId());
+				console.stopApp(i.getCdapName(), s1.getAppId(),s1.getProgramTypes());
 				continue;
 			}
 			if (s instanceof CdapStopFlowStep) {
@@ -213,6 +216,22 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 				console.resumeSchedule(i.getCdapName(), s1.getAppId(), s1.getScheduleId());
 				continue;
 			}
+			if (s instanceof CdapDeleteAppStep) {
+				CdapDeleteAppStep s1 = (CdapDeleteAppStep) s;
+				console.deleteApp(i.getCdapName(), s1.getAppId());
+				continue;
+			}
+			if (s instanceof CdapDeleteArtifact) {
+				CdapDeleteArtifact s1 = (CdapDeleteArtifact) s;
+				console.deleteArtifact(i.getCdapName(), s1.getArtifactName(),s1.getVersion());
+				continue;
+			}			
+			if (s instanceof CdapSuspendScheduleStep) {
+				CdapSuspendScheduleStep s1 = (CdapSuspendScheduleStep) s;
+				console.suspendSchedule(i.getCdapName(), s1.getAppId(),s1.getScheduleId());
+				continue;
+			}				
+			throw new RuntimeException("Unable to support: " + s.eClass().getName());
 		}
 	}
 
@@ -235,7 +254,7 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 		}
 		for (String a : i.getAppNames()) {
 			try {
-				console.stopApp(i.getCdapName(), a);
+				console.stopApp(i.getCdapName(), a, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -253,7 +272,7 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 		}
 		for (CdapApplication a : i.getApps()) {
 			try {
-				console.stopApp(i.getCdapName(), a.getName());
+				console.stopApp(i.getCdapName(), a.getName(), null);
 				console.deleteApp(i.getCdapName(), a.getName());
 				console.deleteArtifact(i.getCdapName(), a.getArtifactName(), a.getVersion());
 			} catch (Exception e) {
@@ -270,14 +289,14 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 		synchronized (i) {
 			for (CdapArtifact a : i.getArtifacts()) {
 				try {
-					console.stopApp(i.getCdapName(), a.getName());
+					console.stopApp(i.getCdapName(), a.getName(), null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 			for (CdapApplication a : i.getApps()) {
 				try {
-					console.stopApp(i.getCdapName(), a.getName());
+					console.stopApp(i.getCdapName(), a.getName(),null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

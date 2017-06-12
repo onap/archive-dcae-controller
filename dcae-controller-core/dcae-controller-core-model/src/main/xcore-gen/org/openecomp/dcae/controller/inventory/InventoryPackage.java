@@ -107,13 +107,22 @@ public interface InventoryPackage extends EPackage {
 	int DCAE_INVENTORY__SERVICES = 1;
 
 	/**
+	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DCAE_INVENTORY__RULES = 2;
+
+	/**
 	 * The number of structural features of the '<em>Dcae Inventory</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DCAE_INVENTORY_FEATURE_COUNT = 2;
+	int DCAE_INVENTORY_FEATURE_COUNT = 3;
 
 	/**
 	 * The operation id for the '<em>Get Dcae Service Types</em>' operation.
@@ -206,13 +215,22 @@ public interface InventoryPackage extends EPackage {
 	int DCAE_INVENTORY___POLL = 9;
 
 	/**
+	 * The operation id for the '<em>Update Configuration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DCAE_INVENTORY___UPDATE_CONFIGURATION = 10;
+
+	/**
 	 * The number of operations of the '<em>Dcae Inventory</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DCAE_INVENTORY_OPERATION_COUNT = 10;
+	int DCAE_INVENTORY_OPERATION_COUNT = 11;
 
 	/**
 	 * The meta object id for the '{@link org.openecomp.dcae.controller.inventory.impl.ApiResponseMessageImpl <em>Api Response Message</em>}' class.
@@ -1481,6 +1499,106 @@ public interface InventoryPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.openecomp.dcae.controller.inventory.impl.InventoryConfigurationRuleImpl <em>Configuration Rule</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openecomp.dcae.controller.inventory.impl.InventoryConfigurationRuleImpl
+	 * @see org.openecomp.dcae.controller.inventory.impl.InventoryPackageImpl#getInventoryConfigurationRule()
+	 * @generated
+	 */
+	int INVENTORY_CONFIGURATION_RULE = 15;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVENTORY_CONFIGURATION_RULE__NAME = CorePackage.NAMED_ENTITY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Last Polled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVENTORY_CONFIGURATION_RULE__LAST_POLLED = CorePackage.NAMED_ENTITY__LAST_POLLED;
+
+	/**
+	 * The feature id for the '<em><b>Last Changed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVENTORY_CONFIGURATION_RULE__LAST_CHANGED = CorePackage.NAMED_ENTITY__LAST_CHANGED;
+
+	/**
+	 * The feature id for the '<em><b>Created</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVENTORY_CONFIGURATION_RULE__CREATED = CorePackage.NAMED_ENTITY__CREATED;
+
+	/**
+	 * The feature id for the '<em><b>Type Name Match</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVENTORY_CONFIGURATION_RULE__TYPE_NAME_MATCH = CorePackage.NAMED_ENTITY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Service Name Match</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVENTORY_CONFIGURATION_RULE__SERVICE_NAME_MATCH = CorePackage.NAMED_ENTITY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Instance Name Match</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVENTORY_CONFIGURATION_RULE__INSTANCE_NAME_MATCH = CorePackage.NAMED_ENTITY_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Bp Node Name Match</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVENTORY_CONFIGURATION_RULE__BP_NODE_NAME_MATCH = CorePackage.NAMED_ENTITY_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Configuration Rule</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVENTORY_CONFIGURATION_RULE_FEATURE_COUNT = CorePackage.NAMED_ENTITY_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Configuration Rule</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVENTORY_CONFIGURATION_RULE_OPERATION_COUNT = CorePackage.NAMED_ENTITY_OPERATION_COUNT + 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.openecomp.dcae.controller.inventory.DcaeInventory <em>Dcae Inventory</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1511,6 +1629,17 @@ public interface InventoryPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDcaeInventory_Services();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openecomp.dcae.controller.inventory.DcaeInventory#getRules <em>Rules</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Rules</em>'.
+	 * @see org.openecomp.dcae.controller.inventory.DcaeInventory#getRules()
+	 * @see #getDcaeInventory()
+	 * @generated
+	 */
+	EReference getDcaeInventory_Rules();
 
 	/**
 	 * Returns the meta object for the '{@link org.openecomp.dcae.controller.inventory.DcaeInventory#getDcaeServiceTypes(java.lang.String, java.lang.Boolean, java.lang.Boolean, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer) <em>Get Dcae Service Types</em>}' operation.
@@ -1611,6 +1740,16 @@ public interface InventoryPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getDcaeInventory__Poll();
+
+	/**
+	 * Returns the meta object for the '{@link org.openecomp.dcae.controller.inventory.DcaeInventory#updateConfiguration() <em>Update Configuration</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Update Configuration</em>' operation.
+	 * @see org.openecomp.dcae.controller.inventory.DcaeInventory#updateConfiguration()
+	 * @generated
+	 */
+	EOperation getDcaeInventory__UpdateConfiguration();
 
 	/**
 	 * Returns the meta object for class '{@link org.openecomp.dcae.controller.inventory.ApiResponseMessage <em>Api Response Message</em>}'.
@@ -2600,6 +2739,60 @@ public interface InventoryPackage extends EPackage {
 	EClass getUriBuilder();
 
 	/**
+	 * Returns the meta object for class '{@link org.openecomp.dcae.controller.inventory.InventoryConfigurationRule <em>Configuration Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Configuration Rule</em>'.
+	 * @see org.openecomp.dcae.controller.inventory.InventoryConfigurationRule
+	 * @generated
+	 */
+	EClass getInventoryConfigurationRule();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.inventory.InventoryConfigurationRule#getTypeNameMatch <em>Type Name Match</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type Name Match</em>'.
+	 * @see org.openecomp.dcae.controller.inventory.InventoryConfigurationRule#getTypeNameMatch()
+	 * @see #getInventoryConfigurationRule()
+	 * @generated
+	 */
+	EAttribute getInventoryConfigurationRule_TypeNameMatch();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.inventory.InventoryConfigurationRule#getServiceNameMatch <em>Service Name Match</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Service Name Match</em>'.
+	 * @see org.openecomp.dcae.controller.inventory.InventoryConfigurationRule#getServiceNameMatch()
+	 * @see #getInventoryConfigurationRule()
+	 * @generated
+	 */
+	EAttribute getInventoryConfigurationRule_ServiceNameMatch();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.inventory.InventoryConfigurationRule#getInstanceNameMatch <em>Instance Name Match</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Instance Name Match</em>'.
+	 * @see org.openecomp.dcae.controller.inventory.InventoryConfigurationRule#getInstanceNameMatch()
+	 * @see #getInventoryConfigurationRule()
+	 * @generated
+	 */
+	EAttribute getInventoryConfigurationRule_InstanceNameMatch();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.inventory.InventoryConfigurationRule#getBpNodeNameMatch <em>Bp Node Name Match</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bp Node Name Match</em>'.
+	 * @see org.openecomp.dcae.controller.inventory.InventoryConfigurationRule#getBpNodeNameMatch()
+	 * @see #getInventoryConfigurationRule()
+	 * @generated
+	 */
+	EAttribute getInventoryConfigurationRule_BpNodeNameMatch();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2647,6 +2840,14 @@ public interface InventoryPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DCAE_INVENTORY__SERVICES = eINSTANCE.getDcaeInventory_Services();
+
+		/**
+		 * The meta object literal for the '<em><b>Rules</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DCAE_INVENTORY__RULES = eINSTANCE.getDcaeInventory_Rules();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Dcae Service Types</b></em>' operation.
@@ -2727,6 +2928,14 @@ public interface InventoryPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation DCAE_INVENTORY___POLL = eINSTANCE.getDcaeInventory__Poll();
+
+		/**
+		 * The meta object literal for the '<em><b>Update Configuration</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation DCAE_INVENTORY___UPDATE_CONFIGURATION = eINSTANCE.getDcaeInventory__UpdateConfiguration();
 
 		/**
 		 * The meta object literal for the '{@link org.openecomp.dcae.controller.inventory.impl.ApiResponseMessageImpl <em>Api Response Message</em>}' class.
@@ -3483,6 +3692,48 @@ public interface InventoryPackage extends EPackage {
 		 * @generated
 		 */
 		EClass URI_BUILDER = eINSTANCE.getUriBuilder();
+
+		/**
+		 * The meta object literal for the '{@link org.openecomp.dcae.controller.inventory.impl.InventoryConfigurationRuleImpl <em>Configuration Rule</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openecomp.dcae.controller.inventory.impl.InventoryConfigurationRuleImpl
+		 * @see org.openecomp.dcae.controller.inventory.impl.InventoryPackageImpl#getInventoryConfigurationRule()
+		 * @generated
+		 */
+		EClass INVENTORY_CONFIGURATION_RULE = eINSTANCE.getInventoryConfigurationRule();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Name Match</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INVENTORY_CONFIGURATION_RULE__TYPE_NAME_MATCH = eINSTANCE.getInventoryConfigurationRule_TypeNameMatch();
+
+		/**
+		 * The meta object literal for the '<em><b>Service Name Match</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INVENTORY_CONFIGURATION_RULE__SERVICE_NAME_MATCH = eINSTANCE.getInventoryConfigurationRule_ServiceNameMatch();
+
+		/**
+		 * The meta object literal for the '<em><b>Instance Name Match</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INVENTORY_CONFIGURATION_RULE__INSTANCE_NAME_MATCH = eINSTANCE.getInventoryConfigurationRule_InstanceNameMatch();
+
+		/**
+		 * The meta object literal for the '<em><b>Bp Node Name Match</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INVENTORY_CONFIGURATION_RULE__BP_NODE_NAME_MATCH = eINSTANCE.getInventoryConfigurationRule_BpNodeNameMatch();
 
 	}
 

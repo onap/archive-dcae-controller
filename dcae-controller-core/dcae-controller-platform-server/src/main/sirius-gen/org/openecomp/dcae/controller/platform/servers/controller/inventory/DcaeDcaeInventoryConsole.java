@@ -164,4 +164,15 @@ public class DcaeDcaeInventoryConsole extends Console {
 		
 	}
 
+	public void updateConfiguration() {
+		
+		try {
+			 controller.updateConfiguration();
+		}
+		catch (ManagementServerError e) {
+			System.err.println("ERROR: " + e.getJson().toString(2));
+		}
+		
+	}
+
 }

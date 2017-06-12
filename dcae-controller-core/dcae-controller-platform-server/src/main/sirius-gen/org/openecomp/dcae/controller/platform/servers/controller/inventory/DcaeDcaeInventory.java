@@ -352,6 +352,34 @@ public class DcaeDcaeInventory extends DcaeInventoryImpl implements ISiriusProvi
 		
 	}
 
+	public void updateConfiguration() {
+		
+		long duration_ = 0;
+		if (server != null)
+			server.getServer().recordApi(null, this, "updateConfiguration", ApiRequestStatus.START, duration_);
+		Date now_ = new Date();
+		ecomplogger.recordAuditEventStartIfNeeded(DcaeInventoryOperationEnum.DcaeInventory_updateConfiguration,server,this);
+		ecomplogger.recordMetricEventStart(DcaeInventoryOperationEnum.DcaeInventory_updateConfiguration,"self:" + ManagementServer.object2ref(this));
+		try {
+			 controller.updateConfiguration();
+		}
+		catch (Exception e) {
+			duration_ = new Date().getTime()-now_.getTime();
+			if (server != null)
+				server.getServer().recordApi(null, this, "updateConfiguration", ApiRequestStatus.ERROR, duration_);
+			System.err.println("ERROR: " + e);
+			ecomplogger.warn(DcaeInventoryMessageEnum.REQUEST_FAILED_updateConfiguration, e.toString());
+			EcompException e1 =  EcompException.create(DcaeInventoryMessageEnum.REQUEST_FAILED_updateConfiguration,e,e.getMessage());
+			ecomplogger.recordMetricEventEnd(StatusCodeEnum.ERROR, DcaeInventoryMessageEnum.REQUEST_FAILED_updateConfiguration, e.getMessage());
+			throw e1;
+		}
+		ecomplogger.recordMetricEventEnd();
+		duration_ = new Date().getTime()-now_.getTime();
+		if (server != null)
+			server.getServer().recordApi(null, this, "updateConfiguration", ApiRequestStatus.OKAY, duration_);
+		
+	}
+
 
 
 

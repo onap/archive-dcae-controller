@@ -163,6 +163,13 @@ public class InventorySwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case InventoryPackage.INVENTORY_CONFIGURATION_RULE: {
+				InventoryConfigurationRule inventoryConfigurationRule = (InventoryConfigurationRule)theEObject;
+				T result = caseInventoryConfigurationRule(inventoryConfigurationRule);
+				if (result == null) result = caseNamedEntity(inventoryConfigurationRule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -389,6 +396,21 @@ public class InventorySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseUriBuilder(UriBuilder object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Configuration Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Configuration Rule</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInventoryConfigurationRule(InventoryConfigurationRule object) {
 		return null;
 	}
 

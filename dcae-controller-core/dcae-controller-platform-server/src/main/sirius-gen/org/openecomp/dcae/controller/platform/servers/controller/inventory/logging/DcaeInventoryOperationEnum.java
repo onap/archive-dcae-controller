@@ -14,7 +14,8 @@ public enum DcaeInventoryOperationEnum implements EcompOperationEnum {
   DcaeInventory_deleteDcaeServicesService("DcaeInventory@deleteDcaeServicesService"),
   DcaeInventory_getDcaeServicesService("DcaeInventory@getDcaeServicesService"),
   DcaeInventory_createDcaeServicesService("DcaeInventory@createDcaeServicesService"),
-  DcaeInventory_poll("DcaeInventory@poll") ; 
+  DcaeInventory_poll("DcaeInventory@poll"),
+  DcaeInventory_updateConfiguration("DcaeInventory@updateConfiguration") ; 
 
 
 	private String n;

@@ -822,6 +822,17 @@ public interface ServicePackage extends EPackage {
 	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authflag();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthlist <em>Authlist</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Authlist</em>'.
+	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthlist()
+	 * @see #getControllerServiceStandardeventcollectorServiceConfiguration()
+	 * @generated
+	 */
+	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authlist();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getCheckschemaflag <em>Checkschemaflag</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -842,17 +853,6 @@ public interface ServicePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Schemafile();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthlist <em>Authlist</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Authlist</em>'.
-	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthlist()
-	 * @see #getControllerServiceStandardeventcollectorServiceConfiguration()
-	 * @generated
-	 */
-	EAttribute getControllerServiceStandardeventcollectorServiceConfiguration_Authlist();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getStreamid <em>Streamid</em>}'.
@@ -975,6 +975,14 @@ public interface ServicePackage extends EPackage {
 		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHFLAG = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Authflag();
 
 		/**
+		 * The meta object literal for the '<em><b>Authlist</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Authlist();
+
+		/**
 		 * The meta object literal for the '<em><b>Checkschemaflag</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -989,14 +997,6 @@ public interface ServicePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Schemafile();
-
-		/**
-		 * The meta object literal for the '<em><b>Authlist</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST = eINSTANCE.getControllerServiceStandardeventcollectorServiceConfiguration_Authlist();
 
 		/**
 		 * The meta object literal for the '<em><b>Streamid</b></em>' attribute feature.

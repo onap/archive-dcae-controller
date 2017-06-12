@@ -157,6 +157,15 @@ public interface InventoryFactory extends EFactory {
 	UriBuilder createUriBuilder();
 
 	/**
+	 * Returns a new object of class '<em>Configuration Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Configuration Rule</em>'.
+	 * @generated
+	 */
+	InventoryConfigurationRule createInventoryConfigurationRule();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

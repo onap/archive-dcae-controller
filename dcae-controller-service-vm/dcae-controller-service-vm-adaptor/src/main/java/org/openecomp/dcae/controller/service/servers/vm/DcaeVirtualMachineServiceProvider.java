@@ -110,7 +110,7 @@ public class DcaeVirtualMachineServiceProvider extends BasicAdaptorProvider {
 				throw new RuntimeException("Unable to find container object: " + containerPath);
 			}
 			if (!(s.o instanceof DcaeLocation))
-				throw new RuntimeException("Unable to deploy to this container: " + containerPath + " " + s.o);
+				throw new RuntimeException("Unable to deploy to this non location container: " + containerPath);
 			i.setLocation((DcaeLocation) s.o);
 		}
 		DcaeLocation location = i.getLocation();

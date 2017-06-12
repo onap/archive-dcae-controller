@@ -71,6 +71,7 @@ public class InventoryFactoryImpl extends EFactoryImpl implements InventoryFacto
 			case InventoryPackage.LINK: return createLink();
 			case InventoryPackage.PARAMETER: return createParameter();
 			case InventoryPackage.URI_BUILDER: return createUriBuilder();
+			case InventoryPackage.INVENTORY_CONFIGURATION_RULE: return createInventoryConfigurationRule();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -224,6 +225,16 @@ public class InventoryFactoryImpl extends EFactoryImpl implements InventoryFacto
 	public UriBuilder createUriBuilder() {
 		UriBuilderImpl uriBuilder = new UriBuilderImpl();
 		return uriBuilder;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InventoryConfigurationRule createInventoryConfigurationRule() {
+		InventoryConfigurationRuleImpl inventoryConfigurationRule = new InventoryConfigurationRuleImpl();
+		return inventoryConfigurationRule;
 	}
 
 	/**

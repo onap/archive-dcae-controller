@@ -950,6 +950,15 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCdapStopAppStep_ProgramTypes() {
+		return (EAttribute)cdapStopAppStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCdapStartFlowStep() {
 		return cdapStartFlowStepEClass;
 	}
@@ -1285,6 +1294,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 
 		cdapStopAppStepEClass = createEClass(CDAP_STOP_APP_STEP);
 		createEAttribute(cdapStopAppStepEClass, CDAP_STOP_APP_STEP__APP_ID);
+		createEAttribute(cdapStopAppStepEClass, CDAP_STOP_APP_STEP__PROGRAM_TYPES);
 
 		cdapStartFlowStepEClass = createEClass(CDAP_START_FLOW_STEP);
 		createEAttribute(cdapStartFlowStepEClass, CDAP_START_FLOW_STEP__APP_ID);
@@ -1469,6 +1479,7 @@ public class CdapPackageImpl extends EPackageImpl implements CdapPackage {
 
 		initEClass(cdapStopAppStepEClass, CdapStopAppStep.class, "CdapStopAppStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCdapStopAppStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapStopAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCdapStopAppStep_ProgramTypes(), theEcorePackage.getEString(), "programTypes", null, 0, 1, CdapStopAppStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cdapStartFlowStepEClass, CdapStartFlowStep.class, "CdapStartFlowStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCdapStartFlowStep_AppId(), theEcorePackage.getEString(), "appId", null, 0, 1, CdapStartFlowStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -9,6 +9,7 @@ operations:
   DcaeInventory@getDcaeServicesService: {}
   DcaeInventory@createDcaeServicesService: {}
   DcaeInventory@poll: {}
+  DcaeInventory@updateConfiguration: {}
 messages:
   dummy: {}
   REQUEST-FAILED-getDcaeServiceTypes:
@@ -51,6 +52,10 @@ messages:
     errorCode: 4001W
     messageFormat: '{0}'
     description: Operation Failed with Exception
+  REQUEST-FAILED-updateConfiguration:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Operation Failed with Exception
   REMOTE-CALL-FAILED-getDcaeServiceTypes:
     errorCode: 4001W
     messageFormat: '{0}'
@@ -88,6 +93,10 @@ messages:
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception
   REMOTE-CALL-FAILED-poll:
+    errorCode: 4001W
+    messageFormat: '{0}'
+    description: Remote Operation Failed with Exception
+  REMOTE-CALL-FAILED-updateConfiguration:
     errorCode: 4001W
     messageFormat: '{0}'
     description: Remote Operation Failed with Exception

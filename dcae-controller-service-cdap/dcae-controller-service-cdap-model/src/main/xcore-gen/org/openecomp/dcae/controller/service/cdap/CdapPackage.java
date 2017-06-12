@@ -1841,13 +1841,22 @@ public interface CdapPackage extends EPackage {
 	int CDAP_STOP_APP_STEP__APP_ID = CDAP_STEP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Program Types</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CDAP_STOP_APP_STEP__PROGRAM_TYPES = CDAP_STEP_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Stop App Step</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CDAP_STOP_APP_STEP_FEATURE_COUNT = CDAP_STEP_FEATURE_COUNT + 1;
+	int CDAP_STOP_APP_STEP_FEATURE_COUNT = CDAP_STEP_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Stop App Step</em>' class.
@@ -3287,6 +3296,17 @@ public interface CdapPackage extends EPackage {
 	EAttribute getCdapStopAppStep_AppId();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openecomp.dcae.controller.service.cdap.CdapStopAppStep#getProgramTypes <em>Program Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Program Types</em>'.
+	 * @see org.openecomp.dcae.controller.service.cdap.CdapStopAppStep#getProgramTypes()
+	 * @see #getCdapStopAppStep()
+	 * @generated
+	 */
+	EAttribute getCdapStopAppStep_ProgramTypes();
+
+	/**
 	 * Returns the meta object for class '{@link org.openecomp.dcae.controller.service.cdap.CdapStartFlowStep <em>Start Flow Step</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4107,6 +4127,13 @@ public interface CdapPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CDAP_STOP_APP_STEP__APP_ID = eINSTANCE.getCdapStopAppStep_AppId();
+		/**
+		 * The meta object literal for the '<em><b>Program Types</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CDAP_STOP_APP_STEP__PROGRAM_TYPES = eINSTANCE.getCdapStopAppStep_ProgramTypes();
 		/**
 		 * The meta object literal for the '{@link org.openecomp.dcae.controller.service.cdap.impl.CdapStartFlowStepImpl <em>Start Flow Step</em>}' class.
 		 * <!-- begin-user-doc -->

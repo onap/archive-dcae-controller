@@ -344,10 +344,10 @@ public class DcaeCdapClusterManagerConsole extends Console {
 		return res;
 	}
 
-	public java.lang.String stopApp(java.lang.String namespace, java.lang.String appName) {
+	public java.lang.String stopApp(java.lang.String namespace, java.lang.String appName, java.lang.String programTypes) {
 		java.lang.String res = null;
 		try {
-			res =  controller.stopApp(namespace,appName);
+			res =  controller.stopApp(namespace,appName,programTypes);
 		}
 		catch (ManagementServerError e) {
 			System.err.println("ERROR: " + e.getJson().toString(2));

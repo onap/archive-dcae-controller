@@ -130,6 +130,10 @@ public class InventoryAdapterFactory extends AdapterFactoryImpl {
 				return createUriBuilderAdapter();
 			}
 			@Override
+			public Adapter caseInventoryConfigurationRule(InventoryConfigurationRule object) {
+				return createInventoryConfigurationRuleAdapter();
+			}
+			@Override
 			public Adapter caseNamedEntity(NamedEntity object) {
 				return createNamedEntityAdapter();
 			}
@@ -360,6 +364,20 @@ public class InventoryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUriBuilderAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openecomp.dcae.controller.inventory.InventoryConfigurationRule <em>Configuration Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openecomp.dcae.controller.inventory.InventoryConfigurationRule
+	 * @generated
+	 */
+	public Adapter createInventoryConfigurationRuleAdapter() {
 		return null;
 	}
 

@@ -92,7 +92,6 @@ MTU=$(/sbin/ifconfig | grep MTU | sed 's/.*MTU://' | sed 's/ .*//' | sort -n | h
 FILE1=/etc/default/docker
 echo DOCKER_OPTS=\"\$DOCKER_OPTS --mtu=$MTU\" >> $FILE1
 
-
 #
 # Start Docker
 #

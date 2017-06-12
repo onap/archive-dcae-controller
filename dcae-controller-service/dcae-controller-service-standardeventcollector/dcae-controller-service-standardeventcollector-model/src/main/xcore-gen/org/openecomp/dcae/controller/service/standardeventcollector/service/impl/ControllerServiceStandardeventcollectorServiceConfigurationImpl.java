@@ -425,6 +425,27 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getAuthlist() {
+		return authlist;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAuthlist(String newAuthlist) {
+		String oldAuthlist = authlist;
+		authlist = newAuthlist;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST, oldAuthlist, authlist));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getCheckschemaflag() {
 		return checkschemaflag;
 	}
@@ -460,27 +481,6 @@ public class ControllerServiceStandardeventcollectorServiceConfigurationImpl ext
 		schemafile = newSchemafile;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__SCHEMAFILE, oldSchemafile, schemafile));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getAuthlist() {
-		return authlist;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAuthlist(String newAuthlist) {
-		String oldAuthlist = authlist;
-		authlist = newAuthlist;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ServicePackage.CONTROLLER_SERVICE_STANDARDEVENTCOLLECTOR_SERVICE_CONFIGURATION__AUTHLIST, oldAuthlist, authlist));
 	}
 
 	/**

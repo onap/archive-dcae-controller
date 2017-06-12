@@ -243,6 +243,33 @@ public interface ControllerServiceStandardeventcollectorServiceConfiguration ext
 	void setAuthflag(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Authlist</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Authlist</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Authlist</em>' attribute.
+	 * @see #setAuthlist(String)
+	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage#getControllerServiceStandardeventcollectorServiceConfiguration_Authlist()
+	 * @model unique="false"
+	 *        annotation="http://openecomp.org type='configuration'"
+	 * @generated
+	 */
+	String getAuthlist();
+
+	/**
+	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthlist <em>Authlist</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Authlist</em>' attribute.
+	 * @see #getAuthlist()
+	 * @generated
+	 */
+	void setAuthlist(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Checkschemaflag</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -295,33 +322,6 @@ public interface ControllerServiceStandardeventcollectorServiceConfiguration ext
 	 * @generated
 	 */
 	void setSchemafile(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Authlist</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Authlist</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Authlist</em>' attribute.
-	 * @see #setAuthlist(String)
-	 * @see org.openecomp.dcae.controller.service.standardeventcollector.service.ServicePackage#getControllerServiceStandardeventcollectorServiceConfiguration_Authlist()
-	 * @model unique="false"
-	 *        annotation="http://openecomp.org type='configuration'"
-	 * @generated
-	 */
-	String getAuthlist();
-
-	/**
-	 * Sets the value of the '{@link org.openecomp.dcae.controller.service.standardeventcollector.service.ControllerServiceStandardeventcollectorServiceConfiguration#getAuthlist <em>Authlist</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Authlist</em>' attribute.
-	 * @see #getAuthlist()
-	 * @generated
-	 */
-	void setAuthlist(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Streamid</b></em>' attribute.

@@ -17,6 +17,7 @@ public enum DcaeInventoryMessageEnum implements EcompMessageEnum {
   REQUEST_FAILED_getDcaeServicesService,
   REQUEST_FAILED_createDcaeServicesService,
   REQUEST_FAILED_poll,
+  REQUEST_FAILED_updateConfiguration,
   REMOTE_CALL_FAILED_getDcaeServiceTypes,
   REMOTE_CALL_FAILED_deleteDcaeServiceTypesType,
   REMOTE_CALL_FAILED_getDcaeServiceTypesType,
@@ -26,7 +27,8 @@ public enum DcaeInventoryMessageEnum implements EcompMessageEnum {
   REMOTE_CALL_FAILED_deleteDcaeServicesService,
   REMOTE_CALL_FAILED_getDcaeServicesService,
   REMOTE_CALL_FAILED_createDcaeServicesService,
-  REMOTE_CALL_FAILED_poll;
+  REMOTE_CALL_FAILED_poll,
+  REMOTE_CALL_FAILED_updateConfiguration;
 
 	static {
 		EELFResourceManager.loadMessageBundle("org/openecomp/dcae/controller/platform/servers/controller/inventory/logging/DcaeInventory");

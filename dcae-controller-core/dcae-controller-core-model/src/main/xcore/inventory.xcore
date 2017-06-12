@@ -25,6 +25,7 @@ import org.openecomp.ncomp.core.NamedEntity
 class DcaeInventory {
 	contains DCAEServiceType[] serviceTypes
 	contains DCAEService[] services
+	contains InventoryConfigurationRule[] rules
 	op DcaeServiceTypeResults getDcaeServiceTypes(String typeName, Boolean onlyLatest, Boolean onlyActive, String vnfType, String serviceId, String serviceLocation, String asdcServiceId, String asdcResourceId, Integer offset)
 	op ApiResponseMessage deleteDcaeServiceTypesType(String[1] typeId)
 	op DCAEServiceType getDcaeServiceTypesType(String typeId)
@@ -35,6 +36,7 @@ class DcaeInventory {
 	op DCAEService getDcaeServicesService(String serviceId)
 	op DCAEService createDcaeServicesService(String serviceId, DCAEServiceRequest body)
 	op void poll()
+	op void updateConfiguration()
 }
 
 class ApiResponseMessage {
@@ -196,3 +198,12 @@ class Parameter extends NamedEntity {
 
 class UriBuilder {
 }
+
+
+class InventoryConfigurationRule extends NamedEntity {
+	String typeNameMatch     // blueprint.yaml
+	String serviceNameMatch  // cdap-map-edge
+	String instanceNameMatch // cfc1
+	String bpNodeNameMatch   // map_0_map_map
+}
+

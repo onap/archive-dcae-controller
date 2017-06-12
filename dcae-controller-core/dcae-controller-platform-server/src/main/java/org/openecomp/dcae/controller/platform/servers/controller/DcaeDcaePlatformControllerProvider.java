@@ -273,6 +273,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 									o.setInventory(inv);
 								}
 								inv.poll();
+								inv.updateConfiguration();
 								ecomplogger.recordAuditEventEnd();
 							} catch (Exception e) {
 								ecomplogger.warn(DcaeControllerMessageEnum.INVENTORY_POLLING_FAILED, e.toString());
@@ -615,16 +616,14 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			for (Iterator<String> i = pub.keys(); i.hasNext();) {
 				String k = i.next();
 				JSONObject json1 = pub.getJSONObject(k);
-				if (!k.startsWith("external")) {
-					String user = "dcae";
-					if (json1.has("dcaeLocationName"))
-						user = json1.getString("dcaeLocationName");
-					json1.put("username", user);
+				String user = "dcae";
+				if (json1.has("dcaeLocationName") && ! json1.getString("dcaeLocationName").equals("notSpecified") )
+					user = json1.getString("dcaeLocationName");
+				json1.put("username", user);
+				if (json1.has("userpwd"))
+					json1.put("userpwd", JavaHttpClient.decryptPassword(json1.getString("userpwd")));
+				else
 					json1.put("userpwd", password());
-				} else {
-					if (json1.has("userpwd"))
-						json1.put("userpwd", JavaHttpClient.decryptPassword(json1.getString("userpwd")));
-				}
 				if (json1.has("localStreamId"))
 					json1.remove("localStreamId");
 				if (json1.has("feedId"))
@@ -716,17 +715,18 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		} catch (Exception e) {
 			numberOfErrors++;
 			feed.setFeedName("ERROR: " + e.toString());
+			e.printStackTrace();
 		}
 	}
 
 	private void encryptPasswords(DatabusStreamFeed feed) {
 		for (DatabusStreamFeedPublisher p : feed.getPublishers()) {
-			if (p.getUserpwd().startsWith("rsa:"))
+			if (p.getUserpwd() == null || p.getUserpwd().startsWith("rsa:"))
 				continue;
 			p.setUserpwd(encryptPassword(p.getUserpwd()));
 		}
 		for (DatabusStreamFeedSubscriber s : feed.getSubscribers()) {
-			if (s.getUserpwd().startsWith("rsa:"))
+			if (s.getUserpwd() == null || s.getUserpwd().startsWith("rsa:"))
 				continue;
 			s.setUserpwd(encryptPassword(s.getUserpwd()));
 		}
@@ -1024,12 +1024,13 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 					System.out.println("PPPPPPPPPPP 1.1: " + c1.toString(2));
 					continue;
 				}
-				if (!uuid.equals(newConfig.getString("uuid").toLowerCase()))
+				if (!uuid.equalsIgnoreCase(newConfig.getString("uuid")))
 					continue;
 				a.put(c1);
 			}
+			default: 
+				throw new RuntimeException("Unknown Policy match type: " + matchingType);
 		}
-
 		switch (a.length()) {
 		case 0:
 			System.out.println("PPPPPPPPPPP 0 no policies: " + matchPolicyName + " " + uuid);
@@ -1078,13 +1079,13 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		}
 	}
 
-	private JSONObject cleanJson(EObject o2) {
+	public static JSONObject cleanJson(EObject o2) {
 		JSONObject json = ManagementServer.ecore2json(o2, 1000, null, true);
 		removeLastChanged(json);
 		return json;
 	}
 
-	private void removeLastChanged(Object o) {
+	private static void removeLastChanged(Object o) {
 		if (o instanceof JSONObject) {
 			JSONObject json = (JSONObject) o;
 			json.remove("lastChanged");
@@ -1123,7 +1124,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		throw new RuntimeException("unknown service instance: " + i);
 	}
 
-	protected EList<? extends DcaeServiceInstance> instances(DcaeService s) {
+	public static EList<? extends DcaeServiceInstance> instances(DcaeService s) {
 		if (s instanceof VirtualMachineService) {
 			VirtualMachineService s1 = (VirtualMachineService) s;
 			return s1.getInstances();

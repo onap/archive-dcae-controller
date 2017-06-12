@@ -543,12 +543,12 @@ public class DcaeCdapClusterManagerClient extends CdapClusterManagerImpl {
 	}
 
 	@Override
-	public java.lang.String stopApp(java.lang.String namespace, java.lang.String appName) {
+	public java.lang.String stopApp(java.lang.String namespace, java.lang.String appName, java.lang.String programTypes) {
 		EClass c = ManagerPackage.eINSTANCE.getCdapClusterManager(); 
 		ecomplogger.recordMetricEventStart(CdapClusterManagerOperationEnum.CdapClusterManager_stopApp,client.getRemote());
 		java.lang.String res;
 		try {
-		  res = (java.lang.String) client.operationPath("/resources", c, "stopApp", null, namespace,appName);
+		  res = (java.lang.String) client.operationPath("/resources", c, "stopApp", null, namespace,appName,programTypes);
 		}
 		catch (Exception e) {
 			ecomplogger.warn(CdapClusterManagerMessageEnum.REMOTE_CALL_FAILED_stopApp, e.toString());

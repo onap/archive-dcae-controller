@@ -124,7 +124,7 @@ public class DcaeCdapClusterManagerProviderTemplate extends DcaeVirtualMachineMa
      throw new UnsupportedOperationException();
 	}
 
-	public java.lang.String stopApp(java.lang.String namespace, java.lang.String appName) {
+	public java.lang.String stopApp(java.lang.String namespace, java.lang.String appName, java.lang.String programTypes) {
 		java.lang.String res = null;
      // TODO IMPLEMENT
      throw new UnsupportedOperationException();
