@@ -168,7 +168,7 @@ public class DcaeDcaeInventoryProvider extends BasicAdaptorProvider {
 			for (Iterator<String> iterator = o.keys(); iterator.hasNext();) {
 				String key = (String) iterator.next();
 				Object o1 = o.get(key);
-				if (o1.equals(null)) {
+				if (o1 == null) {
 					delete.add(key);
 					continue;
 				}
