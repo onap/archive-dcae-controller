@@ -1028,6 +1028,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 					continue;
 				a.put(c1);
 			}
+                        break;
 			default: 
 				throw new RuntimeException("Unknown Policy match type: " + matchingType);
 		}
