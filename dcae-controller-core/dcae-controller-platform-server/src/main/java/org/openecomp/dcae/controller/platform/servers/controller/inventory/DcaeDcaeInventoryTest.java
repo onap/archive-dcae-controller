@@ -5,19 +5,17 @@ import org.openecomp.ncomp.sirius.manager.ISiriusServer;
 import org.openecomp.ncomp.sirius.manager.ManagementServer;
 
 public class DcaeDcaeInventoryTest implements ISiriusServer {
+    private ManagementServer server = new ManagementServer();
 
-	public static void main(String[] args) {
-		DcaeDcaeInventoryTest server = new DcaeDcaeInventoryTest();
-		DcaeInventoryFactory f = new DcaeInventoryFactory(server);
-		DcaeInventory inv = f.createDcaeInventory();
-		inv.poll();
-	}
+    public static void main(String[] args) {
+        DcaeDcaeInventoryTest server = new DcaeDcaeInventoryTest();
+        DcaeInventoryFactory f = new DcaeInventoryFactory(server);
+        DcaeInventory inv = f.createDcaeInventory();
+        inv.poll();
+    }
 
-	private ManagementServer server = new ManagementServer();
-
-	@Override
-	public ManagementServer getServer() {
-		return server;
-	}
-
+    @Override
+    public ManagementServer getServer() {
+        return server;
+    }
 }
