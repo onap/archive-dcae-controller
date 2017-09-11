@@ -18,17 +18,13 @@
  * limitations under the License.
  * ============LICENSE_END============================================
  */
-	
-package org.openecomp.dcae.controller.service.servers.dockermanager;
 
-import java.io.OutputStreamWriter;
-import java.util.Date;
+package org.openecomp.dcae.controller.service.servers.dockermanager;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import org.openecomp.dcae.controller.core.service.HealthTestResponse;
 import org.openecomp.dcae.controller.core.service.HealthTestStatus;
 import org.openecomp.dcae.controller.core.service.ServiceFactory;
@@ -46,120 +42,127 @@ import org.openecomp.ncomp.sirius.manager.logging.NcompLogger;
 import org.openecomp.ncomp.utils.ShellCmd;
 import org.openecomp.ncomp.webservice.utils.FileUtils;
 
+import java.io.OutputStreamWriter;
+import java.util.Date;
+
 public class DcaeDockerManagerProvider extends BasicAdaptorProvider {
-	private static final Logger logger = Logger.getLogger(DcaeDockerManagerProvider.class);
-	private static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
-	DockerManager o;
-	private boolean suspended;
+    private static final Logger logger = Logger.getLogger(DcaeDockerManagerProvider.class);
+    private static final NcompLogger ecomplogger = NcompLogger.getNcompLogger();
+    DockerManager o;
+    private boolean suspended;
 
-	public DcaeDockerManagerProvider(ISiriusServer controller, DockerManager o) {
-		super(controller, o);
-		this.o = o;
-	}
+    public DcaeDockerManagerProvider(ISiriusServer controller, DockerManager o) {
+        super(controller, o);
+        this.o = o;
+    }
 
-	public HealthTestResponse test() {
-		HealthTestResponse res = ServiceFactory.eINSTANCE.createHealthTestResponse();
-		res.setStatus(HealthTestStatus.GREEN);
-		return res;
-	}
+    public HealthTestResponse test() {
+        HealthTestResponse res = ServiceFactory.eINSTANCE.createHealthTestResponse();
+        res.setStatus(HealthTestStatus.GREEN);
+        return res;
+    }
 
-	public void suspend() {
-		suspended = true;
-	}
+    public void suspend() {
+        suspended = true;
+    }
 
-	public void resume() {
-		suspended = false;
-	}
+    public void resume() {
+        suspended = false;
+    }
 
-	public java.lang.String publicKey() {
-		throw new UnsupportedOperationException();
-	}
+    public java.lang.String publicKey() {
+        throw new UnsupportedOperationException();
+    }
 
-	// US618656
-	public void configurationChanged() {
-		updateDMaapConfig();
-	}
+    // US618656
+    public void configurationChanged() {
+        updateDMaapConfig();
+    }
 
-	// US618665
-	private void updateDMaapConfig() {
-		JSONArray a = new JSONArray();
-		for (DcaeStream s : o.getInputStreams()) {
-			JSONObject json = ManagementServer.ecore2json(s, 100, null, true);
-			json.put("dmaapStreamId", s.getName());
-			a.put(json);
-		}
-		for (DcaeStream s : o.getOutputStreams()) {
-			JSONObject json = ManagementServer.ecore2json(s, 100, null, true);
-			json.put("dmaapStreamId", s.getName());
-			a.put(json);
-		}
-		write2file(a, "/tmp/dmaap.conf2");
-		write2file(a, "/etc/dcae/dmaap.conf");
+    // US618665
+    private void updateDMaapConfig() {
+        JSONArray a = new JSONArray();
+        for (DcaeStream s : o.getInputStreams()) {
+            JSONObject json = ManagementServer.ecore2json(s, 100, null, true);
+            json.put("dmaapStreamId", s.getName());
+            a.put(json);
+        }
+        for (DcaeStream s : o.getOutputStreams()) {
+            JSONObject json = ManagementServer.ecore2json(s, 100, null, true);
+            json.put("dmaapStreamId", s.getName());
+            a.put(json);
+        }
+        write2file(a, "/tmp/dmaap.conf2");
+        write2file(a, "/etc/dcae/dmaap.conf");
 
-	}
+    }
 
-	private void write2file(JSONArray a, String fileName) {
-		try {
-			OutputStreamWriter w = FileUtils.filename2writer(fileName);
-			w.write(a.toString(2));
-			w.close();
-		} catch (Exception e) {
-			logger.warn("Unable to write file: " + fileName);
-			ManagementServerUtils.printStackTrace(e);
-		}
-	}
+    private void write2file(JSONArray a, String fileName) {
+        try {
+            OutputStreamWriter w = FileUtils.filename2writer(fileName);
+            w.write(a.toString(2));
+            w.close();
+        } catch (Exception e) {
+            logger.warn("Unable to write file: " + fileName);
+            ManagementServerUtils.printStackTrace(e);
+        }
+    }
 
-	public void updateStreams(EList<DcaeStream> inputStreams, EList<DcaeStream> outputStreams) {
-		o.getInputStreams().clear();
-		o.getInputStreams().addAll(inputStreams);
-		o.getOutputStreams().clear();
-		o.getOutputStreams().addAll(outputStreams);
-	}
+    public void updateStreams(EList<DcaeStream> inputStreams, EList<DcaeStream> outputStreams) {
+        o.getInputStreams().clear();
+        o.getInputStreams().addAll(inputStreams);
+        o.getOutputStreams().clear();
+        o.getOutputStreams().addAll(outputStreams);
+    }
 
-	public void scheduleCronjob(final String cmd, final long frequency) {
-		ecomplogger.setOperation(DockerManager2OperationEnum.DOCKER_MANAGER_START_NEW_CRON);
-		ecomplogger.newRequestId();
-		ecomplogger.setInstanceId(controller, o);
-		ecomplogger.recordAuditEventStart();
-		EcompMessageEnum msg1 = DockerManager2MessageEnum.DOCKER_MANAGER_START_NEW_CRON;
-		;
-		ecomplogger.recordAuditEventEnd(StatusCodeEnum.COMPLETE, msg1, cmd, Long.toString(frequency));
+    public void scheduleCronjob(final String cmd, final long frequency) {
+        ecomplogger.setOperation(DockerManager2OperationEnum.DOCKER_MANAGER_START_NEW_CRON);
+        ecomplogger.newRequestId();
+        ecomplogger.setInstanceId(controller, o);
+        ecomplogger.recordAuditEventStart();
+        EcompMessageEnum msg1 = DockerManager2MessageEnum.DOCKER_MANAGER_START_NEW_CRON;
+        ;
+        ecomplogger.recordAuditEventEnd(StatusCodeEnum.COMPLETE, msg1, cmd, Long.toString(frequency));
 
-		Thread t = new Thread("crontab: " + cmd) {
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						Date now = new Date();
-						long wait = frequency - (now.getTime() % frequency);
-						Thread.sleep(wait);
-						if (suspended)
-							continue;
-						try {
-							ecomplogger.setOperation(DockerManager2OperationEnum.DOCKER_MANAGER_START_CRON_RUN);
-							ecomplogger.newRequestId();
-							ecomplogger.setInstanceId(controller, o);
-							ecomplogger.recordAuditEventStart();
-							ShellCmd c = new ShellCmd(cmd);
-							c.result(frequency);
-							ecomplogger.recordAuditEventEnd();
-						} catch (Exception e) {
-							e.printStackTrace();
-							EcompMessageEnum msg = DockerManager2MessageEnum.DOCKER_MANAGER_CRON_FAILURE;
-							ecomplogger.recordAuditEventEnd(StatusCodeEnum.ERROR, msg, cmd, e.toString());
-						}
-					} catch (Exception e) {
-						ManagementServerUtils.printStackTrace(e);
-						logger.fatal("crontab: " + cmd + " " + e);
-						try {
-							Thread.sleep(30000);
-						} catch (InterruptedException e1) {
-						}
-					}
-				}
-			};
-		};
-		t.start();
-	}
+        Thread t = new Thread("crontab: " + cmd) {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Date now = new Date();
+                        long wait = frequency - (now.getTime() % frequency);
+                        Thread.sleep(wait);
+                        if (suspended) {
+                            continue;
+                        }
+                        try {
+                            ecomplogger.setOperation(DockerManager2OperationEnum.DOCKER_MANAGER_START_CRON_RUN);
+                            ecomplogger.newRequestId();
+                            ecomplogger.setInstanceId(controller, o);
+                            ecomplogger.recordAuditEventStart();
+                            ShellCmd c = new ShellCmd(cmd);
+                            c.result(frequency);
+                            ecomplogger.recordAuditEventEnd();
+                        } catch (Exception e) {
+                            logger.error("exception occured ", e);
+                            //e.printStackTrace();
+                            EcompMessageEnum msg = DockerManager2MessageEnum.DOCKER_MANAGER_CRON_FAILURE;
+                            ecomplogger.recordAuditEventEnd(StatusCodeEnum.ERROR, msg, cmd, e.toString());
+                        }
+                    } catch (Exception e) {
+                        ManagementServerUtils.printStackTrace(e);
+                        logger.fatal("crontab: " + cmd + " " + e);
+                        try {
+                            Thread.sleep(30000);
+                        } catch (InterruptedException e1) {
+                        }
+                    }
+                }
+            }
+
+            ;
+        };
+        t.start();
+    }
 
 }
