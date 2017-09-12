@@ -52,7 +52,7 @@ public class DcaeCdapClusterManagerProvider extends DcaeVirtualMachineManagerPro
     @Override
     public HealthTestResponse test() {
         String s = run(o.getHealthCheckScript(), o.getTestTimeout());
-        String a[] = s.trim().split(":");
+        String[] a = s.trim().split(":");
         int index = s.trim().indexOf(":");
         String msg = index < 0 ? null : s.substring(index);
         HealthTestResponse res = ServiceFactory.eINSTANCE.createHealthTestResponse();
