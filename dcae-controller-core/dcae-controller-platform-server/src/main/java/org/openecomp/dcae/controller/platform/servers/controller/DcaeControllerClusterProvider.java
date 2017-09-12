@@ -21,8 +21,6 @@
 	
 package org.openecomp.dcae.controller.platform.servers.controller;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Date;
 
 import org.openecomp.ncomp.sirius.manager.GenericHttpClient;
@@ -168,7 +166,8 @@ public class DcaeControllerClusterProvider extends BasicAdaptorProvider implemen
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("exception occured. due to " + e.getLocalizedMessage(), e);
+			//e.printStackTrace();
 		}
 		Thread t = new Thread("cluster replication") {
 			@Override
@@ -214,6 +213,7 @@ public class DcaeControllerClusterProvider extends BasicAdaptorProvider implemen
 						try {
 							Thread.sleep(30000);
 						} catch (InterruptedException e1) {
+							logger.warn("cluster replication interrupted due to " + e.getLocalizedMessage(), e);
 						}
 					}
 				}

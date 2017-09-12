@@ -141,6 +141,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 						try {
 							Thread.sleep(30000);
 						} catch (InterruptedException e1) {
+							logger.warn("health check interrupted due to "+ e.getLocalizedMessage(), e);
 						}
 					}
 				}
@@ -205,6 +206,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 						try {
 							Thread.sleep(30000);
 						} catch (InterruptedException e1) {
+							logger.warn("PPPPPPPPPPP interrupted due to" + e.getLocalizedMessage(), e);
 						}
 					}
 				}
@@ -245,6 +247,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 						try {
 							Thread.sleep(30000);
 						} catch (InterruptedException e1) {
+							logger.warn("health checks	 interrupted due to"+ e.getLocalizedMessage(), e);
 						}
 					}
 				}
@@ -321,7 +324,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 					}
 				}
 			} catch (Exception e) {
-				System.err.println("DATABUS ERROR:" + stream.getName() + " " + e);
+				logger.error("DATABUS ERROR:" + stream.getName() + " " + e);
 				e.printStackTrace();
 			}
 		}
@@ -373,7 +376,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 						s.pushManagerConfiguration(i.getName());
 						okay = true;
 					} catch (Exception e) {
-						logger.warn("Unable to push configuration: " + ManagementServer.object2ref(i));
+						logger.warn("Unable to push configuration: " + ManagementServer.object2ref(i), e);
 						e.printStackTrace();
 					}
 				} else {
@@ -429,9 +432,9 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		json2.put("bridgeAdminTopic", "DCAE_MM_AGENT");
 		try {
 			client.httpJsonTransaction("/webapi/dmaap", "PUT", headers, json2);
-			System.err.println("DATABUS: dmaap: " + json2);
+			logger.error("DATABUS: dmaap: " + json2);
 		} catch (Exception e) {
-			System.err.println("DATABUS: dmaap: FAILED");
+			logger.error("DATABUS: dmaap: FAILED");
 		}
 		for (DcaeLocation l : o.getLocations()) {
 			if (findNamed(databus.getLocations(), l.getName()) != null)
@@ -457,12 +460,12 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 						json.put("dcaeLocationName", i.getName());
 						json.put("fqdn", server.getNetworks().get(0).getDnsName());
 						client.httpJsonTransaction("/webapi/dr_nodes", "POST", headers, json);
-						System.err.println("DATABUS: add dr node: " + server.getName() + " " + time);
+						logger.error("DATABUS: add dr node: " + server.getName() + " " + time);
 					}
 					if (found && i.getStatus() != DeploymentStatus.DEPLOYED) {
 						client.httpJsonTransaction("/webapi/dr_nodes/" + server.getNetworks().get(0).getDnsName(),
 								"DELETE", headers, null);
-						System.err.println("DATABUS: delete dr node: " + server.getName() + " " + time);
+						logger.error("DATABUS: delete dr node: " + server.getName() + " " + time);
 					}
 				}
 			}
@@ -485,12 +488,12 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 					}
 					json.put("fqdn", i.getServiceFqdn());
 					client.httpJsonTransaction("/webapi/mr_clusters", "POST", headers, json);
-					System.err.println("DATABUS: add mr cluster: " + i.getName() + " " + time);
+					logger.error("DATABUS: add mr cluster: " + i.getName() + " " + time);
 				}
 				if (found && i.getStatus() != DeploymentStatus.DEPLOYED) {
 					// TODO
 					client.httpJsonTransaction("/webapi/mr_clusters/" + i.getName(), "DELETE", headers, null);
-					System.err.println("DATABUS: delete mr cluster: " + i.getName() + " " + time);
+					logger.error("DATABUS: delete mr cluster: " + i.getName() + " " + time);
 				}
 			}
 		}
@@ -512,7 +515,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 					if (feed2.getPublishURL() == null)
 						continue;
 					if (!feed2.getPublishURL().equals(sub.getDeliveryURL())) {
-						System.err.println("FEED: forward URL wrong: " + feed.getName() + " " + sub.getDeliveryURL()
+						logger.error("FEED: forward URL wrong: " + feed.getName() + " " + sub.getDeliveryURL()
 								+ " != " + feed2.getPublishURL());
 						o.refreshDataBus(feed.getName());
 					}
@@ -552,7 +555,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			d.setDmaapUrl(url);
 			d.setDmaapUserName(username);
 			d.setDmaapPassword(userpwd);
-			// System.err.println("UPDATE: " + d);
+			// logger.error("UPDATE: " + d);
 			List<DmaapStream> l = m.get(i);
 			if (l == null) {
 				l = new ArrayList<DmaapStream>();
@@ -580,7 +583,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			HashMap<String, String> headers = new HashMap<String, String>();
 			headers.put("Content-Type", "application/json");
 			JSONObject json = ManagementServer.ecore2json(feed, 100, feed.eClass(), true);
-			System.err.println("FEED0: " + feed.getName() + " " + json.toString(2));
+			logger.error("FEED0: " + feed.getName() + " " + json.toString(2));
 			if (feed.getPublishers().size() == 0) {
 				// Add a generic publisher
 				DatabusStreamFeedPublisher p = StreamFactory.eINSTANCE.createDatabusStreamFeedPublisher();
@@ -596,15 +599,15 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				DatabusStreamFeed feed2 = findFeed(bus, s.getOtherFeedName());
 				if (feed2 == null)
 					return;
-				System.err.println("FEED X1: " + s.getOtherFeedName() + " " + feed2.getName());
-				System.err.println("FEED X2: " + feed2.getPublishURL() + " " + feed2.getPublishers().size());
+				logger.error("FEED X1: " + s.getOtherFeedName() + " " + feed2.getName());
+				logger.error("FEED X2: " + feed2.getPublishURL() + " " + feed2.getPublishers().size());
 				if (feed2.getPublishURL() == null || feed2.getPublishers().size() == 0)
 					return;
 				s.setDeliveryURL(feed2.getPublishURL());
 				DatabusStreamFeedPublisher p = feed2.getPublishers().get(0);
 				s.setUsername(p.getUsername());
 				s.setUserpwd(p.getUserpwd());
-				System.err.println("FEED X2: " + s.getDeliveryURL() + " " + s.getUserpwd());
+				logger.error("FEED X2: " + s.getDeliveryURL() + " " + s.getUserpwd());
 			}
 			json = ManagementServer.ecore2json(feed, 100, feed.eClass(), true);
 			String feedName = feed.getName() + ":" + new Date().getTime();
@@ -671,7 +674,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			}
 			json.put("subs", a1);
 			json.remove("subscribers");
-			System.err.println("FEED1: " + json.toString(2));
+			logger.error("FEED1: " + json.toString(2));
 			JSONObject res = client.httpJsonTransaction("/webapi/feeds", "POST", headers, json);
 			if (res == null) {
 				numberOfErrors++;
@@ -679,7 +682,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				logger.warn("unable to create feed: " + feed.getName() + " " + json.toString(2));
 				return;
 			}
-			System.err.println("FEED2: " + res.toString(2));
+			logger.error("FEED2: " + res.toString(2));
 			JSONArray aa1 = res.getJSONArray("pubs");
 			JSONObject pub1 = new JSONObject();
 			for (int i = 0; i < aa1.length() && i < feed.getPublishers().size(); i++) {
@@ -700,18 +703,18 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			}
 			res.put("subscribers", sub1);
 			res.remove("subs");
-			System.err.println("FEED3: " + res.toString(2));
+			logger.error("FEED3: " + res.toString(2));
 			// XX use second
 			// ManagementServer s = server;
 			ManagementServer s = controller.getServer();
 			DatabusStreamFeed feed1 = (DatabusStreamFeed) s.json2ecore(feed.eClass(), res);
-			System.err.println("FEED4: " + ManagementServer.ecore2json(feed1, 100, feed.eClass(), true).toString(2));
+			logger.error("FEED4: " + ManagementServer.ecore2json(feed1, 100, feed.eClass(), true).toString(2));
 			encryptPasswords(feed1);
 			ManagementServer.merge(feed, feed1, res, true, null);
 			if (feed.getFeedName() == null) {
 				feed.setFeedName("FAILED with no name");
 			}
-			System.err.println("FEED5: " + ManagementServer.ecore2json(feed, 100, feed.eClass(), true).toString(2));
+			logger.error("FEED5: " + ManagementServer.ecore2json(feed, 100, feed.eClass(), true).toString(2));
 		} catch (Exception e) {
 			numberOfErrors++;
 			feed.setFeedName("ERROR: " + e.toString());
@@ -787,11 +790,11 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				try {
 					client.httpJsonTransaction("/webapi/topics/" + topic.getFqtn(), "DELETE", headers, null);
 				} catch (Exception e) {
-					System.err.println("TOPIC0: delete existing topic: " + topicName + " " + e);
+					logger.error("TOPIC0: delete existing topic: " + topicName + " " + e);
 				}
-				System.err.println("TOPIC0: delete existing topic: " + topicName);
+				logger.error("TOPIC0: delete existing topic: " + topicName);
 			} else
-				System.err.println("TOPIC0: new topic: " + topicName);
+				logger.error("TOPIC0: new topic: " + topicName);
 			json.put("topicName", topicName);
 			json.put("owner", "controller");
 			json.put("txenabled", false);
@@ -813,7 +816,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				a.put(json1);
 			}
 			json.put("clients", a);
-			System.err.println("TOPIC1: " + json.toString(2));
+			logger.error("TOPIC1: " + json.toString(2));
 			JSONObject res;
 			try {
 				res = client.httpJsonTransaction("/webapi/topics", "POST", headers, json);
@@ -823,7 +826,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 					int i = s.indexOf("topic already exists");
 					s = s.substring(i + "topic already exists: ".length()).replace("\"}", "");
 					topic.setFqtn(s);
-					System.err.println("TOPIC2: topic already exists without FQTN");
+					logger.error("TOPIC2: topic already exists without FQTN");
 					return;
 				}
 				throw e;
@@ -833,24 +836,24 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				logger.warn("unable to create topic: " + topic.getName() + " " + json.toString(2));
 				return;
 			}
-			System.err.println("TOPIC2: " + res.toString(2));
+			logger.error("TOPIC2: " + res.toString(2));
 			JSONArray aa1 = res.getJSONArray("clients");
 			JSONObject clients1 = new JSONObject();
 			for (int i = 0; i < aa1.length() && i < topic.getClients().size(); i++) {
 				clients1.put(topic.getClients().get(i).getName(), aa1.getJSONObject(i));
 			}
 			res.put("clients", clients1);
-			System.err.println("TOPIC3: " + res.toString(2));
+			logger.error("TOPIC3: " + res.toString(2));
 			// XX use second
 			// ManagementServer s = server;
 			ManagementServer s = controller.getServer();
 			DatabusStreamTopic topic1 = (DatabusStreamTopic) s.json2ecore(topic.eClass(), res);
-			System.err.println("TOPIC4: " + ManagementServer.ecore2json(topic1, 100, topic.eClass(), true).toString(2));
+			logger.error("TOPIC4: " + ManagementServer.ecore2json(topic1, 100, topic.eClass(), true).toString(2));
 			ManagementServer.merge(topic, topic1, res, true, null);
 			if (topic.getTopicName() == null) {
 				topic.setTopicName("FAILED with no name");
 			}
-			System.err.println("TOPIC5: " + ManagementServer.ecore2json(topic, 100, topic.eClass(), true).toString(2));
+			logger.error("TOPIC5: " + ManagementServer.ecore2json(topic, 100, topic.eClass(), true).toString(2));
 		} catch (Exception e) {
 			numberOfErrors++;
 			topic.setTopicName("ERROR: " + e.toString());
@@ -894,15 +897,15 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		headers.put("Content-Type", "application/json");
 		// locations
 		JSONObject res1 = client.httpJsonTransaction("/webapi/dcaeLocations", "GET", headers, null);
-		// System.err.println("DATABUS0: locations" + res1.toString(2));
+		// logger.error("DATABUS0: locations" + res1.toString(2));
 		databusJson2locations(res1, d);
 		// mr_clusters
 		JSONObject res2 = client.httpJsonTransaction("/webapi/mr_clusters", "GET", headers, null);
-		// System.err.println("DATABUS0: mr_clusters" + res2.toString(2));
+		// logger.error("DATABUS0: mr_clusters" + res2.toString(2));
 		databusJson2mrClusters(res2, d);
 		// dr_nodes
 		JSONObject res3 = client.httpJsonTransaction("/webapi/dr_nodes", "GET", headers, null);
-		// System.err.println("DATABUS0: dr_nodes" + res3.toString(2));
+		// logger.error("DATABUS0: dr_nodes" + res3.toString(2));
 		databusJson2drNodes(res3, d);
 
 	}
@@ -1184,7 +1187,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 			}
 			buf = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
 			while ((line = buf.readLine()) != null) {
-				System.err.println(line);
+				logger.error(line);
 				logger.warn("error: " + line);
 			}
 			if (status != 0) {
@@ -1201,7 +1204,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 
 	public Object handleJson(String userName, String action, String resourcePath, JSONObject json, JSONObject context,
 			String clientVersion) {
-		// System.err.println("XXXXXX handleJson: " + action + " " +
+		// logger.error("XXXXXX handleJson: " + action + " " +
 		// resourcePath + " " + context);
 		switch ((String) context.get("path")) {
 		case "/test/":
@@ -1213,7 +1216,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 		case "/swagger":
 			return controller.getServer().getSwaggerJson();
 		}
-		System.err.println("XXXXXXX: request not handled: path=" + resourcePath + " action=" + action + " json="
+		logger.error("XXXXXXX: request not handled: path=" + resourcePath + " action=" + action + " json="
 				+ ((json != null) ? json.toString(2) : "NULL") + " context="
 				+ ((context != null) ? context.toString(2) : "NULL"));
 		return null;
@@ -1226,7 +1229,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 	}
 
 	public void refreshDataBus(String nameMatch) {
-		System.err.println(
+		logger.error(
 				"BBBBBBBBB: numberOfErrors=" + numberOfErrors + " tooMany=" + tooMany + " nameMatch=" + nameMatch);
 		numberOfErrors = 0;
 		for (DatabusStream s : o.getDatabus().getStreams()) {
@@ -1236,7 +1239,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				DatabusStreamFeed f = (DatabusStreamFeed) s;
 				if (f.getFeedName() == null)
 					continue;
-				System.err.println(
+				logger.error(
 						"BBBBBBBBB: feed change to null " + ManagementServer.object2ref(s) + " " + f.getFeedName());
 				f.setFeedName(null);
 				for (DatabusStreamFeedPublisher c : f.getPublishers()) {
@@ -1255,7 +1258,7 @@ public class DcaeDcaePlatformControllerProvider extends BasicManagementServerPro
 				DatabusStreamTopic t = (DatabusStreamTopic) s;
 				if (t.getTopicName() == null)
 					continue;
-				System.err.println(
+				logger.error(
 						"BBBBBBBBB: topic change to null " + ManagementServer.object2ref(s) + " " + t.getTopicName());
 				t.setTopicName(null);
 				for (DatabusStreamTopicClient c : t.getClients()) {
