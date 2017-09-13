@@ -167,7 +167,6 @@ public class DcaeControllerClusterProvider extends BasicAdaptorProvider implemen
 			}
 		} catch (Exception e) {
 			logger.error("exception occured. due to " + e.getLocalizedMessage(), e);
-			//e.printStackTrace();
 		}
 		Thread t = new Thread("cluster replication") {
 			@Override

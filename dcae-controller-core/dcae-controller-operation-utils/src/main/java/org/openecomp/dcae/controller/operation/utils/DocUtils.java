@@ -108,7 +108,7 @@ public class DocUtils {
                     }
 //					System.err.println (" XXx:" + t + " " + vmDeploymentKey + " " + vmType.keySet()+ " " + tenant.keySet());
                     LinkedHashMap<String, Object> s1 = new LinkedHashMap<String, Object>();
-                    LinkedHashMap<String, Object> sss = new LinkedHashMap<String, Object>();
+
                     s1.put("dcae-service", vmDeploymentKey);
                     s1.put("dcae-service-instance", tenantKey);
                     s1.put("dcae-container", "/locations/" + tenantKey);
@@ -167,7 +167,6 @@ public class DocUtils {
                 }
                 for (String dockerDeploymentKey : dockerDeployments.keySet()) {
                     Map<String, Object> dockerDeployment = (Map<String, Object>) dockerDeployments.get(dockerDeploymentKey);
-                    Map<String, Object> dockerType = (Map<String, Object>) dockerTypes.get(dockerDeployment.get("docker-type"));
 //					if (dockerType.containsKey("error")) continue;
 //					System.err.println (" XXx:" + t + " " + vmDeploymentKey + " " + vmType.keySet()+ " " + container.keySet());
                     LinkedHashMap<String, Object> s1 = new LinkedHashMap<String, Object>();
