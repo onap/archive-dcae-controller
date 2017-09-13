@@ -278,7 +278,7 @@ public class DcaeDcaeInventoryProvider extends BasicAdaptorProvider {
 						}
 					}
 					catch (Exception e) {
-						e.printStackTrace(System.out);
+                                                logger.error("exception: ", e);
 						System.out.println("BBBBBBB: error "+ s.getName() + " " + i.getName() + " " + e);
 					}
 				}
@@ -332,13 +332,15 @@ public class DcaeDcaeInventoryProvider extends BasicAdaptorProvider {
 				try {
 					updateJson(json,a,0, app_preferences.get(path));
 				}
-				catch (Exception e) {};
+				catch (Exception e) {
+                                    logger.error("exception: ", e);
+                                }
 			}
 			System.out.println("BBBBBBB: fixed value: " + json.toString(2));
 			return json;
 		}
 		catch (Exception e) {
-			e.printStackTrace(System.out);
+                        logger.error("exception: ", e);
 			System.out.println("BBBBBBB: bp error=" + e);
 			return null;
 		}
