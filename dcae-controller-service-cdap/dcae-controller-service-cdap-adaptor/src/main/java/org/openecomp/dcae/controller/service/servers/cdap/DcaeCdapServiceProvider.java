@@ -134,7 +134,6 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 				doSteps(console, i, i.getDeploySteps());
 			} catch (Exception e) {
 				logger.warn("unable to start CDAP app: " + ManagementServer.object2ref(i));
-				e.printStackTrace();
 				throw new RuntimeException("Unable to start CDAP app: " + ManagementServer.object2ref(i) + " " + e);
 			}
 
@@ -249,14 +248,14 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 			try {
 				console.stopFlow(i.getCdapName(), a[0], a[1]);
 			} catch (Exception e) {
-				e.printStackTrace();
+                            logger.error("exception: ", e);
 			}
 		}
 		for (String a : i.getAppNames()) {
 			try {
 				console.stopApp(i.getCdapName(), a, null);
 			} catch (Exception e) {
-				e.printStackTrace();
+                            logger.error("exception: ", e);
 			}
 		}
 		for (CdapArtifact a : i.getArtifacts()) {
@@ -267,7 +266,7 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 					console.deleteArtifact(i.getCdapName(), a.getName(), a.getVersion());
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+                            logger.error("exception: ", e);
 			}
 		}
 		for (CdapApplication a : i.getApps()) {
@@ -276,7 +275,7 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 				console.deleteApp(i.getCdapName(), a.getName());
 				console.deleteArtifact(i.getCdapName(), a.getArtifactName(), a.getVersion());
 			} catch (Exception e) {
-				e.printStackTrace();
+                            logger.error("exception: ", e);
 			}
 		}
 		// console.deleteNamespace(i.getCdapName());
@@ -291,14 +290,14 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 				try {
 					console.stopApp(i.getCdapName(), a.getName(), null);
 				} catch (Exception e) {
-					e.printStackTrace();
+                                    logger.error("exception: ", e);
 				}
 			}
 			for (CdapApplication a : i.getApps()) {
 				try {
 					console.stopApp(i.getCdapName(), a.getName(),null);
 				} catch (Exception e) {
-					e.printStackTrace();
+                                    logger.error("exception: ", e);
 				}
 			}
 			for (String f : i.getFlowNames()) {
@@ -308,7 +307,7 @@ public class DcaeCdapServiceProvider extends BasicAdaptorProvider {
 				try {
 					console.stopFlow(i.getCdapName(), a[0], a[1]);
 				} catch (Exception e) {
-					e.printStackTrace();
+                                    logger.error("exception: ", e);
 				}
 			}
 			for (String w : i.getWorkerNames()) {
